@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Tahu!';
+    src: url('../../Fonts/Tahu.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+     url('../../Fonts/Tahu.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  }  
+
+.MidNav-Title{
+    background-color: rgb(41, 43, 44);
+    font-family: 'Tahu!';
+    font-size: 72px;
+    color: white;
+} 
