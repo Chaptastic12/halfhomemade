@@ -1,24 +1,10 @@
 import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 
 const TopNav = props =>{
-
-    return(<div>
-        <Navbar expand="lg" bg="dark" variant="dark">
-            <Container>
-                <Navbar.Brand href="#home">Half-Homemade</Navbar.Brand>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end">
-                <Nav>
-                    <Nav.Link href="#login">Login</Nav.Link>
-                    <Nav.Link href="#Cart">Cart</Nav.Link>
-                </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
-    </div>)
+        return(
+            <div className='TopNav d-flex justify-content-center align-items-center text-center'>
+                <span>Free shipping on every order through 12/25/2021. Apply discount code <strong>NEWBOOK2021</strong> at checkout</span>
+            </div>)    
 }
 
 export default TopNav;

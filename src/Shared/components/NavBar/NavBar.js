@@ -1,14 +1,16 @@
 import React from 'react';
 import TopNav from './TopNav'
 import MidNav from './MidNav'
-/*import BottomNav from './BottomNav'*/
+import BottomNav from './BottomNav'
 
 const NavBar = props =>{
 
     return(
-        <div>
+        <div className='NavBar'>
            <TopNav />
-           <MidNav />
+           <MidNav/>
+           <BottomNav />
+            <div className='NavBar-Divider' />
         </div>
     )
 }

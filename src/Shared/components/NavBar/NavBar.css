@@ -1,12 +1,33 @@
-@font-face {
-    font-family: 'Tahu!';
-    src: url('../../Fonts/Tahu.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-     url('../../Fonts/Tahu.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-  }  
+.NavBar-Divider{
+    background-color: white;
+    height: 7px;
+    width:100vw;
+}
 
-.MidNav-Title{
+/* CSS for TopNav components */
+.TopNav{
+    height:35px;
+    font-style: italic;
+}
+
+/* CSS For MidNav components */
+.MidNav{
     background-color: rgb(41, 43, 44);
-    font-family: 'Tahu!';
-    font-size: 72px;
+    height:150px;
     color: white;
+}
+.MidNav-Title{
+    font-family: 'Tahu!';
+    font-size: 6vw;
+    padding-top:0.5vw;
 } 
+
+/* CSS For BotNav components */
+.BotNav-Nav{
+    background-color: rgb(41, 43, 44);
+    padding-bottom:15px;
+    width: 100vw;
+}
+.NavBar-Button{
+    margin:5px;
+}

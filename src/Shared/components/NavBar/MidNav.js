@@ -1,19 +1,25 @@
 import React from 'react';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 
 import './NavBar.css';
 
 const MidNav = props =>{
 
     return(
-        <div className='MidNav-Title'>
-            <Container>
-                <div className='text-center'>Half-Homemade</div>
-            </Container>
-        </div>)
+        <Row className='MidNav d-flex align-items-center justify-content-center text-center'>
+            <Col>Some other text can go here</Col>
+            <Col>
+                <div className='MidNav-Title'>halfHomemade</div>
+            </Col>
+            <Col>
+                <Button variant='outline-light' className='NavBar-Button'>Login</Button>
+                <Button variant='outline-light' className='NavBar-Button'>Cart</Button>
+            </Col>
+        </Row>
+        )
 }
 
 export default MidNav;

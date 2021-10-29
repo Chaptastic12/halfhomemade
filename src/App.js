@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import NavBar from './Shared/components/NavBar/NavBar';
+import HomePage from './pages/HomePage/HomePage';
 
 import './App.css';
 
@@ -13,7 +14,7 @@ function App() {
 
       <Switch>
         <Route path="/" exact>
-          {/*Component to load*/}
+          <HomePage />
         </Route>
 
         <Redirect to="/" exact />
