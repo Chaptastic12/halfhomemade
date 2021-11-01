@@ -1,0 +1,27 @@
+.Footer{
+    background-color: rgba(241, 218, 191, 1);
+    bottom: 0;
+    width:100vw;
+    height:350px;
+    padding: 40px 0;
+    color: rgba(4, 3, 15, 1);
+    font-family: 'sans-serif';
+
+}
+
+.Footer-Recipes, .Footer-About, .Footer-Contact{
+    font-size: 1.5rem;
+    padding-top:0.5vw;
+    padding-right: 4vw;
+    margin-bottom:10px;
+}
+
+.Footer ul{
+    list-style-type: none;
+    text-align: start;
+    padding: 0;
+}
+
+.Footer li{
+    padding: 5px 0;
+}

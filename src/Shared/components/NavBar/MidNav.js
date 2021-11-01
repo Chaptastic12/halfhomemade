@@ -15,8 +15,8 @@ const MidNav = props =>{
                 <div className='MidNav-Title'>halfHomemade</div>
             </Col>
             <Col>
-                <Button variant='outline-light' className='NavBar-Button'>Login</Button>
-                <Button variant='outline-light' className='NavBar-Button'>Cart</Button>
+                <Button variant='outline-light' className='NavBar-Button'>Login <i class="fas fa-sign-in-alt"/></Button>
+                <Button variant='outline-light' className='NavBar-Button'>Cart <i class="fas fa-shopping-cart"/></Button>
             </Col>
         </Row>
         )

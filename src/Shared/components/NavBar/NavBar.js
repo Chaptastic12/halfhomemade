@@ -10,7 +10,7 @@ const NavBar = props =>{
            <TopNav />
            <MidNav/>
            <BottomNav />
-            <div className='NavBar-Divider' />
+            <div className='Section-Divider' />
         </div>
     )
 }

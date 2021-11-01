@@ -1,11 +1,18 @@
 .BookDiv{
-    background-color: rgb(35, 37, 37);
-    padding:10px;
+    /* Original color
+    background-color: rgb(35, 37, 37); */
+    background-color: rgba(146, 129, 122, 1);
+    padding:0px;
+    margin: 0px;
+    height: 33vh;
+    max-height: 600px;
 }
 
 .BookDiv-BookImg{
     background: url('../../Img/Food/Cover.jpg') center center/contain no-repeat;
-    height:500px;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
 }
 
 .BookDiv-BookText{
@@ -28,4 +35,11 @@
 
 .BookDiv-Button{
     margin:2.5px;
+}
+
+@media screen and (max-width: 900px){
+    .BookDiv.BookDiv-BookImg{
+        height:350px;
+        width: 350px;
+    }
 }
