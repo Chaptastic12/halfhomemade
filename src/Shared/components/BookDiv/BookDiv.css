@@ -4,13 +4,15 @@
     background-color: rgba(146, 129, 122, 1);
     padding:0px;
     margin: 0px;
-    height: 33vh;
+    height: 50vh;
     max-height: 600px;
 }
 
 .BookDiv-BookImg{
     background: url('../../Img/Food/Cover.jpg') center center/contain no-repeat;
     height: 100%;
+    min-height: 300px;
+    min-width: 300px;
     width: 100%;
     object-fit: contain;
 }
@@ -25,7 +27,7 @@
 
 .BookDiv h1{
     font-family: 'Tahu!';
-    font-size:6vw;
+    font-size:calc(12px + 4.5vw);
 }
 
 .BookDiv-LearnMore{
@@ -37,9 +39,19 @@
     margin:2.5px;
 }
 
-@media screen and (max-width: 900px){
-    .BookDiv.BookDiv-BookImg{
-        height:350px;
-        width: 350px;
+@media screen and (max-width: 767px) {
+    .BookDiv {
+        padding-top:15px;
+    }
+    .BookDiv-BookText{
+        padding:15px;
+        box-shadow: 10px 10px rgba(0,0,0, 0.2);
+
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .BookDiv {
+        height:80vh;
     }
 }

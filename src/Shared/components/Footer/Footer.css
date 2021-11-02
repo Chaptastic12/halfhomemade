@@ -6,7 +6,6 @@
     padding: 40px 0;
     color: rgba(4, 3, 15, 1);
     font-family: 'sans-serif';
-
 }
 
 .Footer-Recipes, .Footer-About, .Footer-Contact{
@@ -24,4 +23,14 @@
 
 .Footer li{
     padding: 5px 0;
+}
+
+.Footer li i{
+    margin: 0 10px;
+}
+
+@media screen and (max-width: 767px) {
+    .Footer{
+        padding-left:15px;
+    }
 }

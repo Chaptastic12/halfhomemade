@@ -1,0 +1,16 @@
+.SideDrawer{
+    height:100vh;
+    position: absolute;
+    top:0;
+    left:0;
+    width:70%;
+    max-width:350px;
+    z-index: 200;
+
+    background-color: rgba(241, 218, 191, 1);
+
+}
+
+.SideDrawer-Open{
+    transform: translateX(0);
+}

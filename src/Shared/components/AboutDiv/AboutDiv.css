@@ -6,3 +6,38 @@
     height: 40vh;
     width: 100vw;
 }
+
+.AboutDiv-BookText{
+    margin-top:5px;
+}
+
+.AboutDiv h1{
+    font-family: 'Tahu!';
+    font-size:calc(12px + 4.5vw);
+}
+
+.AboutDiv-LearnMore{
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.AboutDiv-Button{
+    margin:2.5px;
+}
+
+@media screen and (max-width: 767px) {
+    .BookDiv {
+        padding-top:15px;
+    }
+    .BookDiv-BookText{
+        padding:15px;
+        box-shadow: 10px 10px rgba(0,0,0, 0.2);
+
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .BookDiv {
+        height:80vh;
+    }
+}

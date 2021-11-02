@@ -9,7 +9,7 @@
     /*Original color 
     background-color: rgb(41, 43, 44); */
     background-color: rgba(54, 36, 23, 1);
-    height:150px;
+    height:8vw;
     color: white;
     width: 100vw;
     margin:0px;
@@ -30,4 +30,27 @@
 }
 .NavBar-Button{
     margin:5px;
+}
+
+.MobileNav{
+    background-color: rgba(54, 36, 23, 1);
+    height:7vh;
+    color: white;
+    width: 100vw;
+    margin:0px;
+}
+
+.MobileNav-Title{
+    font-family: 'Tahu!';
+    font-size: 7vw;
+    padding-left:10px;
+}
+
+.MobileBotNav-Nav {
+    background-color: rgba(241, 218, 191, 1);
+    width: 100vw;
+}
+
+.Nav-Hamburger{
+    font-size: 5vw;
 }

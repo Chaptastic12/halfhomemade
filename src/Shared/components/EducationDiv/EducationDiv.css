@@ -1,0 +1,13 @@
+.EducationDiv{
+    background-color: rgb(35, 37, 37); 
+    height:33vh;
+    color: white;
+    margin-top:5px;
+
+}
+
+.EducationDiv-Title{
+    font-family: 'Tahu!';
+    font-size:calc(12px + 4.5vw);
+    padding-top:15px;
+}
