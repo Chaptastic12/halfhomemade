@@ -1,5 +1,5 @@
 .PageHeader{
-    background-image: url('../../Img/Food/Honey_roasted_ham.jpg');
+    background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ), url('../../Img/Food/Honey_roasted_ham.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

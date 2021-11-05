@@ -21,7 +21,7 @@ const RecipeCard = props =>{
 
     let tags = props.tags.map(tag=>{
         return<Link className='RecipeCard-Tag' to={`/recipes/search?=${tag}`}>{tag}</Link>
-    })
+    });
 
     if(!isMobile){
         return(
@@ -35,6 +35,7 @@ const RecipeCard = props =>{
                         <p className='RecipeCard-Stars'>{foodRating}</p>
                         <p>{props.foodDesc}</p>
                         <Button className='RecipeCard-Link'><Link to={`/recipes/view/${props.id}`}>View</Link></Button>
+                        <p>TAGS: {tags}</p>
                         <p className='RecipeCard-Date'>Date Posted: {props.date}</p>
                     </Col>
                     <Col>
@@ -43,9 +44,6 @@ const RecipeCard = props =>{
                             <h3>{userRating}</h3>
                         </div>
                     </Col>
-                </Row>
-                <Row className='text-center'>
-                    <Col>TAGS: {tags}</Col>
                 </Row>
             </Container>
         )
