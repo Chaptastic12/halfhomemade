@@ -20,7 +20,7 @@ const RecipeCard = props =>{
     let foodRating = <Stars item={props.foodRating} />
 
     let tags = props.tags.map(tag=>{
-        return<Link className='RecipeCard-Tag' to={`/recipes/search?${tag}`}>{tag}</Link>
+        return<Link className='RecipeCard-Tag' to={`/recipes/search?=${tag}`}>{tag}</Link>
     })
 
     if(!isMobile){
@@ -51,7 +51,7 @@ const RecipeCard = props =>{
         )
     }
     return(
-        <Col>
+        <Col className='d-flex align-items-center justify-content-center'>
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={props.foodImage} />
                 <Card.Body>

@@ -1,0 +1,16 @@
+.PageHeader{
+    background-image: url('../../Img/Food/Honey_roasted_ham.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 95vw;
+    height: 400px;
+}
+
+.pageHeader-title{
+    background-color: rgba(0,0,0,0.7);
+    color:white;
+    height: 55px;
+    width: 450px;
+    border-radius: 5px;
+}
