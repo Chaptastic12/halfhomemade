@@ -1,12 +1,64 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
+import foodImg from '../../Shared/Img/Food/Mafu_tofu.jpg'
+import userImg from '../../Shared/Img/Food/Cover.jpg'
+
+import Row from 'react-bootstrap/Row'
+import { MobileContext } from '../../Shared/context/mobile-context';
+
+import './RecipePage.css';
+
+const testData = [{
+    id: 12345,
+    foodImage: foodImg,
+    foodTitle: 'Mafu Tofu',
+    foodDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    foodRating: 5,
+    userImage: userImg,
+    userRating: 5,
+    tags: ['Chinese', 'Rice', ' Tofu'],
+    date: '11/5/2021'
+},
+{
+    id: 123456,
+    foodImage: foodImg,
+    foodTitle: 'Mafu Tofu',
+    foodDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    foodRating: 5,
+    userImage: userImg,
+    userRating: 5,
+    tags: ['Chinese', 'Rice', ' Tofu'],
+    date: '11/5/2021'
+}];
 
 const RecipePage = props =>{
 
-    return(
-        <div>
+    const { isMobile } = useContext(MobileContext);
 
-        </div>
+    const recipes = testData.map(recipe => {
+        return <RecipeCard 
+            id={recipe.id} 
+            foodImage={recipe.foodImage} foodTitle={recipe.foodTitle} foodDesc={recipe.foodDesc} foodRating={recipe.foodRating} 
+            userImage={recipe.userImage} userRating={recipe.userRating} 
+            tags={recipe.tags} 
+            date={recipe.date} />
+    })
+
+    if(!isMobile){
+        return(
+            <div className='RecipePage'>
+                {recipes}
+            </div>
+        )
+    }
+
+    return(
+        <Row className='RecipePage'>
+            {recipes}
+        </Row>
     )
+    
 }
 
 export default RecipePage;

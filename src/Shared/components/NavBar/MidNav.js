@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { NavLink } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
@@ -12,7 +13,7 @@ const MidNav = props =>{
         <Row className='MidNav d-flex align-items-center justify-content-center text-center'>
             <Col>Some other text can go here</Col>
             <Col>
-                <div className='MidNav-Title'>halfHomemade</div>
+                <div className='MidNav-Title'><NavLink to='/'>halfHomemade</NavLink></div>
             </Col>
             <Col>
                 <Button variant='outline-light' className='NavBar-Button'>Login <i className="fas fa-sign-in-alt"/></Button>

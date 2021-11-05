@@ -31,6 +31,13 @@
 .NavBar-Button{
     margin:5px;
 }
+.NavBar-Button a, .MidNav-Title a, .MobileNav-Title a{
+    text-decoration: none;
+    color: inherit;
+}
+.NavBar-Button a:hover, .NavBar-Button a:active{
+    color: black;
+}
 
 /* CSS For MobileNav components */
 .MobileNav{
@@ -55,4 +62,10 @@
 
 .Nav-Hamburger{
     font-size: 5vw;
+}
+
+@media screen and (max-width: 767px) {
+    .NavBar-Button a:hover, .NavBar-Button a:active{
+        color: white;
+    }
 }

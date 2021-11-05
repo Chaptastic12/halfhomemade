@@ -1,0 +1,52 @@
+.RecipeCard{
+    background-color: white;;
+    width:80vw;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    margin-bottom:5px;
+    margin-top:5px;
+    padding:10px;
+}
+
+.RecipeCard-FoodImage{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:300px;
+}
+
+.RecipeCard-UserImage{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 300px;
+    min-height:200px;
+    min-width:200px;
+}
+
+.RecipeCard-Link{
+    margin:2.5px;
+}
+.RecipeCard-Link a{
+    text-decoration: none;
+    color: white;
+}
+
+.RecipeCard-Tag{
+    margin:5px;
+    text-decoration: none;
+    font-style: italic
+}
+
+.RecipeCard-Stars{
+    margin: 0px;
+}
+
+.RecipeCard-Date{
+    font-size: 12px;
+    margin: 0px;
+}
+.RecipeCard-Tags{
+    font-size: 14px;
+    margin: 0px;
+}
