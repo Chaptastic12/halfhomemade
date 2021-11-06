@@ -26,7 +26,9 @@ const BottomNav = props =>{
             <Button size='sm' className='NavBar-Button' variant='outline-dark'>Shop</Button>
             <Button size='sm' className='NavBar-Button' variant='outline-dark'>About</Button>
             <Button size='sm' className='NavBar-Button' variant='outline-dark'>Blog</Button>
-            <Button size='sm' className='NavBar-Button' variant='outline-dark'>Login <i className="fas fa-sign-in-alt"/></Button>
+            <Button size='sm' className='NavBar-Button' variant='outline-dark'>
+                <NavLink to="/login">Login</NavLink> <i className="fas fa-sign-in-alt"/>
+            </Button>
             <Button size='sm' className='NavBar-Button' variant='outline-dark'>Cart <i className="fas fa-shopping-cart"/></Button>
         </div>
     )

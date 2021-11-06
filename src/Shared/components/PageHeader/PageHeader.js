@@ -7,7 +7,7 @@ import './PageHeader.css';
 
 const PageHeader = props =>{
     //Grab the important URL bits we need and split them up by the '/' sign into an array
-    // page[0] is a /, page[1] is the first item and page[2] is the specifics
+    // page[0] is a /, page[1] is the first item and page[2] is the
     const location = useLocation();
     let page = location.pathname.split('/');
     
@@ -24,9 +24,16 @@ const PageHeader = props =>{
         style = {background: props.backgroundColor};
     }
 
+    let secondHref;
+    if(page[2]){
+        secondHref = <span> / {capitalizeFirstLetter(page[2])}</span>
+    } else {
+        secondHref = <span></span>
+    }
+
     return(
         <Container className='PageHeader d-flex justify-content-center align-items-center' style={style}>
-            <h1 className='pageHeader-title text-center'>{capitalizeFirstLetter(page[1])} / {capitalizeFirstLetter(page[2])}</h1>
+            <h1 className='pageHeader-title text-center'>{capitalizeFirstLetter(page[1])} {secondHref}</h1>
         </Container>
 )
 }

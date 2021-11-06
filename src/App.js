@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './Shared/components/NavBar/NavBar';
 import HomePage from './pages/HomePage/HomePage';
 import RecipePage from './pages/RecipePage/RecipePage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
 import { MobileContext } from './Shared/context/mobile-context';
 import SideDrawerProvider from './Shared/context/sidedrawer-context';
@@ -50,6 +51,9 @@ function App() {
             </Route>
             <Route path='/recipes/all' exact>
               <RecipePage />
+            </Route>
+            <Route path='/login' exact>
+              <LoginPage />
             </Route>
 
             <Redirect to="/" exact />
