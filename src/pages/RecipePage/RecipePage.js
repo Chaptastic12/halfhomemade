@@ -9,6 +9,8 @@ import Row from 'react-bootstrap/Row'
 import { MobileContext } from '../../Shared/context/mobile-context';
 import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 
+import FoodPlatter from '../../Shared/Img/Food/Food_platter.jpg';
+
 import './RecipePage.css';
 
 const testData = [{
@@ -58,7 +60,7 @@ const RecipePage = props =>{
     return(
         <div className='RecipePage'>
             <Container>
-                <PageHeader />
+                <PageHeader backgroundImage={FoodPlatter}/>
                {recipeCardFormat}
             </Container>
         </div>
