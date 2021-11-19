@@ -8,6 +8,9 @@ import './Footer.css';
 const Footer = props =>{
 
     return(
+        <>
+        <div className='Section-Divider' />
+
         <div className='Footer d-flex justify-content-center'>
             <Row sm='auto'>
                 <Col>
@@ -42,6 +45,7 @@ const Footer = props =>{
                 </Col>
             </Row>
         </div>
+        </>
     )
 }
 

@@ -16,7 +16,7 @@ import './RecipePage.css';
 const testData = [{
     id: 12345,
     foodImage: foodImg,
-    foodTitle: 'Mafu Tofu',
+    foodTitle: 'Mapo Tofu',
     foodDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     foodRating: 5,
     userImage: userImg,
@@ -27,7 +27,7 @@ const testData = [{
 {
     id: 123456,
     foodImage: foodImg,
-    foodTitle: 'Mafu Tofu',
+    foodTitle: 'Mapo Tofu',
     foodDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     foodRating: 5,
     userImage: userImg,

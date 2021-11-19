@@ -1,0 +1,22 @@
+.RecipePageDetails{
+    background-color: rgba(146, 129, 122, 1);
+    height: 100%;
+    width: 100%;
+
+}
+.RecipePageDetails-Container{
+    background-color: rgb(35, 37, 37);
+    height: 100%; 
+}
+
+.RecipePageDetails-IngredientsList{
+    min-width: 250px;
+}
+
+.RecipePageDetails-Title{
+    font-family: 'Tahu!';
+    font-size:calc(48px + 3.5vw);  
+    color: white;
+    margin-top:15px;
+}
+
