@@ -6,6 +6,7 @@ import NavBar from './Shared/components/NavBar/NavBar';
 import HomePage from './pages/HomePage/HomePage';
 import RecipePage from './pages/RecipePage/RecipePage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import RecipeDetailsPage from './pages/RecipeDetailsPage/RecipeDetailsPage';
 
 import { MobileContext } from './Shared/context/mobile-context';
 import SideDrawerProvider from './Shared/context/sidedrawer-context';
@@ -51,6 +52,9 @@ function App() {
             </Route>
             <Route path='/recipes/all' exact>
               <RecipePage />
+            </Route>
+            <Route path='/recipes/view/:id' exact>
+              <RecipeDetailsPage />
             </Route>
             <Route path='/login' exact>
               <LoginPage />
