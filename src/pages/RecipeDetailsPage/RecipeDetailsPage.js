@@ -84,14 +84,14 @@ const RecipeDetailsPage = props =>{
         <div className='RecipePageDetails'>
             <Container className='RecipePageDetails-Container'>
                 <Row>
-                    <Col xs={12} md={4}>
+                    <Col xs={{span: 12, order: 'last'}} md={{span: 4, order: 'first'}}>
                         <div className='RecipePageDetails-IngredientsList text-center'>
-                            <h1 className='RecipePageDetails-Title'>{recipeData.foodTitle}</h1>
                             <IngredientList ingredients={recipeData.ingredients} />
                         </div>
                     </Col>
-                    <Col xs={12} md={8}>
-                        <div>
+                    <Col xs={{span: 12, order: 'first'}} md={{span: 8, order: 'last'}}>
+                        <div className='RecipePageDetails-Instructions'>
+                            <h1 className='RecipePageDetails-Title text-center'>{recipeData.foodTitle}</h1>
                             <RecipeDetails details={recipeData}/>
                         </div>
                     </Col>

@@ -19,10 +19,12 @@
     height: 400px;
     width: 90%;
     margin-bottom: 25px;
+    margin-left: 5%;
 }
 
 .RecipeDetails-header{
     font-family: 'Tahu!';
     font-size:calc(12px + 3.5vw);  
     color: white;
+    margin-top: 10px;
 }
