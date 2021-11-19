@@ -49,7 +49,7 @@ const RecipeCard = props =>{
         )
     }
     return(
-        <Col className='d-flex align-items-center justify-content-center'>
+        <Col sm={6} className='d-flex align-items-center justify-content-center'>
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={props.foodImage} />
                 <Card.Body>
@@ -63,8 +63,8 @@ const RecipeCard = props =>{
                     </Card.Footer>
                 </Card.Body>
             </Card>  
-        </Col>      
-    )
+        </Col> 
+    )     
 }
 
 export default RecipeCard;
