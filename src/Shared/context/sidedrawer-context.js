@@ -5,15 +5,15 @@ const SideDrawerContext = createContext();
 
 const SideDrawerProvider = props =>{
 
-    const [ showSideDrawer, setShowSideDrawer ] = useState(false);
+    const [ showCart, setShowCart ] = useState(false);
 
-    const toggleDrawer = () =>{
-        setShowSideDrawer(!showSideDrawer);
-    }
+    const handleCartClose = () => setShowCart(false);
+    const handleCartShow = () => setShowCart(true);
 
     return (<SideDrawerContext.Provider value={{
-        showSideDrawer: showSideDrawer,
-        toggleDrawer: toggleDrawer
+        showCart: showCart,
+        handleCartClose: handleCartClose,
+        handleCartShow: handleCartShow
     }}>
         {props.children}
     </SideDrawerContext.Provider>)

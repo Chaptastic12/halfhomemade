@@ -1,9 +1,13 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom'
+import React, { useContext } from 'react';
 
+import { NavLink } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 
+import { SideDrawerContext } from '../../context/sidedrawer-context';
+
 const BottomNav = props =>{
+
+    const { handleCartShow } = useContext(SideDrawerContext);
 
     if(!props.mobile){
         return(
@@ -29,8 +33,8 @@ const BottomNav = props =>{
             <Button size='sm' className='NavBar-Button' variant='outline-dark'>
                 <NavLink to="/login">Login <i className="fas fa-sign-in-alt"/></NavLink>
             </Button>
-            <Button size='sm' className='NavBar-Button' variant='outline-dark'>Cart <i className="fas fa-shopping-cart"/></Button>
-        </div>
+            <Button size='sm' className='NavBar-Button' variant='outline-dark' onClick={()=>handleCartShow()}>Cart <i className="fas fa-shopping-cart"/></Button>
+        </div> 
     )
 }
 
