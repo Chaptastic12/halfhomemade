@@ -21,11 +21,17 @@ const LoginForm = props =>{
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
+                {!props.isLogin && 
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control type="password" placeholder="Confirm Password" />
+                    </Form.Group>
+                }
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check to be notified when new recipes are posted" />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Submit
+                    {props.isLogin ? 'Login' : 'Register' }
                 </Button>
             </Form>)
 }

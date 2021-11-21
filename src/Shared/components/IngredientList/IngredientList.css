@@ -21,6 +21,6 @@
 
 .IngredientList h1{
     font-family: 'Tahu!';
-    font-size:calc(12px + 3.5vw);
+    font-size:calc(12px + 2.5vw);
     text-decoration: underline;
 }
