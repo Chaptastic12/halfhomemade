@@ -15,9 +15,15 @@ const BottomNav = props =>{
                 <Button className='NavBar-Button' variant='outline-light'>
                     <NavLink to="/recipes/all">Recipes</NavLink>
                 </Button>
-                <Button className='NavBar-Button' variant='outline-light'>Shop</Button>
-                <Button className='NavBar-Button' variant='outline-light'>About</Button>
-                <Button className='NavBar-Button' variant='outline-light'>Blog</Button>
+                <Button className='NavBar-Button' variant='outline-light'>
+                    <NavLink to="/shop">Shop</NavLink>
+                </Button>
+                <Button className='NavBar-Button' variant='outline-light'>
+                    <NavLink to="/about">About</NavLink>
+                </Button>
+                <Button className='NavBar-Button' variant='outline-light'>
+                    <NavLink to="/blog/all">Blog</NavLink>
+                </Button>
             </div>
         );
     }
@@ -27,13 +33,21 @@ const BottomNav = props =>{
             <Button size='sm' className='NavBar-Button' variant='outline-dark'>
                 <NavLink to="/recipes/all">Recipes</NavLink>
             </Button>
-            <Button size='sm' className='NavBar-Button' variant='outline-dark'>Shop</Button>
-            <Button size='sm' className='NavBar-Button' variant='outline-dark'>About</Button>
-            <Button size='sm' className='NavBar-Button' variant='outline-dark'>Blog</Button>
+            <Button size='sm' className='NavBar-Button' variant='outline-dark'>
+                <NavLink to="/shop">Shop</NavLink>
+            </Button>
+            <Button size='sm' className='NavBar-Button' variant='outline-dark'>
+                <NavLink to="/about">About</NavLink>
+            </Button>
+            <Button size='sm' className='NavBar-Button' variant='outline-dark'>
+                <NavLink to="/blog/all">Blog</NavLink>
+            </Button>
             <Button size='sm' className='NavBar-Button' variant='outline-dark'>
                 <NavLink to="/login">Login <i className="fas fa-sign-in-alt"/></NavLink>
             </Button>
-            <Button size='sm' className='NavBar-Button' variant='outline-dark' onClick={()=>handleCartShow()}>Cart <i className="fas fa-shopping-cart"/></Button>
+            <Button size='sm' className='NavBar-Button' variant='outline-dark' onClick={()=>handleCartShow()}>
+                Cart <i className="fas fa-shopping-cart"/>
+            </Button>
         </div> 
     )
 }

@@ -11,7 +11,7 @@ const SideCart = props =>{
     return (
         <Offcanvas show={showCart} placement='end' className='me-2'>
             <Offcanvas.Header closeButton onClick={handleCartClose}>
-                <Offcanvas.Title>Cart</Offcanvas.Title>
+                <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 List of items will go here

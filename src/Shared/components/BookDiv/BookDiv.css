@@ -8,6 +8,11 @@
     max-height: 600px;
 }
 
+.BookDiv a{
+    text-decoration: none;
+    color: inherit;
+}
+
 .BookDiv-BookImg{
     background: url('../../Img/Food/Cover.jpg') center center/contain no-repeat;
     height: 100%;
