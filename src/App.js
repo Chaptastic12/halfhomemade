@@ -12,6 +12,7 @@ import Footer from './Shared/components/Footer/Footer';
 
 import { MobileContext } from './Shared/context/mobile-context';
 import SideDrawerProvider from './Shared/context/sidedrawer-context';
+import AuthProvider from './Shared/context/auth-context';
 
 import './App.css';
 
@@ -43,33 +44,34 @@ function App() {
   let isMobile = (width <= 768);
 
   return (
+    <AuthProvider>
+      <SideDrawerProvider>
+        <MobileContext.Provider value={{isMobile: isMobile, changeMobile: handleWindowSizeChange}}>
+          <Router>
+            <NavBar />
+            <SideCart />
 
-    <SideDrawerProvider>
-      <MobileContext.Provider value={{isMobile: isMobile, changeMobile: handleWindowSizeChange}}>
-        <Router>
-          <NavBar />
-          <SideCart />
+            <Switch>
+              <Route path="/" exact>
+                  <HomePage />
+              </Route>
+              <Route path='/recipes/all' exact>
+                <RecipePage />
+              </Route>
+              <Route path='/recipes/view/:id' exact>
+                <RecipeDetailsPage />
+              </Route>
+              <Route path='/login' exact>
+                <LoginPage />
+              </Route>
 
-          <Switch>
-            <Route path="/" exact>
-                <HomePage />
-            </Route>
-            <Route path='/recipes/all' exact>
-              <RecipePage />
-            </Route>
-            <Route path='/recipes/view/:id' exact>
-              <RecipeDetailsPage />
-            </Route>
-            <Route path='/login' exact>
-              <LoginPage />
-            </Route>
-
-            <Redirect to="/" exact />
-          </Switch>
-          <Footer />
-        </Router>
-      </MobileContext.Provider>
-    </SideDrawerProvider>
+              <Redirect to="/" exact />
+            </Switch>
+            <Footer />
+          </Router>
+        </MobileContext.Provider>
+      </SideDrawerProvider>
+    </AuthProvider>
   );
 }
 
