@@ -56,7 +56,7 @@ const LoginForm = props =>{
         fetch(process.env.REACT_APP_API_ENDPOINT + registerOrLogin, {
             method: 'POST',
             credentials: 'include',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
             body: JSON.stringify(JSONbody)
         })
             .then(async response => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -13,6 +13,7 @@ import Footer from './Shared/components/Footer/Footer';
 import { MobileContext } from './Shared/context/mobile-context';
 import SideDrawerProvider from './Shared/context/sidedrawer-context';
 import AuthProvider from './Shared/context/auth-context';
+import { AuthContext } from './Shared/context/auth-context';
 
 import './App.css';
 
@@ -42,6 +43,41 @@ function App() {
   //Finally, determine if the window width is less than our minimum value
   //If it is, we are on mobile. If not, we are on PC
   let isMobile = (width <= 768);
+
+
+  const [ userState, setUserState ] = useContext(AuthContext);
+
+  const verifyUser = useCallback(() => {
+    fetch(process.env.REACT_APP_API_ENDPOINT + 'auth/refreshtoken', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(async response => {
+      const data = await response.json();
+      console.log(data)
+      if(response.ok){
+        console.log('ok response');
+        const data = await response.json();
+        setUserState(oldValues => {
+          return { ...oldValues, token: data.token}
+        })
+      } else {
+        console.log('bad response');
+
+        setUserState(oldValues => {
+          return {...oldValues, token: null }
+        })
+      }
+
+      //refresh our token if its been 5 mins (300000) to renew our auth token
+      setTimeout(verifyUser, 30000)
+    })
+  }, [setUserState]);
+
+  useEffect(()=>{
+    verifyUser();
+  }, [verifyUser])
 
   return (
     <AuthProvider>

@@ -13,10 +13,8 @@ import './NavBar.css';
 const MidNav = props =>{
 
     const { handleCartShow } = useContext(SideDrawerContext);
-    const { userState } = useContext(AuthContext);
-
-    console.log(userState.token ? true : false);
-
+    const { userState, logoutUser } = useContext(AuthContext);
+    
     return(
         <Row className='MidNav d-flex align-items-center justify-content-center text-center'>
             <Col>Some other text can go here</Col>
@@ -31,6 +29,11 @@ const MidNav = props =>{
                         <><NavLink to="/userPage">Profile</NavLink> <i className='fas fa-user' /></>
                     }
                 </Button>
+                {userState.token && 
+                    <Button variant='outline-light' className='NavBar-Button' onClick={() => logoutUser()}>
+                        Logout <i className="fas fa-sign-out-alt" />
+                    </Button>
+                }
                 <Button variant='outline-light' className='NavBar-Button' onClick={()=>handleCartShow()}>Cart <i className="fas fa-shopping-cart"/></Button>
             </Col>
         </Row>
