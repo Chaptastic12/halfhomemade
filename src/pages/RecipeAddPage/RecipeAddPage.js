@@ -27,7 +27,7 @@ const RecipeAddPage = props =>{
     const updateRecipeIngredients = (index, value) => {
         const stateClone = [ ...recipeIngredients ];
 
-        stateClone[index] = value;
+        stateClone[index] = {id: index + 1, value};
 
         setRecipeIngredients(stateClone);
     }
@@ -35,7 +35,7 @@ const RecipeAddPage = props =>{
     const updateRecipeSteps = (index, value) => {
         const stateClone = [ ...recipeSteps ];
 
-        stateClone[index] = value;
+        stateClone[index] = {id: index + 1, value};
 
         setRecipeSteps(stateClone);
     }
