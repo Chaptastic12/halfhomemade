@@ -29,7 +29,12 @@ const MidNav = props =>{
                         <><NavLink to="/userPage">Profile</NavLink> <i className='fas fa-user' /></>
                     }
                 </Button>
-                {userState.token && 
+                {userState.isAdmin &&
+                    <Button variant='outline-light' className='NavBar-Button'>
+                        <NavLink to="/recipes/add">Add Recipe</NavLink>
+                    </Button>
+                }
+                {userState.token &&
                     <Button variant='outline-light' className='NavBar-Button' onClick={() => logoutUser()}>
                         Logout <i className="fas fa-sign-out-alt" />
                     </Button>

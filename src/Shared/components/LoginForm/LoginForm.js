@@ -75,8 +75,9 @@ const LoginForm = props =>{
                 } else {
                     //If we did get good data, update our userState
                     const data = await response.json();
+                    console.log(data);
                     setUserState(oldValues => {
-                        return { ...oldValues, token: data.token }
+                        return { ...oldValues, token: data.token, isAdmin: data.isAdmin }
                     });
                 }
             })

@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 
+import { AuthContext } from '../../Shared/context/auth-context';
+
 import './RecipeAddPage.css'
 
 const RecipeAddPage = props =>{
+
+    const { userState } = useContext(AuthContext);
+    console.log(userState)
 
     const [ numberOfSteps, setNumberOfSteps ] = useState(1);
     const [ numberOfIngredients, setNumberOfIngredients ] = useState(1);
@@ -25,7 +30,6 @@ const RecipeAddPage = props =>{
         stateClone[index] = value;
 
         setRecipeIngredients(stateClone);
-
     }
 
     const updateRecipeSteps = (index, value) => {
@@ -59,9 +63,11 @@ const RecipeAddPage = props =>{
     console.log(numberOfSteps, numberOfIngredients);
     console.log(recipeIngredients, recipeSteps);
     console.log(recipeTitle, recipeDesc);
-    console.log(tags);
+    console.log(tags, uploadDate);
 
-
+    if(!userState.isAdmin){
+        return <div>Access Denied</div>
+    }
 
     return (
         <Form>

@@ -19,7 +19,7 @@ const AuthProvider = props =>{
         })
         .then( async response => {
             setUserState(oldValues => {
-                return { ...oldValues, details : undefined, token: null }
+                return { ...oldValues, details : undefined, token: null, isAdmin: null }
             })
             console.log('successful logout');
             window.localStorage.setItem('logout', Date.now());
