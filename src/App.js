@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,12 +8,13 @@ import HomePage from './pages/HomePage/HomePage';
 import RecipePage from './pages/RecipePage/RecipePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RecipeDetailsPage from './pages/RecipeDetailsPage/RecipeDetailsPage';
+import RecipeAddPage from './pages/RecipeAddPage/RecipeAddPage';
 import Footer from './Shared/components/Footer/Footer';
 
 import { MobileContext } from './Shared/context/mobile-context';
 import SideDrawerProvider from './Shared/context/sidedrawer-context';
 import AuthProvider from './Shared/context/auth-context';
-import { AuthContext } from './Shared/context/auth-context';
+//import { AuthContext } from './Shared/context/auth-context';
 
 import './App.css';
 
@@ -44,40 +45,46 @@ function App() {
   //If it is, we are on mobile. If not, we are on PC
   let isMobile = (width <= 768);
 
+//////////////////
+//
+//  Below is for the refresh token; but the FETCH call does not work as the server does not receive any secretCookies
+//  Disabled this for now as it is not needed for MVP
+//
+//////////////////
 
-  const [ userState, setUserState ] = useContext(AuthContext);
+  // const [ userState, setUserState ] = useContext(AuthContext);
 
-  const verifyUser = useCallback(() => {
-    fetch(process.env.REACT_APP_API_ENDPOINT + 'auth/refreshtoken', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then(async response => {
-      const data = await response.json();
-      console.log(data)
-      if(response.ok){
-        console.log('ok response');
-        const data = await response.json();
-        setUserState(oldValues => {
-          return { ...oldValues, token: data.token}
-        })
-      } else {
-        console.log('bad response');
+  // const verifyUser = useCallback(() => {
+  //   fetch(process.env.REACT_APP_API_ENDPOINT + 'auth/refreshtoken', {
+  //     method: 'POST',
+  //     credentials: 'include',
+  //     headers: { 'Content-Type': 'application/json' }
+  //   })
+  //   .then(async response => {
+  //     const data = await response.json();
+  //     console.log(data)
+  //     if(response.ok){
+  //       console.log('ok response');
+  //       const data = await response.json();
+  //       setUserState(oldValues => {
+  //         return { ...oldValues, token: data.token}
+  //       })
+  //     } else {
+  //       console.log('bad response');
 
-        setUserState(oldValues => {
-          return {...oldValues, token: null }
-        })
-      }
+  //       setUserState(oldValues => {
+  //         return {...oldValues, token: null }
+  //       })
+  //     }
 
-      //refresh our token if its been 5 mins (300000) to renew our auth token
-      setTimeout(verifyUser, 30000)
-    })
-  }, [setUserState]);
+  //     //refresh our token if its been 5 mins (300000) to renew our auth token
+  //     setTimeout(verifyUser, 30000)
+  //   })
+  // }, [setUserState]);
 
-  useEffect(()=>{
-    verifyUser();
-  }, [verifyUser])
+  // useEffect(()=>{
+  //   verifyUser();
+  // }, [verifyUser])
 
   return (
     <AuthProvider>
@@ -99,6 +106,9 @@ function App() {
               </Route>
               <Route path='/login' exact>
                 <LoginPage />
+              </Route>
+              <Route path='/recipes/add' exact>
+                <RecipeAddPage />
               </Route>
 
               <Redirect to="/" exact />
