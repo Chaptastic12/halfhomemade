@@ -66,13 +66,13 @@ const RecipeAddPage = props =>{
     return (
         <Form>
             <Form.Group className="mb-3" controlId="recipeUpload.ControlInput1">
-                <Form.Label onChange={ e => setRecipeTitle(e.target.value) }>Recipe Title</Form.Label>
-                <Form.Control type="text" placeholder="Recipe Name" />
+                <Form.Label>Recipe Title</Form.Label>
+                <Form.Control type="text" placeholder="Recipe Name"  onChange={ e => setRecipeTitle(e.target.value) }/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="recipeUpload.ControlInput2">
-                <Form.Label onChange={ e => setRecipeDesc(e.target.value) }>Recipe Desc</Form.Label>
-                <Form.Control type="text" placeholder="Recipe Desc" />
+                <Form.Label>Recipe Desc</Form.Label>
+                <Form.Control type="text" placeholder="Recipe Desc"  onChange={ e => setRecipeDesc(e.target.value) }/>
             </Form.Group>
 
             <Row>
@@ -100,8 +100,8 @@ const RecipeAddPage = props =>{
             {recipeIngredientInputs}
 
             <Form.Group className="mb-3">
-                <Form.Label onChange={ e => setTags(e.target.value) }>Recipe Tags</Form.Label>
-                <Form.Control type="text" placeholder="Recipe Tags" />
+                <Form.Label>Recipe Tags</Form.Label>
+                <Form.Control type="text" placeholder="Recipe Tags" onChange={ e => setTags(e.target.value) }/>
             </Form.Group>
         
         </Form>
