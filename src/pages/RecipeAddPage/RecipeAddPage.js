@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button';
 
 import { AuthContext } from '../../Shared/context/auth-context';
 
@@ -11,7 +12,6 @@ import './RecipeAddPage.css'
 const RecipeAddPage = props =>{
 
     const { userState } = useContext(AuthContext);
-    console.log(userState)
 
     const [ numberOfSteps, setNumberOfSteps ] = useState(1);
     const [ numberOfIngredients, setNumberOfIngredients ] = useState(1);
@@ -21,6 +21,10 @@ const RecipeAddPage = props =>{
     const [ recipeDesc, setRecipeDesc ] = useState('');
     //const [ recipeImage, setRecipeImage ] = useState('');
     const [ tags, setTags ] = useState([]);
+
+    const [ submitting, setSubmitting ] = useState(false);
+    const [ error, setError ] = useState('');
+    const genericErrorMsg = 'Something went wrong; please try again later';
 
     const uploadDate = new Date();
 
@@ -60,16 +64,55 @@ const RecipeAddPage = props =>{
         )
     }
 
-    console.log(numberOfSteps, numberOfIngredients);
-    console.log(recipeIngredients, recipeSteps);
-    console.log(recipeTitle, recipeDesc);
-    console.log(tags, uploadDate);
+    const submitRecipeToServer = e => {
+        e.preventDefault();
+        setSubmitting(true);
 
-    if(!userState.isAdmin){
-        return <div>Access Denied</div>
+        //Put together what we will send to the server
+        const JSONbody = {
+            numberOfIngredients,
+            numberOfSteps,
+            recipeIngredients,
+            recipeSteps,
+            recipeTitle,
+            recipeDesc,
+            tags,
+            uploadDate
+        }
+
+        //Reach out to our server
+        fetch(process.env.REACT_APP_API_ENDPOINT + '/recipes/add', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(JSONbody)
+        })
+            .then(async response => {
+                //We have our response, no longer submitting
+                setSubmitting(false);
+
+                //Check if we got a good response or not. If we did, set an error message
+                if(response.ok === false){
+                    if(response.status === 400){
+                        setError('Please fill in all the fields.');
+                    } else {
+                        setError(genericErrorMsg);
+                    }
+                } 
+            })
+            .catch(err => {
+                setSubmitting(false);
+                setError(genericErrorMsg);
+            })
     }
 
-    return (
+    //If they are not an admin, they should not be able to get here
+    //Will need to safeguard on the API route as well incase they are able to manipulate the state somehow
+    if(!userState.isAdmin){
+        return <div>Access Denied.</div>
+    }
+
+    return (<>
+        <h1>{ error }</h1>
         <Form>
             <Form.Group className="mb-3" controlId="recipeUpload.ControlInput1">
                 <Form.Label>Recipe Title</Form.Label>
@@ -109,9 +152,11 @@ const RecipeAddPage = props =>{
                 <Form.Label>Recipe Tags</Form.Label>
                 <Form.Control type="text" placeholder="Recipe Tags" onChange={ e => setTags(e.target.value) }/>
             </Form.Group>
+
+            <Button onClick={submitRecipeToServer}>{ submitting ? 'Submitting...' : 'Submit' }</Button>
         
         </Form>
-    )
+    </>)
 }
 
 export default RecipeAddPage;
