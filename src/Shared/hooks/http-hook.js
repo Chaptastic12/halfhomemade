@@ -9,7 +9,7 @@ export const useHttp = () => {
     //Store across re-renders
     const activeHttpRequest = useRef([]);
 
-    const sendRequest = useCallback(async (url, method = 'GET',  headers = {}, body = null ) =>{
+    const sendRequest = useCallback(async (url, method = 'GET', credentials = null,  headers = {}, body = null ) =>{
         setSubmitting(true);
 
         //Link our request incase we need to cancel it
@@ -19,6 +19,7 @@ export const useHttp = () => {
         try{
             const response = await fetch(url, {
                 method,
+                credentials,
                 headers,
                 body,
                 signal: httpAbortController.signal
@@ -33,14 +34,17 @@ export const useHttp = () => {
             if(!response.ok){
                 if(response.status === 400){
                     setError('Please fill in all the fields.');
+                    setSubmitting(false);
+                    return { error : 400 };
                 } else {
                     setError(genericErrorMsg);
+                    setSubmitting(false);
+                    return { error: genericErrorMsg };
                 }
+            } else {
+                setSubmitting(false);
+                return responseData;
             }
-
-            setSubmitting(false);
-
-            return responseData;
         } catch(err){
             setSubmitting(false);
             setError(genericErrorMsg);
