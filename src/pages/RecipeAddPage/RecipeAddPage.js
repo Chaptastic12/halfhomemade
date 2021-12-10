@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
 
 import { AuthContext } from '../../Shared/context/auth-context';
+import { useHttp } from '../../Shared/hooks/http-hook';
 
 import './RecipeAddPage.css'
 
@@ -22,9 +23,11 @@ const RecipeAddPage = props =>{
     //const [ recipeImage, setRecipeImage ] = useState('');
     const [ tags, setTags ] = useState([]);
 
-    const [ submitting, setSubmitting ] = useState(false);
-    const [ error, setError ] = useState('');
-    const genericErrorMsg = 'Something went wrong; please try again later';
+    const { submitting, error, sendRequest } = useHttp();
+
+    // const [ submitting, setSubmitting ] = useState(false);
+    // const [ error, setError ] = useState('');
+    // const genericErrorMsg = 'Something went wrong; please try again later';
 
     const uploadDate = new Date();
 
@@ -64,9 +67,8 @@ const RecipeAddPage = props =>{
         )
     }
 
-    const submitRecipeToServer = e => {
+    const submitRecipeToServer = async e => {
         e.preventDefault();
-        setSubmitting(true);
 
         //Put together what we will send to the server
         const JSONbody = {
@@ -81,28 +83,39 @@ const RecipeAddPage = props =>{
         }
 
         //Reach out to our server
-        fetch(process.env.REACT_APP_API_ENDPOINT + '/recipes/add', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(JSONbody)
-        })
-            .then(async response => {
-                //We have our response, no longer submitting
-                setSubmitting(false);
+        const sendToServer = async () => {
+            try{
+                await sendRequest(process.env.REACT_APP_API_ENDPOINT + '/recipes/add', 'POST', {'Content-Type': 'application/json'}, JSON.stringify(JSONbody));
+            } catch(err){
+                //Errors handled in hook
+            }
+        }
+        sendToServer();
+        
 
-                //Check if we got a good response or not. If we did, set an error message
-                if(response.ok === false){
-                    if(response.status === 400){
-                        setError('Please fill in all the fields.');
-                    } else {
-                        setError(genericErrorMsg);
-                    }
-                } 
-            })
-            .catch(err => {
-                setSubmitting(false);
-                setError(genericErrorMsg);
-            })
+
+    //     fetch(process.env.REACT_APP_API_ENDPOINT + '/recipes/add', {
+    //         method: 'POST',
+    //         headers: {'Content-Type': 'application/json'},
+    //         body: JSON.stringify(JSONbody)
+    //     })
+    //         .then(async response => {
+    //             //We have our response, no longer submitting
+    //             setSubmitting(false);
+
+    //             //Check if we got a good response or not. If we did, set an error message
+    //             if(response.ok === false){
+    //                 if(response.status === 400){
+    //                     setError('Please fill in all the fields.');
+    //                 } else {
+    //                     setError(genericErrorMsg);
+    //                 }
+    //             } 
+    //         })
+    //         .catch(err => {
+    //             setSubmitting(false);
+    //             setError(genericErrorMsg);
+    //         })
     }
 
     //If they are not an admin, they should not be able to get here

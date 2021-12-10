@@ -9,7 +9,7 @@ export const useHttp = () => {
     //Store across re-renders
     const activeHttpRequest = useRef([]);
 
-    const sendRequest = useCallback(async (url, method = 'GET', body = null, headers = {} ) =>{
+    const sendRequest = useCallback(async (url, method = 'GET',  headers = {}, body = null ) =>{
         setSubmitting(true);
 
         //Link our request incase we need to cancel it
