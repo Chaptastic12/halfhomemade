@@ -9,6 +9,8 @@ import RecipePage from './pages/RecipePage/RecipePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RecipeDetailsPage from './pages/RecipeDetailsPage/RecipeDetailsPage';
 import RecipeAddPage from './pages/RecipeAddPage/RecipeAddPage';
+import BookAddPage from './pages/BookAddPage/BookAddPage';
+
 import Footer from './Shared/components/Footer/Footer';
 
 import { MobileContext } from './Shared/context/mobile-context';
@@ -109,6 +111,9 @@ function App() {
               </Route>
               <Route path='/recipes/add' exact>
                 <RecipeAddPage />
+              </Route>
+              <Route path='book/add' exact>
+                <BookAddPage />
               </Route>
 
               <Redirect to="/" exact />
