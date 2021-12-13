@@ -25,9 +25,7 @@ const RecipeAddPage = props =>{
 
     const { submitting, error, sendRequest } = useHttp();
 
-    // const [ submitting, setSubmitting ] = useState(false);
-    // const [ error, setError ] = useState('');
-    // const genericErrorMsg = 'Something went wrong; please try again later';
+    const [ localError, setLocalError ] = useState('');
 
     const uploadDate = new Date();
 
@@ -70,6 +68,13 @@ const RecipeAddPage = props =>{
     const submitRecipeToServer = async e => {
         e.preventDefault();
 
+        //Make sure we have good entries on the front end
+        if( (numberOfSteps  < 1 || numberOfIngredients < 1) || ( recipeIngredients.length === 0 || recipeSteps.length === 0) || ( recipeTitle === '' || recipeDesc === '')){
+            return setLocalError('All fields must be filled out');
+        }
+
+        let modifiedTags = tags.split(',');
+
         //Put together what we will send to the server
         const JSONbody = {
             numberOfIngredients,
@@ -78,44 +83,20 @@ const RecipeAddPage = props =>{
             recipeSteps,
             recipeTitle,
             recipeDesc,
-            tags,
+            modifiedTags,
             uploadDate
         }
 
         //Reach out to our server
         const sendToServer = async () => {
             try{
-                await sendRequest(process.env.REACT_APP_API_ENDPOINT + '/recipes/add', 'POST', {'Content-Type': 'application/json'}, JSON.stringify(JSONbody));
+                await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/add', 'POST', null, {'Content-Type': 'application/json'}, JSON.stringify(JSONbody));
             } catch(err){
                 //Errors handled in hook
             }
         }
         sendToServer();
         
-
-
-    //     fetch(process.env.REACT_APP_API_ENDPOINT + '/recipes/add', {
-    //         method: 'POST',
-    //         headers: {'Content-Type': 'application/json'},
-    //         body: JSON.stringify(JSONbody)
-    //     })
-    //         .then(async response => {
-    //             //We have our response, no longer submitting
-    //             setSubmitting(false);
-
-    //             //Check if we got a good response or not. If we did, set an error message
-    //             if(response.ok === false){
-    //                 if(response.status === 400){
-    //                     setError('Please fill in all the fields.');
-    //                 } else {
-    //                     setError(genericErrorMsg);
-    //                 }
-    //             } 
-    //         })
-    //         .catch(err => {
-    //             setSubmitting(false);
-    //             setError(genericErrorMsg);
-    //         })
     }
 
     //If they are not an admin, they should not be able to get here
@@ -125,7 +106,7 @@ const RecipeAddPage = props =>{
     }
 
     return (<>
-        <h1>{ error }</h1>
+        <h1>{ error || localError }</h1>
         <Form>
             <Form.Group className="mb-3" controlId="recipeUpload.ControlInput1">
                 <Form.Label>Recipe Title</Form.Label>

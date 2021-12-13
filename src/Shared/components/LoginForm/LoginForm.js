@@ -55,7 +55,7 @@ const LoginForm = props =>{
         //Reach out to our server
         const sendToServer = async () => {
             try{
-                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT +  registerOrLogin, 'POST', 'include', {'Content-Type': 'application/json', 'Accept': 'application/json'}, JSON.stringify(JSONbody));
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT +  registerOrLogin, 'POST', 'include', {'Content-Type': 'application/json', 'Accept': 'application/json'}, JSON.stringify(JSONbody), true);
 
                 setUserState(oldValues => {
                     return { ...oldValues, token: responseData.token, isAdmin: responseData.isAdmin }

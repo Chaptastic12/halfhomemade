@@ -9,7 +9,7 @@ export const useHttp = () => {
     //Store across re-renders
     //const activeHttpRequest = useRef([]);
 
-    const sendRequest = useCallback( async (url, method = 'GET', credentials = null,  headers = {}, body = null ) =>{
+    const sendRequest = useCallback( async (url, method = 'GET', credentials = null,  headers = {}, body = null, auth = false ) =>{
         setSubmitting(true);
 
         //Link our request incase we need to cancel it
@@ -17,13 +17,25 @@ export const useHttp = () => {
         // activeHttpRequest.current.push(httpAbortController);
 
         try{
-            const response = await fetch(url, {
-                method,
-                credentials,
-                headers,
-                body,
-                // signal: httpAbortController.signal
-            });
+            let response;
+            if(auth){
+                response = await fetch(url, {
+                    method,
+                    credentials,
+                    headers,
+                    body,
+                    // signal: httpAbortController.signal
+                });
+            } else {
+                console.log(auth)
+                response = await fetch(url, {
+                    method,
+                    headers,
+                    body,
+                    // signal: httpAbortController.signal
+                });
+            }
+
             const responseData = await response.json();
 
             //if request complete, clear activeHttpRequests
@@ -32,22 +44,18 @@ export const useHttp = () => {
             //Ensure we got good data
             if(!response.ok){
                 if(response.status === 400){
-                    console.log('400 error')
                     setError('Please fill in all the fields.');
                     setSubmitting(false);
                     return { error : 400 };
                 } else {
-                    console.log('generic error')
                     setError(genericErrorMsg);
                     setSubmitting(false);
                     return { error: genericErrorMsg };
                 }
             } 
-
             setSubmitting(false);
             return responseData;
-        }catch {
-            console.log('catch err')
+        }catch(err) {
             setSubmitting(false);
             setError(genericErrorMsg);
         }
