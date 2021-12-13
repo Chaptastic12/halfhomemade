@@ -19,13 +19,15 @@ const MidNav = props =>{
 
     let profileOptions;
     if(userState.isAdmin){
-        profileOptions = <DropdownButton id="dropdown-basic-button" title="Admin options" variant='outline-light'>
+        profileOptions = <DropdownButton id="dropdown-basic-button" title="Admin options" variant='outline-light' className='NavBar-Button'>
                             <Dropdown.Item href="#/action-1"><NavLink to="/userPage">Profile <i className='fas fa-user' /></NavLink></Dropdown.Item>
                             <Dropdown.Item href="#/action-2"><NavLink to="/recipes/add">Add Recipe</NavLink></Dropdown.Item>
                             <Dropdown.Item href="#/action-3"><NavLink to="/book/add">Add Book</NavLink></Dropdown.Item>
                         </DropdownButton>
     } else {
-        profileOptions = <NavLink to="/userPage">Profile <i className='fas fa-user' /></NavLink>
+        profileOptions = <Button variant='outline-light' className='NavBar-Button'>
+                            <NavLink to="/userPage">Profile <i className='fas fa-user' /></NavLink>
+                        </Button>
     }
     
     return(
@@ -35,19 +37,13 @@ const MidNav = props =>{
                 <div className='MidNav-Title'><NavLink to='/'>halfHomemade</NavLink></div>
             </Col>
             <Col>
-                <Button variant='outline-light' className='NavBar-Button'>
                     {!userState.token ? 
-                        <><NavLink to="/login">Login</NavLink> <i className="fas fa-sign-in-alt"/></>
+                        <Button variant='outline-light' className='NavBar-Button'>
+                            <NavLink to="/login">Login</NavLink> <i className="fas fa-sign-in-alt"/>
+                        </Button>
                     :
                         profileOptions
                     }
-                </Button>
-
-                {/* {userState.isAdmin &&
-                    <Button variant='outline-light' className='NavBar-Button'>
-                        <NavLink to="/recipes/add">Add Recipe</NavLink>
-                    </Button>
-                } */}
 
                 {userState.token &&
                     <Button variant='outline-light' className='NavBar-Button' onClick={() => logoutUser()}>

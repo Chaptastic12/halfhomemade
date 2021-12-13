@@ -11,8 +11,6 @@ import './LoginForm.css';
 
 const LoginForm = props =>{
 
-    // const [ submitting, setSubmitting ] = useState(false);
-    // const [ error, setError ] = useState('');
     const [ passwordError, setPasswordError ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
@@ -33,8 +31,6 @@ const LoginForm = props =>{
 
     const submitFormHandler = e =>{
         e.preventDefault()
-        // setSubmitting(true);
-        // setError('');
 
         const genericErrorMsg = 'Something went wrong; please try again later';
 
@@ -69,40 +65,6 @@ const LoginForm = props =>{
             }
         }
         sendToServer();
-
-        //Reach out to our API endpoint and send our data
-        // fetch(process.env.REACT_APP_API_ENDPOINT + registerOrLogin, {
-        //     method: 'POST',
-        //     credentials: 'include',
-        //     headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-        //     body: JSON.stringify(JSONbody)
-        // })
-        //     .then(async response => {
-        //         //We have our response, no longer submitting
-        //         setSubmitting(false);
-
-        //         //Check if we got a good response or not. If we did, set an error message
-        //         if(response.ok === false){
-        //             if(response.status === 400){
-        //                 setError('Please fill in all the fields.');
-        //             } else if(response.status === 401){
-        //                 setError('Invalid email and password combination');
-        //             } else {
-        //                 setError(genericErrorMsg);
-        //             }
-        //         } else {
-        //             //If we did get good data, update our userState
-        //             const data = await response.json();
-        //             console.log(data);
-        //             setUserState(oldValues => {
-        //                 return { ...oldValues, token: data.token, isAdmin: data.isAdmin }
-        //             });
-        //         }
-        //     })
-        //     .catch(err => {
-        //         setSubmitting(false);
-        //         setError(genericErrorMsg);
-        //     })
     }
 
     return(<>

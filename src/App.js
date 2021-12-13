@@ -112,7 +112,7 @@ function App() {
               <Route path='/recipes/add' exact>
                 <RecipeAddPage />
               </Route>
-              <Route path='book/add' exact>
+              <Route path='/book/add' exact>
                 <BookAddPage />
               </Route>
 
