@@ -32,8 +32,6 @@ const LoginForm = props =>{
     const submitFormHandler = e =>{
         e.preventDefault()
 
-        const genericErrorMsg = 'Something went wrong; please try again later';
-
         let registerOrLogin;
         let JSONbody;
         //If we are logging in...

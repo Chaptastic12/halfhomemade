@@ -1,0 +1,11 @@
+.recipePageAdd{
+    margin: 25px;
+}
+
+.recipePageAdd-Image{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 300px;
+    width: 450px;
+}

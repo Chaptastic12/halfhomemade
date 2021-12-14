@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -13,6 +13,7 @@ import './RecipeAddPage.css'
 const RecipeAddPage = props =>{
 
     const { userState } = useContext(AuthContext);
+    const { submitting, error, sendRequest } = useHttp();
 
     const [ numberOfSteps, setNumberOfSteps ] = useState(1);
     const [ numberOfIngredients, setNumberOfIngredients ] = useState(1);
@@ -20,12 +21,23 @@ const RecipeAddPage = props =>{
     const [ recipeIngredients, setRecipeIngredients ] = useState([]);
     const [ recipeTitle, setRecipeTitle ] = useState('');
     const [ recipeDesc, setRecipeDesc ] = useState('');
-    //const [ recipeImage, setRecipeImage ] = useState('');
+    const [ bookSelection, setBookSelection ] = useState('');
+    const [ recipeImage, setRecipeImage ] = useState('');
     const [ tags, setTags ] = useState([]);
-
-    const { submitting, error, sendRequest } = useHttp();
-
     const [ localError, setLocalError ] = useState('');
+    const [ imagePreview, setImagePreview ] = useState();
+
+    useEffect(()=>{
+        if(!recipeImage){
+            return;
+        }
+        const fileReader = new FileReader();
+        fileReader.onload = () => {
+            setImagePreview(fileReader.result);
+        };
+        fileReader.readAsDataURL(recipeImage);
+
+    }, [recipeImage])
 
     const uploadDate = new Date();
 
@@ -65,6 +77,16 @@ const RecipeAddPage = props =>{
         )
     }
 
+    const submitRecipeImage = image =>{
+        console.log(image);
+        if(image && image.length === 1){
+            const chosenFile = image[0];
+            setRecipeImage(chosenFile);
+        } else {
+            setRecipeImage(undefined);
+        }
+    }
+
     const submitRecipeToServer = async e => {
         e.preventDefault();
 
@@ -84,6 +106,8 @@ const RecipeAddPage = props =>{
             recipeTitle,
             recipeDesc,
             modifiedTags,
+            bookSelection,
+            recipeImage,
             uploadDate
         }
 
@@ -107,18 +131,18 @@ const RecipeAddPage = props =>{
 
     return (<>
         <h1>{ error || localError }</h1>
-        <Form>
-            <Form.Group className="mb-3" controlId="recipeUpload.ControlInput1">
-                <Form.Label>Recipe Title</Form.Label>
-                <Form.Control type="text" placeholder="Recipe Name"  onChange={ e => setRecipeTitle(e.target.value) }/>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="recipeUpload.ControlInput2">
-                <Form.Label>Recipe Desc</Form.Label>
-                <Form.Control type="text" placeholder="Recipe Desc"  onChange={ e => setRecipeDesc(e.target.value) }/>
-            </Form.Group>
-
+        <Form className='recipePageAdd'>
             <Row>
+                { imagePreview && <img src={imagePreview } className='recipePageAdd-Image' alt='Recipe Preview' /> }
+                { !imagePreview && <p>Please pick an image to see a preview</p> }
+            </Row>
+            <Row>
+                <Col xs='6'>
+                    <Form.Group className="mb-3" controlId="recipeUpload.ControlInput1">
+                        <Form.Label>Recipe Title</Form.Label>
+                        <Form.Control type="text" placeholder="Recipe Name"  onChange={ e => setRecipeTitle(e.target.value) }/>
+                    </Form.Group>
+                </Col>
                 <Col>
                     <Form.Group className="mb-3" controlId="recipeUpload.ControlInput3">
                         <Form.Label>Number of Ingredients</Form.Label>
@@ -133,10 +157,30 @@ const RecipeAddPage = props =>{
                 </Col>
             </Row>
 
-            <Form.Group controlId="formFile" className="mb-3">
-                <Form.Label>Upload Recipe Image</Form.Label>
-                <Form.Control type="file" />
+            <Form.Group className="mb-3" controlId="recipeUpload.ControlInput2">
+                <Form.Label>Recipe Desc</Form.Label>
+                <Form.Control as='textarea' type="text" placeholder="Recipe Desc"  onChange={ e => setRecipeDesc(e.target.value) }/>
             </Form.Group>
+
+            
+
+            <Row>
+                <Col>
+                    <Form.Group controlId="formFile" className="mb-3">
+                        <Form.Label>Upload Recipe Image</Form.Label>
+                        <Form.Control type="file" name='recipeImage' accept='.jpg,.png,.jpeg' onChange={  e => submitRecipeImage(e.target.files) }/>
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Label>Recipe Book</Form.Label>
+                    <Form.Select aria-label="Select Recipe Book" onChange={ e => setBookSelection(e.target.value) }>
+                        <option>Select a Recipe Book</option>
+                        <option value="halfhomemade">HalfHomemade</option>
+                        <option value="halfhomemadeDeserts">HalfHomemade Deserts</option>
+                        <option value="halfhomemadeDeserts">Standalone Recipe</option>
+                    </Form.Select>
+                </Col>
+            </Row>
 
             {recipeStepInputs}
 
@@ -147,7 +191,7 @@ const RecipeAddPage = props =>{
                 <Form.Control type="text" placeholder="Recipe Tags" onChange={ e => setTags(e.target.value) }/>
             </Form.Group>
 
-            <Button onClick={submitRecipeToServer}>{ submitting ? 'Submitting...' : 'Submit' }</Button>
+            <Button type='button' onClick={submitRecipeToServer}>{ submitting ? 'Submitting...' : 'Submit' }</Button>
         
         </Form>
     </>)
