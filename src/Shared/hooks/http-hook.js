@@ -15,7 +15,6 @@ export const useHttp = () => {
         //Link our request incase we need to cancel it
         // const httpAbortController = new AbortController();
         // activeHttpRequest.current.push(httpAbortController);
-
         try{
             let response;
             if(auth){
@@ -27,7 +26,6 @@ export const useHttp = () => {
                     // signal: httpAbortController.signal
                 });
             } else {
-                console.log(auth)
                 response = await fetch(url, {
                     method,
                     headers,

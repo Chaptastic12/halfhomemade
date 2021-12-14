@@ -13,7 +13,7 @@ const AuthProvider = props =>{
             method: 'POST',
             credentials: 'include',
             headers: {
-                'Content-Type': 'applicaiton/json',
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${userState.token}`
             }
         })

@@ -114,7 +114,8 @@ const RecipeAddPage = props =>{
         //Reach out to our server
         const sendToServer = async () => {
             try{
-                await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/add', 'POST', null, {'Content-Type': 'application/json'}, JSON.stringify(JSONbody));
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/add', 'POST', 'include', {'Content-Type': 'application/json', Authorization: `Bearer ${userState.token}`}, JSON.stringify(JSONbody), true);
+                console.log(responseData);
             } catch(err){
                 //Errors handled in hook
             }
