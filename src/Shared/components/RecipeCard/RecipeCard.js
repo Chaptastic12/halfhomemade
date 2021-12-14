@@ -32,7 +32,7 @@ const RecipeCard = props =>{
                     </Col>
                     <Col>
                         <h2>{props.foodTitle}</h2>
-                        <p className='RecipeCard-Stars'>{foodRating}</p>
+                        { props.foodRating === 0 ? <p>This Recipe has not been rated yet</p> : <p className='RecipeCard-Stars'>{foodRating}</p> }
                         <p>{props.foodDesc}</p>
                         <Button className='RecipeCard-Link'><Link to={`/recipes/view/${props.id}`}>View</Link></Button>
                         <p>TAGS: {tags}</p>

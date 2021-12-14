@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
 import foodImg from '../../Shared/Img/Food/Mafu_tofu.jpg'
@@ -7,6 +7,7 @@ import userImg from '../../Shared/Img/Food/Cover.jpg'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import { MobileContext } from '../../Shared/context/mobile-context';
+import { useHttp } from '../../Shared/hooks/http-hook';
 import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 
 import FoodPlatter from '../../Shared/Img/Food/Food_platter.jpg';
@@ -38,6 +39,25 @@ const testData = [{
 
 const RecipePage = props =>{
 
+    const { sendRequest } = useHttp();
+    const [ loadedRecipes, setLoadedRecipes ] = useState([]);
+
+    //Make a call to our API to get our recipes
+    useEffect(() => {
+         //Reach out to our server
+         const callToServer = async() => {
+            try{
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/showAllRecipes');
+                console.log(responseData)
+                setLoadedRecipes(responseData);
+                console.log(loadedRecipes)
+            } catch(err){
+                //Errors handled in hook
+            }
+        }
+        callToServer();
+    },[sendRequest])
+
     const { isMobile } = useContext(MobileContext);
 
     const recipes = testData.map(recipe => {
@@ -50,11 +70,25 @@ const RecipePage = props =>{
             date={recipe.date} />
     })
 
+    const serverRecipes = loadedRecipes.map(recipe => {
+        //Book information isnt set up yet
+        recipe.bookImage = userImg;
+        recipe.bookRating = 5;
+        recipe.foodImage = foodImg;
+        return <RecipeCard
+            key={recipe._id + recipe.recipeRating} 
+            id={recipe._id} 
+            foodImage={recipe.foodImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
+            userImage={recipe.bookImage} userRating={recipe.bookRating} 
+            tags={recipe.tags} 
+            date={recipe.createdAt} />
+    })
+
     let recipeCardFormat;
     if(!isMobile){
-        recipeCardFormat = <>{recipes}</>
+        recipeCardFormat = <>{recipes} {serverRecipes}</>
     } else {
-        recipeCardFormat = <Row>{recipes}</Row>
+        recipeCardFormat = <Row>{recipes}  {serverRecipes}</Row>
     }
 
     return(

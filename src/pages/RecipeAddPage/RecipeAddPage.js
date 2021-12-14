@@ -108,6 +108,7 @@ const RecipeAddPage = props =>{
             modifiedTags,
             bookSelection,
             recipeImage,
+            recipeRating: 0,
             uploadDate
         }
 
