@@ -20,13 +20,13 @@ const MidNav = props =>{
     let profileOptions;
     if(userState.isAdmin){
         profileOptions = <DropdownButton id="dropdown-basic-button" title="Admin options" variant='outline-light' className='NavBar-Button'>
-                            <Dropdown.Item href="#/action-1"><NavLink to="/userPage">Profile <i className='fas fa-user' /></NavLink></Dropdown.Item>
-                            <Dropdown.Item href="#/action-2"><NavLink to="/recipes/add">Add Recipe</NavLink></Dropdown.Item>
-                            <Dropdown.Item href="#/action-3"><NavLink to="/book/add">Add Book</NavLink></Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/userPage'>Profile <i className='fas fa-user' /></Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to="/recipes/add">Add Recipe</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/book/add'>Add Book</Dropdown.Item>
                         </DropdownButton>
     } else {
-        profileOptions = <Button variant='outline-light' className='NavBar-Button'>
-                            <NavLink to="/userPage">Profile <i className='fas fa-user' /></NavLink>
+        profileOptions = <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/userPage">
+                            Profile <i className='fas fa-user' />
                         </Button>
     }
     
@@ -38,9 +38,9 @@ const MidNav = props =>{
             </Col>
             <Col>
                     {!userState.token ? 
-                        <Button variant='outline-light' className='NavBar-Button'>
-                            <NavLink to="/login">Login</NavLink> <i className="fas fa-sign-in-alt"/>
-                        </Button>
+                            <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/login">
+                                Login <i className="fas fa-sign-in-alt"/>
+                            </Button>
                     :
                         profileOptions
                     }

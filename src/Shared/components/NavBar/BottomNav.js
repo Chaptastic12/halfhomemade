@@ -12,17 +12,17 @@ const BottomNav = props =>{
     if(!props.mobile){
         return(
             <div className='BotNav-Nav d-flex justify-content-center'>
-                <Button className='NavBar-Button' variant='outline-light'>
-                    <NavLink to="/recipes/all">Recipes</NavLink>
+                <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/recipes/all">
+                    Recipes
                 </Button>
-                <Button className='NavBar-Button' variant='outline-light'>
-                    <NavLink to="/shop">Shop</NavLink>
+                <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/shop">
+                    Shop
                 </Button>
-                <Button className='NavBar-Button' variant='outline-light'>
-                    <NavLink to="/about">About</NavLink>
+                <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/about">
+                    About
                 </Button>
-                <Button className='NavBar-Button' variant='outline-light'>
-                    <NavLink to="/blog/all">Blog</NavLink>
+                <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/blog/all">
+                    Blog
                 </Button>
             </div>
         );
@@ -30,18 +30,18 @@ const BottomNav = props =>{
 
     return(
         <div className='MobileBotNav-Nav d-flex justify-content-center'>
-            <Button size='sm' className='NavBar-Button' variant='outline-dark'>
-                <NavLink to="/recipes/all">Recipes</NavLink>
-            </Button>
-            <Button size='sm' className='NavBar-Button' variant='outline-dark'>
-                <NavLink to="/shop">Shop</NavLink>
-            </Button>
-            <Button size='sm' className='NavBar-Button' variant='outline-dark'>
-                <NavLink to="/about">About</NavLink>
-            </Button>
-            <Button size='sm' className='NavBar-Button' variant='outline-dark'>
-                <NavLink to="/blog/all">Blog</NavLink>
-            </Button>
+            <Button size='sm' className='NavBar-Button' variant='outline-dark' as={NavLink} to="/recipes/all">
+                    Recipes
+                </Button>
+            <Button size='sm' className='NavBar-Button' variant='outline-dark' as={NavLink} to="/shop">
+                    Shop
+                </Button>
+            <Button size='sm' className='NavBar-Button' variant='outline-dark' as={NavLink} to="/about">
+                    About
+                </Button>
+            <Button size='sm' className='NavBar-Button' variant='outline-dark' as={NavLink} to="/blog/all">
+                    Blog
+                </Button>
             <Button size='sm' className='NavBar-Button' variant='outline-dark'>
                 <NavLink to="/login">Login <i className="fas fa-sign-in-alt"/></NavLink>
             </Button>
