@@ -146,7 +146,7 @@ const RecipeAddPage = props =>{
 
     //Create our list of book options
     let bookOptions = books.map( book => {
-        return <option value={book._id}>{book.bookTitle}</option>
+        return <option key={book._id} value={book._id}>{book.bookTitle}</option>
     })
 
     return (<>

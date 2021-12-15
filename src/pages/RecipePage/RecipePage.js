@@ -74,8 +74,7 @@ const RecipePage = props =>{
         recipe.bookRating = 5;
         recipe.foodImage = foodImg;
         return <RecipeCard
-            key={recipe._id + recipe.recipeRating} 
-            id={recipe._id} 
+            key={recipe._id } 
             foodImage={recipe.foodImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
             userImage={recipe.bookImage} userRating={recipe.bookRating} 
             tags={recipe.tags} 
