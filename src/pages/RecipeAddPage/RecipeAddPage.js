@@ -111,24 +111,19 @@ const RecipeAddPage = props =>{
 
         let recipeTags = tags.split(',');
 
-        //Put together what we will send to the server
-        const JSONbody = {
-            numberOfIngredients,
-            numberOfSteps,
-            recipeIngredients,
-            recipeSteps,
-            recipeTitle,
-            recipeDesc,
-            recipeTags,
-            bookSelection,
-            recipeImage,
-            recipeRating: 0
-        }
+        const formData = new FormData();
+        formData.append('recipeIngredients', recipeIngredients);
+        formData.append('recipeSteps', recipeSteps);
+        formData.append('recipeTitle', recipeTitle);
+        formData.append('recipeDesc', recipeDesc);
+        formData.append('recipeTags', recipeTags);
+        formData.append('bookSelection', bookSelection);
+        formData.append('recipeImage', recipeImage);
 
         //Reach out to our server
         const sendToServer = async () => {
             try{
-                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/add', 'POST', 'include', {'Content-Type': 'application/json', Authorization: `Bearer ${userState.token}`}, JSON.stringify(JSONbody), true);
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/add', 'POST', 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
             } catch(err){
                 //Errors handled in hook
             }

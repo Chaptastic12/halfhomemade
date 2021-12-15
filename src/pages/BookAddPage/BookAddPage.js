@@ -51,15 +51,14 @@ const BookAddPage = props =>{
         }
 
         //Put together what we will send to the server
-        const JSONbody = {
-            bookTitle,
-            bookImg
-        }
+        const formData = new FormData();
+        formData.append('bookTitle', bookTitle);
+        formData.append('bookImage', bookImg)
 
         //Reach out to our server
         const sendToServer = async () => {
             try{
-                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'books/add', 'POST', 'include', {'Content-Type': 'application/json', Authorization: `Bearer ${userState.token}`}, JSON.stringify(JSONbody), true);
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'books/add', 'POST', 'include', {Authorization: `Bearer ${userState.token}`}, formData, true);
                 console.log(responseData);
             } catch(err){
                 //Errors handled in hook
