@@ -72,12 +72,13 @@ const RecipePage = props =>{
         //Book information isnt set up yet
         recipe.bookImage = userImg;
         recipe.bookRating = 5;
+        recipe.recipeRating = 5;
         recipe.foodImage = foodImg;
         return <RecipeCard
             key={recipe._id } 
             foodImage={recipe.foodImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
             userImage={recipe.bookImage} userRating={recipe.bookRating} 
-            tags={recipe.tags} 
+            tags={recipe.recipeTags} 
             date={recipe.createdAt} />
     })
 

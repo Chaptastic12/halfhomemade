@@ -33,7 +33,6 @@ export const useHttp = () => {
                     // signal: httpAbortController.signal
                 });
             }
-
             const responseData = await response.json();
 
             //if request complete, clear activeHttpRequests
