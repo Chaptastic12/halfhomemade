@@ -72,11 +72,12 @@ const RecipePage = props =>{
         //Book information isnt set up yet
         recipe.bookImage = userImg;
         recipe.bookRating = 5;
-        recipe.recipeRating = 5;
-        recipe.foodImage = foodImg;
+
+        recipe.recipeImage = recipe.recipeImage.replace(/\\/g, '/');
+        recipe.createdAt = recipe.createdAt.toString().split('T')[0];
         return <RecipeCard
             key={recipe._id } 
-            foodImage={recipe.foodImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
+            foodImage={recipe.recipeImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
             userImage={recipe.bookImage} userRating={recipe.bookRating} 
             tags={recipe.recipeTags} 
             date={recipe.createdAt} />
