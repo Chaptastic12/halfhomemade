@@ -26,8 +26,24 @@ const RecipeAddPage = props =>{
     const [ tags, setTags ] = useState([]);
     const [ localError, setLocalError ] = useState('');
     const [ imagePreview, setImagePreview ] = useState();
+    const [ books, setBooks ] = useState([]);
+
+    useEffect( () => {
+        //Get our books that can be chosen as a source for the recipe
+        const getFromServer = async() => {
+            try{
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'books/getAllBooks');
+                setBooks(responseData);
+            } catch(err){
+                //Errors handled in hook
+            }
+        }
+        getFromServer();
+    // eslint-disable-next-line 
+    },[setBooks])
 
     useEffect(()=>{
+        //Display a preview of our image
         if(!recipeImage){
             return;
         }
@@ -37,9 +53,7 @@ const RecipeAddPage = props =>{
         };
         fileReader.readAsDataURL(recipeImage);
 
-    }, [recipeImage])
-
-    const uploadDate = new Date();
+    }, [sendRequest, recipeImage]);
 
     const updateRecipeIngredients = (index, value) => {
         const stateClone = [ ...recipeIngredients ];
@@ -108,8 +122,7 @@ const RecipeAddPage = props =>{
             modifiedTags,
             bookSelection,
             recipeImage,
-            recipeRating: 0,
-            uploadDate
+            recipeRating: 0
         }
 
         //Reach out to our server
@@ -130,6 +143,11 @@ const RecipeAddPage = props =>{
     if(!userState.isAdmin){
         return <div>Access Denied.</div>
     }
+
+    //Create our list of book options
+    let bookOptions = books.map( book => {
+        return <option value={book._id}>{book.bookTitle}</option>
+    })
 
     return (<>
         <h1>{ error || localError }</h1>
@@ -177,9 +195,7 @@ const RecipeAddPage = props =>{
                     <Form.Label>Recipe Book</Form.Label>
                     <Form.Select aria-label="Select Recipe Book" onChange={ e => setBookSelection(e.target.value) }>
                         <option>Select a Recipe Book</option>
-                        <option value="halfhomemade">HalfHomemade</option>
-                        <option value="halfhomemadeDeserts">HalfHomemade Deserts</option>
-                        <option value="halfhomemadeDeserts">Standalone Recipe</option>
+                        {bookOptions}
                     </Form.Select>
                 </Col>
             </Row>

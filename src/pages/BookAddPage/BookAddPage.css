@@ -1,0 +1,11 @@
+.bookPageAdd{
+    margin: 25px;
+}
+
+.bookPageAdd-Image{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 300px;
+    width: 450px;
+}

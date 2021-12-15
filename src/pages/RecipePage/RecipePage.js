@@ -48,15 +48,13 @@ const RecipePage = props =>{
          const callToServer = async() => {
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/showAllRecipes');
-                console.log(responseData)
                 setLoadedRecipes(responseData);
-                console.log(loadedRecipes)
             } catch(err){
                 //Errors handled in hook
             }
         }
         callToServer();
-    },[sendRequest])
+    },[sendRequest, setLoadedRecipes])
 
     const { isMobile } = useContext(MobileContext);
 
