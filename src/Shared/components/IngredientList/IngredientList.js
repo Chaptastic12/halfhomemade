@@ -4,9 +4,21 @@ import './IngredientList.css';
 
 const IngredientList = props =>{
 
+    //IN THE FUTURE WE WANT TO EXPAND TO HOLD THIS LEVEL OF DETAIL
+    //
+    // const ingredientList = props.ingredients.map(ingredient => {
+    //     let key = ingredient.quantity+ingredient.measurement+ingredient.ingredient;
+    //     return (<li key={key}>
+    //                 {ingredient.quantity} {ingredient.measurement && ingredient.measurement} {ingredient.ingredient} {ingredient.special && ingredient.special}
+    //             </li>)
+    // });           
+
     const ingredientList = props.ingredients.map(ingredient => {
-        return (<li>{ingredient.quantity} {ingredient.measurement && ingredient.measurement} {ingredient.ingredient} {ingredient.special && ingredient.special}</li>)
-    });           
+        let key = ingredient.id+ingredient.value;
+        return (<li key={key}>
+                    {ingredient.value}
+                </li>)
+    })
 
     return(
         <div className='IngredientList'>

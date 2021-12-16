@@ -9,18 +9,19 @@ import FormattedSteps from './FormattedSteps/FormattedSteps';
 import './RecipeDetails.css';
 
 const RecipeDetails = props =>{
+    console.log(props.details)
 
-    let steps = props.details.steps;
+    let steps = props.details;
 
     let formattedSteps = steps.map(step =>{
-        return <FormattedSteps step={step.step} instructions={step.instructions} />
+        return <FormattedSteps step={step.id} instructions={step.value} />
     })
 
     return(
         <Container>
             <Row className='RecipeDetails'>
                 <Col xs={12}>
-                    <div className='RecipeDetails-Image' style={{backgroundImage: 'URL('+props.details.foodImage+')'}} />
+                    <div className='RecipeDetails-Image' style={{backgroundImage: 'URL(http://localhost:8081/'+props.image+')'}} />
                 </Col>
             </Row>
             <Row>

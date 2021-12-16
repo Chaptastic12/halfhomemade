@@ -76,7 +76,8 @@ const RecipePage = props =>{
         recipe.recipeImage = recipe.recipeImage.replace(/\\/g, '/');
         recipe.createdAt = recipe.createdAt.toString().split('T')[0];
         return <RecipeCard
-            key={recipe._id } 
+            key={recipe._id}
+            id={recipe._id} 
             foodImage={recipe.recipeImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
             userImage={recipe.bookImage} userRating={recipe.bookRating} 
             tags={recipe.recipeTags} 

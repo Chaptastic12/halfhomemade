@@ -29,7 +29,6 @@ const RecipeAddPage = props =>{
     const [ imagePreview, setImagePreview ] = useState();
     const [ books, setBooks ] = useState([]);
 
-    console.log(recipeSteps, recipeIngredients);
     //useEffect to get our list of book options
     useEffect( () => {
         //Get our books that can be chosen as a source for the recipe
@@ -95,8 +94,8 @@ const RecipeAddPage = props =>{
         let recipeTags = tags.split(',');
 
         const formData = new FormData();
-        formData.append('recipeIngredients', recipeIngredients);
-        formData.append('recipeSteps', recipeSteps);
+        formData.append('recipeIngredients', JSON.stringify(recipeIngredients));
+        formData.append('recipeSteps', JSON.stringify(recipeSteps));
         formData.append('recipeTitle', recipeTitle);
         formData.append('recipeDesc', recipeDesc);
         formData.append('recipeTags', recipeTags);
@@ -142,13 +141,13 @@ const RecipeAddPage = props =>{
                 <Col>
                     <Form.Group className="mb-3" controlId="recipeUpload.ControlInput3">
                         <Form.Label>Number of Ingredients</Form.Label>
-                        <Form.Control type="number" min={1} placeholder="Number of Ingredients" onChange={ e => setNumberOfIngredients(e.target.value) }/>
+                        <Form.Control type="number" min={1} value={numberOfIngredients} placeholder="Number of Ingredients" onChange={ e => setNumberOfIngredients(e.target.value) }/>
                     </Form.Group>
                 </Col>
                 <Col>
                     <Form.Group className="mb-3" controlId="recipeUpload.ControlInput4">
                         <Form.Label>Number of Steps</Form.Label>
-                        <Form.Control type="number" min={1} placeholder="Number of Steps" onChange={ e => setNumberOfSteps(e.target.value) }/>
+                        <Form.Control type="number" min={1} value={numberOfSteps} placeholder="Number of Steps" onChange={ e => setNumberOfSteps(e.target.value) }/>
                     </Form.Group>
                 </Col>
             </Row>
