@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
 
+import TabbedEntry from '../../Shared/components/TabbedEntry/TabbedEntry';
 import { AuthContext } from '../../Shared/context/auth-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
 
@@ -28,6 +29,8 @@ const RecipeAddPage = props =>{
     const [ imagePreview, setImagePreview ] = useState();
     const [ books, setBooks ] = useState([]);
 
+    console.log(recipeSteps, recipeIngredients);
+    //useEffect to get our list of book options
     useEffect( () => {
         //Get our books that can be chosen as a source for the recipe
         const getFromServer = async() => {
@@ -42,7 +45,8 @@ const RecipeAddPage = props =>{
     // eslint-disable-next-line 
     },[setBooks])
 
-    useEffect(()=>{
+    //useEffect for our image processing
+    useEffect( () => {
         //Display a preview of our image
         if(!recipeImage){
             return;
@@ -71,28 +75,7 @@ const RecipeAddPage = props =>{
         setRecipeSteps(stateClone);
     }
 
-    let recipeStepInputs = [];
-    for( let i = 0; i < numberOfSteps; i++ ){
-        recipeStepInputs.push(
-            <Form.Group className="mb-3" id={i}>
-                <Form.Label>Ingredient {i+1}</Form.Label>
-                <Form.Control type="Text" placeholder={`Ingredient ${i+1}`} onChange={e => updateRecipeIngredients(i, e.target.value)}/>
-            </Form.Group>
-        )
-    }
-
-    let recipeIngredientInputs = [];
-    for( let i = 0; i < numberOfIngredients; i++ ){
-        recipeIngredientInputs.push(
-            <Form.Group className="mb-3" id={i}>
-                <Form.Label>Step {i+1}</Form.Label>
-                <Form.Control type="Text" placeholder={`Step ${i+1}`}  onChange={ e => updateRecipeSteps(i, e.target.value)} />
-            </Form.Group>
-        )
-    }
-
     const submitRecipeImage = image =>{
-        console.log(image);
         if(image && image.length === 1){
             const chosenFile = image[0];
             setRecipeImage(chosenFile);
@@ -129,7 +112,6 @@ const RecipeAddPage = props =>{
             }
         }
         sendToServer();
-        
     }
 
     //If they are not an admin, they should not be able to get here
@@ -160,13 +142,13 @@ const RecipeAddPage = props =>{
                 <Col>
                     <Form.Group className="mb-3" controlId="recipeUpload.ControlInput3">
                         <Form.Label>Number of Ingredients</Form.Label>
-                        <Form.Control type="number" placeholder="Number of Ingredients" onChange={ e => setNumberOfIngredients(e.target.value) }/>
+                        <Form.Control type="number" min={1} placeholder="Number of Ingredients" onChange={ e => setNumberOfIngredients(e.target.value) }/>
                     </Form.Group>
                 </Col>
                 <Col>
                     <Form.Group className="mb-3" controlId="recipeUpload.ControlInput4">
                         <Form.Label>Number of Steps</Form.Label>
-                        <Form.Control type="number" placeholder="Number of Steps" onChange={ e => setNumberOfSteps(e.target.value) }/>
+                        <Form.Control type="number" min={1} placeholder="Number of Steps" onChange={ e => setNumberOfSteps(e.target.value) }/>
                     </Form.Group>
                 </Col>
             </Row>
@@ -175,8 +157,6 @@ const RecipeAddPage = props =>{
                 <Form.Label>Recipe Desc</Form.Label>
                 <Form.Control as='textarea' type="text" placeholder="Recipe Desc"  onChange={ e => setRecipeDesc(e.target.value) }/>
             </Form.Group>
-
-            
 
             <Row>
                 <Col>
@@ -194,9 +174,17 @@ const RecipeAddPage = props =>{
                 </Col>
             </Row>
 
-            {recipeStepInputs}
+            <Row>
+                <Col>
+                    <Form.Label>Recipe Ingredients</Form.Label>
+                    <TabbedEntry entries={numberOfIngredients} entryType='Ingredient' updateRecipeSteps={updateRecipeIngredients} />
+                </Col>
+                <Col>
+                    <Form.Label>Recipe Steps</Form.Label>
+                    <TabbedEntry entries={numberOfSteps} entryType='Step' updateRecipeSteps={updateRecipeSteps} />
+                </Col>
+            </Row>
 
-            {recipeIngredientInputs}
 
             <Form.Group className="mb-3">
                 <Form.Label>Recipe Tags</Form.Label>
