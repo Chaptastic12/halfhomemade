@@ -106,6 +106,10 @@ const RecipeAddPage = props =>{
         const sendToServer = async () => {
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/add', 'POST', 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
+
+                if(responseData){
+                    //Add logic for redirecting upon receipt of our success from server
+                }
             } catch(err){
                 //Errors handled in hook
             }

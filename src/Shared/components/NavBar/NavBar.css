@@ -20,6 +20,11 @@
     padding-top:0.5vw;
 } 
 
+.NavBar-ProfileOptions{
+    position: none;
+    display: inline-block;
+}
+
 /* CSS For BotNav components */
 .BotNav-Nav{
     /* Original color

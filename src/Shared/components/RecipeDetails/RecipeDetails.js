@@ -9,8 +9,6 @@ import FormattedSteps from './FormattedSteps/FormattedSteps';
 import './RecipeDetails.css';
 
 const RecipeDetails = props =>{
-    console.log(props.details)
-
     let steps = props.details;
 
     let formattedSteps = steps.map(step =>{

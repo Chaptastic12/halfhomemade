@@ -37,13 +37,13 @@ const MidNav = props =>{
                 <div className='MidNav-Title'><NavLink to='/'>halfHomemade</NavLink></div>
             </Col>
             <Col>
-                    {!userState.token ? 
-                            <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/login">
-                                Login <i className="fas fa-sign-in-alt"/>
-                            </Button>
-                    :
-                        profileOptions
-                    }
+                {!userState.token ? 
+                    <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/login">
+                        Login <i className="fas fa-sign-in-alt"/>
+                    </Button>
+                :
+                    <div className='NavBar-ProfileOptions'>{profileOptions}</div>
+                }
 
                 {userState.token &&
                     <Button variant='outline-light' className='NavBar-Button' onClick={() => logoutUser()}>

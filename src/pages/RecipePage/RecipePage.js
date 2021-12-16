@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
-import foodImg from '../../Shared/Img/Food/Mafu_tofu.jpg'
 import userImg from '../../Shared/Img/Food/Cover.jpg'
 
 import Container from 'react-bootstrap/Container'
@@ -13,29 +12,6 @@ import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 import FoodPlatter from '../../Shared/Img/Food/Food_platter.jpg';
 
 import './RecipePage.css';
-
-const testData = [{
-    id: 12345,
-    foodImage: foodImg,
-    foodTitle: 'Mapo Tofu',
-    foodDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    foodRating: 5,
-    userImage: userImg,
-    userRating: 5,
-    tags: ['Chinese', 'Rice', ' Tofu'],
-    date: '11/5/2021'
-},
-{
-    id: 123456,
-    foodImage: foodImg,
-    foodTitle: 'Mapo Tofu',
-    foodDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    foodRating: 5,
-    userImage: userImg,
-    userRating: 5,
-    tags: ['Chinese', 'Rice', 'Tofu'],
-    date: '11/6/2021'
-}];
 
 const RecipePage = props =>{
 
@@ -58,44 +34,41 @@ const RecipePage = props =>{
 
     const { isMobile } = useContext(MobileContext);
 
-    const recipes = testData.map(recipe => {
-        return <RecipeCard
-            key={recipe.id + recipe.userRating} 
-            id={recipe.id} 
-            foodImage={recipe.foodImage} foodTitle={recipe.foodTitle} foodDesc={recipe.foodDesc} foodRating={recipe.foodRating} 
-            userImage={recipe.userImage} userRating={recipe.userRating} 
-            tags={recipe.tags} 
-            date={recipe.date} />
-    })
-
-    const serverRecipes = loadedRecipes.map(recipe => {
-        //Book information isnt set up yet
-        recipe.bookImage = userImg;
-        recipe.bookRating = 5;
-
-        recipe.recipeImage = recipe.recipeImage.replace(/\\/g, '/');
-        recipe.createdAt = recipe.createdAt.toString().split('T')[0];
-        return <RecipeCard
-            key={recipe._id}
-            id={recipe._id} 
-            foodImage={recipe.recipeImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
-            userImage={recipe.bookImage} userRating={recipe.bookRating} 
-            tags={recipe.recipeTags} 
-            date={recipe.createdAt} />
-    })
-
     let recipeCardFormat;
-    if(!isMobile){
-        recipeCardFormat = <>{recipes} {serverRecipes}</>
+
+    //Project the site if the server goes down
+    if(loadedRecipes){
+        const serverRecipes = loadedRecipes.map(recipe => {
+            //Book information isnt set up yet
+            recipe.bookImage = userImg;
+            recipe.bookRating = 5;
+    
+            recipe.recipeImage = recipe.recipeImage.replace(/\\/g, '/');
+            recipe.createdAt = recipe.createdAt.toString().split('T')[0];
+            return <RecipeCard
+                key={recipe._id}
+                id={recipe._id} 
+                foodImage={recipe.recipeImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
+                userImage={recipe.bookImage} userRating={recipe.bookRating} 
+                tags={recipe.recipeTags} 
+                date={recipe.createdAt} />
+        })
+
+        if(!isMobile){
+            recipeCardFormat = <>{serverRecipes}</>
+        } else {
+            recipeCardFormat = <Row>{serverRecipes}</Row>
+        }
     } else {
-        recipeCardFormat = <Row>{recipes}  {serverRecipes}</Row>
+        recipeCardFormat = <Row>EROR: UNABLE TO REACH SITE...</Row>
     }
+
 
     return(
         <div className='RecipePage'>
             <Container>
                 <PageHeader backgroundImage={FoodPlatter}/>
-               {recipeCardFormat}
+               { recipeCardFormat }
             </Container>
         </div>
     )

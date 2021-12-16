@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import { useHttp } from '../../Shared/hooks/http-hook';
 
 const AuthContext = createContext([{}, () => {}]);
 
@@ -7,24 +8,26 @@ const AuthProvider = props =>{
     let initialState = {};
 
     const [ userState, setUserState ] = useState(initialState);
+    const { sendRequest } = useHttp();
 
     const logoutUser = () => {
-        fetch(process.env.REACT_APP_API_ENDPOINT + 'auth/logout', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${userState.token}`
+
+        const sendToServer = async () => {
+            try{
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'auth/logout', 'POST', 'include', { 'Content-Type': 'application/json', Authorization: `Bearer ${userState.token}`}, null, true);
+                if(responseData){
+                    setUserState(oldValues => {
+                        return { ...oldValues, details : undefined, token: null, isAdmin: null }
+                    })
+                    window.localStorage.setItem('logout', Date.now());
+                }
+            } catch(err){
+                //Errors handled in hook
             }
-        })
-        .then( async response => {
-            setUserState(oldValues => {
-                return { ...oldValues, details : undefined, token: null, isAdmin: null }
-            })
-            console.log('successful logout');
-            window.localStorage.setItem('logout', Date.now());
-        })
+        }
+        sendToServer();
     }
+
     return (
         <AuthContext.Provider value = {{userState, setUserState, logoutUser}}>
             {props.children}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -7,9 +7,6 @@ import Container from 'react-bootstrap/Container'
 
 import IngredientList from '../../Shared/components/IngredientList/IngredientList';
 import RecipeDetails from '../../Shared/components/RecipeDetails/RecipeDetails';
-
-import foodImg from '../../Shared/Img/Food/Mafu_tofu.jpg'
-import userImg from '../../Shared/Img/Food/Cover.jpg'
 
 import { useHttp } from '../../Shared/hooks/http-hook';
 
@@ -33,7 +30,6 @@ const RecipeDetailsPage = props =>{
            //Reach out to our server
            const callToServer = async() => {
               try{
-                  console.log('call')
                   const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/getOneRecipe/' + id);
                   setLoadedRecipe(responseData);
               } catch(err){
