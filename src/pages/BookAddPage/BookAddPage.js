@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 
 import { AuthContext } from '../../Shared/context/auth-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
@@ -73,31 +74,35 @@ const BookAddPage = props =>{
         return <div>Access Denied.</div>
     }
 
-    return (<>
-        <h1>{ error } { localError }</h1>
-        <Form className='bookPageAdd'>
-            <Row>
-                { imagePreview && <img src={imagePreview } className='bookPageAdd-Image' alt='Recipe Preview' /> }
-                { !imagePreview && <p>Please pick an image to see a preview</p> }
-            </Row>
-            <Row>
-                <Col>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Book Title</Form.Label>
-                        <Form.Control type="text" placeholder="Book Title"  onChange={ e => setBookTitle(e.target.value) }/>
-                    </Form.Group>
-                </Col>
-                <Col>
-                    <Form.Group controlId="formFile" className="mb-3">
-                        <Form.Label>Upload Recipe Image</Form.Label>
-                        <Form.Control type="file" name='bookImg' accept='.jpg,.png,.jpeg' onChange={  e => submitBookImage(e.target.files) }/>
-                    </Form.Group>
-                </Col>
-            </Row>
+    return (<div className='bookPageAdd'>
+    <div className='recipePageAdd-Header text-center'>Add a new book below</div>
+        <Container>
+            <h1>{ error } { localError }</h1>
+            <Form className='bookPageAdd-Form'>
+                <Row>
+                    { imagePreview && <img src={imagePreview } className='bookPageAdd-Image' alt='Recipe Preview' /> }
+                    { !imagePreview && <p>Please pick an image to see a preview</p> }
+                </Row>
+                <Row>
+                    <Col>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Book Title</Form.Label>
+                            <Form.Control type="text" placeholder="Book Title"  onChange={ e => setBookTitle(e.target.value) }/>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Upload Recipe Image</Form.Label>
+                            <Form.Control type="file" name='bookImg' accept='.jpg,.png,.jpeg' onChange={  e => submitBookImage(e.target.files) }/>
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-            <Button onClick={submitBookToServer}>{ submitting ? 'Submitting...' : 'Submit' }</Button>
-        </Form>
-    </>)
+                <Button onClick={submitBookToServer}>{ submitting ? 'Submitting...' : 'Submit' }</Button>
+            </Form>
+        </Container>
+        <div className='recipeAddPage-Warning text-center'>*** Please ensure that all of the above fields are filled out ***</div>
+    </div>)
 }
 
 export default BookAddPage;

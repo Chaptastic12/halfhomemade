@@ -4,6 +4,8 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Form from 'react-bootstrap/Form';
 
+import './TabbedEntry.css';
+
 const TabbedEntry = props => {
     let entry = [];
     for(let i = 0; i < props.entries; i++){
@@ -15,10 +17,12 @@ const TabbedEntry = props => {
     }
 
     return(
-    <Tabs defaultActiveKey={0} className="mb-3">
-        {entry}
-    </Tabs>
-  );
+        <div className='Tabs'>
+            <Tabs defaultActiveKey={0} className="mb-3">
+                {entry}
+            </Tabs>
+        </div>
+    );
 }
 
 export default TabbedEntry;

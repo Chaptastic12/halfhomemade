@@ -1,5 +1,7 @@
 .recipePageAdd{
-    margin: 25px;
+    background-color: rgba(146, 129, 122, 1);
+    height: 100%;
+    width: 100vw;
 }
 
 .recipePageAdd-Image{
@@ -8,4 +10,23 @@
     background-size: cover;
     height: 300px;
     width: 450px;
+}
+.recipePageAdd-Form{
+    background-color: rgb(235, 235, 235);
+    padding: 50px;
+    border:1px rgb(235,235,235) solid;
+    border-radius: 25px;
+}
+
+.recipePageAdd-Header{
+    font-family: 'Tahu!';
+    font-size: 6vw;
+    padding-top:0.5vw;
+    color:white;
+}
+
+.recipeAddPage-Warning{
+    font-size: 1vw;
+    padding-top:0.5vw;
+    color:white;
 }

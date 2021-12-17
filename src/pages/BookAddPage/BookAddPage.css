@@ -1,5 +1,7 @@
 .bookPageAdd{
-    margin: 25px;
+    background-color: rgba(146, 129, 122, 1);
+    height: 100%;
+    width: 100vw;
 }
 
 .bookPageAdd-Image{
@@ -8,4 +10,11 @@
     background-size: cover;
     height: 300px;
     width: 450px;
+}
+
+.bookPageAdd-Form{
+    background-color: rgb(235, 235, 235);
+    padding: 50px;
+    border:1px rgb(235,235,235) solid;
+    border-radius: 25px;
 }
