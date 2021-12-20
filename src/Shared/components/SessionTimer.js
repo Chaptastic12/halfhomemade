@@ -6,35 +6,43 @@ import PopupModal from './UI Elements/Modal/Modal';
 
 const SessionTimer = props => {
 
-    const [ runTimer, setRunTimer ] = useState(false);
-    const [ message, setMessage ] = useState(false);
+    const [ runningTimer, setRunningTimer ] = useState(false);
+    const [ showWarning, setShowWarning ] = useState(false);
+
+    let difference;
+    const trackSessionTime = () =>{
+        const sessionStart = window.sessionStorage.getItem('sessionStart');
+
+        if(sessionStart !== null){
+            const loginTime = sessionStart;
+            let timeNow = moment();
+            difference = (moment(timeNow.diff(loginTime)) / 1000 / 60);
+
+            if(difference >= 1){
+                setRunningTimer(false);
+                setShowWarning(true);
+            }
+        } else {
+            console.log('no session active');
+        }
+    }
 
     useEffect(() => {
-        setRunTimer(true);
+        setRunningTimer(true);
     }, []);
 
-    if(runTimer){
-        const sessionTimer = setInterval(() =>{
-            const sessionStart = window.sessionStorage.getItem('sessionStart');
+    useEffect( () => { 
+        if(!runningTimer){ return; } 
 
-            if(sessionStart !== null){
-                const loginTime = sessionStart;
-                let timeNow = moment();
-                let difference = (moment(timeNow.diff(loginTime)) / 1000 / 60);
+        const intervalId = setInterval(() => { trackSessionTime(); }, 60000 ); 
 
-                if(difference >= 9 && message !== true){
-                    clearInterval(sessionTimer);
-                    setRunTimer(false);
-                    setMessage(true);
-                }
-            } else {
-                console.log('no session active');
-            }
-        }, 60000);
-    } 
+        return () => { clearInterval(intervalId); 
+        }
+        // eslint-disable-next-line
+    }, [runningTimer]);
 
     return <div>
-            <PopupModal show={message} body='Your session with the server is about to end, please re-login soon.' title='Session is about to end' handleClose={() => setMessage(false)}/>
+            <PopupModal show={showWarning} body='Your session with the server is about to end, please finish what you are doing and login again.' title='Session is about to end' handleClose={() => setShowWarning(false)}/>
             { props.children }
         </div>;
 }

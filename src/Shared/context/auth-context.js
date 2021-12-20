@@ -25,6 +25,7 @@ const AuthProvider = props =>{
             }
         }
         sendToServer();
+        sessionStorage.removeItem('sessionStart'); 
     }
 
     return (
