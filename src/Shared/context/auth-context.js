@@ -11,7 +11,6 @@ const AuthProvider = props =>{
     const { sendRequest } = useHttp();
 
     const logoutUser = () => {
-
         const sendToServer = async () => {
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'auth/logout', 'POST', 'include', { 'Content-Type': 'application/json', Authorization: `Bearer ${userState.token}`}, null, true);
@@ -29,7 +28,7 @@ const AuthProvider = props =>{
     }
 
     return (
-        <AuthContext.Provider value = {{userState, setUserState, logoutUser}}>
+        <AuthContext.Provider value = {{ userState, setUserState, logoutUser }}>
             {props.children}
         </AuthContext.Provider>
     )

@@ -16,12 +16,13 @@ import Footer from './Shared/components/Footer/Footer';
 import { MobileContext } from './Shared/context/mobile-context';
 import SideDrawerProvider from './Shared/context/sidedrawer-context';
 import AuthProvider from './Shared/context/auth-context';
-//import { AuthContext } from './Shared/context/auth-context';
 
 import './App.css';
 
 function App() {
-
+  window.onunload = () => {
+    sessionStorage.removeItem('sessionStart');
+  }
   ////////////////////////////////////////////////////
   //
   // The following controls if we are mobile or not

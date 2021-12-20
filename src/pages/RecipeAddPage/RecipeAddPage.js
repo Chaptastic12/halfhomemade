@@ -30,7 +30,6 @@ const RecipeAddPage = props =>{
     const [ localError, setLocalError ] = useState('');
     const [ imagePreview, setImagePreview ] = useState();
     const [ books, setBooks ] = useState([]);
-    const [ newRecipeId, setNewRecipeId ] = useState();
 
     //useEffect to get our list of book options
     useEffect( () => {

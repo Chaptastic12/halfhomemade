@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 
+import moment from 'moment';
+
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
@@ -45,7 +47,6 @@ const LoginForm = props =>{
                 setPasswordError('Passwords do not match!');
                 return;
             }
-
             registerOrLogin = 'auth/register';
             JSONbody = { username: email, email, password, firstName, lastName }      
         }
@@ -63,6 +64,7 @@ const LoginForm = props =>{
             }
         }
         sendToServer();
+        window.sessionStorage.setItem('sessionStart', moment());
     }
 
     return(<>
