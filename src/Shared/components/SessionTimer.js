@@ -1,10 +1,16 @@
-import { useState, useEffect  } from 'react';
+import { useState, useEffect, useContext  } from 'react';
 
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 
 import PopupModal from './UI Elements/Modal/Modal';
 
+import { AuthContext } from '../context/auth-context';
+
 const SessionTimer = props => {
+
+    const { logoutUser } = useContext(AuthContext);
+    const history = useHistory();
 
     const [ runningTimer, setRunningTimer ] = useState(false);
     const [ showWarning, setShowWarning ] = useState(false);
@@ -18,12 +24,12 @@ const SessionTimer = props => {
             let timeNow = moment();
             difference = (moment(timeNow.diff(loginTime)) / 1000 / 60);
 
-            if(difference >= 1){
+            if(difference >= 9){
                 setRunningTimer(false);
                 setShowWarning(true);
             }
         } else {
-            console.log('no session active');
+           //No session active, shouldn't do anything but continue to check
         }
     }
 
@@ -41,8 +47,15 @@ const SessionTimer = props => {
         // eslint-disable-next-line
     }, [runningTimer]);
 
+    const logOutAndRedirectTologin = () =>{
+        setShowWarning(false);
+        logoutUser();
+        setTimeout(() =>{ history.push('/login') }, 1000)
+    }
+
     return <div>
-            <PopupModal show={showWarning} body='Your session with the server is about to end, please finish what you are doing and login again.' title='Session is about to end' handleClose={() => setShowWarning(false)}/>
+            <PopupModal show={showWarning} body='Your session with the server is about to end, please finish what you are doing and login again.' title='Session is about to end' handleClose={() => setShowWarning(false)}
+                directTo='Login Page' directToFunction={ () => logOutAndRedirectTologin() } directToRoute={'/login'} />
             { props.children }
         </div>;
 }

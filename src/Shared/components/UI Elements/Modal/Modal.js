@@ -13,8 +13,8 @@ const PopupModal = props => {
                 <Button variant="secondary" onClick={props.handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={props.handleClose}>
-                    Save Changes
+                <Button variant="primary" onClick={props.directToFunction} >
+                    Take me to {props.directTo}
                 </Button>
             </Modal.Footer>
         </Modal>

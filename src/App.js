@@ -16,7 +16,7 @@ import Footer from './Shared/components/Footer/Footer';
 import { MobileContext } from './Shared/context/mobile-context';
 import SideDrawerProvider from './Shared/context/sidedrawer-context';
 import AuthProvider from './Shared/context/auth-context';
-
+import SessionTimer from './Shared/components/SessionTimer';
 import './App.css';
 
 function App() {
@@ -94,6 +94,7 @@ function App() {
       <SideDrawerProvider>
         <MobileContext.Provider value={{isMobile: isMobile, changeMobile: handleWindowSizeChange}}>
           <Router>
+            <SessionTimer />
             <NavBar />
             <SideCart />
 
