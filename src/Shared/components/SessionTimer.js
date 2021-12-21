@@ -24,9 +24,15 @@ const SessionTimer = props => {
             let timeNow = moment();
             difference = (moment(timeNow.diff(loginTime)) / 1000 / 60);
 
-            if(difference >= 9){
-                setRunningTimer(false);
+            //Warn our user that logout is approaching
+            if(difference >= 10 && difference <= 11){
                 setShowWarning(true);
+            }
+            //Log them out before the server does
+            if(difference >= 11){
+                setRunningTimer(false);
+                setShowWarning(false);
+                setTimeout(() =>{ logoutUser() });
             }
         } else {
            //No session active, shouldn't do anything but continue to check
@@ -37,7 +43,7 @@ const SessionTimer = props => {
         setRunningTimer(true);
     }, []);
 
-    useEffect( () => { 
+    useEffect(() => { 
         if(!runningTimer){ return; } 
 
         const intervalId = setInterval(() => { trackSessionTime(); }, 60000 ); 
@@ -55,7 +61,7 @@ const SessionTimer = props => {
     }
 
     return <div>
-            <PopupModal show={showWarning} body='Your session with the server is about to end, please finish what you are doing and login again.' title='Session is about to end' handleClose={() => setShowWarning(false)}
+            <PopupModal show={showWarning} body='Your session with the server is about to end, please finish what you are doing and login again. You will be auto logged out;' title='Session is about to end' handleClose={() => setShowWarning(false)}
                 directTo='Login Page' directToFunction={ () => logOutAndRedirectTologin() } directToRoute={'/login'} />
             { props.children }
         </div>;
