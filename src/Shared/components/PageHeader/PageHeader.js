@@ -33,7 +33,7 @@ const PageHeader = props =>{
 
     return(
         <Container className='PageHeader d-flex justify-content-center align-items-center' style={style}>
-            <h1 className='pageHeader-title text-center'>{capitalizeFirstLetter(page[1])} {secondHref}</h1>
+            <h1 className='pageHeader-title d-flex justify-content-center align-items-center'>{capitalizeFirstLetter(page[1])} {secondHref}</h1>
         </Container>
 )
 }

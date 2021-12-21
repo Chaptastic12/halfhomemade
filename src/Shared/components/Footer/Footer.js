@@ -34,12 +34,13 @@ const Footer = props =>{
                     <h1 className='Footer-Header'>CONTACT</h1>
                     <ul>
                         <li>US: 1-555-5555</li>
-                        <li>International: 1-555-5556</li>
-                        <li>Monday - Friday: 9am - 5pm CST</li>
+                        <li>Int'l: 1-555-5556</li>
+                        <li>Monday - Friday: <br /> 9am - 5pm CST</li>
+                        <li></li>
                         <li><i className="fab fa-facebook-f contactIcon"/><i className="fab fa-twitter contactIcon"/><i className="fab fa-instagram contactIcon"/><i className="fab fa-youtube contactIcon"/></li>
                         <li></li>
                         <li>
-                            <p className='text-center'><i className="far fa-copyright"/> Copyright ZaStrap<br/>Reserved | Privacy Policy | Legal</p>
+                            <p className='text-center copyright'><i className="far fa-copyright"/>Copyright ZaStrap<br/>Reserved | Privacy Policy | Legal</p>
                         </li>
                     </ul>
                 </Col>

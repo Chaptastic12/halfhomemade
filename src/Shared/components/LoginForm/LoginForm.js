@@ -59,7 +59,6 @@ const LoginForm = props =>{
                 if(responseData === undefined){
                     return;
                 } else {
-                    console.log('setting user')
                     window.sessionStorage.setItem('sessionStart', moment());
                     setUserState(oldValues => {
                         return { ...oldValues, token: responseData.token, isAdmin: responseData.isAdmin }

@@ -91,7 +91,7 @@ const RecipeAddPage = props =>{
         e.preventDefault();
 
         //Make sure we have good entries on the front end
-        if( (numberOfSteps  < 1 || numberOfIngredients < 1) || ( recipeIngredients.length === 0 || recipeSteps.length === 0) || ( recipeTitle === '' || recipeDesc === '')){
+        if( (numberOfSteps  < 1 || numberOfIngredients < 1) || ( recipeIngredients.length === 0 || recipeSteps.length === 0) || ( recipeTitle === '' || recipeDesc === '' || recipeImage === '' || bookSelection === '' ) ){
             return setLocalError('All fields must be filled out');
         }
 
