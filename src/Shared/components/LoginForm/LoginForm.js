@@ -13,7 +13,7 @@ import './LoginForm.css';
 
 const LoginForm = props =>{
 
-    const [ passwordError, setPasswordError ] = useState('');
+    const [ localError, setLocalError ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ verifyPassword, setVerifyPassword ] = useState('');
@@ -44,7 +44,7 @@ const LoginForm = props =>{
         } else {
             //Ensure passwords match. If they do not, kick them out
             if(password !== verifyPassword){
-                setPasswordError('Passwords do not match!');
+                setLocalError('Passwords do not match!');
                 return;
             }
             registerOrLogin = 'auth/register';
@@ -56,19 +56,24 @@ const LoginForm = props =>{
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT +  registerOrLogin, 'POST', 'include', {'Content-Type': 'application/json', 'Accept': 'application/json'}, JSON.stringify(JSONbody), true);
 
-                setUserState(oldValues => {
-                    return { ...oldValues, token: responseData.token, isAdmin: responseData.isAdmin }
-                });
+                if(responseData === undefined){
+                    return;
+                } else {
+                    console.log('setting user')
+                    window.sessionStorage.setItem('sessionStart', moment());
+                    setUserState(oldValues => {
+                        return { ...oldValues, token: responseData.token, isAdmin: responseData.isAdmin }
+                    });
+                }
             } catch(err){
                 //Errors handled in hook
             }
         }
         sendToServer();
-        window.sessionStorage.setItem('sessionStart', moment());
     }
 
     return(<>
-            {error && <h1>{ error }</h1>} {passwordError && <h1>{ passwordError }</h1>}
+            {error && <h1>{ error }</h1>} {localError && <h1>{ localError }</h1>}
             <Form className='LoginForm' onSubmit={submitFormHandler}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>

@@ -32,7 +32,7 @@ const MidNav = props =>{
     
     return(
         <Row className='MidNav d-flex align-items-center justify-content-center text-center'>
-            <Col>Some other text can go here</Col>
+            <Col></Col>
             <Col>
                 <div className='MidNav-Title'><NavLink to='/'>halfHomemade</NavLink></div>
             </Col>

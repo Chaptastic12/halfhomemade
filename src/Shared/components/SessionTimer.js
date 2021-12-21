@@ -50,6 +50,7 @@ const SessionTimer = props => {
     const logOutAndRedirectTologin = () =>{
         setShowWarning(false);
         logoutUser();
+        //Need to wait for the modal to properly close
         setTimeout(() =>{ history.push('/login') }, 1000)
     }
 
