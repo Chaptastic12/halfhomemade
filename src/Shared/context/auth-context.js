@@ -14,18 +14,18 @@ const AuthProvider = props =>{
         const sendToServer = async () => {
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'auth/logout', 'POST', 'include', { 'Content-Type': 'application/json', Authorization: `Bearer ${userState.token}`}, null, true);
-                if(responseData){
+                if(responseData || responseData === undefined){
                     setUserState(oldValues => {
                         return { ...oldValues, details : undefined, token: null, isAdmin: null }
                     })
                     window.localStorage.setItem('logout', Date.now());
-                }
+                } 
             } catch(err){
                 //Errors handled in hook
             }
         }
         sendToServer();
-        sessionStorage.removeItem('sessionStart'); 
+        window.sessionStorage.removeItem('sessionStart'); 
     }
 
     return (

@@ -17,6 +17,7 @@ const RecipePage = props =>{
 
     const { sendRequest } = useHttp();
     const [ loadedRecipes, setLoadedRecipes ] = useState([]);
+    const [ deletedRecipe, setDeletedRecipe ] = useState(false);
 
     //Make a call to our API to get our recipes
     useEffect(() => {
@@ -30,7 +31,9 @@ const RecipePage = props =>{
             }
         }
         callToServer();
-    },[sendRequest, setLoadedRecipes])
+
+        setDeletedRecipe(false);
+    },[deletedRecipe, sendRequest, setLoadedRecipes])
 
     const { isMobile } = useContext(MobileContext);
 
@@ -51,7 +54,8 @@ const RecipePage = props =>{
                 foodImage={recipe.recipeImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
                 userImage={recipe.bookImage} userRating={recipe.bookRating} 
                 tags={recipe.recipeTags} 
-                date={recipe.createdAt} />
+                date={recipe.createdAt}
+                delete={() => setDeletedRecipe(true)} />
         })
 
         if(!isMobile){

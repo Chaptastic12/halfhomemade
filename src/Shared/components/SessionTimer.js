@@ -62,7 +62,7 @@ const SessionTimer = props => {
 
     return <div>
             <PopupModal show={showWarning} body='Your session with the server is about to end, please finish what you are doing and login again. You will be auto logged out;' title='Session is about to end' handleClose={() => setShowWarning(false)}
-                directTo='Login Page' directToFunction={ () => logOutAndRedirectTologin() } directToRoute={'/login'} />
+                directTo='Take me to Login Page' directToFunction={ () => logOutAndRedirectTologin() } directToRoute={'/login'} />
             { props.children }
         </div>;
 }

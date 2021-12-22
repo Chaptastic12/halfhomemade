@@ -14,7 +14,7 @@ const PopupModal = props => {
                     Close
                 </Button>
                 <Button variant="primary" onClick={props.directToFunction} >
-                    Take me to {props.directTo}
+                    { props.directTo }
                 </Button>
             </Modal.Footer>
         </Modal>

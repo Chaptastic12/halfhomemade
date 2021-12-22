@@ -1,4 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
+
+import { useHttp } from '../../hooks/http-hook';
 
 import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
@@ -10,6 +12,7 @@ import Card from 'react-bootstrap/Card';
 import { MobileContext } from '../../context/mobile-context';
 import { AuthContext } from '../../context/auth-context';
 
+import PopupModal from '../UI Elements/Modal/Modal';
 import Stars from '../UI Elements/Stars/Stars';
 
 import './RecipeCard.css';
@@ -17,6 +20,10 @@ import './RecipeCard.css';
 const RecipeCard = props =>{
     const { isMobile } = useContext(MobileContext);
     const { userState } = useContext(AuthContext);
+
+    const { sendRequest } = useHttp();
+
+    const [ showModal, setShowModal ] = useState(false);
   
     let userRating = <Stars item={props.userRating} />
     let foodRating = <Stars item={props.foodRating} />
@@ -24,6 +31,21 @@ const RecipeCard = props =>{
     let tags = props.tags.map(tag=>{
         return<Link className='RecipeCard-Tag' to={`/recipes/search?=${tag}`}>{tag}</Link>
     });
+
+    const deleteRecipe = () =>{
+        //Get delete oure recipe
+        const deleteFromServer = async() => {
+            try{
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/deleteOneRecipe/'+props.id, 'DELETE', 'include', {Authorization: `Bearer ${userState.token}`}, null, true);
+                console.log(responseData);
+            } catch(err){
+                //Errors handled in hook
+            }
+        }
+        deleteFromServer();
+        setShowModal(false);
+        setTimeout(() => {props.delete(true) }, 500 );
+    }
 
     if(!isMobile){
         return(
@@ -40,7 +62,9 @@ const RecipeCard = props =>{
                         <p>TAGS: {tags}</p>
                         <p className='RecipeCard-Date'>Date Posted: {props.date}</p>
                         { userState.isAdmin && <span>
-                            <Button variant='danger' className='RecipeCard-Link' as={Link} to={`/recipes/delete/${props.id}`}>Delete</Button> 
+                            <PopupModal show={showModal} body='Are you sure you would like to delete this entry?' title='Confirm deletion' handleClose={() => setShowModal(false)}
+                                    directTo='Confirm delete' directToFunction={ () => deleteRecipe() } directToRoute={'/recipes/all'} />
+                            <Button variant='danger' className='RecipeCard-Link' onClick={() => setShowModal(true)}>Delete</Button> 
                             <Button variant='warning' className='RecipeCard-Link' as={Link} to={`/recipes/edit/${props.id}`}>Edit</Button> 
                         </span>}
                     </Col>
@@ -64,7 +88,9 @@ const RecipeCard = props =>{
                     <Card.Text>{props.foodDesc}</Card.Text>
                     <Button className='RecipeCard-Link' as={Link} to={`/recipes/view/${props.id}`}>View</Button>
                     { userState.isAdmin && <span>
-                        <Button variant='danger' className='RecipeCard-Link' as={Link} to={`/recipes/delete/${props.id}`}>Delete</Button> 
+                        <PopupModal show={showModal} body='Are you sure you would like to delete this entry?' title='Confirm deletion' handleClose={() => setShowModal(false)}
+                                    directTo='Confirm delete' directToFunction={ () => deleteRecipe() } directToRoute={'/recipes/all'} />
+                        <Button variant='danger' className='RecipeCard-Link' onClick={() => setShowModal(true)}>Delete</Button> 
                         <Button variant='warning' className='RecipeCard-Link' as={Link} to={`/recipes/edit/${props.id}`}>Edit</Button> 
                     </span>}
                     <Card.Text><p  className='RecipeCard-Tags'>TAGS: {tags}</p></Card.Text>
