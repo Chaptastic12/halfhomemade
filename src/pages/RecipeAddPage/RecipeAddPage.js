@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
+
 import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -18,18 +20,39 @@ const RecipeAddPage = props =>{
     const { userState } = useContext(AuthContext);
     const { submitting, error, sendRequest } = useHttp();
 
+    const emptyRecipe = {bookSelection: '', recipeDesc: '', recipeImage: '', recipeTitle: '',  recipeIngredients: [{value: ''}], recipeSteps: [{value: ''}], recipeTags: '', recipeBook: { _id: 0}};
+
     const [ numberOfSteps, setNumberOfSteps ] = useState(1);
     const [ numberOfIngredients, setNumberOfIngredients ] = useState(1);
-    const [ recipeSteps, setRecipeSteps ] = useState([]);
-    const [ recipeIngredients, setRecipeIngredients ] = useState([]);
-    const [ recipeTitle, setRecipeTitle ] = useState('');
-    const [ recipeDesc, setRecipeDesc ] = useState('');
-    const [ bookSelection, setBookSelection ] = useState('');
     const [ recipeImage, setRecipeImage ] = useState('');
-    const [ tags, setTags ] = useState([]);
     const [ localError, setLocalError ] = useState('');
     const [ imagePreview, setImagePreview ] = useState();
     const [ books, setBooks ] = useState([]);
+    const [ loadedRecipe, setLoadedRecipe ] = useState(emptyRecipe);
+
+    const { id } = useParams();
+    const history = useHistory();
+
+    //If we are editing a recipe, we need to get those details
+    useEffect(() => {
+        //Reach out to our server
+        if(props.edit !== undefined){
+            const callToServer = async() => {
+                try{
+                    const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/getOneRecipe/' + id);
+                    setLoadedRecipe({...responseData, recipeTags: responseData.recipeTags.join(','), bookSelection: responseData.recipeBook._id});
+                    setNumberOfIngredients(responseData.recipeIngredients.length);
+                    setNumberOfSteps(responseData.recipeSteps.length)
+
+                } catch(err){
+                    //Errors handled in hook
+                }
+            }
+            callToServer();
+        } else {
+            setLoadedRecipe(emptyRecipe);
+        }
+    },[])
 
     //useEffect to get our list of book options
     useEffect( () => {
@@ -60,56 +83,73 @@ const RecipeAddPage = props =>{
 
     }, [sendRequest, recipeImage]);
 
-    const updateRecipeIngredients = (index, value) => {
-        const stateClone = [ ...recipeIngredients ];
+    const updateRecipeIngredientsOrSteps = (index, value, which) => {
+        const stateClone = {...loadedRecipe};
 
-        stateClone[index] = {id: index + 1, value};
-
-        setRecipeIngredients(stateClone);
-    }
-
-    const updateRecipeSteps = (index, value) => {
-        const stateClone = [ ...recipeSteps ];
-
-        stateClone[index] = {id: index + 1, value};
-
-        setRecipeSteps(stateClone);
-    }
-
-    const submitRecipeImage = image =>{
-        if(image && image.length === 1){
-            const chosenFile = image[0];
-            setRecipeImage(chosenFile);
-        } else {
-            setRecipeImage(undefined);
+        switch(which){
+            case 'ingredient':
+                stateClone.recipeIngredients[index] = {id: index + 1, value};
+                setLoadedRecipe(stateClone);
+                break;
+            case 'step':
+                stateClone.recipeSteps[index] = {id: index + 1, value};
+                setLoadedRecipe(stateClone);
+                break;
+            default:
+                setLocalError('Error updating ingredient and/or step')
         }
     }
 
-    const history = useHistory();
+    // const submitRecipeImage = image =>{
+    //     if(image && image.length === 1){
+    //         const chosenFile = image[0];
+    //         setRecipeImage(chosenFile);
+    //     } else {
+    //         setRecipeImage(undefined);
+    //     }
+    // }
+
+    const submitRecipeImage = image =>{
+        const stateClone = { ...loadedRecipe };
+        if(image && image.length === 1){
+            stateClone.recipeImage = image[0]
+            setLoadedRecipe(stateClone);
+        } else {
+            stateClone.recipeImage = undefined;
+            setLoadedRecipe(stateClone);
+        }
+    }
 
     const submitRecipeToServer = async e => {
         e.preventDefault();
-
+        console.log(loadedRecipe)
         //Make sure we have good entries on the front end
-        if( (numberOfSteps  < 1 || numberOfIngredients < 1) || ( recipeIngredients.length === 0 || recipeSteps.length === 0) || ( recipeTitle === '' || recipeDesc === '' || recipeImage === '' || bookSelection === '' ) ){
+        if( (numberOfSteps  < 1 || numberOfIngredients < 1) || ( loadedRecipe.recipeIngredients.length === 0 || loadedRecipe.recipeSteps.length === 0) || ( loadedRecipe.recipeTitle === '' || loadedRecipe.recipeDesc === '' || loadedRecipe.recipeImage === '' || loadedRecipe.bookSelection === '' ) ){
             return setLocalError('All fields must be filled out');
         }
 
-        let recipeTags = tags.split(',');
+        let recipeTags = loadedRecipe.recipeTags.split(',');
 
         const formData = new FormData();
-        formData.append('recipeIngredients', JSON.stringify(recipeIngredients));
-        formData.append('recipeSteps', JSON.stringify(recipeSteps));
-        formData.append('recipeTitle', recipeTitle);
-        formData.append('recipeDesc', recipeDesc);
+        formData.append('recipeIngredients', JSON.stringify(loadedRecipe.recipeIngredients));
+        formData.append('recipeSteps', JSON.stringify(loadedRecipe.recipeSteps));
+        formData.append('recipeTitle', loadedRecipe.recipeTitle);
+        formData.append('recipeDesc', loadedRecipe.recipeDesc);
         formData.append('recipeTags', recipeTags);
-        formData.append('bookSelection', bookSelection);
-        formData.append('recipeImage', recipeImage);
+        formData.append('bookSelection', loadedRecipe.bookSelection);
+        formData.append('recipeImage', loadedRecipe.recipeImage);
+
+        let URL = process.env.REACT_APP_API_ENDPOINT + 'recipes/add';
+        let method = 'POST'
+        if(props.edit){ 
+            URL = process.env.REACT_APP_API_ENDPOINT + 'recipes/update';
+            method = 'PUT' 
+        }
 
         //Reach out to our server
         const sendToServer = async () => {
             try{
-                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/add', 'POST', 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
+                const responseData = await sendRequest(URL, method, 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
 
                 if(responseData){
                     //Add logic for redirecting upon receipt of our success from server
@@ -146,7 +186,7 @@ const RecipeAddPage = props =>{
                     <Col xs='6'>
                         <Form.Group className="mb-3" controlId="recipeUpload.ControlInput1">
                             <Form.Label>Recipe Title</Form.Label>
-                            <Form.Control type="text" placeholder="Recipe Name"  onChange={ e => setRecipeTitle(e.target.value) }/>
+                            <Form.Control type="text" placeholder="Recipe Name" value={loadedRecipe.recipeTitle} onChange={ e => setLoadedRecipe({...loadedRecipe, recipeTitle: e.target.value}) }/>
                         </Form.Group>
                     </Col>
                     <Col>
@@ -165,7 +205,7 @@ const RecipeAddPage = props =>{
 
                 <Form.Group className="mb-3" controlId="recipeUpload.ControlInput2">
                     <Form.Label>Recipe Desc</Form.Label>
-                    <Form.Control as='textarea' type="text" placeholder="Recipe Desc"  onChange={ e => setRecipeDesc(e.target.value) }/>
+                    <Form.Control as='textarea' type="text" value={loadedRecipe.recipeDesc} placeholder="Recipe Desc" onChange={ e => setLoadedRecipe({...loadedRecipe, recipeDesc: e.target.value}) }/>
                 </Form.Group>
 
                 <Row>
@@ -177,7 +217,7 @@ const RecipeAddPage = props =>{
                     </Col>
                     <Col>
                         <Form.Label>Recipe Book</Form.Label>
-                        <Form.Select aria-label="Select Recipe Book" onChange={ e => setBookSelection(e.target.value) }>
+                        <Form.Select aria-label="Select Recipe Book" value={loadedRecipe.bookSelection} onChange={ e => setLoadedRecipe({ ...loadedRecipe, bookSelection: e.target.value}) }>
                             <option>Select a Recipe Book</option>
                             {bookOptions}
                         </Form.Select>
@@ -187,18 +227,18 @@ const RecipeAddPage = props =>{
                 <Row>
                     <Col>
                         <Form.Label>Recipe Ingredients</Form.Label>
-                        <TabbedEntry entries={numberOfIngredients} entryType='Ingredient' updateRecipeSteps={updateRecipeIngredients} />
+                        <TabbedEntry entries={numberOfIngredients} entryType='ingredient' updateRecipeSteps={updateRecipeIngredientsOrSteps} loadedDetails={props.edit && loadedRecipe.recipeIngredients} />
                     </Col>
                     <Col>
                         <Form.Label>Recipe Steps</Form.Label>
-                        <TabbedEntry entries={numberOfSteps} entryType='Step' updateRecipeSteps={updateRecipeSteps} />
+                        <TabbedEntry entries={numberOfSteps} entryType='step' updateRecipeSteps={updateRecipeIngredientsOrSteps} loadedDetails={props.edit && loadedRecipe.recipeSteps} />
                     </Col>
                 </Row>
 
 
                 <Form.Group className="mb-3">
                     <Form.Label>Recipe Tags</Form.Label>
-                    <Form.Control type="text" placeholder="Recipe Tags" onChange={ e => setTags(e.target.value) }/>
+                    <Form.Control type="text" value={loadedRecipe.recipeTags} placeholder="Recipe Tags" onChange={ e => setLoadedRecipe({...loadedRecipe, recipeTags: e.target.value}) }/>
                 </Form.Group>
 
                 <Button type='button' onClick={submitRecipeToServer}>{ submitting ? 'Submitting...' : 'Submit' }</Button>

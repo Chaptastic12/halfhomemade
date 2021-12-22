@@ -114,6 +114,9 @@ function App() {
               <Route path='/recipes/add' exact>
                 <RecipeAddPage />
               </Route>
+              <Route path='/recipes/edit/:id' exact>
+                <RecipeAddPage edit/>
+              </Route>
               <Route path='/book/add' exact>
                 <BookAddPage />
               </Route>

@@ -61,7 +61,8 @@
 }
 
 .MobileBotNav-Nav {
-    background-color: rgba(241, 218, 191, 1);
+    background-color: rgb(235, 235, 235);
+    /* background-color: rgba(241, 218, 191, 1); */
     width: 100vw;
 }
 

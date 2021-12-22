@@ -25,11 +25,11 @@ const SessionTimer = props => {
             difference = (moment(timeNow.diff(loginTime)) / 1000 / 60);
 
             //Warn our user that logout is approaching
-            if(difference >= 10 && difference <= 11){
+            if(difference >= 9 && difference <= 10){
                 setShowWarning(true);
             }
             //Log them out before the server does
-            if(difference >= 11){
+            if(difference >= 10){
                 setRunningTimer(false);
                 setShowWarning(false);
                 setTimeout(() =>{ logoutUser() });
