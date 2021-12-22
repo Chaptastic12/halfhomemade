@@ -36,8 +36,7 @@ const RecipeCard = props =>{
         //Get delete oure recipe
         const deleteFromServer = async() => {
             try{
-                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/deleteOneRecipe/'+props.id, 'DELETE', 'include', {Authorization: `Bearer ${userState.token}`}, null, true);
-                console.log(responseData);
+                await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/deleteOneRecipe/'+props.id, 'DELETE', 'include', {Authorization: `Bearer ${userState.token}`}, null, true);
             } catch(err){
                 //Errors handled in hook
             }

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 
 import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
@@ -14,6 +16,7 @@ import './NavBar.css';
 
 const MidNav = props =>{
 
+    const history = useHistory();
     const { handleCartShow } = useContext(SideDrawerContext);
     const { userState, logoutUser } = useContext(AuthContext);
 
@@ -28,6 +31,11 @@ const MidNav = props =>{
         profileOptions = <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/userPage">
                             Profile <i className='fas fa-user' />
                         </Button>
+    }
+
+    const logoutAndRedirect = () =>{
+        logoutUser()
+        setTimeout(()=> { history.push('/') }, 500);
     }
     
     return(
@@ -46,7 +54,7 @@ const MidNav = props =>{
                 }
 
                 {userState.token &&
-                    <Button variant='outline-light' className='NavBar-Button' onClick={() => logoutUser()}>
+                    <Button variant='outline-light' className='NavBar-Button' onClick={() => logoutAndRedirect()}>
                         Logout <i className="fas fa-sign-out-alt" />
                     </Button>
                 }

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 
 import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
+
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -12,6 +14,7 @@ const BottomNav = props =>{
 
     const { handleCartShow } = useContext(SideDrawerContext);
     const { userState, logoutUser } = useContext(AuthContext);
+    const history = useHistory();
 
     let profileOptions;
     if(userState.isAdmin){
@@ -24,6 +27,11 @@ const BottomNav = props =>{
         profileOptions = <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/userPage">
                             Profile <i className='fas fa-user' />
                         </Button>
+    }
+
+    const logoutAndRedirect = () =>{
+        logoutUser()
+        setTimeout(()=> { history.push('/') }, 500);
     }
 
     if(!props.mobile){
@@ -60,7 +68,7 @@ const BottomNav = props =>{
             }
 
             {userState.token &&
-                <Button variant='outline-dark' className='NavBar-Button' onClick={() => logoutUser()}>Logout</Button>
+                <Button variant='outline-dark' className='NavBar-Button' onClick={() => logoutAndRedirect()}>Logout</Button>
             }
             <Button className='NavBar-Button' variant='outline-dark' onClick={()=>handleCartShow()}>Cart</Button>
         </div> 
