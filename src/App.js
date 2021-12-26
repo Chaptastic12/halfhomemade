@@ -14,8 +14,8 @@ import BookAddPage from './pages/BookAddPage/BookAddPage';
 import Footer from './Shared/components/Footer/Footer';
 
 import { MobileContext } from './Shared/context/mobile-context';
-import SideDrawerProvider from './Shared/context/sidedrawer-context';
-import AuthProvider from './Shared/context/auth-context';
+import Providers from './Shared/context/Providers';
+
 import SessionTimer from './Shared/components/SessionTimer';
 import './App.css';
 
@@ -90,44 +90,42 @@ function App() {
   // }, [verifyUser])
 
   return (
-    <AuthProvider>
-      <SideDrawerProvider>
-        <MobileContext.Provider value={{isMobile: isMobile, changeMobile: handleWindowSizeChange}}>
-          <Router>
-            <SessionTimer />
-            <NavBar />
-            <SideCart />
+    <Providers>
+      <MobileContext.Provider value={{isMobile: isMobile, changeMobile: handleWindowSizeChange}}>
+        <Router>
+          <SessionTimer />
+          <NavBar />
+          <SideCart />
 
-            <Switch>
-              <Route path="/" exact>
-                  <HomePage />
-              </Route>
-              <Route path='/recipes/all' exact>
-                <RecipePage />
-              </Route>
-              <Route path='/recipes/view/:id' exact>
-                <RecipeDetailsPage />
-              </Route>
-              <Route path='/login' exact>
-                <LoginPage />
-              </Route>
-              <Route path='/recipes/add' exact>
-                <RecipeAddPage />
-              </Route>
-              <Route path='/recipes/edit/:id' exact>
-                <RecipeAddPage edit/>
-              </Route>
-              <Route path='/book/add' exact>
-                <BookAddPage />
-              </Route>
+          <Switch>
+            <Route path="/" exact>
+                <HomePage />
+            </Route>
+            <Route path='/recipes/all' exact>
+              <RecipePage />
+            </Route>
+            <Route path='/recipes/view/:id' exact>
+              <RecipeDetailsPage />
+            </Route>
+            <Route path='/login' exact>
+              <LoginPage />
+            </Route>
+            <Route path='/recipes/add' exact>
+              <RecipeAddPage />
+            </Route>
+            <Route path='/recipes/edit/:id' exact>
+              <RecipeAddPage edit/>
+            </Route>
+            <Route path='/book/add' exact>
+              <BookAddPage />
+            </Route>
 
-              <Redirect to="/" exact />
-            </Switch>
-            <Footer />
-          </Router>
-        </MobileContext.Provider>
-      </SideDrawerProvider>
-    </AuthProvider>
+            <Redirect to="/" exact />
+          </Switch>
+          <Footer />
+        </Router>
+      </MobileContext.Provider>
+    </Providers>
   );
 }
 
