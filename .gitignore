@@ -24,4 +24,4 @@ yarn-error.log*
 .env
 
 #ignore these photos as they will be part of the ShopifyStore
-/src/shared/Img/products
+#/src/shared/Img/products
