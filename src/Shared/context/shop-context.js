@@ -1,9 +1,9 @@
-import { createContext, useState, useCallback, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import Client from 'shopify-buy';
 
 const client = Client.buildClient({
-    domain:halfhomemade.shopify.com,
-    storefrontAccessToken: process.env.REACT_APP_SHOPIFY_STOREFRONT_TOKEN
+    domain: 'halfhomemade.myshopify.com',
+    storefrontAccessToken: '8ad5634bac097e081d905c741aa81503'
 });
 
 const ShopContext = createContext();
@@ -21,7 +21,7 @@ const ShopProvider = props => {
     },[]);
 
     const createCheckout = async () =>{
-        const newCheckout = await client.checkout.create();
+        const newCheckout = await client.checkout.create();        
         setCheckout(newCheckout);
     }
 
@@ -61,8 +61,7 @@ const ShopProvider = props => {
     }
 
     const fetchCollectionById = async (id) => {
-        const collection = await client.collection.fetchAllWithProducts(id);
-
+        const collection = await client.collection.fetchWithProducts(id);
         setCollection(collection);
     }
 

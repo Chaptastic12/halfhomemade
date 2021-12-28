@@ -40,7 +40,7 @@ const BottomNav = props =>{
                 <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/recipes/all">
                     Recipes
                 </Button>
-                <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/shop">
+                <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/shop/all">
                     Shop
                 </Button>
                 <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/about">
@@ -57,6 +57,7 @@ const BottomNav = props =>{
         <div className='MobileBotNav-Nav d-flex justify-content-center'>
             <DropdownButton id="dropdown-basic-button" title="Browse" variant='outline-dark' className='NavBar-Button'>
                 <Dropdown.Item as={NavLink} to="/recipes/all">Recipes</Dropdown.Item>
+                <Dropdown.Item as={NavLink} to="/shop/all">Shop</Dropdown.Item>
                 <Dropdown.Item as={NavLink} to="/about">About</Dropdown.Item>
                 <Dropdown.Item as={NavLink} to="/blog/all">Blog</Dropdown.Item>
             </DropdownButton>

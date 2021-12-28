@@ -10,7 +10,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import RecipeDetailsPage from './pages/RecipeDetailsPage/RecipeDetailsPage';
 import RecipeAddPage from './pages/RecipeAddPage/RecipeAddPage';
 import BookAddPage from './pages/BookAddPage/BookAddPage';
-
+import ShopPage from './pages/ShopPage/ShopPage';
 import Footer from './Shared/components/Footer/Footer';
 
 import { MobileContext } from './Shared/context/mobile-context';
@@ -118,6 +118,9 @@ function App() {
             </Route>
             <Route path='/book/add' exact>
               <BookAddPage />
+            </Route>
+            <Route path='/shop/:id' exact>
+              <ShopPage />
             </Route>
 
             <Redirect to="/" exact />

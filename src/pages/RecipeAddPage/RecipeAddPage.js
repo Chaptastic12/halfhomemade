@@ -52,6 +52,7 @@ const RecipeAddPage = props =>{
         } else {
             setLoadedRecipe(emptyRecipe);
         }
+    //eslint-disable-next-line
     },[])
 
     //useEffect to get our list of book options
@@ -114,6 +115,7 @@ const RecipeAddPage = props =>{
         if(image && image.length === 1){
             stateClone.recipeImage = image[0]
             setLoadedRecipe(stateClone);
+            setRecipeImage(image[0]);
         } else {
             stateClone.recipeImage = undefined;
             setLoadedRecipe(stateClone);
@@ -122,7 +124,6 @@ const RecipeAddPage = props =>{
 
     const submitRecipeToServer = async e => {
         e.preventDefault();
-        console.log(loadedRecipe)
         //Make sure we have good entries on the front end
         if( (numberOfSteps  < 1 || numberOfIngredients < 1) || ( loadedRecipe.recipeIngredients.length === 0 || loadedRecipe.recipeSteps.length === 0) || ( loadedRecipe.recipeTitle === '' || loadedRecipe.recipeDesc === '' || loadedRecipe.recipeImage === '' || loadedRecipe.bookSelection === '' ) ){
             return setLocalError('All fields must be filled out');
