@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card';
+import { v4 as uuid } from 'uuid';
 
 import { MobileContext } from '../../context/mobile-context';
 import { AuthContext } from '../../context/auth-context';
@@ -29,7 +30,7 @@ const RecipeCard = props =>{
     let foodRating = <Stars item={props.foodRating} />
 
     let tags = props.tags.map(tag=>{
-        return<Link className='RecipeCard-Tag' to={`/recipes/search?=${tag}`}>{tag}</Link>
+        return<Link key={uuid()} className='RecipeCard-Tag' to={`/recipes/search?=${tag}`}>{tag}</Link>
     });
 
     const deleteRecipe = () =>{

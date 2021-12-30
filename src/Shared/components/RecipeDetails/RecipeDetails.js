@@ -4,6 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container'
 
+import { v4 as uuid } from 'uuid';
+
 import FormattedSteps from './FormattedSteps/FormattedSteps';
 
 import './RecipeDetails.css';
@@ -12,7 +14,7 @@ const RecipeDetails = props =>{
     let steps = props.details;
 
     let formattedSteps = steps.map(step =>{
-        return <FormattedSteps step={step.id} instructions={step.value} />
+        return <FormattedSteps key={uuid()} step={step.id} instructions={step.value} />
     })
 
     return(

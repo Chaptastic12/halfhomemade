@@ -1,6 +1,24 @@
 .ProductDetails-Picture {
     height: 400px;
-    width: 400px;
+    width: 25vw;
+    min-width: 250px;
+    max-width: 400px;
     background-size: cover;
     background-position: center;
+}
+
+.ProductDetails-Details{
+    margin-left:100px;
+    width: 38vw;
+}
+
+@media screen and (max-width: 767px) {
+    .ProductDetails-Details{
+        width: 100vw;
+        margin-left: 0px;
+    }
+    .ProductDetails-Picture {
+        width: 100vw;
+        margin-left:10vw;
+    }
 }

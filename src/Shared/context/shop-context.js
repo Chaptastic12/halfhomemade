@@ -37,7 +37,6 @@ const ShopProvider = props => {
         }];
 
         const updateCheckout = await client.checkout.addLineItems(checkout.id, lineItemsToAdd);
-        console.log(updateCheckout)
         setCheckout(updateCheckout);
       }
 

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import { Button, Offcanvas } from 'react-bootstrap';
+import { v4 as uuid } from 'uuid';
 
 import CartItem from '../../CartItem/CartItem';
 
@@ -17,11 +18,9 @@ const SideCart = props =>{
     let cartItems;
     if(checkout.lineItems){
         cartItems = checkout.lineItems.map(item => {
-            return <CartItem item={item} removeLineItem={removeItemsFromCheckout}/>
+            return <CartItem key={uuid()} item={item} removeLineItem={removeItemsFromCheckout}/>
         });
     } 
-
-    console.log(checkout)
 
     return (
         <Offcanvas show={showCart} placement='end' className='me-2'>
@@ -33,9 +32,9 @@ const SideCart = props =>{
                 <>
                     { cartItems } 
                     <span className='Cart-Totals'>
-                        <h1>Total: {checkout.totalPrice}</h1>
+                        <h1>Total: ${checkout.totalPrice}</h1>
                         <p>Tax Calculated at checkout</p>
-                        <Button size='lg'>Checkout</Button>
+                        <Button size='lg' target="_blank" rel="noreferrer" href={checkout.webUrl} disabled>Checkout</Button>
                     </span>
                 </>
                 : 'No items currently in cart' }

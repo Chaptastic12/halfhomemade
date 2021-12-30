@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap'
+import { v4 as uuid } from 'uuid';
 
 import { ShopContext } from '../../Shared/context/shop-context';
 
@@ -40,12 +41,12 @@ const ProductDetailsPage = props => {
         let productOptions = []; 
         for( let i=0; i < product.options.length; i++ ){
             let options = product.options[i].values.map(value => {
-                return <option value={value.value}>{value.value}</option>
+                return <option key={uuid()} value={value.value}>{value.value}</option>
             })
-            productOptions.push(<>
-                        <label>{product.options[i].name}</label>
-                        <select value={product.options[0].value} onChange={e => updateSelection(i, e.target.value)}>{options}</select>
-                    </>)
+            productOptions.push(<React.Fragment key={uuid()}>
+                            <label>{product.options[i].name}</label>
+                            <select value={product.options[0].value} onChange={e => updateSelection(i, e.target.value)}>{options}</select>
+                        </React.Fragment>)
         }
 
         const updateSelection = (i, value) => {
@@ -85,14 +86,15 @@ const ProductDetailsPage = props => {
             <div>
                 <Container>
                     <Row>
-                        <Col xs={4}>
+                        <Col sm={4}>
                             <div className='ProductDetails-Picture' style={{backgroundImage: `URL(${product.images[0].src})`}}></div>
                         </Col>
-                        <Col xs={8}>
-                            <Row>{product.title}</Row>
+                        <Col sm={8} className='ProductDetails-Details'>
+                            <Row><h2>{product.title}</h2></Row>
                             <Row>{product.description}</Row>
                             <Row>{productOptions}</Row>
                             <Row><label>Quantity</label><input type='number' value={quantity} onChange={e => setQuantity(e.target.value)}/></Row>
+                            <Row><br /></Row>
                             <Row><Button onClick={() => findVariantIDAndAddToCart()}>Add to Cart</Button></Row>
                         </Col>
                     </Row>

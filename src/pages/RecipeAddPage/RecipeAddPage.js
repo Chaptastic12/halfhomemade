@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 
+import { v4 as uuid } from 'uuid';
+
 import TabbedEntry from '../../Shared/components/TabbedEntry/TabbedEntry';
 import { AuthContext } from '../../Shared/context/auth-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
@@ -143,7 +145,7 @@ const RecipeAddPage = props =>{
         let URL = process.env.REACT_APP_API_ENDPOINT + 'recipes/add';
         let method = 'POST'
         if(props.edit){ 
-            URL = process.env.REACT_APP_API_ENDPOINT + 'recipes/update';
+            URL = process.env.REACT_APP_API_ENDPOINT + 'recipes/UpdateOneRecipe/' + id;
             method = 'PUT' 
         }
 
@@ -171,7 +173,7 @@ const RecipeAddPage = props =>{
 
     //Create our list of book options
     let bookOptions = books.map( book => {
-        return <option key={book._id} value={book._id}>{book.bookTitle}</option>
+        return <option key={uuid()} value={book._id}>{book.bookTitle}</option>
     })
 
     return (<div className='recipePageAdd'>

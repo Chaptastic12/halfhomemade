@@ -14,9 +14,9 @@ const CartItem = props => {
                 <div className='CartItem-Image' style={{ backgroundImage: 'URL('+ item.variant.image.src + ')'}} />
             </Col>
             <Col>
-                <Row><h3 className='text-center'>{item.variant.title}</h3></Row>
+                <Row><span className='bold text-center'>{item.variant.title}</span></Row>
                 <Row><span className='text-center'>Quantity: {item.quantity}</span></Row>
-                <Row><br/></Row>
+                <Row><span className='text-center'>Price: ${item.variant.price} each</span></Row>
                 <Row><Button variant='danger' size='sm' onClick={() => props.removeLineItem(item.id)}>Remove</Button></Row>
             </Col>
         </Row>

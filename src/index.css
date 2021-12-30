@@ -30,3 +30,7 @@ code {
   height: 7px;
   width:100vw;
 }
+
+.bold{
+  font-weight: bold;
+}

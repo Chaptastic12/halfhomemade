@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row';
@@ -37,7 +38,7 @@ const ProductSearch = props =>{
                     <Form.Select onChange={e => updatedCollection(e.target.value)}>
                         <option value='all'>All</option>
                         {props.collections.map(collection => {
-                            return <option value={collection.id}>{collection.title}</option>
+                            return <option key={uuid()} value={collection.id}>{collection.title}</option>
                         })}
                     </Form.Select>
                 </Form.Group>
