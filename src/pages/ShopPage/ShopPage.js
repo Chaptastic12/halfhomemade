@@ -36,7 +36,7 @@ const ShopPage = props => {
         } else{
             setLoadedProducts(products);
         }
-    }, [ id, collection ])
+    }, [ id, collection, products ])
 
     const searchFormSubmitHandler = (collection, filterText) => {
         if(collection.id === null){
@@ -58,7 +58,7 @@ const ShopPage = props => {
                 <Col sm={1} />
                 <Col sm={9}>
                     <Row>
-                        {loadedProducts.map(product => { return <ProductCard key={product.id} id={product.id} title={product.title} description={product.description} image={null} /> })}
+                        {loadedProducts.map(product => { return <ProductCard key={product.id} id={product.id} title={product.title} description={product.description} image={product.images[0].src} /> })}
                     </Row>
                 </Col>
             </Container>

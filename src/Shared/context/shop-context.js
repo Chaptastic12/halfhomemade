@@ -15,25 +15,31 @@ const ShopProvider = props => {
     const [ checkout, setCheckout ] = useState({});
     const [ collections, setCollections ] = useState([]);
     const [ collection, setCollection ] = useState([]);
+    const [ quantityInCart, setQuantityInCart ] = useState(0);
 
     useEffect(()=>{
         createCheckout();
     },[]);
 
+    useEffect(()=>{
+        checkTotalItemsInCart();
+    //eslint-disable-next-line
+    }, [checkout])
+
     const createCheckout = async () =>{
         const newCheckout = await client.checkout.create();        
         setCheckout(newCheckout);
     }
-
-    const addItemsToCheckout = async (variantID, quatnity) => {
+    const addItemsToCheckout = async (variantId, quantity) =>{
         const lineItemsToAdd = [{
-            variantID,
-            quantity: parseInt(quatnity, 10)
+          variantId,
+          quantity: parseInt(quantity, 10)
         }];
 
         const updateCheckout = await client.checkout.addLineItems(checkout.id, lineItemsToAdd);
+        console.log(updateCheckout)
         setCheckout(updateCheckout);
-    }
+      }
 
     const removeItemsFromCheckout = async (variantID) => {
         const lineItemsToRemove = [ variantID ];
@@ -65,9 +71,19 @@ const ShopProvider = props => {
         setCollection(collection);
     }
 
+    const checkTotalItemsInCart = () => {
+        let numberOfItems = 0;
+        if(checkout.lineItems && checkout.lineItems.length > 0){
+            for(let i=0; i < checkout.lineItems.length; i++){
+                numberOfItems += checkout.lineItems[i].quantity;
+            }
+            setQuantityInCart(numberOfItems);
+        }
+    }
+
     return (
         <ShopContext.Provider value={{
-            products, product, checkout, collections, collection,
+            products, product, checkout, collections, collection, quantityInCart,
             fetchAllProducts, fetchProductById, fetchAllCollections, fetchCollectionById,
             addItemsToCheckout, removeItemsFromCheckout
         }}>

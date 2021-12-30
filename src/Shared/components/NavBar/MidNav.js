@@ -11,6 +11,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import { SideDrawerContext } from '../../context/sidedrawer-context';
 import { AuthContext } from '../../context/auth-context';
+import { ShopContext } from '../../context/shop-context';
 
 import './NavBar.css';
 
@@ -19,7 +20,8 @@ const MidNav = props =>{
     const history = useHistory();
     const { handleCartShow } = useContext(SideDrawerContext);
     const { userState, logoutUser } = useContext(AuthContext);
-
+    const { quantityInCart } = useContext(ShopContext)
+;
     let profileOptions;
     if(userState.isAdmin){
         profileOptions = <DropdownButton id="dropdown-basic-button" title="Admin options" variant='outline-light' className='NavBar-Button'>
@@ -58,7 +60,7 @@ const MidNav = props =>{
                         Logout <i className="fas fa-sign-out-alt" />
                     </Button>
                 }
-                <Button variant='outline-light' className='NavBar-Button' onClick={()=>handleCartShow()}>Cart <i className="fas fa-shopping-cart"/></Button>
+                <Button variant='outline-light' className='NavBar-Button' onClick={()=>handleCartShow()}>Cart ({quantityInCart})<i className="fas fa-shopping-cart"/></Button>
             </Col>
         </Row>
         )

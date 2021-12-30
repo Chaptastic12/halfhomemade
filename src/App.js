@@ -11,6 +11,8 @@ import RecipeDetailsPage from './pages/RecipeDetailsPage/RecipeDetailsPage';
 import RecipeAddPage from './pages/RecipeAddPage/RecipeAddPage';
 import BookAddPage from './pages/BookAddPage/BookAddPage';
 import ShopPage from './pages/ShopPage/ShopPage';
+import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
+
 import Footer from './Shared/components/Footer/Footer';
 
 import { MobileContext } from './Shared/context/mobile-context';
@@ -98,30 +100,15 @@ function App() {
           <SideCart />
 
           <Switch>
-            <Route path="/" exact>
-                <HomePage />
-            </Route>
-            <Route path='/recipes/all' exact>
-              <RecipePage />
-            </Route>
-            <Route path='/recipes/view/:id' exact>
-              <RecipeDetailsPage />
-            </Route>
-            <Route path='/login' exact>
-              <LoginPage />
-            </Route>
-            <Route path='/recipes/add' exact>
-              <RecipeAddPage />
-            </Route>
-            <Route path='/recipes/edit/:id' exact>
-              <RecipeAddPage edit/>
-            </Route>
-            <Route path='/book/add' exact>
-              <BookAddPage />
-            </Route>
-            <Route path='/shop/:id' exact>
-              <ShopPage />
-            </Route>
+            <Route path="/" exact component={HomePage} />
+            <Route path='/recipes/all' exact component={RecipePage} />
+            <Route path='/recipes/view/:id' exact component={RecipeDetailsPage} />
+            <Route path='/login' exact component={LoginPage} />
+            <Route path='/recipes/add' exact component={RecipeAddPage} />
+            <Route path='/recipes/edit/:id' exact> <RecipeAddPage edit/> </Route>
+            <Route path='/book/add' exact component={BookAddPage} />
+            <Route path='/shop/:id' exact component={ShopPage} />
+            <Route path='/shop/product/:id' exact component={ProductDetailsPage}/>
 
             <Redirect to="/" exact />
           </Switch>

@@ -16,7 +16,7 @@ const ProductCard = props => {
                 <Card.Body>
                     <Card.Title>{props.title}</Card.Title>
                     <Card.Text>{props.description}</Card.Text>
-                    <Button variant="primary" as={Link} to={`/products/view/${props.id}`}>View</Button>
+                    <Button variant="primary" as={Link} to={`/shop/product/${props.id}`}>View</Button>
                 </Card.Body>
             </Card>
         </Col>
