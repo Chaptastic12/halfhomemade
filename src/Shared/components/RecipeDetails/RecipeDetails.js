@@ -18,7 +18,7 @@ const RecipeDetails = props =>{
         <Container>
             <Row className='RecipeDetails'>
                 <Col xs={12}>
-                    <div className='RecipeDetails-Image' style={{backgroundImage: 'URL(http://localhost:8081/'+props.image+')'}} />
+                    <div className='RecipeDetails-Image' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + props.image+')'}} />
                 </Col>
             </Row>
             <Row>

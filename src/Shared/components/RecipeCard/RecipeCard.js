@@ -47,7 +47,7 @@ const RecipeCard = props =>{
             <Container className='RecipeCard' key={props.id}>
                 <Row>
                     <Col>
-                        <div className='RecipeCard-FoodImage' style={{backgroundImage: 'URL(http://localhost:8081/'+props.foodImage+')'}} />
+                        <div className='RecipeCard-FoodImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + props.foodImage+')'}} />
                     </Col>
                     <Col>
                         <h2>{props.foodTitle}</h2>

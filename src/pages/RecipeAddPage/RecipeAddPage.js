@@ -37,7 +37,9 @@ const RecipeAddPage = props =>{
                     const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/getOneRecipe/' + id);
                     setLoadedRecipe({...responseData, recipeTags: responseData.recipeTags.join(','), bookSelection: responseData.recipeBook._id});
                     setNumberOfIngredients(responseData.recipeIngredients.length);
-                    setNumberOfSteps(responseData.recipeSteps.length)
+                    setNumberOfSteps(responseData.recipeSteps.length);
+                    responseData.recipeImage = process.env.REACT_APP_IMAGE_ENDPOINT + responseData.recipeImage.replace(/\\/g, '/');
+                    setImagePreview(responseData.recipeImage)
 
                 } catch(err){
                     //Errors handled in hook
