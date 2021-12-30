@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
@@ -17,7 +19,7 @@ const Footer = props =>{
                     <h1 className='Footer-Header'>RECIPES & SHOP</h1>
                     <ul>
                         <li>Buy the Book</li>
-                        <li>View all Recipes</li>
+                        <li><Link to='/recipes/all'>View all Recipes</Link></li>
                         <li>View American Recipes</li>
                         <li>View Asian Recipes</li>
                     </ul>
