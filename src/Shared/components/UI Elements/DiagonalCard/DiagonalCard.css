@@ -1,9 +1,14 @@
+.contact-positionLeft, .contact-positionRight{
+    height: 40vh;
+    max-height:500px;
+}
+
 .contact-positionLeft .left-contact{
 	background-size: cover;
 	background-position: center;
 	-webkit-clip-path: polygon(0 0, 100% 0, 68% 100%, 0 100%);
     clip-path: polygon(0 0, 100% 0, 68% 100%, 0 100%);
-    height:37.6vh;
+    height:100%;
     width:100%;
     float:left;
 }
@@ -21,7 +26,7 @@
 	background-position: center;
 	-webkit-clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
     clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
-    height:37.6vh;
+    height: 100%;
     width:100%;
 }
 

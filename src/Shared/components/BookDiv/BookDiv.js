@@ -15,8 +15,8 @@ const BookDiv = props =>{
             <div className='BookDiv2'>
                 <Container >
                     <Row >
-                        <Col />
-                        <Col>
+                        <Col xs={0} s={3}/>
+                        <Col xs='auto'>
                         <div className="header d-flex justify-content-center align-items-end ">
                             <div className='BookDiv-BookText2 text-center'>
                                 <h1>Check out our new book!</h1>
@@ -31,7 +31,7 @@ const BookDiv = props =>{
                         </div>
 
                         </Col>
-                        <Col />
+                        <Col xs={0} s={3}/>
                     </Row>
                 </Container>
                 <div className='Section-Divider' />
