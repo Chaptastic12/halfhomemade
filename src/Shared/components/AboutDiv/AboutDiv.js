@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 
 import DiagonalCard from '../UI Elements/DiagonalCard/DiagonalCard';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import { Col, Row } from 'react-bootstrap';
 
 import HoneyHam from '../../Img/Food/Honey_roasted_ham.jpg';
 import MafuTofu from '../../Img/Food/Mafu_tofu.jpg'

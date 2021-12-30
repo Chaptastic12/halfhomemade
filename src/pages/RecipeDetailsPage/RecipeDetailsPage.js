@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container'
+import { Col, Row, Container } from 'react-bootstrap';
 
 import IngredientList from '../../Shared/components/IngredientList/IngredientList';
 import RecipeDetails from '../../Shared/components/RecipeDetails/RecipeDetails';

@@ -1,9 +1,6 @@
 import React from 'react';
 
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
-import Form from 'react-bootstrap/Form';
-
+import { Tabs, Tab, Form } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
 import './TabbedEntry.css';

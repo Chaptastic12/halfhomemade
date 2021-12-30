@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { NavLink } from 'react-router-dom';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import { Col, Row } from 'react-bootstrap';
+
 import BottomNav from './BottomNav';
 
 import './NavBar.css';

@@ -3,8 +3,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
 import userImg from '../../Shared/Img/Food/Cover.jpg'
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
+import { Container, Row } from 'react-bootstrap'
+
 import { MobileContext } from '../../Shared/context/mobile-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
 import PageHeader from '../../Shared/components/PageHeader/PageHeader';

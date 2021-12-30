@@ -1,9 +1,6 @@
 import React from 'react';
 
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container'
-
+import { Col, Row, Container } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
 import FormattedSteps from './FormattedSteps/FormattedSteps';

@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom';
+import { Card, Button, Col } from 'react-bootstrap';
 
 import './ProductCard.css';
 

@@ -4,9 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { ShopContext } from '../../Shared/context/shop-context';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import ProductCard from '../../Shared/components/ProductCard/ProductCard';
 import ProductSearch from'../../Shared/components/ProductSearch/ProductSearch';
@@ -47,23 +45,27 @@ const ShopPage = props => {
             setHeaderText('Search / ' + collection.title)
         }
     }
+    if(!loadedProducts){
+        return <div>Loading...</div>
+    } else {
+        return (
+            <div className='ShopPage'>
+                <h1>{headerText}</h1>
+                <Container className='d-flex justify-content-center'>
+                    <Col sm={2}>
+                        <ProductSearch collections={collections} submitSearch={(id) => searchFormSubmitHandler(id)}/>
+                    </Col>
+                    <Col sm={1} />
+                    <Col sm={9}>
+                        <Row>
+                            {loadedProducts.map(product => { return <ProductCard key={product.id} id={product.id} title={product.title} description={product.description} image={product.images[0].src} /> })}
+                        </Row>
+                    </Col>
+                </Container>
+            </div>
+        )
+    }
 
-    return (
-        <div className='ShopPage'>
-            <h1>{headerText}</h1>
-            <Container className='d-flex justify-content-center'>
-                <Col sm={2}>
-                    <ProductSearch collections={collections} submitSearch={(id) => searchFormSubmitHandler(id)}/>
-                </Col>
-                <Col sm={1} />
-                <Col sm={9}>
-                    <Row>
-                        {loadedProducts.map(product => { return <ProductCard key={product.id} id={product.id} title={product.title} description={product.description} image={product.images[0].src} /> })}
-                    </Row>
-                </Col>
-            </Container>
-        </div>
-    )
 }
 
 export default ShopPage;

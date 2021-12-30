@@ -8,7 +8,8 @@
 .MidNav{
     /*Original color 
     background-color: rgb(41, 43, 44); */
-    background-color: rgb(44, 29, 18);
+    /* background-color: rgb(44, 29, 18); */
+    background-color: rgb(17, 19, 19); 
     height:8vw;
     color: white;
     width: 100vw;
@@ -29,7 +30,8 @@
 .BotNav-Nav{
     /* Original color
     background-color: rgb(41, 43, 44); */
-    background-color: rgb(44, 29, 18);;
+    /* background-color: rgb(44, 29, 18); */
+    background-color: rgb(17, 19, 19); 
     padding-bottom:15px;
     width: 100vw;
 }

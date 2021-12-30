@@ -9,7 +9,7 @@
 
 .ProductDetails-Details{
     margin-left:100px;
-    width: 38vw;
+    width: 25vw;
 }
 
 @media screen and (max-width: 767px) {
@@ -19,6 +19,5 @@
     }
     .ProductDetails-Picture {
         width: 100vw;
-        margin-left:10vw;
     }
 }

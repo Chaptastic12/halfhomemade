@@ -1,13 +1,7 @@
 import React, { useContext } from 'react';
 
-import { NavLink } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import { NavLink, useHistory } from 'react-router-dom';
+import { Col, Row, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 
 import { SideDrawerContext } from '../../context/sidedrawer-context';
 import { AuthContext } from '../../context/auth-context';

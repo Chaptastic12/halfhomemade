@@ -1,14 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 
-import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container'
-
+import { useHistory, useParams } from 'react-router-dom';
+import { Form, Row, Col, Button, Container } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
 import TabbedEntry from '../../Shared/components/TabbedEntry/TabbedEntry';

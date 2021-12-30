@@ -1,13 +1,8 @@
 import React, { useState, useContext } from 'react';
-
 import { useHttp } from '../../hooks/http-hook';
 
 import { Link } from 'react-router-dom';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container'
-import Card from 'react-bootstrap/Card';
+import { Col, Row, Button, Container, Card } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
 import { MobileContext } from '../../context/mobile-context';
@@ -84,7 +79,7 @@ const RecipeCard = props =>{
                 <Card.Img variant="top" src={`http://localhost:8081/${props.foodImage}`} />
                 <Card.Body>
                     <Card.Title>{props.foodTitle}</Card.Title>
-                    <Card.Text>{ props.foodRating === 0 ? <p>This Recipe has not been rated yet</p> : <p className='RecipeCard-Stars'>{foodRating}</p> }</Card.Text>
+                    <Card.Text>{ props.foodRating === 0 ? <span>This Recipe has not been rated yet</span> : <span className='RecipeCard-Stars'>{foodRating}</span> }</Card.Text>
                     <Card.Text>{props.foodDesc}</Card.Text>
                     <Button className='RecipeCard-Link' as={Link} to={`/recipes/view/${props.id}`}>View</Button>
                     { userState.isAdmin && <span>
@@ -93,7 +88,7 @@ const RecipeCard = props =>{
                         <Button variant='danger' className='RecipeCard-Link' onClick={() => setShowModal(true)}>Delete</Button> 
                         <Button variant='warning' className='RecipeCard-Link' as={Link} to={`/recipes/edit/${props.id}`}>Edit</Button> 
                     </span>}
-                    <Card.Text><p  className='RecipeCard-Tags'>TAGS: {tags}</p></Card.Text>
+                    <Card.Text><span  className='RecipeCard-Tags'>TAGS: {tags}</span></Card.Text>
                     <Card.Footer>
                         <p className='RecipeCard-Date'>Date Posted: {props.date}</p>
                     </Card.Footer>

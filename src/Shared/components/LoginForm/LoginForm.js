@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 
 import moment from 'moment';
-
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../../context/auth-context'
