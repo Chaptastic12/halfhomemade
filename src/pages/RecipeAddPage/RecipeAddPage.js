@@ -24,6 +24,7 @@ const RecipeAddPage = props =>{
     const [ imagePreview, setImagePreview ] = useState();
     const [ books, setBooks ] = useState([]);
     const [ loadedRecipe, setLoadedRecipe ] = useState(emptyRecipe);
+    const [ recipeImageChange, setRecipeImageChange ] = useState(false);
 
     const { id } = useParams();
     const history = useHistory();
@@ -35,11 +36,11 @@ const RecipeAddPage = props =>{
             const callToServer = async() => {
                 try{
                     const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/getOneRecipe/' + id);
-                    setLoadedRecipe({...responseData, recipeTags: responseData.recipeTags.join(','), bookSelection: responseData.recipeBook._id});
+                    setLoadedRecipe({...responseData, recipeTags: responseData.recipeTags.join(','), bookSelection: responseData.recipeBook.id});
                     setNumberOfIngredients(responseData.recipeIngredients.length);
                     setNumberOfSteps(responseData.recipeSteps.length);
                     responseData.recipeImage = process.env.REACT_APP_IMAGE_ENDPOINT + responseData.recipeImage.replace(/\\/g, '/');
-                    setImagePreview(responseData.recipeImage)
+                    setImagePreview(responseData.recipeImage);
 
                 } catch(err){
                     //Errors handled in hook
@@ -86,11 +87,11 @@ const RecipeAddPage = props =>{
 
         switch(which){
             case 'ingredient':
-                stateClone.recipeIngredients[index] = {id: index + 1, value};
+                stateClone.recipeIngredients[index] = {id: index + 1, value: value};
                 setLoadedRecipe(stateClone);
                 break;
             case 'step':
-                stateClone.recipeSteps[index] = {id: index + 1, value};
+                stateClone.recipeSteps[index] = {id: index + 1, value: value};
                 setLoadedRecipe(stateClone);
                 break;
             default:
@@ -98,16 +99,8 @@ const RecipeAddPage = props =>{
         }
     }
 
-    // const submitRecipeImage = image =>{
-    //     if(image && image.length === 1){
-    //         const chosenFile = image[0];
-    //         setRecipeImage(chosenFile);
-    //     } else {
-    //         setRecipeImage(undefined);
-    //     }
-    // }
-
     const submitRecipeImage = image =>{
+        setRecipeImageChange(true);
         const stateClone = { ...loadedRecipe };
         if(image && image.length === 1){
             stateClone.recipeImage = image[0]
@@ -141,9 +134,13 @@ const RecipeAddPage = props =>{
         let method = 'POST'
         if(props.edit){ 
             URL = process.env.REACT_APP_API_ENDPOINT + 'recipes/UpdateOneRecipe/' + id;
-            method = 'PUT' 
+            if(recipeImageChange === false){
+                formData.append('updateImage', false)
+            } else {
+                formData.append('updateImage', true)
+            }
         }
-
+       
         //Reach out to our server
         const sendToServer = async () => {
             try{
@@ -172,7 +169,7 @@ const RecipeAddPage = props =>{
     })
 
     return (<div className='recipePageAdd'>
-        <div className='recipePageAdd-Header text-center'>Add a new recipe below</div>
+        <div className='recipePageAdd-Header text-center'>{ props.edit ? `Edit recipe for ${loadedRecipe.recipeTitle} below` : 'Add a new recipe below' }</div>
         <Container>
             <h1>{ error || localError }</h1>
             <Form className='recipePageAdd-Form'>
@@ -210,7 +207,7 @@ const RecipeAddPage = props =>{
                     <Col>
                         <Form.Group controlId="formFile" className="mb-3">
                             <Form.Label>Upload Recipe Image</Form.Label>
-                            <Form.Control type="file" name='recipeImage' accept='.jpg,.png,.jpeg' onChange={  e => submitRecipeImage(e.target.files) }/>
+                            <Form.Control type="file" name='recipeImage' accept='.jpg,.png,.jpeg,.webp' onChange={  e => submitRecipeImage(e.target.files) }/>
                         </Form.Group>
                     </Col>
                     <Col>
@@ -225,11 +222,11 @@ const RecipeAddPage = props =>{
                 <Row>
                     <Col>
                         <Form.Label>Recipe Ingredients</Form.Label>
-                        <TabbedEntry entries={numberOfIngredients} entryType='ingredient' updateRecipeSteps={updateRecipeIngredientsOrSteps} loadedDetails={props.edit && loadedRecipe.recipeIngredients} />
+                        <TabbedEntry entries={numberOfIngredients} entryType='ingredient' updateRecipeSteps={updateRecipeIngredientsOrSteps} loadedDetails={loadedRecipe.recipeIngredients} />
                     </Col>
                     <Col>
                         <Form.Label>Recipe Steps</Form.Label>
-                        <TabbedEntry entries={numberOfSteps} entryType='step' updateRecipeSteps={updateRecipeIngredientsOrSteps} loadedDetails={props.edit && loadedRecipe.recipeSteps} />
+                        <TabbedEntry entries={numberOfSteps} entryType='step' updateRecipeSteps={updateRecipeIngredientsOrSteps} loadedDetails={loadedRecipe.recipeSteps} />
                     </Col>
                 </Row>
 

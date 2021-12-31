@@ -47,7 +47,7 @@ const RecipeCard = props =>{
             <Container className='RecipeCard' key={props.id}>
                 <Row>
                     <Col>
-                        <div className='RecipeCard-FoodImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + props.foodImage+')'}} />
+                        <div className='RecipeCard-FoodImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + props.foodImage + ')'}} />
                     </Col>
                     <Col>
                         <h2>{props.foodTitle}</h2>
@@ -65,7 +65,7 @@ const RecipeCard = props =>{
                     </Col>
                     <Col>
                         <div className='text-center'>
-                            <div className='RecipeCard-UserImage' style={{backgroundImage: 'URL('+props.userImage+')'}} />
+                            <div className='RecipeCard-UserImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + props.userImage + ')'}} />
                             <h3>{userRating}</h3>
                         </div>
                     </Col>

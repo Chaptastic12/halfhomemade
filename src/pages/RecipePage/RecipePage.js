@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
-import userImg from '../../Shared/Img/Food/webp/Cover.webp'
 
 import { Container, Row } from 'react-bootstrap'
 
@@ -43,16 +42,16 @@ const RecipePage = props =>{
     if(loadedRecipes){
         const serverRecipes = loadedRecipes.map(recipe => {
             //Book information isnt set up yet
-            recipe.bookImage = userImg;
             recipe.bookRating = 5;
-    
+            
+            recipe.recipeBook.bookImage = recipe.recipeBook.bookImage.replace(/\\/g, '/');
             recipe.recipeImage = recipe.recipeImage.replace(/\\/g, '/');
             recipe.createdAt = recipe.createdAt.toString().split('T')[0];
             return <RecipeCard
                 key={recipe._id}
                 id={recipe._id} 
                 foodImage={recipe.recipeImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
-                userImage={recipe.bookImage} userRating={recipe.bookRating} 
+                userImage={recipe.recipeBook.bookImage} userRating={recipe.bookRating} 
                 tags={recipe.recipeTags} 
                 date={recipe.createdAt}
                 delete={() => setDeletedRecipe(true)} />
