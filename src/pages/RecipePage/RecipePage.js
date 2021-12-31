@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
-import userImg from '../../Shared/Img/Food/Cover.jpg'
+import userImg from '../../Shared/Img/Food/webp/Cover.webp'
 
 import { Container, Row } from 'react-bootstrap'
 
@@ -9,7 +9,7 @@ import { MobileContext } from '../../Shared/context/mobile-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
 import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 
-import FoodPlatter from '../../Shared/Img/Food/Food_platter.jpg';
+import FoodPlatter from '../../Shared/Img/Food/webp/Food_platter.webp';
 
 import './RecipePage.css';
 

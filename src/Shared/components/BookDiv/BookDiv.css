@@ -9,7 +9,7 @@
 }
 
 .BookDiv2{
-    background: url('../../Img/Food/christopher-jolly-1Ib8243cU8Q-unsplash.jpg');
+    background: url('../../Img/Food/webp/christopher-jolly-1Ib8243cU8Q-unsplash.webp');
     background-size: cover;/*Fill the whole div*/
     background-repeat: no-repeat;/*Don't repeat*/
     background-position: center;
@@ -21,7 +21,7 @@
 }
 
 .BookDiv-BookImg{
-    background: url('../../Img/Food/Cover.jpg') center center/contain no-repeat;
+    background: url('../../Img/Food/webp/Cover.webp') center center/contain no-repeat;
     height: 100%;
     min-height: 300px;
     min-width: 300px;
@@ -64,28 +64,16 @@
 }
 
 .header {
-    background-image: url(../../Img/Food/Cover.jpg);
+    background-image: url(../../Img/Food/webp/Cover.webp);
     background-size: cover;/*Fill the whole div*/
     background-repeat: no-repeat;/*Don't repeat*/
     background-position: center;
-    height: 75vh;
-    width: 50vw;
+    height: 50vh;
+    width: 33vw;
     color:white;
-	opacity: 1;
-	animation-name: fadeInOpacity;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in;
-	animation-duration: 0.8s;
-    margin: 10px 0px;
+    margin: 2vw;
+    margin-left: 4vw;
     border-radius: 10px;
-}
-@keyframes fadeInOpacity {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 @media screen and (max-width: 767px) {

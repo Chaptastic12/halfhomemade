@@ -3,8 +3,8 @@ import React, { useContext } from 'react';
 import DiagonalCard from '../UI Elements/DiagonalCard/DiagonalCard';
 import { Col, Row } from 'react-bootstrap';
 
-import HoneyHam from '../../Img/Food/Honey_roasted_ham.jpg';
-import MafuTofu from '../../Img/Food/Mafu_tofu.jpg'
+import HoneyHam from '../../Img/Food/webp/Honey_roasted_ham.webp';
+import MafuTofu from '../../Img/Food/webp/Mafu_tofu.webp'
 
 import { MobileContext } from '../../context/mobile-context';
 
@@ -19,7 +19,7 @@ const AboutDiv = props =>{
             <div className='AboutDiv'>
                 <Row>
                     {!isMobile && <Col>
-                        <DiagonalCard backgroundImage={HoneyHam} cardTitle='HoneyHam' left={true}>Hi</DiagonalCard>
+                        <DiagonalCard backgroundImage={HoneyHam} cardTitle='HoneyHam' left={true} />
                     </Col> }
                     <Col className='d-flex justify-content-center align-items-center'>
                         <div className='AboutDiv-BookText text-center'>
@@ -29,7 +29,7 @@ const AboutDiv = props =>{
                         </div>
                     </Col>
                     <Col>
-                        <DiagonalCard backgroundImage={MafuTofu} cardTitle='MafoTofu' left={false}>Hi</DiagonalCard>
+                        <DiagonalCard backgroundImage={MafuTofu} cardTitle='MafoTofu' left={false} />
                     </Col>
                 </Row>
             </div>
