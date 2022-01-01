@@ -36,15 +36,32 @@ const ShopPage = props => {
             setLoadedProducts(products);
         }
     // eslint-disable-next-line
-    }, [ id, collection ])
+    }, [ id, collection, products ])
 
     const searchFormSubmitHandler = (collection, filterText) => {
+        //If we are set to look at all products
         if(collection.id === 'all'){
-            setLoadedProducts(products);
+            //If no text is sent, just load them all
+            if(filterText === undefined || ''){
+                setLoadedProducts(products);
+            } else {
+                //If text is sent, search through all the products for a match to our search criteria
+                let searchedProducts = products.filter(x => x.title.toLowerCase().includes(filterText.toLowerCase()));
+                setLoadedProducts(searchedProducts);
+            }
             setShowAll(true)
             setHeaderText('All')
         } else {
-            fetchCollectionById(collection.id);
+            //If we are sorting by a specific collection
+            if(filterText === undefined || ''){
+                //No search text means we just need them all
+                fetchCollectionById(collection.id);
+            } else {
+                //If search text is sent, find the collection we need and then filter the products by our search filter
+                let collectionIndex = collections.findIndex(i => i.id === collection.id);
+                let searchedCollection = collections[collectionIndex].products.filter(x => x.title.toLowerCase().includes(filterText.toLowerCase()));
+                setLoadedProducts(searchedCollection);
+            }
             setHeaderText('Search / ' + collection.title)
             setShowAll(false);
         }
@@ -58,7 +75,7 @@ const ShopPage = props => {
                 <div>
                     <Row>
                         <Col sm={3}>
-                            <ProductSearch collections={collections} submitSearch={(id) => searchFormSubmitHandler(id)}/>
+                            <ProductSearch collections={collections} submitSearch={(id, text) => searchFormSubmitHandler(id, text)}/>
                         </Col>
                         <Col sm={8}>
                             <Row className='ShopPage-Products'>

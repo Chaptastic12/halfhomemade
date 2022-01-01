@@ -16,10 +16,12 @@ const UserView = props =>{
     const loadedRecipeImage = useProgressiveImage(process.env.REACT_APP_IMAGE_ENDPOINT + props.data.foodImage)
     const loadedBookImage = useProgressiveImage(process.env.REACT_APP_IMAGE_ENDPOINT + props.data.userImage)
 
+    let spinner = <div className='d-flex justify-content-center align-items-center'><Spinner animation='border' /></div>
+
     return (
         <Row>
             <Col>
-                { loadedRecipeImage ? <div className='RecipeCard-FoodImage RecipeImage' style={{backgroundImage: 'URL(' + loadedRecipeImage || null + ')'}} /> : <Spinner animation="border" /> }
+                { loadedRecipeImage ? <div className='RecipeCard-FoodImage RecipeImage' style={{backgroundImage: 'URL(' + loadedRecipeImage || null + ')'}} /> : spinner }
             </Col>
             <Col>
                 <h2>{props.data.foodTitle}</h2>
@@ -37,7 +39,7 @@ const UserView = props =>{
             </Col>
             <Col>
                 <div className='text-center'>
-                    { loadedBookImage ? <div className='RecipeCard-UserImage RecipeImage' style={{backgroundImage: 'URL(' + loadedBookImage || null + ')'}} /> : <Spinner animation="border" /> }
+                    { loadedBookImage ? <div className='RecipeCard-UserImage RecipeImage' style={{backgroundImage: 'URL(' + loadedBookImage || null + ')'}} /> : spinner }
                     <h3>{userRating}</h3>
                 </div>
             </Col>
