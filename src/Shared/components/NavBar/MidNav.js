@@ -22,6 +22,8 @@ const MidNav = props =>{
                             <Dropdown.Item as={NavLink} to='/userPage'>Profile <i className='fas fa-user' /></Dropdown.Item>
                             <Dropdown.Item as={NavLink} to="/recipes/add">Add Recipe</Dropdown.Item>
                             <Dropdown.Item as={NavLink} to='/book/add'>Add Book</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/admin'>Admin</Dropdown.Item>
+
                         </DropdownButton>
     } else {
         profileOptions = <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/userPage">

@@ -8,18 +8,23 @@ import MafuTofu from '../../Img/Food/webp/Mafu_tofu.webp'
 
 import { MobileContext } from '../../context/mobile-context';
 
+import useProgressiveImage from '../../hooks/lazyLoad-hook';
+
 import './AboutDiv.css';
 
 const AboutDiv = props =>{
 
     const { isMobile } = useContext(MobileContext);
 
+    const loadedHoney = useProgressiveImage(HoneyHam);
+    const loadedMafu = useProgressiveImage(MafuTofu)
+
     return(
         <>
             <div className='AboutDiv'>
                 <Row>
                     {!isMobile && <Col>
-                        <DiagonalCard backgroundImage={HoneyHam} cardTitle='HoneyHam' left={true} />
+                        <DiagonalCard backgroundImage={loadedHoney} cardTitle='HoneyHam' left={true} />
                     </Col> }
                     <Col className='d-flex justify-content-center align-items-center'>
                         <div className='AboutDiv-BookText text-center'>
@@ -29,7 +34,7 @@ const AboutDiv = props =>{
                         </div>
                     </Col>
                     <Col>
-                        <DiagonalCard backgroundImage={MafuTofu} cardTitle='MafoTofu' left={false} />
+                        <DiagonalCard backgroundImage={loadedMafu} cardTitle='MafoTofu' left={false} />
                     </Col>
                 </Row>
             </div>

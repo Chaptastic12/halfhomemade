@@ -45,12 +45,12 @@ const RecipeDetailsPage = props =>{
         <div className='RecipePageDetails'>
             { loadedRecipe !== null && <Container className='RecipePageDetails-Container'>
                 <Row>
-                    <Col xs={{span: 12, order: 'last'}} md={{span: 3, order: 'first'}}>
+                    <Col xs={{span: 12, order: 'last'}} lg={{span: 3, order: 'first'}}>
                         <div className='RecipePageDetails-IngredientsList text-center'>
                             <IngredientList ingredients={loadedRecipe.recipeIngredients} />
                         </div>
                     </Col>
-                    <Col xs={{span: 12, order: 'first'}} md={{span: 9, order: 'last'}}>
+                    <Col xs={{span: 12, order: 'first'}} lg={{span: 9, order: 'last'}}>
                         <div className='RecipePageDetails-Instructions'>
                             <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
                             <RecipeDetails details={loadedRecipe.recipeSteps} image={loadedRecipe.recipeImage}/>

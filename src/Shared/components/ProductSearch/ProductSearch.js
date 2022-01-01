@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
@@ -8,12 +8,16 @@ import './ProductSearch.css';
 
 const ProductSearch = props =>{
 
-    const [ selectedCollection, setSelectedCollection ] = useState({title: 'all', id: null});
+    const [ selectedCollection, setSelectedCollection ] = useState({title: 'all', id: 'all'});
     const [ searchText, setSearchText ] = useState();
+
+    useEffect(() =>{
+        setSelectedCollection({title: 'all', id: 'all'})
+    }, [])
 
     const updatedCollection = collectionId =>{
         if(collectionId === 'all'){
-            setSelectedCollection({title: 'all', id: null})
+            setSelectedCollection({title: 'all', id: 'all'})
             return;
         }
         let chosenCollection = props.collections.find( collection => collection.id === collectionId );
@@ -32,8 +36,8 @@ const ProductSearch = props =>{
             <Row className="mb-3">
                 <Form.Group>
                     <Form.Label>Collection</Form.Label>
-                    <Form.Select onChange={e => updatedCollection(e.target.value)}>
-                        <option value='all'>All</option>
+                    <Form.Select value={selectedCollection.id} onChange={e => updatedCollection(e.target.value)}>
+                        <option key={uuid()} value='all'>All</option>
                         {props.collections.map(collection => {
                             return <option key={uuid()} value={collection.id}>{collection.title}</option>
                         })}

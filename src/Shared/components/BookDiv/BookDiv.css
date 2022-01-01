@@ -9,7 +9,7 @@
 }
 
 .BookDiv2{
-    background: url('../../Img/Food/webp/christopher-jolly-1Ib8243cU8Q-unsplash.webp');
+    /* background: url('../../Img/Food/webp/christopher-jolly-1Ib8243cU8Q-unsplash.webp'); */
     background-size: cover;/*Fill the whole div*/
     background-repeat: no-repeat;/*Don't repeat*/
     background-position: center;
@@ -64,7 +64,7 @@
 }
 
 .header {
-    background-image: url(../../Img/Food/webp/Cover.webp);
+    /* background-image: url(../../Img/Food/webp/Cover.webp); */
     background-size: cover;/*Fill the whole div*/
     background-repeat: no-repeat;/*Don't repeat*/
     background-position: center;

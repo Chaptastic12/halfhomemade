@@ -10,6 +10,8 @@ import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 
 import FoodPlatter from '../../Shared/Img/Food/webp/Food_platter.webp';
 
+import useProgressiveImage from '../../Shared/hooks/lazyLoad-hook';
+
 import './RecipePage.css';
 
 const RecipePage = props =>{
@@ -54,7 +56,8 @@ const RecipePage = props =>{
                 userImage={recipe.recipeBook.bookImage} userRating={recipe.bookRating} 
                 tags={recipe.recipeTags} 
                 date={recipe.createdAt}
-                delete={() => setDeletedRecipe(true)} />
+                delete={() => setDeletedRecipe(true)} 
+                adminPage={props.admin}/>
         })
 
         if(!isMobile){
@@ -66,15 +69,21 @@ const RecipePage = props =>{
         recipeCardFormat = <Row>EROR: UNABLE TO REACH SITE...</Row>
     }
 
+    const loadedFoodPlatter = useProgressiveImage(FoodPlatter)
 
-    return(
-        <div className='RecipePage'>
-            <Container>
-                <PageHeader backgroundImage={FoodPlatter}/>
-               { recipeCardFormat }
-            </Container>
-        </div>
-    )
+    if(props.admin){
+        return <div className='RecipePage'> { recipeCardFormat } </div>
+    } else {
+        return(
+            <div className='RecipePage'>
+                <Container>
+                    <PageHeader backgroundImage={loadedFoodPlatter}/> 
+                   { loadedRecipes && recipeCardFormat }
+                </Container>
+            </div>
+        )
+    }
+
     
 }
 

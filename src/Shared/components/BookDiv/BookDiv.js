@@ -4,18 +4,26 @@ import { NavLink } from 'react-router-dom';
 
 import { Col, Row, Button } from 'react-bootstrap';
 
+import useProgressiveImage from '../../hooks/lazyLoad-hook';
+
+import BookCover from '../../Img/Food/webp/Cover.webp'
+import DivBackground from '../../Img/Food/webp/christopher-jolly-1Ib8243cU8Q-unsplash.webp'
+
 import './BookDiv.css';
 
 const BookDiv = props =>{
 
     const test = true;
 
+    const loadedBookCover = useProgressiveImage(BookCover);
+    const loadedDivBackground = useProgressiveImage(DivBackground)
+
     if(test){
         return (
-            <div className='BookDiv2'>
+            <div className='BookDiv2' style={{backgroundImage: 'URL(' + loadedDivBackground || null + ')'}}>
                 <Row >
                     <Col>
-                        <div className="header" />
+                        <div className="header" style={{backgroundImage: 'URL(' + loadedBookCover || null + ')'}}/>
                     </Col>
                     <Col className="d-flex justify-content-center align-items-center ">
                         <div className='BookDiv-BookText2 text-center'>

@@ -1,7 +1,8 @@
 @font-face {
   font-family: 'Tahu!';
   src: url('./Shared/Fonts/Tahu.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-   url('./Shared/Fonts/Tahu.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  url('./Shared/Fonts/Tahu.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  font-display: swap;
 }  
 
 body {
@@ -21,7 +22,7 @@ html, body{
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 

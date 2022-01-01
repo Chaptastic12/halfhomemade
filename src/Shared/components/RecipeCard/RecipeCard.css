@@ -1,4 +1,9 @@
-.RecipeCard{
+.RecipeImage {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.RecipeCard, .RecipeCard-Admin{
     background-color: white;;
     width:100vw;
     border: 1px solid rgba(0,0,0,.125);
@@ -8,20 +13,28 @@
     padding:10px;
 }
 
+.RecipeCard-Admin{
+    height: 175px;
+    width:90vw;
+}
+
 .RecipeCard-FoodImage{
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     height:300px;
 }
 
+.RecipeCard-FoodImage-Admin {
+    height:150px;
+    width: 250px;
+}
+
 .RecipeCard-UserImage{
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
     height: 300px;
     min-height:200px;
     min-width:200px;
+}
+
+.RecipeCard-UserImage-Admin{
+    height: 150px;
 }
 
 .RecipeCard-Link{
