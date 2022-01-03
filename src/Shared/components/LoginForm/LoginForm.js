@@ -59,7 +59,7 @@ const LoginForm = props =>{
                 } else {
                     window.sessionStorage.setItem('sessionStart', moment());
                     setUserState(oldValues => {
-                        return { ...oldValues, token: responseData.token, isAdmin: responseData.isAdmin }
+                        return { ...oldValues, token: responseData.token, isAdmin: responseData.isAdmin, id: responseData.id }
                     });
                 }
             } catch(err){

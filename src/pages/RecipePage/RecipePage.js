@@ -34,7 +34,7 @@ const RecipePage = props =>{
         callToServer();
 
         setDeletedRecipe(false);
-    },[deletedRecipe, sendRequest, setLoadedRecipes])
+    },[deletedRecipe, sendRequest, setLoadedRecipes]);
 
     const { isMobile } = useContext(MobileContext);
 
