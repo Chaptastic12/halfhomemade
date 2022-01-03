@@ -9,6 +9,7 @@ import ReviewRecipe from '../../Shared/components/ReviewRecipe/ReviewRecipe';
 import ViewExistingReviews from '../../Shared/components/ViewExistingReviews/ViewExistingReviews';
 
 import { useHttp } from '../../Shared/hooks/http-hook';
+import { decryptData } from '../../Shared/utils/util';
 
 import { AuthContext } from '../../Shared/context/auth-context';
 
@@ -40,14 +41,23 @@ const RecipeDetailsPage = props =>{
               try{
                   const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/getOneRecipe/' + id);
                   setLoadedRecipe(responseData);
-                  // eslint-disable-next-line
-                  responseData.reviews.find(review => { if(review.author.id === userState.id){ setCanSubmitReview(false); } return; });
+                  if(userState.id){
+                        let decryptID = decryptData(userState.id, process.env.REACT_APP_CRYPSALT);
+                        let allow = true;
+                        for(let i=0; i < loadedRecipe.reviews.length; i++){
+                            if(loadedRecipe.reviews[i].author.id === decryptID){
+                                allow = false;
+                            }
+                        }
+                        setCanSubmitReview(allow);
+                    }
               } catch(err){
                   //Errors handled in hook
               }
           }
           callToServer();
-      },[id, sendRequest, setLoadedRecipe, refresh, userState.id])
+      // eslint-disable-next-line
+      },[id, sendRequest, setLoadedRecipe, refresh ])
 
     if(loadedRecipe){
         loadedRecipe.recipeImage = loadedRecipe.recipeImage.replace(/\\/g, '/');

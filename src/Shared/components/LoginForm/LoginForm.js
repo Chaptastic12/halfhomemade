@@ -3,6 +3,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import moment from 'moment';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { encryptData } from '../../utils/util';
 
 import { AuthContext } from '../../context/auth-context'
 import { useHttp } from '../../hooks/http-hook';
@@ -59,7 +60,9 @@ const LoginForm = props =>{
                 } else {
                     window.sessionStorage.setItem('sessionStart', moment());
                     setUserState(oldValues => {
-                        return { ...oldValues, token: responseData.token, isAdmin: responseData.isAdmin, id: responseData.id }
+                        let encryptedID = encryptData(responseData.id, process.env.REACT_APP_CRYPSALT);
+                        console.log(encryptedID)
+                        return { ...oldValues, token: responseData.token, isAdmin: responseData.isAdmin, id: encryptedID }
                     });
                 }
             } catch(err){
