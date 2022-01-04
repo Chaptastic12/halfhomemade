@@ -25,9 +25,7 @@ const LoginForm = props =>{
     const history = useHistory();
 
     useEffect(()=>{
-        if(userState.token){
-            history.push('/');
-        }
+        if(userState.token){ history.goBack(); }
     },[history, userState])
 
     const submitFormHandler = e =>{
@@ -61,7 +59,6 @@ const LoginForm = props =>{
                     window.sessionStorage.setItem('sessionStart', moment());
                     setUserState(oldValues => {
                         let encryptedID = encryptData(responseData.id, process.env.REACT_APP_CRYPSALT);
-                        console.log(encryptedID)
                         return { ...oldValues, token: responseData.token, isAdmin: responseData.isAdmin, id: encryptedID }
                     });
                 }

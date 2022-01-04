@@ -41,29 +41,31 @@ const RecipeDetailsPage = props =>{
               try{
                   const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/getOneRecipe/' + id);
                   setLoadedRecipe(responseData);
-                  if(userState.id){
-                        let decryptID = decryptData(userState.id, process.env.REACT_APP_CRYPSALT);
-                        let allow = true;
-                        for(let i=0; i < loadedRecipe.reviews.length; i++){
-                            if(loadedRecipe.reviews[i].author.id === decryptID){
-                                allow = false;
-                            }
-                        }
-                        setCanSubmitReview(allow);
-                    }
-              } catch(err){
-                  //Errors handled in hook
-              }
+                  
+              } catch(err){ /*Errors handled in hook */ }
           }
           callToServer();
       // eslint-disable-next-line
-      },[id, sendRequest, setLoadedRecipe, refresh ])
+      },[id, sendRequest, setLoadedRecipe, refresh, userState.id ]);
+
+      useEffect(() => {
+            //If we have a user logged in, decrypt their ID to find if theyve submitted any reviews yet
+            if(userState.id && loadedRecipe){
+                let decryptID = decryptData(userState.id, process.env.REACT_APP_CRYPSALT);
+                for(let i=0; i < loadedRecipe.reviews.length; i++){
+                    if(loadedRecipe.reviews[i].author.id === decryptID){
+                        setCanSubmitReview(false);
+                    }
+                }
+            }
+      }, [loadedRecipe, userState.id]);
 
     if(loadedRecipe){
         loadedRecipe.recipeImage = loadedRecipe.recipeImage.replace(/\\/g, '/');
     }
 
     const submitReviewToServer = (rating, text, ratingSet) =>{
+        //Check for any issues with the data; If there are any, throw a specific error message
         if(ratingSet){ setError('Rating not chosen; Please click to confirm'); return }
         if(text === ''){ setError('Please enter in some text'); return; }
 
@@ -74,12 +76,7 @@ const RecipeDetailsPage = props =>{
         const submitToServer = async() => {
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/reviewARecipe/' + id, 'POST', 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
-                console.log(responseData);
-
-                if(responseData){
-                    //Add logic for redirecting upon receipt of our success from server
-                    setRefresh(prevState => !prevState)             
-                }
+                if(responseData){ setRefresh(prevState => !prevState) }
             }
             catch (err) { console.log(err) }
         }
