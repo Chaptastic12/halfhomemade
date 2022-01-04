@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 
+import defaultImage from '../Img/Food/webp/loadingImage.webp'
+
 const useProgressiveImage = src => {  
-    const [sourceLoaded, setSourceLoaded] = useState(null)
+    const [sourceLoaded, setSourceLoaded] = useState(defaultImage)
   
     useEffect(() => {
       const img = new Image()
