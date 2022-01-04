@@ -69,7 +69,7 @@ const RecipeDetailsPage = props =>{
                 if(ratingSet){ setError('Rating not chosen; Please click to confirm'); return }
                 if(text === ''){ setError('Please enter in some text'); return; }
 
-                const formData = new FormData();
+                formData = new FormData();
                 formData.append('rating', rating);
                 formData.append('text', text);
                 url = process.env.REACT_APP_API_ENDPOINT + 'recipes/reviewARecipe/' + id
@@ -84,12 +84,12 @@ const RecipeDetailsPage = props =>{
             default:
                 break;
         }
-        
 
         const submitToServer = async() => {
             try{
                 const responseData = await sendRequest(url, method, 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
                 if(responseData){ setRefresh(prevState => !prevState) }
+                if(type === 'submit'){ setAllowEnterReview(false) }
             }
             catch (err) { /* Errors handled in the hook */ }
         }
