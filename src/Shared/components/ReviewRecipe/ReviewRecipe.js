@@ -18,7 +18,7 @@ const ReviewRecipe = props => {
                     <Form.Control type="text" as='textarea' placeholder="Type your review here" onChange={e => setReviewText(e.target.value)} />
                 </Form.Group>
 
-                <Button variant="primary" type="button" onClick={() => props.submitReview(reviewRating, reviewText, adjustRating)}>Submit </Button>
+                <Button variant="primary" type="button" onClick={() => props.submitReview('submit', reviewRating, reviewText, adjustRating)}>Submit </Button>
             </Form>
         </div>
     )

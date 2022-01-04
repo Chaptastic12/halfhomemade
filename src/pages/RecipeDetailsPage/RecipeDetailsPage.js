@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 
+import { useParams } from 'react-router-dom';
 import { Col, Row, Container, Button } from 'react-bootstrap';
 
 import IngredientList from '../../Shared/components/IngredientList/IngredientList';
@@ -40,16 +40,15 @@ const RecipeDetailsPage = props =>{
            const callToServer = async() => {
               try{
                   const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/getOneRecipe/' + id);
+                  responseData.recipeImage = responseData.recipeImage.replace(/\\/g, '/');
                   setLoadedRecipe(responseData);
-                  
               } catch(err){ /*Errors handled in hook */ }
           }
           callToServer();
-      // eslint-disable-next-line
-      },[id, sendRequest, setLoadedRecipe, refresh, userState.id ]);
+      },[id, sendRequest, setLoadedRecipe, refresh ]);
 
+      //If we have a user logged in, decrypt their ID to find if theyve submitted any reviews yet
       useEffect(() => {
-            //If we have a user logged in, decrypt their ID to find if theyve submitted any reviews yet
             if(userState.id && loadedRecipe){
                 let decryptID = decryptData(userState.id, process.env.REACT_APP_CRYPSALT);
                 for(let i=0; i < loadedRecipe.reviews.length; i++){
@@ -60,29 +59,50 @@ const RecipeDetailsPage = props =>{
             }
       }, [loadedRecipe, userState.id]);
 
-    if(loadedRecipe){
-        loadedRecipe.recipeImage = loadedRecipe.recipeImage.replace(/\\/g, '/');
-    }
+    const submitReviewToServer = (type, rating, text, ratingSet, reviewID) =>{
+        let url;
+        let formData = null;
+        let method = 'POST';
+        switch(type){
+            case 'submit':
+                //Check for any issues with the data; If there are any, throw a specific error message
+                if(ratingSet){ setError('Rating not chosen; Please click to confirm'); return }
+                if(text === ''){ setError('Please enter in some text'); return; }
 
-    const submitReviewToServer = (rating, text, ratingSet) =>{
-        //Check for any issues with the data; If there are any, throw a specific error message
-        if(ratingSet){ setError('Rating not chosen; Please click to confirm'); return }
-        if(text === ''){ setError('Please enter in some text'); return; }
-
-        const formData = new FormData();
-        formData.append('rating', rating);
-        formData.append('text', text);
+                const formData = new FormData();
+                formData.append('rating', rating);
+                formData.append('text', text);
+                url = process.env.REACT_APP_API_ENDPOINT + 'recipes/reviewARecipe/' + id
+                break;
+            case 'delete':
+                url = process.env.REACT_APP_API_ENDPOINT + 'recipes/deleteAReview/' + id + '/' + reviewID
+                method = 'DELETE';
+                break;
+            case 'edit':
+                url = process.env.REACT_APP_API_ENDPOINT + 'recipes/editARecipe/' + reviewID
+                break;
+            default:
+                break;
+        }
+        
 
         const submitToServer = async() => {
             try{
-                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/reviewARecipe/' + id, 'POST', 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
+                const responseData = await sendRequest(url, method, 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
                 if(responseData){ setRefresh(prevState => !prevState) }
             }
-            catch (err) { console.log(err) }
+            catch (err) { /* Errors handled in the hook */ }
         }
+        // submitToServer();const submitToServer = async() => {
+        //     try{
+        //         const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/reviewARecipe/' + id, 'POST', 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
+        //         if(responseData){ setRefresh(prevState => !prevState) }
+        //     }
+        //     catch (err) { /* Errors handled in the hook */ }
+        // }
         submitToServer();
     }
- 
+
     return(
         <div className='RecipePageDetails'>
             { loadedRecipe !== null && <Container className='RecipePageDetails-Container'>
@@ -103,14 +123,22 @@ const RecipeDetailsPage = props =>{
                     <p className='RecipePageDetails-ReviewText'>
                         Showing latest {amountOfReviews} reviews of {loadedRecipe.reviews.length} <Button size='sm' variant='outline-light' onClick={() => setAmountOfReviews(loadedRecipe.reviews.length)}>View all</Button> 
                         { userState.token && 
-                            <Button size='sm' variant='outline-light' disabled={!canSubmitReview} onClick={() => setAllowEnterReview(prevState => !prevState)}>{canSubmitReview ? 'Write a Review' : 'Already Reviewed'}</Button>
+                            <span>
+                                <Button size='sm' variant='outline-light' disabled={!canSubmitReview} onClick={() => setAllowEnterReview(prevState => !prevState)}>{canSubmitReview ? 'Write a Review' : 'Already Reviewed'}</Button>
+                            </span>
                         }
                     </p> 
                     { userState.token && allowEnterReview && <>
                         { error }
-                        <ReviewRecipe submitReview={(rating, text, ratingSet) => submitReviewToServer(rating, text, ratingSet)} />
+                        <ReviewRecipe submitReview={(type, rating, text, ratingSet) => submitReviewToServer(type, rating, text, ratingSet)} />
                     </> }
-                    <ViewExistingReviews data={loadedRecipe.reviews} amount={amountOfReviews} /> 
+                    <ViewExistingReviews 
+                        data={loadedRecipe.reviews} 
+                        amount={amountOfReviews} 
+                        userID={userState.id ? decryptData(userState.id, process.env.REACT_APP_CRYPSALT) : null} 
+                        isAdmin={userState.isAdmin} 
+                        edit={null} 
+                        delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/> 
                 </Row> 
             </Container> }
         </div>

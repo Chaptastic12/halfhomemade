@@ -8,3 +8,11 @@
 .Review-Icon {
     font-size: calc(12px + 6vw);
 }
+
+.Review-Buttons {
+    height: 125px;
+}
+
+.Review-Buttons button {
+    margin: 2px;
+}
