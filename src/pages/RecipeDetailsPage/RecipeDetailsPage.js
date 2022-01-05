@@ -90,16 +90,10 @@ const RecipeDetailsPage = props =>{
                 const responseData = await sendRequest(url, method, 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
                 if(responseData){ setRefresh(prevState => !prevState) }
                 if(type === 'submit'){ setAllowEnterReview(false) }
+                if(type === 'delete'){ setAllowEnterReview(true); setCanSubmitReview(true) }
             }
             catch (err) { /* Errors handled in the hook */ }
         }
-        // submitToServer();const submitToServer = async() => {
-        //     try{
-        //         const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/reviewARecipe/' + id, 'POST', 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
-        //         if(responseData){ setRefresh(prevState => !prevState) }
-        //     }
-        //     catch (err) { /* Errors handled in the hook */ }
-        // }
         submitToServer();
     }
 
