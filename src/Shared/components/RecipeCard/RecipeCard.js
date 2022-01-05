@@ -46,8 +46,7 @@ const RecipeCard = props =>{
         } else {
             // return(
             //      <div className='' key={props.data.id}>
-            //         <MobileView data={props.data} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/>
-            //           <UserView data={props.data} foodRating={props.foodRating} userRating={props.userRating} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/> 
+            //          <UserView data={props.data} foodRating={props.foodRating} userRating={props.userRating} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/> 
             //      </div>
             // )
             return <MobileView data={props.data} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/>

@@ -19,36 +19,38 @@ const MobileView = props =>{
     }
 
     return (
-        <Col sm={6} className='RecipeCard-Mobile RecipeImage d-flex align-items-center justify-content-center'>
-            <Card className='RecipeCard-MobileCard' onClick={() => onCardClickHandler()}>
-                <Card.Img variant="top" src={loadedRecipeImage} />
-                <Card.Body>
-                    <Card.Title>{props.data.recipeTitle}</Card.Title>
-                    <Card.Text>
-                        { props.data.recipeRating === 0 ? <small>Recipe not yet rated</small> : <span className='RecipeCard-Stars'>{foodRating}</span> } 
-                        {/* <Button className='RecipeCard-Link' size='sm' variant='outline-primary' as={Link} to={`/recipes/view/${props.data.id}`}>View</Button> */}
-                    </Card.Text>
-                    <Card.Text>{props.data.recipeDesc}</Card.Text>
-                    <Card.Text><span  className='RecipeCard-Tags'>TAGS: {props.tags}</span></Card.Text>
-                    <Card.Text className='text-center'><small>Found in the <strong>{props.data.recipeBook.bookTitle}</strong> recipe book</small></Card.Text>
-                    <Card.Footer>
-                        <p className='RecipeCard-Date'>Date Posted: {props.data.createdAt}</p>
-                    </Card.Footer>
-                    { props.userState.isAdmin && <span>
-                        <PopupModal 
-                            show={props.showModal} 
-                            body='Are you sure you would like to delete this entry?' 
-                            title='Confirm deletion' 
-                            handleClose={() => props.setShowModal(false)}
-                            directTo='Confirm delete' 
-                            directToFunction={ () => props.deleteRecipe(props.data.id) } 
-                            directToRoute={'/recipes/all'} 
-                        />
-                        <Button variant='danger' className='RecipeCard-Link' onClick={() => props.setShowModal(true)}>Delete</Button> 
-                        <Button variant='warning' className='RecipeCard-Link' as={Link} to={`/recipes/edit/${props.data.id}`}>Edit</Button> 
-                    </span>}
-                </Card.Body>
-            </Card>  
+        <Col sm={3} className='RecipeCard-Mobile RecipeImage d-flex align-items-center justify-content-center'>
+            <div>
+                <Card className='RecipeCard-MobileCard' onClick={() => onCardClickHandler()}>
+                    <Card.Img variant="top" className='RecipCard-CardImg' src={loadedRecipeImage} />
+                    <Card.Body>
+                        <Card.Title>{props.data.recipeTitle}</Card.Title>
+                        <Card.Text>
+                            { props.data.recipeRating === 0 ? <small>Recipe not yet rated</small> : <span className='RecipeCard-Stars'>{foodRating}</span> } 
+                            {/* <Button className='RecipeCard-Link' size='sm' variant='outline-primary' as={Link} to={`/recipes/view/${props.data.id}`}>View</Button> */}
+                        </Card.Text>
+                        <Card.Text>{props.data.recipeDesc}</Card.Text>
+                        <Card.Text><span  className='RecipeCard-Tags'>TAGS: {props.tags}</span></Card.Text>
+                        <Card.Text className='text-center'><small>Found in the <strong>{props.data.recipeBook.bookTitle}</strong> recipe book</small></Card.Text>
+                        <Card.Footer>
+                            <p className='RecipeCard-Date'>Date Posted: {props.data.createdAt}</p>
+                        </Card.Footer>
+                    </Card.Body>
+                </Card>  
+                { props.userState.isAdmin && <span>
+                    <PopupModal 
+                        show={props.showModal} 
+                        body='Are you sure you would like to delete this entry?' 
+                        title='Confirm deletion' 
+                        handleClose={() => props.setShowModal(false)}
+                        directTo='Confirm delete' 
+                        directToFunction={ () => props.deleteRecipe(props.data._id) } 
+                        directToRoute={'/recipes/all'} 
+                    />
+                    <Button size='sm' variant='danger' className='RecipeCard-Link' onClick={() => props.setShowModal(true)}>Delete</Button> 
+                    <Button size='sm' variant='warning' className='RecipeCard-Link' as={Link} to={`/recipes/edit/${props.data._id}`}>Edit</Button> 
+                </span>}
+            </div>
         </Col> 
     )
 }
