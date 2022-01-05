@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
 
 import { Container, Row } from 'react-bootstrap'
 
-import { MobileContext } from '../../Shared/context/mobile-context';
+// import { MobileContext } from '../../Shared/context/mobile-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
 import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 
@@ -36,7 +36,7 @@ const RecipePage = props =>{
         setDeletedRecipe(false);
     },[deletedRecipe, sendRequest, setLoadedRecipes]);
 
-    const { isMobile } = useContext(MobileContext);
+    // const { isMobile } = useContext(MobileContext);
 
     let recipeCardFormat;
 
@@ -50,21 +50,13 @@ const RecipePage = props =>{
             recipe.recipeImage = recipe.recipeImage.replace(/\\/g, '/');
             recipe.createdAt = recipe.createdAt.toString().split('T')[0];
             return <RecipeCard
+                data={recipe}
                 key={recipe._id}
-                id={recipe._id} 
-                foodImage={recipe.recipeImage} foodTitle={recipe.recipeTitle} foodDesc={recipe.recipeDesc} foodRating={recipe.recipeRating} 
-                userImage={recipe.recipeBook.bookImage} userRating={recipe.bookRating} 
-                tags={recipe.recipeTags} 
-                date={recipe.createdAt}
                 delete={() => setDeletedRecipe(true)} 
                 adminPage={props.admin}/>
         })
 
-        if(!isMobile){
-            recipeCardFormat = <>{serverRecipes}</>
-        } else {
-            recipeCardFormat = <Row>{serverRecipes}</Row>
-        }
+        recipeCardFormat = <Row>{serverRecipes}</Row>
     } else {
         recipeCardFormat = <Row>EROR: UNABLE TO REACH SITE...</Row>
     }

@@ -2,14 +2,13 @@ import React, { useState, useContext } from 'react';
 import { useHttp } from '../../hooks/http-hook';
 
 import { Link } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
 import { MobileContext } from '../../context/mobile-context';
 import { AuthContext } from '../../context/auth-context';
 
 import AdminView from './RecipeCardView/AdminView';
-import UserView from './RecipeCardView/UserView';
+//import UserView from './RecipeCardView/UserView';
 import MobileView from './RecipeCardView/MobileView';
 
 import './RecipeCard.css';
@@ -17,17 +16,15 @@ import './RecipeCard.css';
 const RecipeCard = props =>{
     const { isMobile } = useContext(MobileContext);
     const { userState } = useContext(AuthContext);
-
     const { sendRequest } = useHttp();
 
     const [ showModal, setShowModal ] = useState(false);
-  
-    let tags = props.tags.map(tag=>{
+
+    let tags = props.data.recipeTags.map(tag=>{
         return<Link key={uuid()} className='RecipeCard-Tag' to={`/recipes/search?=${tag}`}>{tag}</Link>
     });
 
     const deleteRecipe = (id) =>{
-        console.log(deleteRecipe)
         //Get delete oure recipe
         const deleteFromServer = async() => {
             try{
@@ -43,18 +40,21 @@ const RecipeCard = props =>{
 
     if(!isMobile){
         if(props.adminPage){
-            return <div className='RecipeCard-Admin' key={props.id}>
-                        <AdminView data={props} foodRating={props.foodRating} userRating={props.userRating} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal} />
+            return <div className='RecipeCard-Admin' key={props.data.id}>
+                        <AdminView data={props.data} foodRating={props.foodRating} userRating={props.userRating} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal} />
                     </div>
         } else {
-            return(
-                <Container className='RecipeCard' key={props.id}>
-                    <UserView data={props} foodRating={props.foodRating} userRating={props.userRating} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/>
-                </Container>
-            )
+            // return(
+            //      <div className='' key={props.data.id}>
+            //         <MobileView data={props.data} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/>
+            //           <UserView data={props.data} foodRating={props.foodRating} userRating={props.userRating} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/> 
+            //      </div>
+            // )
+            return <MobileView data={props.data} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/>
+
         }
     } else {
-        return <MobileView data={props} foodRating={props.foodRating} userRating={props.userRating} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/>
+        return <MobileView data={props.data} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/>
     }
 }
 
