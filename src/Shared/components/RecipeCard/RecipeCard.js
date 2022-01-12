@@ -21,7 +21,7 @@ const RecipeCard = props =>{
     const [ showModal, setShowModal ] = useState(false);
 
     let tags = props.data.recipeTags.map(tag=>{
-        return<Link key={uuid()} className='RecipeCard-Tag' to={`/recipes/search?=${tag}`}>{tag}</Link>
+        return<Link key={uuid()} className='RecipeCard-Tag' to={`/recipes/search/${tag}`}>{tag}</Link>
     });
 
     const deleteRecipe = (id) =>{
@@ -35,9 +35,10 @@ const RecipeCard = props =>{
         }
         deleteFromServer();
         setShowModal(false);
-        setTimeout(() => {props.delete(true) }, 500 );
+        setTimeout(() => { props.delete(true) }, 500 );
     }
 
+    //Leaving this check in here for now; May decide to make it a user option to use UserView if its not a mobile viewport size.
     if(!isMobile){
         if(props.adminPage){
             return <div className='RecipeCard-Admin' key={props.data.id}>

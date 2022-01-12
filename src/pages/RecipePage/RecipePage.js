@@ -4,7 +4,6 @@ import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
 
 import { Container, Row } from 'react-bootstrap'
 
-// import { MobileContext } from '../../Shared/context/mobile-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
 import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 
@@ -18,6 +17,7 @@ const RecipePage = props =>{
 
     const { sendRequest } = useHttp();
     const [ loadedRecipes, setLoadedRecipes ] = useState([]);
+    const [ allRecipes, setAllRecipes ] = useState([]);
     const [ deletedRecipe, setDeletedRecipe ] = useState(false);
 
     //Make a call to our API to get our recipes
@@ -26,26 +26,28 @@ const RecipePage = props =>{
          const callToServer = async() => {
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/showAllRecipes');
+                //Update state for the recipes we show; Keep a back up of all our recipes for searching.
                 setLoadedRecipes(responseData);
-            } catch(err){
-                //Errors handled in hook
-            }
+                setAllRecipes(responseData);
+            } catch(err){ /* Errors handled in hook */ }
         }
         callToServer();
 
         setDeletedRecipe(false);
     },[deletedRecipe, sendRequest, setLoadedRecipes]);
 
-    // const { isMobile } = useContext(MobileContext);
+    const recipeSearchHandler = ( title, tag ) => {
+        //If title is null, we are only searching by tag
+        if(title === null){
+
+        }
+    }
 
     let recipeCardFormat;
-
     //Project the site if the server goes down
     if(loadedRecipes){
         const serverRecipes = loadedRecipes.map(recipe => {
-            //Book information isnt set up yet
-            recipe.bookRating = 5;
-            
+            //Update the URl for our images and how the createdAt is formatted.
             recipe.recipeBook.bookImage = recipe.recipeBook.bookImage.replace(/\\/g, '/');
             recipe.recipeImage = recipe.recipeImage.replace(/\\/g, '/');
             recipe.createdAt = recipe.createdAt.toString().split('T')[0];
@@ -55,7 +57,6 @@ const RecipePage = props =>{
                 delete={() => setDeletedRecipe(true)} 
                 adminPage={props.admin}/>
         })
-
         recipeCardFormat = <Row>{serverRecipes}</Row>
     } else {
         recipeCardFormat = <Row>EROR: UNABLE TO REACH SITE...</Row>
