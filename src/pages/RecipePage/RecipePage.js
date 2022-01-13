@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
+import PageHeader from '../../Shared/components/PageHeader/PageHeader';
+import RecipeSearch from '../../Shared/components/RecipeSearch/RecipeSearch';
 
 import { Container, Row } from 'react-bootstrap'
 
 import { useHttp } from '../../Shared/hooks/http-hook';
-import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 
 import FoodPlatter from '../../Shared/Img/Food/webp/Food_platter.webp';
 
@@ -19,6 +20,7 @@ const RecipePage = props =>{
     const [ loadedRecipes, setLoadedRecipes ] = useState([]);
     const [ allRecipes, setAllRecipes ] = useState([]);
     const [ deletedRecipe, setDeletedRecipe ] = useState(false);
+    const [ localError, setLocalError ] = useState('');
 
     //Make a call to our API to get our recipes
     useEffect(() => {
@@ -37,9 +39,30 @@ const RecipePage = props =>{
     },[deletedRecipe, sendRequest, setLoadedRecipes]);
 
     const recipeSearchHandler = ( title, tag ) => {
-        //If title is null, we are only searching by tag
-        if(title === null){
+        let searchedRecipe;
 
+        //If title is null, we are only searching by tag
+        if(title === null || ''){
+            if(tag === null || ''){
+                //If both are null, we have an issue and should throw an error
+                setLocalError('A tag or title must be entered in');
+            } else {
+                //If title is null but tag is not, search our tags and show results
+                searchedRecipe = allRecipes.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
+                //setLoadedRecipes(searchedRecipe);
+            }
+        } else {
+            let recipesWithMatchingTitle = allRecipes.filter(x => x.recipeTitle.toLowerCase().includes(title.toLowerCase()));
+            //If they are searching for a title, we need to check if they are searching by tags as well
+            if(tag === null || '' ){
+                //no tags? just use our filtered title vaue
+                //setLoadedRecipes(recipesWithMatchingTitle);
+            } else {
+                //Search all the titles for our tags
+                searchedRecipe = recipesWithMatchingTitle.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
+                console.log(searchedRecipe)
+                //setLoadedRecipes(searchedRecipe);
+            }
         }
     }
 
@@ -71,6 +94,7 @@ const RecipePage = props =>{
             <div className='RecipePage'>
                 <Container>
                     <PageHeader backgroundImage={loadedFoodPlatter}/> 
+                    <RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} />
                    { loadedRecipes && recipeCardFormat }
                 </Container>
             </div>
