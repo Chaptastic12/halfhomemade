@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
 const RecipeSearch = props => {
 
@@ -8,17 +8,22 @@ const RecipeSearch = props => {
     const [ searchTag, setSearchTag ] = useState(null);
 
     return (
-        <div>
-            <Form.Group className="mb-3">
-                <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder={searchTitle} onChange={e => setSearchTitle(e.target.value)} />
-  
-                <Form.Label>Tag</Form.Label>
-                <Form.Control type="text" placeholder={searchTag} onChange={e => setSearchTag(e.target.value)} />
-            </Form.Group>
-            <Button type='button' onClick={() => props.submitRecipeSearch(searchTitle, searchTag)}>
-                Search
-            </Button>
+        <div className='d-flex justify-content-center align-items-center'>
+            <Row>
+                <Form.Group className="mb-3" as={Col}>
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control type="text" placeholder={searchTitle ? searchTitle : 'Search by Title'}  onChange={e => setSearchTitle(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3" as={Col}>
+                    <Form.Label>Tag</Form.Label>
+                    <Form.Control type="text" placeholder={searchTag ? searchTag : 'Search by Tag'} onChange={e => setSearchTag(e.target.value)} />
+                </Form.Group>
+                <Form.Group className="mb-3 d-flex align-items-end" as={Col}>
+                    <Button type='button' onClick={() => props.submitRecipeSearch(searchTitle, searchTag)}>
+                        Search
+                    </Button>
+                </Form.Group>
+            </Row>
         </div>
     )
 }
