@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
 import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 import RecipeSearch from '../../Shared/components/RecipeSearch/RecipeSearch';
+import PaginationComponent from '../../Shared/components/UI Elements/Pagination/Pagination';
 
 import { Container, Row } from 'react-bootstrap'
 
@@ -14,6 +15,8 @@ import useProgressiveImage from '../../Shared/hooks/lazyLoad-hook';
 
 import './RecipePage.css';
 
+const ITEMS_PER_PAGE = 4;
+
 const RecipePage = props =>{
 
     const { sendRequest } = useHttp();
@@ -21,6 +24,7 @@ const RecipePage = props =>{
     const [ allRecipes, setAllRecipes ] = useState([]);
     const [ deletedRecipe, setDeletedRecipe ] = useState(false);
     const [ localError, setLocalError ] = useState('');
+    const [ pageNumber, setPageNumber ] = useState(1);
 
     //Make a call to our API to get our recipes
     useEffect(() => {
@@ -69,7 +73,10 @@ const RecipePage = props =>{
     let recipeCardFormat;
     //Project the site if the server goes down
     if(loadedRecipes){
-        const serverRecipes = loadedRecipes.map(recipe => {
+        const indexStart = (~ITEMS_PER_PAGE + 1) + (ITEMS_PER_PAGE * pageNumber);
+        const indexEnd = indexStart + ITEMS_PER_PAGE;
+
+        const serverRecipes = loadedRecipes.slice(indexStart, indexEnd).map(recipe => {
             //Update the URl for our images and how the createdAt is formatted.
             recipe.recipeBook.bookImage = recipe.recipeBook.bookImage.replace(/\\/g, '/');
             recipe.recipeImage = recipe.recipeImage.replace(/\\/g, '/');
@@ -85,7 +92,8 @@ const RecipePage = props =>{
         recipeCardFormat = <Row>EROR: UNABLE TO REACH SITE...</Row>
     }
 
-    const loadedFoodPlatter = useProgressiveImage(FoodPlatter)
+    const loadedFoodPlatter = useProgressiveImage(FoodPlatter);
+    const numberOfPages = Math.ceil((loadedRecipes.length+1)/ITEMS_PER_PAGE)
 
     if(props.admin){
         return <div className='RecipePage'> { recipeCardFormat } </div>
@@ -96,7 +104,8 @@ const RecipePage = props =>{
                     { localError && <div>{ localError } </div> }
                     <PageHeader backgroundImage={loadedFoodPlatter}/> 
                     <RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} />
-                   { loadedRecipes && recipeCardFormat }
+                    { loadedRecipes && recipeCardFormat }
+                    { loadedRecipes && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
                 </Container>
             </div>
         )
