@@ -20,8 +20,8 @@ const RecipeCard = props =>{
 
     const [ showModal, setShowModal ] = useState(false);
 
-    let tags = props.data.recipeTags.map(tag=>{
-        return<Link key={uuid()} className='RecipeCard-Tag' to={`/recipes/search/${tag}`}>{tag}</Link>
+    let tags = props.data.recipeTags[0].split(',').map(tag=>{
+        return<Link key={uuid()} className='RecipeCard-Tag' to={`/recipes/search/tag/${tag.trim()}`}>{tag}</Link>
     });
 
     const deleteRecipe = (id) =>{

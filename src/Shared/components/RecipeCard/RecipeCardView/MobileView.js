@@ -14,6 +14,8 @@ const MobileView = props =>{
     let foodRating = <Stars item={props.data.recipeRating} />
     const loadedRecipeImage = useProgressiveImage(process.env.REACT_APP_IMAGE_ENDPOINT + props.data.recipeImage);
 
+    console.log(props.data)
+
     const onCardClickHandler = () => {
         history.push(`/recipes/view/${props.data._id}`);
     }
@@ -26,11 +28,11 @@ const MobileView = props =>{
                     <Card.Body>
                         <Card.Title>{props.data.recipeTitle}</Card.Title>
                         <Card.Text>
-                            { props.data.recipeRating === 0 ? <small>Recipe not yet rated</small> : <span className='RecipeCard-Stars'>{foodRating}</span> } 
+                            { props.data.recipeRating === 0 ? <small>Recipe not yet rated</small> : <span className='RecipeCard-Stars'>{foodRating}({props.data.reviews.length})</span> } 
                             {/* <Button className='RecipeCard-Link' size='sm' variant='outline-primary' as={Link} to={`/recipes/view/${props.data.id}`}>View</Button> */}
                         </Card.Text>
-                        <Card.Text>{props.data.recipeDesc}</Card.Text>
-                        <Card.Text><span  className='RecipeCard-Tags'>TAGS: {props.tags}</span></Card.Text>
+                        {/* <Card.Text>{props.data.recipeDesc}</Card.Text> */}
+                        <Card.Text><span  className='RecipeCard-Tags'>TAGS:<br /> {props.tags}</span></Card.Text>
                         <Card.Text className='text-center'><small>Found in the <strong>{props.data.recipeBook.bookTitle}</strong> recipe book</small></Card.Text>
                         <Card.Footer>
                             <p className='RecipeCard-Date'>Date Posted: {props.data.createdAt}</p>

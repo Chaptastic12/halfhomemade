@@ -1,5 +1,6 @@
 .Footer{
-    background-color: rgba(241, 218, 191, 1);
+    /* background-color: rgba(241, 218, 191, 1); */
+    background-color: rgb(182, 182, 182);
     bottom: 0;
     width:100vw;
     height:385px;

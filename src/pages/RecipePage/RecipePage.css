@@ -1,5 +1,17 @@
 .RecipePage{
-    background-color: rgba(146, 129, 122, 1);
+    /* background-color: rgba(146, 129, 122, 1); */
     height: 100%;
     width: 100vw;
+}
+
+.RecipePage-Title{
+    font-family: 'Arial';
+    font-size:calc(12px + 2.5vw);  
+    /* color: white; */
+}
+
+.RecipePage-SubTitle{
+    font-family: 'Arial';
+    font-size:calc(12px + 0.5vw);  
+    /* color: white; */
 }

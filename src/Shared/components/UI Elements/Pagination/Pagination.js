@@ -13,7 +13,7 @@ const PaginationComponent = props => {
     }
 
     return (
-        <Pagination>
+        <Pagination style={{marginTop: '20px'}}>
             <Pagination.First onClick={() => changePage(0)} />
             <Pagination.Prev onClick={() => changePage(prevState => prevState - 1)} />
                 { items }

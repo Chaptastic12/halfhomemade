@@ -5,7 +5,7 @@ import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 import RecipeSearch from '../../Shared/components/RecipeSearch/RecipeSearch';
 import PaginationComponent from '../../Shared/components/UI Elements/Pagination/Pagination';
 
-import { Container, Row } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import { useHttp } from '../../Shared/hooks/http-hook';
 
@@ -102,8 +102,13 @@ const RecipePage = props =>{
             <div className='RecipePage'>
                 <Container>
                     { localError && <div>{ localError } </div> }
-                    <PageHeader backgroundImage={loadedFoodPlatter}/> 
-                    <RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} />
+                    {/* <PageHeader backgroundImage={loadedFoodPlatter}/>  */}
+                    <div className='RecipePage-Title'>Recipes from around the world</div>
+                    <Row>
+                        <Col><span className='RecipePage-SubTitle'>Ready for you, right here</span></Col>
+                        <Col><RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} /></Col>
+                    </Row>
+                    {/* <RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} /> */}
                     { loadedRecipes && recipeCardFormat }
                     { loadedRecipes && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
                 </Container>
