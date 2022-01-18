@@ -1,14 +1,3 @@
-.IngredientList{
-    /* background-color: rgba(255,255,255, 0.9);
-    border: 5px white solid;
-    border-radius: 20px;
-    padding-top: 3rem;
-    height: 75vh;
-    min-width: 300x;
-    margin-top: 25px;
-    margin-bottom: 25px; */
-}
-
 .IngredientList li{
     list-style-type: none;
     padding-bottom: 5px;

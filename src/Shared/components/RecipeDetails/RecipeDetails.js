@@ -14,30 +14,13 @@ const RecipeDetails = props =>{
         return <FormattedSteps key={uuid()} step={step.id} instructions={step.value} />
     })
 
-    if(props.new){
-        return <><h1 className='RecipeDetails-header text-center'><hr className='hr' style={{float: 'left' }}/>Instructions<hr className='hr' style={{float: 'right' }}/></h1>
+    return <>
+        <h1 className='RecipeDetails-header text-center'><hr className='hr' style={{float: 'left' }}/>Instructions<hr className='hr' style={{float: 'right' }}/></h1>
         <div className='RecipeDetails-Steps '>
             {formattedSteps}
-        </div></>
-    }
+        </div>
+    </>
 
-    return(
-        <Container>
-            <Row className='RecipeDetails'>
-                <Col xs={12}>
-                    <div className='RecipeDetails-Image' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + props.image+')'}} />
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <h1 className='RecipeDetails-header text-center'>Instructions</h1>
-                    <div className='RecipeDetails-Steps '>
-                        {formattedSteps}
-                    </div>
-                </Col>
-            </Row>
-        </Container>
-    )
 }
 
 export default RecipeDetails;

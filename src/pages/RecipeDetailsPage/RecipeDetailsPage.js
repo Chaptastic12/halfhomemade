@@ -97,7 +97,7 @@ const RecipeDetailsPage = props =>{
         }
         submitToServer();
     }
-    console.log(loadedRecipe);
+    
     let foodRating = loadedRecipe ? 
                         loadedRecipe.recipeRating === 0 ? 
                             'Not yet reviewed' 
@@ -106,25 +106,9 @@ const RecipeDetailsPage = props =>{
 
     return(
         <div className='RecipePageDetails'>
-            { /*loadedRecipe !== null && <Container className='RecipePageDetails-Container'> */ }
             { loadedRecipe !== null && <div>
-
-                {/* <Row>
-                    <Col xs={{span: 12, order: 'last'}} lg={{span: 3, order: 'first'}}>
-                        <div className='RecipePageDetails-IngredientsList text-center'>
-                            <IngredientList ingredients={loadedRecipe.recipeIngredients} />
-                        </div>
-                    </Col>
-                    <Col xs={{span: 12, order: 'first'}} lg={{span: 9, order: 'last'}}>
-                        <div className='RecipePageDetails-Instructions'>
-                            <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
-                            <RecipeDetails details={loadedRecipe.recipeSteps} image={loadedRecipe.recipeImage}/>
-                        </div>
-                    </Col>
-                </Row> */}
                 <Row>
                     <Col xs={12} lg={5} style={{marginLeft: '15px', marginRight: '15px'}}>
-                        {/* Recipe Image */}
                         <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + loadedRecipe.recipeImage + ')'}} />
                     </Col>
                      <Col style={{marginRight: '15px', marginLeft: '15px'}}>
@@ -156,8 +140,7 @@ const RecipeDetailsPage = props =>{
                         edit={null} 
                         delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/> </div>
                 </Row> 
-                </div>}
-            {/*</div></Container>*/ }
+            </div>}
         </div>
     )
 }
