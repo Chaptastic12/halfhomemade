@@ -1,18 +1,11 @@
 import React from 'react';
 
+import { Row, Col } from 'react-bootstrap';
+
 import './IngredientList.css';
 
 const IngredientList = props =>{
-
-    //IN THE FUTURE WE WANT TO EXPAND TO HOLD THIS LEVEL OF DETAIL
-    //
-    // const ingredientList = props.ingredients.map(ingredient => {
-    //     let key = ingredient.quantity+ingredient.measurement+ingredient.ingredient;
-    //     return (<li key={key}>
-    //                 {ingredient.quantity} {ingredient.measurement && ingredient.measurement} {ingredient.ingredient} {ingredient.special && ingredient.special}
-    //             </li>)
-    // });           
-
+  
     const ingredientList = props.ingredients.map(ingredient => {
         let key = ingredient.id+ingredient.value;
         return (<li key={key}>
@@ -20,9 +13,23 @@ const IngredientList = props =>{
                 </li>)
     })
 
+    const newList = props.ingredients.map(ing => {
+        let key = ing.id+ing.value;
+        return( <Col xs='auto' key={key} className='IngredientList-Ingredients'>
+                    <div>{ing.value}</div>
+                </Col>)
+    })
+    
+    if(props.new){
+        return <div className='IngredientList text-center'>
+            <h1><hr className='hr' style={{float: 'left' }}/>Ingredients<hr className='hr' style={{float: 'right' }}/></h1>
+            <Row className='d-flex justify-content-center align-items-center'>{newList}</Row>
+        </div>
+    }
+
     return(
         <div className='IngredientList'>
-            <h1>Ingredients</h1>
+            <h1><hr className='hr'/>Ingredients<hr className='hr'/></h1>
             <ol>{ingredientList}</ol>
         </div>
     )

@@ -5,7 +5,7 @@
 .FormattedSteps-StepNumber{
     margin-left: 15px;
     font-family: 'Tahu!';
-    font-size:calc(12px + 3.5vw);   
+    font-size:calc(12px + 2vw);   
 }
 
 .FormattedSteps-Instructions{

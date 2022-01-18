@@ -19,8 +19,11 @@ const RecipeSearch = props => {
                     <Form.Control type="text" placeholder={searchTag ? searchTag : 'Search by Tag'} onChange={e => setSearchTag(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex align-items-end" as={Col}>
-                    <Button type='button' onClick={() => props.submitRecipeSearch(searchTitle, searchTag)}>
+                    <Button type='button' onClick={() => props.submitRecipeSearch(searchTitle, searchTag)} style={{marginRight: '5px'}}>
                         Search
+                    </Button>
+                    <Button type='button' onClick={() => props.submitRecipeSearch('', '') }>
+                        Cancel
                     </Button>
                 </Form.Group>
             </Row>

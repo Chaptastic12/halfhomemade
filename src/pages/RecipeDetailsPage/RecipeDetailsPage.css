@@ -1,5 +1,5 @@
 .RecipePageDetails{
-    background-color: rgba(146, 129, 122, 1);
+    /* background-color: rgba(146, 129, 122, 1); */
     height: 100%;
     width: 100%;
     padding-top:15px;
@@ -17,11 +17,19 @@
 
 .RecipePageDetails-Title{
     font-family: 'Tahu!';
-    font-size:calc(48px + 3.5vw);  
-    color: white;
+    font-size:calc(42px + 3vw);  
     margin-top:15px;
 }
 
 .RecipePageDetails-ReviewText{
     color: white
+}
+
+.RecipePageDetails-RecipeImage{
+    background-size: center;
+	background-position: center;
+    background-repeat: no-repeat;
+    height:70vh;
+    width:100%;
+    border-radius: 15px;
 }

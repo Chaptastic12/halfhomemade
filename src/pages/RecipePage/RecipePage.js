@@ -44,16 +44,22 @@ const RecipePage = props =>{
 
     const recipeSearchHandler = ( title, tag ) => {
         let searchedRecipe;
-
+        setLocalError('');
+        
         //If title is null, we are only searching by tag
         if(title === null || ''){
             if(tag === null || ''){
                 //If both are null, we have an issue and should throw an error
-                setLocalError('A tag or title must be entered in');
+                setLoadedRecipes(allRecipes)
             } else {
                 //If title is null but tag is not, search our tags and show results
                 searchedRecipe = allRecipes.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
-                setLoadedRecipes(searchedRecipe);
+                if(searchedRecipe.length > 0){
+                    setLoadedRecipes(searchedRecipe);
+                } else {
+                    setLocalError('No recipes found that match your search criteria.')
+                    setLoadedRecipes(allRecipes);
+                }
             }
         } else {
             //Since we have a title, get recipes with the searched word in the title
@@ -61,11 +67,21 @@ const RecipePage = props =>{
             //If they are searching for a title, we need to check if they are searching by tags as well
             if(tag === null || '' ){
                 //no tags? just use our filtered title vaue
-                setLoadedRecipes(recipesWithMatchingTitle);
+                if(recipesWithMatchingTitle.length > 0){
+                    setLoadedRecipes(recipesWithMatchingTitle);
+                } else {
+                    setLocalError('No recipes found that match your search criteria.')
+                    setLoadedRecipes(allRecipes);
+                }
             } else {
                 //Search all the titles for our tags
                 searchedRecipe = recipesWithMatchingTitle.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
-                setLoadedRecipes(searchedRecipe);
+                if(searchedRecipe.length > 0){
+                    setLoadedRecipes(searchedRecipe);
+                } else {
+                    setLocalError('No recipes found that match your search criteria.')
+                    setLoadedRecipes(allRecipes);
+                }
             }
         }
     }

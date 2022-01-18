@@ -7,6 +7,7 @@ import IngredientList from '../../Shared/components/IngredientList/IngredientLis
 import RecipeDetails from '../../Shared/components/RecipeDetails/RecipeDetails';
 import ReviewRecipe from '../../Shared/components/ReviewRecipe/ReviewRecipe';
 import ViewExistingReviews from '../../Shared/components/ViewExistingReviews/ViewExistingReviews';
+import Stars from '../../Shared/components/UI Elements/Stars/Stars';
 
 import { useHttp } from '../../Shared/hooks/http-hook';
 import { decryptData } from '../../Shared/utils/util';
@@ -96,11 +97,19 @@ const RecipeDetailsPage = props =>{
         }
         submitToServer();
     }
+    console.log(loadedRecipe);
+    let foodRating = loadedRecipe ? 
+                        loadedRecipe.recipeRating === 0 ? 
+                            'Not yet reviewed' 
+                        : <Stars item={loadedRecipe.recipeRating} /> 
+                    : 'Loading...'
 
     return(
         <div className='RecipePageDetails'>
-            { loadedRecipe !== null && <Container className='RecipePageDetails-Container'>
-                <Row>
+            { /*loadedRecipe !== null && <Container className='RecipePageDetails-Container'> */ }
+            { loadedRecipe !== null && <div>
+
+                {/* <Row>
                     <Col xs={{span: 12, order: 'last'}} lg={{span: 3, order: 'first'}}>
                         <div className='RecipePageDetails-IngredientsList text-center'>
                             <IngredientList ingredients={loadedRecipe.recipeIngredients} />
@@ -111,6 +120,19 @@ const RecipeDetailsPage = props =>{
                             <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
                             <RecipeDetails details={loadedRecipe.recipeSteps} image={loadedRecipe.recipeImage}/>
                         </div>
+                    </Col>
+                </Row> */}
+                <Row>
+                    <Col xs={12} lg={5} style={{marginLeft: '15px', marginRight: '15px'}}>
+                        {/* Recipe Image */}
+                        <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + loadedRecipe.recipeImage + ')'}} />
+                    </Col>
+                     <Col style={{marginRight: '15px', marginLeft: '15px'}}>
+                        <div><h1 className='RecipePageDetails-Title'>{loadedRecipe.recipeTitle}</h1></div>
+                        <br />
+                        <div>{ foodRating } <a href='#reviews'>View Reviews</a></div>
+                        <div><IngredientList new ingredients={loadedRecipe.recipeIngredients} /></div>
+                        <div><RecipeDetails new details={loadedRecipe.recipeSteps} /></div>
                     </Col>
                 </Row>
                 <Row>
@@ -126,15 +148,16 @@ const RecipeDetailsPage = props =>{
                         { error }
                         <ReviewRecipe submitReview={(type, rating, text, ratingSet) => submitReviewToServer(type, rating, text, ratingSet)} />
                     </> }
-                    <ViewExistingReviews 
+                    <div id='reviews'><ViewExistingReviews 
                         data={loadedRecipe.reviews} 
                         amount={amountOfReviews} 
                         userID={userState.id ? decryptData(userState.id, process.env.REACT_APP_CRYPSALT) : null} 
                         isAdmin={userState.isAdmin} 
                         edit={null} 
-                        delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/> 
+                        delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/> </div>
                 </Row> 
-            </Container> }
+                </div>}
+            {/*</div></Container>*/ }
         </div>
     )
 }

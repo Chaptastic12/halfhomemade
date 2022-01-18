@@ -24,7 +24,7 @@
 
 .RecipeDetails-header{
     font-family: 'Tahu!';
-    font-size:calc(12px + 3.5vw);  
-    color: white;
+    font-size:calc(12px + 2vw);  
+    /* color: white; */
     margin-top: 10px;
 }
