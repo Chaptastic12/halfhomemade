@@ -13,7 +13,7 @@ const ProductCard = props => {
                 <Card.Img variant="top" src={props.image} />
                 <Card.Body>
                     <Card.Title>{props.title}</Card.Title>
-                    <Card.Text>{props.description}</Card.Text>
+                    {/* <Card.Text>{props.description}</Card.Text> */}
                     <Button variant="primary" as={Link} to={`/shop/product/${props.id}`}>View</Button>
                 </Card.Body>
             </Card>

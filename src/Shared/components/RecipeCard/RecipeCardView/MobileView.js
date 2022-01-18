@@ -24,7 +24,9 @@ const MobileView = props =>{
         <Col sm={3} className='RecipeCard-Mobile RecipeImage d-flex align-items-center justify-content-center'>
             <div>
                 <Card className='RecipeCard-MobileCard' onClick={() => onCardClickHandler()}>
-                    <Card.Img variant="top" className='RecipCard-CardImg' src={loadedRecipeImage} />
+                    <div className='RecipeCard-ImgDiv'>
+                        <Card.Img variant="top" className='RecipCard-CardImg' src={loadedRecipeImage} />
+                    </div>
                     <Card.Body>
                         <Card.Title>{props.data.recipeTitle}</Card.Title>
                         <Card.Text>
