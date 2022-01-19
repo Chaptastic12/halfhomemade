@@ -97,7 +97,7 @@ const RecipeDetailsPage = props =>{
         }
         submitToServer();
     }
-    
+
     let foodRating = loadedRecipe ? 
                         loadedRecipe.recipeRating === 0 ? 
                             'Not yet reviewed' 
@@ -112,33 +112,39 @@ const RecipeDetailsPage = props =>{
                         <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + loadedRecipe.recipeImage + ')'}} />
                     </Col>
                      <Col style={{marginRight: '15px', marginLeft: '15px'}}>
-                        <div><h1 className='RecipePageDetails-Title'>{loadedRecipe.recipeTitle}</h1></div>
-                        <br />
-                        <div>{ foodRating } <a href='#reviews'>View Reviews</a></div>
-                        <div><IngredientList new ingredients={loadedRecipe.recipeIngredients} /></div>
-                        <div><RecipeDetails new details={loadedRecipe.recipeSteps} /></div>
+                         <div className='RecipePageDetails-RecipeInfo'>
+                            <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
+                            <br />
+                            <div className='RecipePageDetails-Rating'>{ foodRating } <a href='#reviews'>Write a review</a></div>
+                            <div><IngredientList new ingredients={loadedRecipe.recipeIngredients} /></div>
+                            <div><RecipeDetails new details={loadedRecipe.recipeSteps} /></div>
+                        </div>
                     </Col>
                 </Row>
                 <Row>
-                    <p className='RecipePageDetails-ReviewText'>
-                        Showing latest {amountOfReviews} reviews of {loadedRecipe.reviews.length} <Button size='sm' variant='outline-light' onClick={() => setAmountOfReviews(loadedRecipe.reviews.length)}>View all</Button> 
-                        { userState.token && 
-                            <span>
-                                <Button size='sm' variant='outline-light' disabled={!canSubmitReview} onClick={() => setAllowEnterReview(prevState => !prevState)}>{canSubmitReview ? 'Write a Review' : 'Already Reviewed'}</Button>
-                            </span>
-                        }
-                    </p> 
-                    { userState.token && allowEnterReview && <>
-                        { error }
-                        <ReviewRecipe submitReview={(type, rating, text, ratingSet) => submitReviewToServer(type, rating, text, ratingSet)} />
-                    </> }
-                    <div id='reviews'><ViewExistingReviews 
-                        data={loadedRecipe.reviews} 
-                        amount={amountOfReviews} 
-                        userID={userState.id ? decryptData(userState.id, process.env.REACT_APP_CRYPSALT) : null} 
-                        isAdmin={userState.isAdmin} 
-                        edit={null} 
-                        delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/> </div>
+                    <div className='RecipePageDetails-Review'>
+                        <p className='RecipePageDetails-ReviewText'>
+                            Showing latest {amountOfReviews} reviews of {loadedRecipe.reviews.length} <Button size='sm' variant='outline-dark' onClick={() => setAmountOfReviews(loadedRecipe.reviews.length)}>View all</Button> 
+                            { userState.token && 
+                                <span>
+                                    <Button size='sm' variant='outline-dark' disabled={!canSubmitReview} onClick={() => setAllowEnterReview(prevState => !prevState)}>{canSubmitReview ? 'Write a Review' : 'Already Reviewed'}</Button>
+                                </span>
+                            }
+                        </p> 
+                        { userState.token && allowEnterReview && <>
+                            { error }
+                            <ReviewRecipe submitReview={(type, rating, text, ratingSet) => submitReviewToServer(type, rating, text, ratingSet)} />
+                        </> }
+                        <div id='reviews'>
+                            <ViewExistingReviews 
+                                data={loadedRecipe.reviews} 
+                                amount={amountOfReviews} 
+                                userID={userState.id ? decryptData(userState.id, process.env.REACT_APP_CRYPSALT) : null} 
+                                isAdmin={userState.isAdmin} 
+                                edit={null} 
+                                delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/> 
+                        </div>
+                    </div>
                 </Row> 
             </div>}
         </div>

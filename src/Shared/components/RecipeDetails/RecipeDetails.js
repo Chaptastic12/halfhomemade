@@ -14,12 +14,12 @@ const RecipeDetails = props =>{
         return <FormattedSteps key={uuid()} step={step.id} instructions={step.value} />
     })
 
-    return <>
+    return <div className='RecipeDetails'>
         <h1 className='RecipeDetails-header text-center'><hr className='hr' style={{float: 'left' }}/>Instructions<hr className='hr' style={{float: 'right' }}/></h1>
         <div className='RecipeDetails-Steps '>
             {formattedSteps}
         </div>
-    </>
+    </div>
 
 }
 
