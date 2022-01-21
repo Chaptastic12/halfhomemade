@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 
 import { useParams } from 'react-router-dom';
-import { Col, Row, Container, Button } from 'react-bootstrap';
+import { Col, Row, Button } from 'react-bootstrap';
 
 import IngredientList from '../../Shared/components/IngredientList/IngredientList';
 import RecipeDetails from '../../Shared/components/RecipeDetails/RecipeDetails';
@@ -108,10 +108,10 @@ const RecipeDetailsPage = props =>{
         <div className='RecipePageDetails'>
             { loadedRecipe !== null && <div>
                 <Row>
-                    <Col xs={12} lg={5} style={{marginLeft: '15px', marginRight: '15px'}}>
+                    <Col xs={12} lg={5}>
                         <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + loadedRecipe.recipeImage + ')'}} />
                     </Col>
-                     <Col style={{marginRight: '15px', marginLeft: '15px'}}>
+                     <Col>
                          <div className='RecipePageDetails-RecipeInfo'>
                             <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
                             <br />

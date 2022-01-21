@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Col, Row, Container } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
 import FormattedSteps from './FormattedSteps/FormattedSteps';

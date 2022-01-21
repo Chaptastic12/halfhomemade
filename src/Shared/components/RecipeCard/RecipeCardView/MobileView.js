@@ -14,8 +14,6 @@ const MobileView = props =>{
     let foodRating = <Stars item={props.data.recipeRating} />
     const loadedRecipeImage = useProgressiveImage(process.env.REACT_APP_IMAGE_ENDPOINT + props.data.recipeImage);
 
-    console.log(props.data)
-
     const onCardClickHandler = () => {
         history.push(`/recipes/view/${props.data._id}`);
     }

@@ -28,8 +28,8 @@ const AboutDiv = props =>{
                     </Col> }
                     <Col className='d-flex justify-content-center align-items-center'>
                         <div className='AboutDiv-BookText text-center'>
-                            <h1>Learn about us</h1>
-                            <p>Starting from some great ideas, and putting our own twist on them, enjoy our take on some classic recipes</p>
+                            <h1>Learn about us and our recipes</h1>
+                            <p>Starting from some great ideas, and putting our own twist on them, enjoy our take on some classic recipes. The food you see here is just the beginning.</p>
                             <p className='AboutDiv-LearnMore'>Learn more about us <i className="far fa-arrow-alt-circle-right" /></p>
                         </div>
                     </Col>

@@ -58,3 +58,19 @@
 .RecipePageDetails-Review{
     margin-top:55px;
 }
+
+@media only screen and (max-width: 991px) {
+    .RecipePageDetails-RecipeImage{
+        height: 300px;
+        border-radius: 0px;
+        box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048)
+    }
+
+    .RecipePageDetails-RecipeInfo {
+        box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048)
+    }
+  }

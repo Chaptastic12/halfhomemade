@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
-import PageHeader from '../../Shared/components/PageHeader/PageHeader';
 import RecipeSearch from '../../Shared/components/RecipeSearch/RecipeSearch';
 import PaginationComponent from '../../Shared/components/UI Elements/Pagination/Pagination';
 
 import { Container, Row, Col } from 'react-bootstrap'
 
 import { useHttp } from '../../Shared/hooks/http-hook';
-
-import FoodPlatter from '../../Shared/Img/Food/webp/Food_platter.webp';
-
-import useProgressiveImage from '../../Shared/hooks/lazyLoad-hook';
 
 import './RecipePage.css';
 
@@ -108,7 +103,6 @@ const RecipePage = props =>{
         recipeCardFormat = <Row>EROR: UNABLE TO REACH SITE...</Row>
     }
 
-    const loadedFoodPlatter = useProgressiveImage(FoodPlatter);
     const numberOfPages = Math.ceil((loadedRecipes.length+1)/ITEMS_PER_PAGE)
 
     if(props.admin){
