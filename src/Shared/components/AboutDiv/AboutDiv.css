@@ -3,7 +3,7 @@
     background-color: rgb(41, 43, 44,0.2); */
     background-color: rgb(248, 248, 248);
     max-height:500px;
-    height: 40vh;
+    height: 100%;
     width: 100vw;
 }
 
@@ -13,7 +13,7 @@
 
 .AboutDiv h1{
     font-family: 'Tahu!';
-    font-size:calc(12px + 5vw);
+    font-size:calc(12px + 3.5vw);
 }
 
 .AboutDiv-LearnMore{
