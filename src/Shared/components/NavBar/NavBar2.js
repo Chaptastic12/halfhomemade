@@ -10,7 +10,6 @@ import BottomNav from './BottomNav';
 import { SideDrawerContext } from '../../context/sidedrawer-context';
 import { AuthContext } from '../../context/auth-context';
 import { ShopContext } from '../../context/shop-context';
-import { MobileContext } from '../../context/mobile-context';
 
 import './NavBar.css';
 
@@ -20,7 +19,6 @@ const NavBar2 = props => {
 
     const history = useHistory();
 
-    const { isMobile } = useContext(MobileContext);
     const { handleCartShow } = useContext(SideDrawerContext);
     const { userState, logoutUser } = useContext(AuthContext);
     const { quantityInCart } = useContext(ShopContext)
