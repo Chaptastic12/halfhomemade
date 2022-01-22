@@ -14,6 +14,7 @@ import BookAddPage from './pages/BookAddPage/BookAddPage';
 import ShopPage from './pages/ShopPage/ShopPage';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
 import AdminPage from './pages/AdminPage/AdminPage';
+import RecipeAddPage2 from './pages/RecipeAddPage/RecipeAddPage2';
 
 import Footer from './Shared/components/Footer/Footer';
 
@@ -113,6 +114,7 @@ function App() {
             <Route path='/shop/:id' exact component={ShopPage} />
             <Route path='/shop/product/:id' exact component={ProductDetailsPage}/>
             <Route path='/admin' exact component={AdminPage} />
+            <Route path='/testpage' exact component={RecipeAddPage2} />
 
             <Redirect to="/" exact />
           </Switch>

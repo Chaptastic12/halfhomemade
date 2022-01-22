@@ -174,7 +174,7 @@ const RecipeAddPage = props =>{
             <h1>{ error || localError }</h1>
             <Form className='recipePageAdd-Form'>
                 <Row>
-                    { imagePreview && <img src={imagePreview } className='recipePageAdd-Image' alt='Recipe Preview' /> }
+                    { imagePreview && <img src={imagePreview} className='recipePageAdd-Image' alt='Recipe Preview' /> }
                     { !imagePreview && <p>Please pick an image to see a preview</p> }
                 </Row>
                 <Row>
