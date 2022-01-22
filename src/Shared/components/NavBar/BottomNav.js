@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { useHistory, NavLink } from 'react-router-dom';
-import { Button, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Row, Col, Button, Dropdown, DropdownButton } from 'react-bootstrap';
 
 import { SideDrawerContext } from '../../context/sidedrawer-context';
 import { AuthContext } from '../../context/auth-context';
@@ -29,6 +29,29 @@ const BottomNav = props =>{
     const logoutAndRedirect = () =>{
         logoutUser()
         setTimeout(()=> { history.push('/') }, 500);
+    }
+
+    if(props.new){
+        return (
+            <div >
+                <Row className='text-center justify-content-center'>
+                    <div className='NavBottom d-flex justify-content-center align-items-center'>
+                        <Col xs='auto'>
+                            <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/recipes/all">Recipes</Button>
+                        </Col>
+                        <Col xs='auto'>
+                            <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/shop/all">Shop</Button>
+                        </Col>
+                        <Col xs='auto'>
+                            <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/about">About</Button>
+                        </Col>
+                        <Col xs='auto'>
+                            <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/blog/all">Blog</Button>
+                        </Col>
+                    </div>
+                </Row>
+            </div>
+        )
     }
 
     if(!props.mobile){

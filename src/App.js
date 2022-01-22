@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import NavBar from './Shared/components/NavBar/NavBar';
+import NavBar2 from './Shared/components/NavBar/NavBar2';
 import SideCart from './Shared/components/UI Elements/SideCart/SideCart';
 import HomePage from './pages/HomePage/HomePage';
 import RecipePage from './pages/RecipePage/RecipePage';
@@ -97,7 +98,8 @@ function App() {
       <MobileContext.Provider value={{isMobile: isMobile, changeMobile: handleWindowSizeChange}}>
         <Router>
           <SessionTimer />
-          <NavBar />
+          <NavBar2 />
+          {/* <NavBar /> */}
           <SideCart />
 
           <Switch>

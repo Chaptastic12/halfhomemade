@@ -1,6 +1,6 @@
 /* CSS for TopNav components */
 .TopNav{
-    height:35px;
+    height:25px;
     font-style: italic;
 }
 
@@ -76,4 +76,55 @@
     .NavBar-Button a:hover, .NavBar-Button a:active{
         color: white;
     }
+}
+
+/*For the new NAV */
+
+.Nav {
+    border-bottom: 5px solid rgb(155, 155, 155);
+}
+
+.Nav .Hamburger{
+    margin-left: 15px;
+    font-size: calc(12px + 1.5vw);
+    margin-right: calc(5px + 2vw);
+}
+
+.Nav .Login {
+    margin-left:25px;
+}
+
+.Nav .Title{
+    font-family: 'Tahu!';
+    font-size: calc(42px + 3vw);
+}
+
+.Nav .Title a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.Nav .Cart {
+    margin-right: calc(5px + 2vw)
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 0.0rem rgb(13 110 253 / 25%)
+}
+
+.NavBar-Button:hover, .NavBar-Button:active{
+    background-color: rgb(53, 56, 56); 
+    color: white;
+    border-bottom: 5px solid white;
+}
+
+.NavBottom{
+    width: 50vw;
+    height: 35px;
+}
+
+.Nav .Header{
+    height: 10vh;
+    background-color: rgb(17, 19, 19); 
+    color: white;
 }

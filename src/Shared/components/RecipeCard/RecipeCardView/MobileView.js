@@ -19,7 +19,7 @@ const MobileView = props =>{
     }
 
     return (
-        <Col sm={3} className='RecipeCard-Mobile RecipeImage d-flex align-items-center justify-content-center'>
+        <Col className='RecipeCard-Mobile RecipeImage d-flex align-items-center justify-content-center'>
             <div>
                 <Card className='RecipeCard-MobileCard' onClick={() => onCardClickHandler()}>
                     <div className='RecipeCard-ImgDiv'>
