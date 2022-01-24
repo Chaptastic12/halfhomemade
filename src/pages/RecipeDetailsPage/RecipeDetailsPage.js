@@ -111,11 +111,6 @@ const RecipeDetailsPage = props =>{
                     <Col xs={12} lg={5}>
                         <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + loadedRecipe.recipeImage + ')'}} /> 
                         <br /> 
-                        <div className='text-center'>
-                            <div> This recipe is featured in: {loadedRecipe.recipeBook.bookTitle}</div>
-                            <br />
-                            <div> <label>Tags:</label> <br />{loadedRecipe.recipeTags}</div>
-                        </div>
                     </Col>
                      <Col>
                          <div className='RecipePageDetails-RecipeInfo'>
@@ -131,6 +126,12 @@ const RecipeDetailsPage = props =>{
                             <br/>
                             <div><IngredientList show ingredients={loadedRecipe.recipeIngredients} /></div>
                             <div><RecipeDetails details={loadedRecipe.recipeSteps} /></div>
+                            
+                            <div className='text-center'>
+                                <div> This recipe is featured in: {loadedRecipe.recipeBook.bookTitle}</div>
+                                <br />
+                                <div> <label>Tags:</label> <br />{loadedRecipe.recipeTags}</div>
+                            </div>
                         </div>
                     </Col>
                 </Row>

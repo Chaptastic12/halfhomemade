@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 
+import { v4 as uuid } from 'uuid'
+
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
 const RecipeSearch = props => {
 
     const [ searchTitle, setSearchTitle ] = useState(null);
     const [ searchTag, setSearchTag ] = useState(null);
+    const [ searchBook, setSearchBook ] = useState(null);
 
+    //Create our list of book options
+    let bookOptions = props.books.map( book => {
+        return <option key={uuid()} value={book._id}>{book.bookTitle}</option>
+    })
+   
     return (
         <div className='d-flex justify-content-center align-items-center' style={{paddingTop: '10px'}}>
             <Row>
@@ -18,11 +26,17 @@ const RecipeSearch = props => {
                     {/* <Form.Label>Tag</Form.Label> */}
                     <Form.Control type="text" placeholder={searchTag ? searchTag : 'Search by Tag'} onChange={e => setSearchTag(e.target.value)} />
                 </Form.Group>
+                <Form.Group className="mb-3" as={Col}>
+                    <Form.Select aria-label="Select Recipe Book" value={searchBook} onChange={ e => setSearchBook(e.target.value) }>
+                        <option value={null}>Select a Recipe Book</option>
+                        {bookOptions}
+                    </Form.Select>
+                </Form.Group>
                 <Form.Group className="mb-3 d-flex align-items-end" as={Col}>
-                    <Button type='button' onClick={() => props.submitRecipeSearch(searchTitle, searchTag)} style={{marginRight: '5px'}}>
+                    <Button type='button' onClick={() => props.submitRecipeSearch(searchTitle, searchTag, searchBook)} style={{marginRight: '5px'}}>
                         Search
                     </Button>
-                    <Button type='button' onClick={() => props.submitRecipeSearch('', '') }>
+                    <Button type='button' onClick={() => props.submitRecipeSearch('', '', '') }>
                         Cancel
                     </Button>
                 </Form.Group>

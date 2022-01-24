@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Row, Col, Container } from 'react-bootstrap';
 
+import { v4 as uuid } from 'uuid';
+
 import './EducationDiv.css';
 
 const EducationDiv = props =>{
@@ -13,7 +15,7 @@ const EducationDiv = props =>{
     ]
 
     let itemsToDisplay = educationItems.map(item => {
-        return  <Row>
+        return  <Row key={uuid()}>
                     <Col className='d-none d-sm-block' xs={item.iconLeft ? {order: 'first'} : {order: 'last'}}>
                         <div className='box-shadow-small EducationDiv-Box'>
                             {item.icon}

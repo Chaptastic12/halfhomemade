@@ -23,6 +23,22 @@ const RecipePage = props =>{
     const [ deletedRecipe, setDeletedRecipe ] = useState(false);
     const [ localError, setLocalError ] = useState('');
     const [ pageNumber, setPageNumber ] = useState(1);
+    const [ books, setBooks ] = useState([]);
+
+    //useEffect to get our list of book options
+    useEffect( () => {
+        //Get our books that can be chosen as a source for the recipe
+        const getFromServer = async() => {
+            try{
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'books/getAllBooks');
+                setBooks(responseData);
+            } catch(err){
+                //Errors handled in hook
+            }
+        }
+        getFromServer();
+        // eslint-disable-next-line 
+    },[setBooks])
 
     //Make a call to our API to get our recipes
     useEffect(() => {
@@ -40,45 +56,96 @@ const RecipePage = props =>{
         setDeletedRecipe(false);
     },[deletedRecipe, sendRequest, setLoadedRecipes]);
 
-    const recipeSearchHandler = ( title, tag ) => {
+    const recipeSearchHandler = ( title, tag, book ) => {
         let searchedRecipe;
-        setLocalError('');
+        setLocalError('');     
         
         //If title is null, we are only searching by tag
         if(title === null || ''){
             if(tag === null || ''){
-                //If both are null, we have an issue and should throw an error
-                setLoadedRecipes(allRecipes)
+                if(book === null || ''){
+                    //If all are null, we have an issue and should throw an error
+                    setLocalError('No recipes found that match your search criteria.')
+                    setLoadedRecipes(allRecipes)
+                }else {
+                    searchedRecipe =  allRecipes.filter( x => x.recipeBook.id.includes(book))
+                    if(searchedRecipe.length > 0){
+                        setLoadedRecipes(searchedRecipe);
+                    } else {
+                        setLocalError('No recipes found that match your search criteria.')
+                        setLoadedRecipes(allRecipes);
+                    }
+                }
+
             } else {
                 //If title is null but tag is not, search our tags and show results
                 searchedRecipe = allRecipes.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
-                if(searchedRecipe.length > 0){
-                    setLoadedRecipes(searchedRecipe);
+
+                //Check if the book field is null or not
+                if(book === null || ''){
+                    //If its null, then we just want the above displayed if its not empty
+                    if(searchedRecipe.length > 0){
+                        setLoadedRecipes(searchedRecipe);
+                    } else {
+                        setLocalError('No recipes found that match your search criteria.')
+                        setLoadedRecipes(allRecipes);
+                    }
                 } else {
-                    setLocalError('No recipes found that match your search criteria.')
-                    setLoadedRecipes(allRecipes);
+                    //If book was not null, then we filter by the book id
+                    searchedRecipe = searchedRecipe.filter(x => x.recipeBook.id.includes(book))
+                    if(searchedRecipe.length > 0){
+                        setLoadedRecipes(searchedRecipe);
+                    } else {
+                        setLocalError('No recipes found that match your search criteria.')
+                        setLoadedRecipes(allRecipes);
+                    }
                 }
+                
             }
         } else {
             //Since we have a title, get recipes with the searched word in the title
             let recipesWithMatchingTitle = allRecipes.filter(x => x.recipeTitle.toLowerCase().includes(title.toLowerCase()));
             //If they are searching for a title, we need to check if they are searching by tags as well
             if(tag === null || '' ){
-                //no tags? just use our filtered title vaue
-                if(recipesWithMatchingTitle.length > 0){
-                    setLoadedRecipes(recipesWithMatchingTitle);
+                //no tags? check to see if they're fitlering by book as well
+                if(book === null || ''){
+                    if(recipesWithMatchingTitle.length > 0){
+                        setLoadedRecipes(recipesWithMatchingTitle);
+                    } else {
+                        setLocalError('No recipes found that match your search criteria.')
+                        setLoadedRecipes(allRecipes);
+                    }
                 } else {
-                    setLocalError('No recipes found that match your search criteria.')
-                    setLoadedRecipes(allRecipes);
+                    //If book is not null, filter by it
+                    recipesWithMatchingTitle = recipesWithMatchingTitle.filter( x => x.recipeBook.id.includes(book));
+                    if(recipesWithMatchingTitle.length > 0){
+                        setLoadedRecipes(recipesWithMatchingTitle);
+                    } else {
+                        setLocalError('No recipes found that match your search criteria.')
+                        setLoadedRecipes(allRecipes);
+                    }
                 }
             } else {
                 //Search all the titles for our tags
                 searchedRecipe = recipesWithMatchingTitle.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
-                if(searchedRecipe.length > 0){
-                    setLoadedRecipes(searchedRecipe);
+
+                //Check if they are filtering by book or not again
+                if(book === null || ''){
+                    if(searchedRecipe.length > 0){
+                        setLoadedRecipes(searchedRecipe);
+                    } else {
+                        setLocalError('No recipes found that match your search criteria.')
+                        setLoadedRecipes(allRecipes);
+                    }
                 } else {
-                    setLocalError('No recipes found that match your search criteria.')
-                    setLoadedRecipes(allRecipes);
+                    //If there was a book filter, filter by it
+                    searchedRecipe = searchedRecipe.filter( x => x.recipeBook.id.includes(book))
+                    if(searchedRecipe.length > 0){
+                        setLoadedRecipes(searchedRecipe);
+                    } else {
+                        setLocalError('No recipes found that match your search criteria.')
+                        setLoadedRecipes(allRecipes);
+                    }
                 }
             }
         }
@@ -119,7 +186,7 @@ const RecipePage = props =>{
                     <div className='RecipePage-Title'>Recipes from around the world</div>
                     <Row>
                         <Col><span className='RecipePage-SubTitle'>Ready for you, right here</span></Col>
-                        <Col><RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} /></Col>
+                        <Col><RecipeSearch books={books} submitRecipeSearch={(title, tag, book)=> recipeSearchHandler(title, tag, book)} /></Col>
                     </Row>
                     {/* <RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} /> */}
                     { loadedRecipes && recipeCardFormat }
