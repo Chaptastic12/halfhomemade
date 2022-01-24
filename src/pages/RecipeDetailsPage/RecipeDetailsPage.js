@@ -126,10 +126,10 @@ const RecipeDetailsPage = props =>{
                                 <div className='IngredientList text-center'>
                                     <h1><hr className='hr' style={{float: 'left' }}/>Description<hr className='hr' style={{float: 'right' }}/></h1>
                                 </div>
-                                <div>{ loadedRecipe.recipeDesc } </div>
+                                <div className='text-center'>{ loadedRecipe.recipeDesc } </div>
                             </div>
                             <br/>
-                            <div><IngredientList ingredients={loadedRecipe.recipeIngredients} /></div>
+                            <div><IngredientList show ingredients={loadedRecipe.recipeIngredients} /></div>
                             <div><RecipeDetails details={loadedRecipe.recipeSteps} /></div>
                         </div>
                     </Col>

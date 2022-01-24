@@ -74,20 +74,23 @@ const RecipeDetailsPage = props =>{
     //useEffect for our image processing
     useEffect( () => {
         //Display a preview of our image
-        if(!recipeImage){
-            return;
-        }
+        if(!recipeImage){ return; }
         const fileReader = new FileReader();
-        fileReader.onload = () => {
-            setImagePreview(fileReader.result);
-        };
+        fileReader.onload = () => { setImagePreview(fileReader.result); };
         fileReader.readAsDataURL(recipeImage);
 
     }, [sendRequest, recipeImage]);
 
     //Verify that we should be able to submit recipe
     useEffect( () => {
-        if( loadedRecipe.recipeIngredients !== '' && loadedRecipe.recipeSteps !== '' && loadedRecipe.recipeTitle !== '' && loadedRecipe.recipeDesc !== '' && loadedRecipe.recipeImage !== '' && loadedRecipe.bookSelection !== '' && loadedRecipe.recipeTags !== '' ){
+        if(loadedRecipe.recipeIngredients !== '' && 
+           loadedRecipe.recipeSteps       !== '' && 
+           loadedRecipe.recipeTitle       !== '' && 
+           loadedRecipe.recipeDesc        !== '' && 
+           loadedRecipe.recipeImage       !== '' && 
+           loadedRecipe.bookSelection     !== '' && 
+           loadedRecipe.recipeTags        !== '' 
+           ){
             setAllowRecipeSubmit(true);
         } else {
             setAllowRecipeSubmit(false);
@@ -160,14 +163,28 @@ const RecipeDetailsPage = props =>{
     })
 
     let recipeTitleText, recipeStepText, recipeIngText, recipeDescText;
-    if(loadedRecipe.recipeTitle.length > 0){ recipeTitleText = loadedRecipe.recipeTitle; } else { recipeTitleText = ''  }
-    if(loadedRecipe.recipeIngredients.length > 0){ recipeIngText = loadedRecipe.recipeIngredients; } else { recipeIngText = ''  }
-    if(loadedRecipe.recipeSteps.length > 0){ recipeStepText = loadedRecipe.recipeSteps; } else { recipeStepText = ''  }
-    if(loadedRecipe.recipeDesc.length > 0){ recipeDescText = loadedRecipe.recipeDesc; } else { recipeDescText = ''  }
+    if(loadedRecipe.recipeTitle.length       > 0){ recipeTitleText = loadedRecipe.recipeTitle; }       else { recipeTitleText = ''  }
+    if(loadedRecipe.recipeIngredients.length > 0){ recipeIngText   = loadedRecipe.recipeIngredients; } else { recipeIngText = ''  }
+    if(loadedRecipe.recipeSteps.length       > 0){ recipeStepText  = loadedRecipe.recipeSteps; }       else { recipeStepText = ''  }
+    if(loadedRecipe.recipeDesc.length        > 0){ recipeDescText  = loadedRecipe.recipeDesc; }        else { recipeDescText = ''  }
 
     return(
         <div className='RecipePageDetails'>
+            {/* This section will make it easy for the admin to know that they are editing the poage. It also alerts them to how to submit and use thise page */}
             <Row>
+                <div className='text-center'>
+                    <h1>Add or edit an existing Recipe</h1>
+                    <p>Click on the area you would like to edit; Hit shift + enter to confirm on the above entries </p>
+                    { ( editTitle || editDesc || editIngredients || editSteps ) ? 
+                        <Button onClick={() => { setEditTitle(false); setEditIngredients(false); setEditSteps(false); setEditDesc(false) }}>Cancel</Button>
+                        :
+                        <Button onClick={e => submitRecipeToServer(e)} disabled={!allowRecipeSubmit}>Submit Changes</Button>
+                        }
+                </div>
+            </Row>
+            {/* This section will contain the actul information to edit */}
+            <Row>
+                {/* This Col will show our image, as well as the Book and Tag fields */}
                 <Col xs={12} lg={5}>
                     <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + imagePreview + ')'}} onClick={() => inputFile.current.click()}>
                         <input id='file' type="file" ref={inputFile} name='recipeImage' accept='.jpg,.png,.jpeg,.webp' onChange={  e => submitRecipeImage(e.target.files) } style={{display: 'none'}} />
@@ -183,6 +200,8 @@ const RecipeDetailsPage = props =>{
                         <Form.Control type="text" value={loadedRecipe.recipeTags} placeholder="Recipe Tags" onChange={ e => setLoadedRecipe({...loadedRecipe, recipeTags: e.target.value}) }/>
                     </div>
                 </Col>
+                {/* This Col will hold the Title, Description, Ingredients and Instructions. It will check to see what to show based on if that field has been clicked on; If it has, allow editing. If not, show text
+                     This will give the user a good idea of how things will look when actually displayed. */}
                 <Col>
                     <div className='RecipePageDetails-RecipeInfo'>
                         { !editTitle ? 
@@ -247,14 +266,7 @@ const RecipeDetailsPage = props =>{
                         }
                     </div>
                     <br />
-                    { ( editTitle || editDesc || editIngredients || editSteps ) ? 
-                        <div>
-                            <Button onClick={() => { setEditTitle(false); setEditIngredients(false); setEditSteps(false); setEditDesc(false) }}>Cancel</Button>
-                            <span>Hit shift + enter to confirm on the above entries</span>
-                        </div> 
-                        :
-                        <Button onClick={e => submitRecipeToServer(e)} disabled={!allowRecipeSubmit}>Submit</Button>
-                        }
+                    
                 </Col>
             </Row>
         </div>
