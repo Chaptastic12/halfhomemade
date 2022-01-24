@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
 import RecipeSearch from '../../Shared/components/RecipeSearch/RecipeSearch';
 import PaginationComponent from '../../Shared/components/UI Elements/Pagination/Pagination';
 
-import { Container, Row, Col } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom';
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
+import { AuthContext } from '../../Shared/context/auth-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
 
 import './RecipePage.css';
@@ -14,6 +16,7 @@ const ITEMS_PER_PAGE = 4;
 
 const RecipePage = props =>{
 
+    const { userState } = useContext(AuthContext)
     const { sendRequest } = useHttp();
     const [ loadedRecipes, setLoadedRecipes ] = useState([]);
     const [ allRecipes, setAllRecipes ] = useState([]);
@@ -121,6 +124,7 @@ const RecipePage = props =>{
                     {/* <RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} /> */}
                     { loadedRecipes && recipeCardFormat }
                     { loadedRecipes && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
+                    { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }
                 </Container>
             </div>
         )

@@ -109,15 +109,28 @@ const RecipeDetailsPage = props =>{
             { loadedRecipe !== null && <div>
                 <Row>
                     <Col xs={12} lg={5}>
-                        <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + loadedRecipe.recipeImage + ')'}} />
+                        <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + loadedRecipe.recipeImage + ')'}} /> 
+                        <br /> 
+                        <div className='text-center'>
+                            <div> This recipe is featured in: {loadedRecipe.recipeBook.bookTitle}</div>
+                            <br />
+                            <div> <label>Tags:</label> <br />{loadedRecipe.recipeTags}</div>
+                        </div>
                     </Col>
                      <Col>
                          <div className='RecipePageDetails-RecipeInfo'>
                             <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
                             <br />
                             <div className='RecipePageDetails-Rating'>{ foodRating } <a href='#reviews'>Write a review</a></div>
-                            <div><IngredientList new ingredients={loadedRecipe.recipeIngredients} /></div>
-                            <div><RecipeDetails new details={loadedRecipe.recipeSteps} /></div>
+                            <div> 
+                                <div className='IngredientList text-center'>
+                                    <h1><hr className='hr' style={{float: 'left' }}/>Description<hr className='hr' style={{float: 'right' }}/></h1>
+                                </div>
+                                <div>{ loadedRecipe.recipeDesc } </div>
+                            </div>
+                            <br/>
+                            <div><IngredientList ingredients={loadedRecipe.recipeIngredients} /></div>
+                            <div><RecipeDetails details={loadedRecipe.recipeSteps} /></div>
                         </div>
                     </Col>
                 </Row>

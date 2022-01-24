@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Button, Offcanvas } from 'react-bootstrap';
-import { v4 as uuid } from 'uuid';
+import { Offcanvas } from 'react-bootstrap';
+// import { v4 as uuid } from 'uuid';
 
 
 const SideCart = props =>{
