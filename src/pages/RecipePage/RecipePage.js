@@ -60,7 +60,7 @@ const RecipePage = props =>{
         let searchedRecipe;
         setLocalError('');     
         
-        //If title is null, we are only searching by tag
+        //Begin filtering...
         if(title === null || ''){
             if(tag === null || ''){
                 if(book === null || ''){
@@ -76,7 +76,6 @@ const RecipePage = props =>{
                         setLoadedRecipes(allRecipes);
                     }
                 }
-
             } else {
                 //If title is null but tag is not, search our tags and show results
                 searchedRecipe = allRecipes.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
@@ -100,7 +99,6 @@ const RecipePage = props =>{
                         setLoadedRecipes(allRecipes);
                     }
                 }
-                
             }
         } else {
             //Since we have a title, get recipes with the searched word in the title
@@ -185,7 +183,7 @@ const RecipePage = props =>{
                     {/* <PageHeader backgroundImage={loadedFoodPlatter}/>  */}
                     <div className='RecipePage-Title'>Recipes from around the world</div>
                     <Row>
-                        <Col><span className='RecipePage-SubTitle'>Ready for you, right here</span></Col>
+                        <Col xs={3}><span className='RecipePage-SubTitle'>Ready for you, right here</span></Col>
                         <Col><RecipeSearch books={books} submitRecipeSearch={(title, tag, book)=> recipeSearchHandler(title, tag, book)} /></Col>
                     </Row>
                     {/* <RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} /> */}

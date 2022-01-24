@@ -28,7 +28,7 @@ const RecipeSearch = props => {
                 </Form.Group>
                 <Form.Group className="mb-3" as={Col}>
                     <Form.Select aria-label="Select Recipe Book" value={searchBook} onChange={ e => setSearchBook(e.target.value) }>
-                        <option value={null}>Select a Recipe Book</option>
+                        <option value={null}>Search by Book</option>
                         {bookOptions}
                     </Form.Select>
                 </Form.Group>
