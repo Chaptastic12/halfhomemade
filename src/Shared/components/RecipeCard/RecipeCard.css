@@ -68,6 +68,7 @@
     margin-top: 10px;
 }
 .RecipeCard-MobileCard {
+    background-color: rgba(232, 238, 255, 0.2);
     width: 18rem;
 }
 .RecipeCard-MobileCard:hover{

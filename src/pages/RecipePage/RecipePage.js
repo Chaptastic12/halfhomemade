@@ -12,7 +12,7 @@ import { useHttp } from '../../Shared/hooks/http-hook';
 
 import './RecipePage.css';
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 8;
 
 const RecipePage = props =>{
 

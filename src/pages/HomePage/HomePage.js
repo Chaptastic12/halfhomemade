@@ -8,8 +8,8 @@ const HomePage = props =>{
 
     return(<>
             <BookDiv/>
-            <AboutDiv/>
             <EducationDiv />
+            <AboutDiv/>
         </>);
 }
 

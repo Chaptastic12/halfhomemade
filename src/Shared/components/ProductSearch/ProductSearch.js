@@ -29,11 +29,11 @@ const ProductSearch = props =>{
         <Row>
             <Col xs={6} />
             <Form.Group className="mb-3" as={Col}>
-                <Form.Label>Search Text</Form.Label>
+                <Form.Label><small>Search Text</small></Form.Label>
                 <Form.Control size='sm' type="text" placeholder="Search Text" onChange={e => setSearchText(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" as={Col}>
-                <Form.Label>Choose Collection</Form.Label>
+                <Form.Label><small>Choose Collection</small></Form.Label>
                 <Form.Select size='sm' value={selectedCollection.id} onChange={e => updatedCollection(e.target.value)}>
                     <option key={uuid()} value='all'>All</option>
                     {props.collections.map(collection => {

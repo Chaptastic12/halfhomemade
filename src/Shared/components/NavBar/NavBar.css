@@ -125,6 +125,7 @@
 
 .Nav .Header{
     height: 14vh;
+    min-height: 125px;
     background-color: rgb(17, 19, 19); 
     color: white;
 }

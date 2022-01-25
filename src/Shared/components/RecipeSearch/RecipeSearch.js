@@ -20,14 +20,15 @@ const RecipeSearch = props => {
         <div className='d-flex justify-content-center align-items-center' style={{paddingTop: '10px'}}>
             <Row>
                 <Form.Group className="mb-3" as={Col}>
-                    {/* <Form.Label>Title</Form.Label> */}
+                    <Form.Label><small>Title</small></Form.Label>
                     <Form.Control size='sm' type="text" placeholder={searchTitle ? searchTitle : 'Search by Title'}  onChange={e => setSearchTitle(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3" as={Col}>
-                    {/* <Form.Label>Tag</Form.Label> */}
+                    <Form.Label><small>Tag</small></Form.Label>
                     <Form.Control size='sm' type="text" placeholder={searchTag ? searchTag : 'Search by Tag'} onChange={e => setSearchTag(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3" as={Col}>
+                    <Form.Label><small>Book Selection</small></Form.Label>
                     <Form.Select size='sm' aria-label="Select Recipe Book" value={searchBook} onChange={ e => setSearchBook(e.target.value) }>
                         {bookOptions}
                     </Form.Select>

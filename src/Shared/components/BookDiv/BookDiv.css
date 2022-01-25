@@ -13,6 +13,7 @@
     background-size: cover;/*Fill the whole div*/
     background-repeat: no-repeat;/*Don't repeat*/
     background-position: center;
+    height: 700px;
 }
 
 .BookDiv a{

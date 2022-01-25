@@ -10,6 +10,8 @@
       rgb(248, 248, 248) 50%,
       white
     );
+    margin-top: -150px;
+    width: 90vw;
 }
 
 .EducationDiv-Title{

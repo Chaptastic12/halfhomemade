@@ -95,9 +95,7 @@ const ShopPage = props => {
                     <Row className='ShopPage-Products'>
                         { shopProducts }
                         { loadedProducts && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
-
                     </Row>
-                   
                 </Container>
             </div>
         )

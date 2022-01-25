@@ -38,7 +38,7 @@ const BookDiv = props =>{
                         </div>
                     </Col>
                 </Row>
-                <div className='Section-Divider' />
+                {/* <div className='Section-Divider' /> */}
             </div>)
     } else {
         return(

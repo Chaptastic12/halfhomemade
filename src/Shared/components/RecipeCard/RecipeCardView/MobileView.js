@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Card, Col, Button } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
@@ -17,12 +17,13 @@ const MobileView = props =>{
     const onCardClickHandler = () => {
         history.push(`/recipes/view/${props.data._id}`);
     }
+    const [ opacity, setOpacity ] = useState('');
 
     return (
-        <Col className='RecipeCard-Mobile RecipeImage d-flex align-items-center justify-content-center'>
+        <Col className='RecipeCard-Mobile RecipeImage d-flex align-items-center justify-content-center' >
             <div>
-                <Card className='RecipeCard-MobileCard' onClick={() => onCardClickHandler()}>
-                    <div className='RecipeCard-ImgDiv'>
+                <Card className='RecipeCard-MobileCard' onClick={() => onCardClickHandler()} onMouseEnter={() => setOpacity(prevState => !prevState)} onMouseLeave={() => setOpacity(prevState => !prevState)}>
+                    <div className={`RecipeCard-ImgDiv ${opacity && 'opacity'}`}>
                         <Card.Img variant="top" className='RecipCard-CardImg' src={loadedRecipeImage} />
                     </div>
                     <Card.Body>
