@@ -16,6 +16,7 @@ const ProductDetailsPage = props => {
     const [ chosenVariant, setChosenVariant ] = useState();
     const [ localError, setLocalError ] = useState(null);
     const [ price, setPrice ] = useState(null);
+    const [ comparePrice, setComparePrice ] = useState(null);
 
     useEffect(() => {
         fetchProductById(id);
@@ -33,6 +34,7 @@ const ProductDetailsPage = props => {
                 }
             }
             setChosenVariant(defaultVariant)
+            setSelections(product.variants[0].title.split(' / '));
         }
     },[product])
 
@@ -40,7 +42,7 @@ const ProductDetailsPage = props => {
         if(product.id){
             //If we have made a change from the default, we will need to use that instead
             if(selections.length !== 0){
-                let variantTitle = [...chosenVariant];
+                let variantTitle;
                 for(let i=0; i < selections.length; i++){
                     if(i === 0){
                         variantTitle = selections[i];
@@ -48,6 +50,7 @@ const ProductDetailsPage = props => {
                         variantTitle = variantTitle + ' / ' + selections[i]
                     }
                 }
+
                 //.FIND() on variants doesn't work; do it manually to find our variant
                 for(let j=0; j < product.variants.length; j++){
                     if(product.variants[j].title === variantTitle){
@@ -69,6 +72,7 @@ const ProductDetailsPage = props => {
         for(let i=0; i < product.variants.length; i++){
             if(product.variants[i].id === variantID){
                 setPrice(product.variants[i].price)
+                setComparePrice(product.variants[i].compareAtPrice)
                 if(product.variants[i].available === true){
                     if(type === 'add'){
                         addItemsToCheckout(variantID, quantity)
@@ -106,6 +110,13 @@ const ProductDetailsPage = props => {
             setSelections(copyState);
         }
 
+        let showPrice, sale;
+        if(price === comparePrice || comparePrice === null){
+            showPrice = <> ${ price } </>
+        } else {
+            sale = true;
+            showPrice = <><strike style={{color: 'grey', marginRight: '10px'}}> ${ price } </strike> ${ comparePrice } </>
+        }
 
         return (
             <div>
@@ -113,10 +124,12 @@ const ProductDetailsPage = props => {
                     { localError && <h1>{ localError } </h1> }
                     <Row>
                         <Col sm={4}>
-                            <div className='ProductDetails-Picture' style={{backgroundImage: `URL(${product.images[0].src})`}}></div>
+                            <div className='ProductDetails-Picture' style={{backgroundImage: `URL(${product.images[0].src})`}}>
+                            { sale && <div className='sale' style={{marginTop: '10px', marginRight: '10px'}}>Sale</div> }
+                            </div>
                         </Col>
                         <Col sm={8} className='ProductDetails-Details'>
-                            <Row><h2>{product.title} - ${ price } </h2></Row>
+                            <Row> <h2>{product.title} - { showPrice }</h2></Row>
                             <Row>{product.description}</Row>
                             <Row>{productOptions}</Row>
                             <Row><label>Quantity</label><input type='number' value={quantity} onChange={e => setQuantity(e.target.value)}/></Row>

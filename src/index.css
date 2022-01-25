@@ -55,3 +55,16 @@ code {
   0 22.3px 17.9px rgba(0, 0, 0, 0.072),
   0 41.8px 33.4px rgba(0, 0, 0, 0.086)
 }
+
+.sale{
+  color: white;
+  background: red;
+  border-radius:15px;
+  width: 65px;
+  height: 25px;
+  font-size: 16px;
+  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
