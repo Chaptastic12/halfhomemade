@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Spinner, Container, Row, Col, Button } from 'react-bootstrap'
 import { v4 as uuid } from 'uuid';
 
 import { ShopContext } from '../../Shared/context/shop-context';
@@ -20,7 +20,7 @@ const ProductDetailsPage = props => {
     useEffect(() => {
         fetchProductById(id);
     //eslint-disable-next-line
-    },[]);
+    }, [id]);
 
     useEffect(() =>{
         let defaultVariant;
@@ -37,7 +37,7 @@ const ProductDetailsPage = props => {
     },[product])
 
     const findVariantID = (type) =>{
-        if(product){
+        if(product.id){
             //If we have made a change from the default, we will need to use that instead
             if(selections.length !== 0){
                 let variantTitle = [...chosenVariant];
@@ -86,7 +86,7 @@ const ProductDetailsPage = props => {
     })
 
     if(!product.title){
-        return <div>loading...</div>
+        return <div className='spinner'><Spinner animation="border" /></div>
     } else {
         let productOptions = []; 
         for( let i=0; i < product.options.length; i++ ){

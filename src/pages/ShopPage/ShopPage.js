@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { useParams } from 'react-router-dom';
-
 import { ShopContext } from '../../Shared/context/shop-context';
 import PaginationComponent from '../../Shared/components/UI Elements/Pagination/Pagination';
 
-import { Row, Container } from 'react-bootstrap';
+import { Spinner, Row, Container } from 'react-bootstrap';
 
 import ProductCard from '../../Shared/components/ProductCard/ProductCard';
 import ProductSearch from'../../Shared/components/ProductSearch/ProductSearch';
@@ -18,13 +16,9 @@ const ShopPage = props => {
 
     const { fetchAllProducts, products, fetchAllCollections, collections, collection } = useContext(ShopContext);
 
-    const { id } = useParams();
-
     useEffect( () =>{
         fetchAllProducts();
-
         fetchAllCollections();
-
     // eslint-disable-next-line
     }, []);
 
@@ -40,7 +34,7 @@ const ShopPage = props => {
             setLoadedProducts(products);
         }
     // eslint-disable-next-line
-    }, [ id, collection, products ])
+    }, [ collection, products ])
 
     const searchFormSubmitHandler = (collection, filterText, instock) => {
         let finalSearchedProducts;
@@ -79,8 +73,9 @@ const ShopPage = props => {
             setLoadedProducts(finalSearchedProducts);
         }
     }
+    
     if(!loadedProducts){
-        return <div>Loading...</div>
+        return <div className='spinner'><Spinner animation="border" /></div>
     } else {
         //Next three lines are needed for pagination
         const indexStart = (~ITEMS_PER_PAGE + 1) + (ITEMS_PER_PAGE * pageNumber);

@@ -36,3 +36,9 @@ code {
 .bold{
   font-weight: bold;
 }
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
