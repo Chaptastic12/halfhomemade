@@ -8,7 +8,8 @@ const RecipeSearch = props => {
 
     const [ searchTitle, setSearchTitle ] = useState(null);
     const [ searchTag, setSearchTag ] = useState(null);
-    const [ searchBook, setSearchBook ] = useState(null);
+    const [ searchBook, setSearchBook ] = useState('');
+
 
     //Create our list of book options
     let bookOptions = props.books.map( book => {
@@ -20,23 +21,22 @@ const RecipeSearch = props => {
             <Row>
                 <Form.Group className="mb-3" as={Col}>
                     {/* <Form.Label>Title</Form.Label> */}
-                    <Form.Control type="text" placeholder={searchTitle ? searchTitle : 'Search by Title'}  onChange={e => setSearchTitle(e.target.value)} />
+                    <Form.Control size='sm' type="text" placeholder={searchTitle ? searchTitle : 'Search by Title'}  onChange={e => setSearchTitle(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3" as={Col}>
                     {/* <Form.Label>Tag</Form.Label> */}
-                    <Form.Control type="text" placeholder={searchTag ? searchTag : 'Search by Tag'} onChange={e => setSearchTag(e.target.value)} />
+                    <Form.Control size='sm' type="text" placeholder={searchTag ? searchTag : 'Search by Tag'} onChange={e => setSearchTag(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3" as={Col}>
-                    <Form.Select aria-label="Select Recipe Book" value={searchBook} onChange={ e => setSearchBook(e.target.value) }>
-                        <option value={null}>Search by Book</option>
+                    <Form.Select size='sm' aria-label="Select Recipe Book" value={searchBook} onChange={ e => setSearchBook(e.target.value) }>
                         {bookOptions}
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex align-items-end" as={Col}>
-                    <Button type='button' onClick={() => props.submitRecipeSearch(searchTitle, searchTag, searchBook)} style={{marginRight: '5px'}}>
+                    <Button type='button' size='sm' onClick={() => props.submitRecipeSearch(searchTitle, searchTag, searchBook)} style={{marginRight: '5px'}}>
                         Search
                     </Button>
-                    <Button type='button' onClick={() => props.submitRecipeSearch('', '', '') }>
+                    <Button type='button' size='sm' onClick={() => props.submitRecipeSearch('', '', '') }>
                         Cancel
                     </Button>
                 </Form.Group>

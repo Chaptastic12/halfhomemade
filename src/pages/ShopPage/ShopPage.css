@@ -1,13 +1,15 @@
 .ShopPage{
-    background-color: rgba(146, 129, 122, 1);
     height: 100%;
     width: 100vw;
     padding:25px;
 }
 
 .ShopPage-Products{
-    background-color: rgba(255,255,255, 0.8);
     padding: 10px;
-    padding-top: 25px;
     border-radius: 25px;
+}
+
+.ShopPage-Title{
+    font-family: 'Arial';
+    font-size:calc(12px + 2.5vw);  
 }

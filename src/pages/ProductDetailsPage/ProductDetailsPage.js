@@ -14,6 +14,8 @@ const ProductDetailsPage = props => {
     const [ quantity, setQuantity ] = useState('1');
     const [ selections, setSelections ] = useState([]);
     const [ chosenVariant, setChosenVariant ] = useState();
+    const [ localError, setLocalError ] = useState(null);
+    const [ price, setPrice ] = useState(null);
 
     useEffect(() => {
         fetchProductById(id);
@@ -34,28 +36,8 @@ const ProductDetailsPage = props => {
         }
     },[product])
 
-    if(!product.title){
-        return <div>loading...</div>
-    } else {
-        
-        let productOptions = []; 
-        for( let i=0; i < product.options.length; i++ ){
-            let options = product.options[i].values.map(value => {
-                return <option key={uuid()} value={value.value}>{value.value}</option>
-            })
-            productOptions.push(<React.Fragment key={uuid()}>
-                            <label>{product.options[i].name}</label>
-                            <select value={product.options[0].value} onChange={e => updateSelection(i, e.target.value)}>{options}</select>
-                        </React.Fragment>)
-        }
-
-        const updateSelection = (i, value) => {
-            let copyState = [...selections];
-            copyState[i] = value;
-            setSelections(copyState);
-        }
-
-        const findVariantIDAndAddToCart = () =>{
+    const findVariantID = (type) =>{
+        if(product){
             //If we have made a change from the default, we will need to use that instead
             if(selections.length !== 0){
                 let variantTitle = [...chosenVariant];
@@ -69,33 +51,77 @@ const ProductDetailsPage = props => {
                 //.FIND() on variants doesn't work; do it manually to find our variant
                 for(let j=0; j < product.variants.length; j++){
                     if(product.variants[j].title === variantTitle){
-                        addItemsToCheckout(product.variants[j].id, quantity)
+                        verifyVariantIsInStock(type, product.variants[j].id, quantity)
                     }
                 }
             } else {
                 //If we are using our defalt, add this to cart
                 for(let j=0; j < product.variants.length; j++){
                     if(product.variants[j].title === chosenVariant){
-                        addItemsToCheckout(product.variants[j].id, quantity)
+                        verifyVariantIsInStock(type, product.variants[j].id, quantity)
                     }
                 }
             }
         }
+    }
+    
+    const verifyVariantIsInStock = ( type, variantID, quantity ) => {
+        for(let i=0; i < product.variants.length; i++){
+            if(product.variants[i].id === variantID){
+                setPrice(product.variants[i].price)
+                if(product.variants[i].available === true){
+                    if(type === 'add'){
+                        addItemsToCheckout(variantID, quantity)
+                    }
+                    setLocalError(null)
+                } else {
+                    setLocalError('Unfortunately, this item is out of stock.')
+                }
+            }
+        }
+    }
+
+    useEffect(() => {
+        findVariantID()
+    })
+
+    if(!product.title){
+        return <div>loading...</div>
+    } else {
+        let productOptions = []; 
+        for( let i=0; i < product.options.length; i++ ){
+            let options = product.options[i].values.map(value => {
+                return <option key={uuid()} value={value.value}>{value.value}</option>
+            })
+
+            productOptions.push(<React.Fragment key={uuid()}>
+                            <label>{product.options[i].name}</label>
+                            <select value={selections[i]} onChange={e => { updateSelection(i, e.target.value); findVariantID('price') } }>{options}</select>
+                        </React.Fragment>)
+        }
+
+        const updateSelection = (i, value) => {
+            let copyState = [...selections];
+            copyState[i] = value;
+            setSelections(copyState);
+        }
+
 
         return (
             <div>
                 <Container>
+                    { localError && <h1>{ localError } </h1> }
                     <Row>
                         <Col sm={4}>
                             <div className='ProductDetails-Picture' style={{backgroundImage: `URL(${product.images[0].src})`}}></div>
                         </Col>
                         <Col sm={8} className='ProductDetails-Details'>
-                            <Row><h2>{product.title}</h2></Row>
+                            <Row><h2>{product.title} - ${ price } </h2></Row>
                             <Row>{product.description}</Row>
                             <Row>{productOptions}</Row>
                             <Row><label>Quantity</label><input type='number' value={quantity} onChange={e => setQuantity(e.target.value)}/></Row>
                             <Row><br /></Row>
-                            <Row><Button onClick={() => findVariantIDAndAddToCart()}>Add to Cart</Button></Row>
+                            <Row><Button onClick={() => findVariantID('add')}>Add to Cart</Button></Row>
                         </Col>
                     </Row>
                 </Container>

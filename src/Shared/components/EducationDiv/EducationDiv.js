@@ -10,7 +10,7 @@ const EducationDiv = props =>{
 
     const educationItems = [
         { icon: <i className="fas fa-users icon" />, subTitle: 'Learn with others, or on your own time.', desc: `Tune into live classes and ask questions on the fly! For those who can't make it, recordings are saved and made available on our YouTube channel.`, iconLeft: true },
-        { icon: <i className="fas fa-play-circle icon" />, subTitle: `Education videos at your fingertips`, desc: `Trying one of our recipes? Follow along from your book, and along side our experienced chef! Everything is explained for even the most novice of chefs.`, iconLeft: false },
+        { icon: <i className="fas fa-play-circle icon" />, subTitle: `Educational videos at your fingertips`, desc: `Trying one of our recipes? Follow along from your book, and along side our experienced chef! Everything is explained for even the most novice of chefs.`, iconLeft: false },
         { icon: <i className="fas fa-piggy-bank icon" />, subTitle: `Best of yet...`, desc: `All of this is provided to you - free of charge. If you want a hardcopy of our recipes though, you are more than welcome to add our book to your collection.`, iconLeft: true }
     ]
 

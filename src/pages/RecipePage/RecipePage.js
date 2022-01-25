@@ -171,7 +171,7 @@ const RecipePage = props =>{
         recipeCardFormat = <Row>EROR: UNABLE TO REACH SITE...</Row>
     }
 
-    const numberOfPages = Math.ceil((loadedRecipes.length+1)/ITEMS_PER_PAGE)
+    const numberOfPages = Math.ceil((loadedRecipes.length)/ITEMS_PER_PAGE)
 
     if(props.admin){
         return <div className='RecipePage'> { recipeCardFormat } </div>
