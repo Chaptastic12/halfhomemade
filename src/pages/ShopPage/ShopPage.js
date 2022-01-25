@@ -12,7 +12,7 @@ import ProductSearch from'../../Shared/components/ProductSearch/ProductSearch';
 
 import './ShopPage.css';
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 8;
 
 const ShopPage = props => {
 

@@ -15,9 +15,9 @@ const PaginationComponent = props => {
     return (
         <Pagination size='sm' style={{marginTop: '20px'}}>
             <Pagination.First onClick={() => changePage(1)} />
-            {number !== 1 && <Pagination.Prev onClick={() => changePage(prevState => prevState - 1)} /> }
+            { ( number !== 1 && active !== 1 ) && <Pagination.Prev onClick={() => changePage(prevState => prevState - 1)} /> }
                 { items }
-            {number !== 1 && <Pagination.Next onClick={() => changePage(prevState => prevState + 1)} /> }
+            { ( number !== 1 && number !== active ) &&  <Pagination.Next onClick={() => changePage(prevState => prevState + 1)} /> }
             <Pagination.Last onClick={() => changePage(number)} />
         </Pagination>
     )
