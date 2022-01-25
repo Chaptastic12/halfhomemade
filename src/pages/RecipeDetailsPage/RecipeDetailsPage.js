@@ -105,62 +105,64 @@ const RecipeDetailsPage = props =>{
                     : 'Loading...'
 
     return(
-        <div className='RecipePageDetails'>
-            { loadedRecipe !== null && <div>
-                <Row>
-                    <Col xs={12} lg={5}>
-                        <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + loadedRecipe.recipeImage + ')'}} /> 
-                        <br /> 
-                    </Col>
-                     <Col>
-                         <div className='RecipePageDetails-RecipeInfo'>
-                            <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
-                            <br />
-                            <div className='RecipePageDetails-Rating'>{ foodRating } <a href='#reviews'>Write a review</a></div>
-                            <div> 
-                                <div className='IngredientList text-center'>
-                                    <h1><hr className='hr' style={{float: 'left' }}/>Description<hr className='hr' style={{float: 'right' }}/></h1>
-                                </div>
-                                <div className='text-center'>{ loadedRecipe.recipeDesc } </div>
-                            </div>
-                            <br/>
-                            <div><IngredientList show ingredients={loadedRecipe.recipeIngredients} /></div>
-                            <div><RecipeDetails details={loadedRecipe.recipeSteps} /></div>
-                            
-                            <div className='text-center'>
-                                <div> This recipe is featured in: {loadedRecipe.recipeBook.bookTitle}</div>
+        <div className='d-flex justify-content-center'>
+            <div className='RecipePageDetails'>
+                { loadedRecipe !== null && <div>
+                    <Row>
+                        <Col xs={12} lg={5}>
+                            <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + loadedRecipe.recipeImage + ')'}} /> 
+                            <br /> 
+                        </Col>
+                        <Col>
+                            <div className='RecipePageDetails-RecipeInfo'>
+                                <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
                                 <br />
-                                <div> <label>Tags:</label> <br />{loadedRecipe.recipeTags}</div>
+                                <div className='RecipePageDetails-Rating'>{ foodRating } <a href='#reviews'>Write a review</a></div>
+                                <div> 
+                                    <div className='IngredientList text-center'>
+                                        <h1><hr className='hr' style={{float: 'left' }}/>Description<hr className='hr' style={{float: 'right' }}/></h1>
+                                    </div>
+                                    <div className='text-center'>{ loadedRecipe.recipeDesc } </div>
+                                </div>
+                                <br/>
+                                <div><IngredientList show ingredients={loadedRecipe.recipeIngredients} /></div>
+                                <div><RecipeDetails details={loadedRecipe.recipeSteps} /></div>
+                                
+                                <div className='text-center'>
+                                    <div> This recipe is featured in: {loadedRecipe.recipeBook.bookTitle}</div>
+                                    <br />
+                                    <div> <label>Tags:</label> <br />{loadedRecipe.recipeTags}</div>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <div className='RecipePageDetails-Review'>
+                            <p className='RecipePageDetails-ReviewText'>
+                                Showing latest {amountOfReviews} reviews of {loadedRecipe.reviews.length} <Button size='sm' variant='outline-dark' onClick={() => setAmountOfReviews(loadedRecipe.reviews.length)}>View all</Button> 
+                                { userState.token && 
+                                    <span>
+                                        <Button size='sm' variant='outline-dark' disabled={!canSubmitReview} onClick={() => setAllowEnterReview(prevState => !prevState)}>{canSubmitReview ? 'Write a Review' : 'Already Reviewed'}</Button>
+                                    </span>
+                                }
+                            </p> 
+                            { userState.token && allowEnterReview && <>
+                                { error }
+                                <ReviewRecipe submitReview={(type, rating, text, ratingSet) => submitReviewToServer(type, rating, text, ratingSet)} />
+                            </> }
+                            <div id='reviews'>
+                                <ViewExistingReviews 
+                                    data={loadedRecipe.reviews} 
+                                    amount={amountOfReviews} 
+                                    userID={userState.id ? decryptData(userState.id, process.env.REACT_APP_CRYPSALT) : null} 
+                                    isAdmin={userState.isAdmin} 
+                                    edit={null} 
+                                    delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/> 
                             </div>
                         </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <div className='RecipePageDetails-Review'>
-                        <p className='RecipePageDetails-ReviewText'>
-                            Showing latest {amountOfReviews} reviews of {loadedRecipe.reviews.length} <Button size='sm' variant='outline-dark' onClick={() => setAmountOfReviews(loadedRecipe.reviews.length)}>View all</Button> 
-                            { userState.token && 
-                                <span>
-                                    <Button size='sm' variant='outline-dark' disabled={!canSubmitReview} onClick={() => setAllowEnterReview(prevState => !prevState)}>{canSubmitReview ? 'Write a Review' : 'Already Reviewed'}</Button>
-                                </span>
-                            }
-                        </p> 
-                        { userState.token && allowEnterReview && <>
-                            { error }
-                            <ReviewRecipe submitReview={(type, rating, text, ratingSet) => submitReviewToServer(type, rating, text, ratingSet)} />
-                        </> }
-                        <div id='reviews'>
-                            <ViewExistingReviews 
-                                data={loadedRecipe.reviews} 
-                                amount={amountOfReviews} 
-                                userID={userState.id ? decryptData(userState.id, process.env.REACT_APP_CRYPSALT) : null} 
-                                isAdmin={userState.isAdmin} 
-                                edit={null} 
-                                delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/> 
-                        </div>
-                    </div>
-                </Row> 
-            </div>}
+                    </Row> 
+                </div>}
+            </div>
         </div>
     )
 }

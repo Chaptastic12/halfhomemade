@@ -24,7 +24,7 @@ const ProductCard = props => {
 
     return (
         <Col className='ProductCard' key={props.product.id} onClick={() => onCardClickHandler()}>
-            <Card className='ProductCard-MobileCard'>
+            <Card className='ProductCard-MobileCard cust-shadow-sm'>
                 <Card.Img variant="top" src={props.product.images[0].src} />
                 <Card.Body>
                     <Card.Title>{props.product.title}</Card.Title>

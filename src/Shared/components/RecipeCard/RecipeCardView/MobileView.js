@@ -21,7 +21,7 @@ const MobileView = props =>{
 
     return (
         <Col className='RecipeCard-Mobile RecipeImage d-flex align-items-center justify-content-center' >
-            <div>
+            <div className='cust-shadow-sm'>
                 <Card className='RecipeCard-MobileCard' onClick={() => onCardClickHandler()} onMouseEnter={() => setOpacity(prevState => !prevState)} onMouseLeave={() => setOpacity(prevState => !prevState)}>
                     <div className={`RecipeCard-ImgDiv ${opacity && 'opacity'}`}>
                         <Card.Img variant="top" className='RecipCard-CardImg' src={loadedRecipeImage} />
