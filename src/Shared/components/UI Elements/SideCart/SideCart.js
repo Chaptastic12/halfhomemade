@@ -13,7 +13,7 @@ import './SideCart.css';
 const SideCart = props =>{
 
     const { showCart, handleCartClose } = useContext(SideDrawerContext);
-    const { checkout, removeItemsFromCheckout } = useContext(ShopContext);
+    const { checkout, removeItemsFromCheckout, clearCart } = useContext(ShopContext);
 
     let cartItems;
     if(checkout.lineItems){
@@ -21,6 +21,15 @@ const SideCart = props =>{
             return <CartItem key={uuid()} item={item} removeLineItem={removeItemsFromCheckout}/>
         });
     } 
+
+    const removeAllFromCart = e => {
+        e.preventDefault();
+        let cartIds = [];
+        for(let i=0; i < checkout.lineItems.length; i++){
+            cartIds.push(checkout.lineItems[i].id)
+        }
+        clearCart(cartIds);
+    }
 
     return (
         <Offcanvas show={showCart} placement='end' className='me-2'>
@@ -35,6 +44,7 @@ const SideCart = props =>{
                         <h1>Total: ${checkout.totalPrice}</h1>
                         <p>Tax Calculated at checkout</p>
                         <Button size='lg' target="_blank" rel="noreferrer" href={checkout.webUrl} disabled>Checkout</Button>
+                        <Button size='lg' onClick={(e) => removeAllFromCart(e)} style={{marginLeft: '15px'}}>Clear Cart</Button>
                     </span>
                 </>
                 : 'No items currently in cart' }

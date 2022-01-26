@@ -82,11 +82,18 @@ const ShopProvider = props => {
         }
     }
 
+    const clearCart = async (ids) => {
+        console.log(ids)
+        const updateCheckout = await client.checkout.removeLineItems(checkout.id, ids);
+
+        setCheckout(updateCheckout);
+    }
+
     return (
         <ShopContext.Provider value={{
             products, product, checkout, collections, collection, quantityInCart,
             fetchAllProducts, fetchProductById, fetchAllCollections, fetchCollectionById,
-            addItemsToCheckout, removeItemsFromCheckout
+            addItemsToCheckout, removeItemsFromCheckout, clearCart
         }}>
              {props.children }
         </ShopContext.Provider>
