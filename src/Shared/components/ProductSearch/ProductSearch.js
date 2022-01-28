@@ -27,7 +27,7 @@ const ProductSearch = props =>{
  
     return(<div className='ProductSearch'>
         <Row>
-            <Col xs={6} />
+            <Col xs={12} lg={5} />
             <Form.Group className="mb-3" as={Col}>
                 <Form.Label><small>Search Text</small></Form.Label>
                 <Form.Control size='sm' type="text" placeholder="Search Text" onChange={e => setSearchText(e.target.value)}/>

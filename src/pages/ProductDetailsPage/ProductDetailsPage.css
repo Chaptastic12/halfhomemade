@@ -8,14 +8,15 @@
 }
 
 .ProductDetails-Details{
-    margin-left:100px;
-    width: 30vw;
+    margin-left:75px;
+    width: 40vw;
 }
 
 @media screen and (max-width: 767px) {
     .ProductDetails-Details{
         width: 100vw;
-        margin-left: 0px;
+        margin-left:0;
+        text-align: center;
     }
     .ProductDetails-Picture {
         width: 100vw;

@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 
 import { MobileContext } from '../../context/mobile-context';
 import { AuthContext } from '../../context/auth-context';
+import { SearchContext } from '../../context/search-context';
 
 import AdminView from './RecipeCardView/AdminView';
 //import UserView from './RecipeCardView/UserView';
@@ -16,12 +17,14 @@ import './RecipeCard.css';
 const RecipeCard = props =>{
     const { isMobile } = useContext(MobileContext);
     const { userState } = useContext(AuthContext);
+    const { setSearchParam, setSearchItem } = useContext(SearchContext);
+
     const { sendRequest } = useHttp();
 
     const [ showModal, setShowModal ] = useState(false);
 
     let tags = props.data.recipeTags[0].split(',').map(tag=>{
-        return<Link key={uuid()} className='RecipeCard-Tag' to={`/recipes/search/tag/${tag.trim()}`}>{tag}</Link>
+        return<Link key={uuid()} className='RecipeCard-Tag' to={`/recipes/search/${tag.trim()}`} onClick={ () => { setSearchParam('tag'); setSearchItem(tag.trim()) }}>{tag}</Link>
     });
 
     const deleteRecipe = (id) =>{

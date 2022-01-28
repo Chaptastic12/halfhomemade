@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
 import { Card, Col } from 'react-bootstrap';
@@ -22,8 +22,10 @@ const ProductCard = props => {
         return <span key={uuid()}>{ option.name + ' '} </span>
     })
 
+    const [ opacity, setOpacity ] = useState('');
+
     const price = props.product.variants[0].price;
-    const comparePrice = props.product.variants[0].compareAtPrice
+    const comparePrice = props.product.variants[0].compareAtPrice;
     
     let showPrice, sale;
     if(price === comparePrice || comparePrice === null){
@@ -34,9 +36,11 @@ const ProductCard = props => {
     }
 
     return (
-        <Col className='ProductCard' key={props.product.id} onClick={() => onCardClickHandler()}>
-            <Card className='ProductCard-MobileCard cust-shadow-sm'>
-                <Card.Img variant="top" src={props.product.images[0].src} />
+        <Col xs='auto' md={4} lg={3}className='ProductCard' key={props.product.id} onClick={() => onCardClickHandler()}>
+            <Card className='ProductCard-MobileCard cust-shadow-sm' onMouseEnter={() => setOpacity(prevState => !prevState)} onMouseLeave={() => setOpacity(prevState => !prevState)}>
+                <div className={`RecipeCard-ImgDiv ${opacity && 'opacity'}`}>
+                    <Card.Img variant="top" src={props.product.images[0].src} />
+                </div>
                 <Card.Body>
                     <Card.Title>{props.product.title} { sale && <div className='sale'>Sale</div> }</Card.Title>
                     { productRating } <br />

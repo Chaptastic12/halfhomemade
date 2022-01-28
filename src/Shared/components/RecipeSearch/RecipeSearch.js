@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from 'uuid';
 
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
@@ -9,6 +10,7 @@ const RecipeSearch = props => {
     const [ searchTitle, setSearchTitle ] = useState(null);
     const [ searchTag, setSearchTag ] = useState(null);
     const [ searchBook, setSearchBook ] = useState('');
+    const history = useHistory();
 
 
     //Create our list of book options
@@ -34,10 +36,10 @@ const RecipeSearch = props => {
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex align-items-end" as={Col}>
-                    <Button type='button' size='sm' onClick={() => props.submitRecipeSearch(searchTitle, searchTag, searchBook)} style={{marginRight: '5px'}}>
+                    <Button type='button' size='sm' onClick={() => props.submitRecipeSearch(searchTitle, searchTag, searchBook) } style={{marginRight: '5px'}}>
                         Search
                     </Button>
-                    <Button type='button' size='sm' onClick={() => props.submitRecipeSearch('', '', '') }>
+                    <Button type='button' size='sm' onClick={() => { props.submitRecipeSearch('', '', ''); history.push('/recipes/search/all');} }>
                         Cancel
                     </Button>
                 </Form.Group>

@@ -123,12 +123,12 @@ const ProductDetailsPage = props => {
                 <Container>
                     { localError && <h1>{ localError } </h1> }
                     <Row>
-                        <Col sm={4}>
+                        <Col s={12} className='d-flex justify-content-center align-items-center'>
                             <div className='ProductDetails-Picture' style={{backgroundImage: `URL(${product.images[0].src})`}}>
                             { sale && <div className='sale' style={{marginTop: '10px', marginRight: '10px'}}>Sale</div> }
                             </div>
                         </Col>
-                        <Col sm={8} className='ProductDetails-Details'>
+                        <Col s={12} className='ProductDetails-Details'>
                             <Row> <h2>{product.title} - { showPrice }</h2></Row>
                             <Row>{product.description}</Row>
                             <Row>{productOptions}</Row>

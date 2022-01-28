@@ -22,23 +22,25 @@ const MobileView = props =>{
     return (
         <Col className='RecipeCard-Mobile RecipeImage d-flex align-items-center justify-content-center' >
             <div className='cust-shadow-sm'>
-                <Card className='RecipeCard-MobileCard' onClick={() => onCardClickHandler()} onMouseEnter={() => setOpacity(prevState => !prevState)} onMouseLeave={() => setOpacity(prevState => !prevState)}>
-                    <div className={`RecipeCard-ImgDiv ${opacity && 'opacity'}`}>
-                        <Card.Img variant="top" className='RecipCard-CardImg' src={loadedRecipeImage} />
+                <Card className='RecipeCard-MobileCard' onMouseEnter={() => setOpacity(prevState => !prevState)} onMouseLeave={() => setOpacity(prevState => !prevState)}>
+                    <div onClick={() => onCardClickHandler()}>
+                        <div className={`RecipeCard-ImgDiv ${opacity && 'opacity'}`}>
+                            <Card.Img variant="top" className='RecipCard-CardImg' src={loadedRecipeImage} />
+                        </div>
+                        <Card.Body>
+                            <Card.Title>{props.data.recipeTitle}</Card.Title>
+                            <Card.Text>
+                                { props.data.recipeRating === 0 ? <small>Recipe not yet rated</small> : <span className='RecipeCard-Stars'>{foodRating}({props.data.reviews.length})</span> } 
+                                {/* <Button className='RecipeCard-Link' size='sm' variant='outline-primary' as={Link} to={`/recipes/view/${props.data.id}`}>View</Button> */}
+                            </Card.Text>
+                            {/* <Card.Text>{props.data.recipeDesc}</Card.Text> */}
+                            <Card.Text className='text-center'><small>Found in the <strong>{props.data.recipeBook.bookTitle}</strong> recipe book</small></Card.Text>
+                            <Card.Footer>
+                                <p className='RecipeCard-Date'>Date Posted: {props.data.createdAt}</p>
+                            </Card.Footer>
+                        </Card.Body>
                     </div>
-                    <Card.Body>
-                        <Card.Title>{props.data.recipeTitle}</Card.Title>
-                        <Card.Text>
-                            { props.data.recipeRating === 0 ? <small>Recipe not yet rated</small> : <span className='RecipeCard-Stars'>{foodRating}({props.data.reviews.length})</span> } 
-                            {/* <Button className='RecipeCard-Link' size='sm' variant='outline-primary' as={Link} to={`/recipes/view/${props.data.id}`}>View</Button> */}
-                        </Card.Text>
-                        {/* <Card.Text>{props.data.recipeDesc}</Card.Text> */}
-                        <Card.Text><span  className='RecipeCard-Tags'>TAGS:<br /> {props.tags}</span></Card.Text>
-                        <Card.Text className='text-center'><small>Found in the <strong>{props.data.recipeBook.bookTitle}</strong> recipe book</small></Card.Text>
-                        <Card.Footer>
-                            <p className='RecipeCard-Date'>Date Posted: {props.data.createdAt}</p>
-                        </Card.Footer>
-                    </Card.Body>
+                    <Card.Text><span  className='RecipeCard-Tags'><small>Tags:</small> {props.tags}</span></Card.Text>
                 </Card>  
                 { props.userState.isAdmin && <span>
                     <PopupModal 

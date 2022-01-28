@@ -5,11 +5,14 @@ import { Row, Col, Button, Dropdown, DropdownButton } from 'react-bootstrap';
 
 import { SideDrawerContext } from '../../context/sidedrawer-context';
 import { AuthContext } from '../../context/auth-context';
+import { SearchContext } from '../../context/search-context';
 
 const BottomNav = props =>{
 
     const { handleCartShow } = useContext(SideDrawerContext);
     const { userState, logoutUser } = useContext(AuthContext);
+    const { setSearchParam, setSearchItem } = useContext(SearchContext);
+
     const history = useHistory();
 
     let profileOptions;
@@ -26,6 +29,13 @@ const BottomNav = props =>{
                         </Button>
     }
 
+    let RecipeNav = <DropdownButton title={`Recipes`} variant='outline-none' className='NavBar-Button'>
+                        <Dropdown.Item as={NavLink} to='/recipes/search/all' onClick={ () => { setSearchParam(null); setSearchItem(null) } }>All</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to='/recipes/search/stars' onClick={ () => { setSearchParam('tag'); setSearchItem('reviews') } }>Best Reviewed</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to='/recipes/search/japanese' onClick={ () => { setSearchParam('tag'); setSearchItem('japanese') } }>Japanese Dishes</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to='/recipes/search/american' onClick={ () => { setSearchParam('tag'); setSearchItem('american') } }>American Dishes</Dropdown.Item>
+                    </DropdownButton>
+
     const logoutAndRedirect = () =>{
         logoutUser()
         setTimeout(()=> { history.push('/') }, 500);
@@ -37,7 +47,8 @@ const BottomNav = props =>{
                 <Row className='text-center justify-content-center'>
                     <div className='NavBottom d-flex justify-content-center align-items-center'>
                         <Col xs='auto'>
-                            <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/recipes/all">Recipes</Button>
+                            {/* <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/recipes/all">Recipes <i className="fas fa-chevron-down" /></Button> */}
+                            {RecipeNav} 
                         </Col>
                         <Col xs='auto'>
                             <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/shop/all">Shop</Button>

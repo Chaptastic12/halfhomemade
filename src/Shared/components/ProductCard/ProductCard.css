@@ -4,10 +4,10 @@
 
 .ProductCard-MobileCard {
     background-color: rgba(232, 238, 255, 0.2);
-    width: 18rem;
+    width: 14rem;
 }
 .ProductCard-MobileCard:hover{
-    width: 18.5rem;
+    width: 14.5rem;
     /* box-shadow: 10px 10px rgba(0,0,0, 0.2); */
 }
 .ProductCard-MobileCard:active{

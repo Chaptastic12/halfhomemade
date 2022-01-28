@@ -1,17 +1,20 @@
 import ShopProvider from "./shop-context";
 import AuthProvider from "./auth-context";
 import SideDrawerProvider from "./sidedrawer-context";
+import SearchProvider from "./search-context";
 
 const Providers = props => {
 
     return (
-        <ShopProvider>
-            <AuthProvider>
-                <SideDrawerProvider>
-                    { props.children }
-                </SideDrawerProvider>
-            </AuthProvider>
-        </ShopProvider>
+        <SearchProvider>
+            <ShopProvider>
+                <AuthProvider>
+                    <SideDrawerProvider>
+                        { props.children }
+                    </SideDrawerProvider>
+                </AuthProvider>
+            </ShopProvider>
+        </SearchProvider>
     )
 }
 

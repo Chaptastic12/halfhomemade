@@ -14,8 +14,6 @@ import BookAddPage from './pages/BookAddPage/BookAddPage';
 import ShopPage from './pages/ShopPage/ShopPage';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
 import AdminPage from './pages/AdminPage/AdminPage';
-import RecipeAddPage2 from './pages/RecipeAddPage/RecipeAddPage';
-
 import Footer from './Shared/components/Footer/Footer';
 
 import { MobileContext } from './Shared/context/mobile-context';
@@ -105,7 +103,8 @@ function App() {
 
           <Switch>
             <Route path="/" exact component={HomePage} />
-            <Route path='/recipes/all' exact component={RecipePage} />
+            {/* <Route path='/recipes/all' exact component={RecipePage} /> */}
+            <Route path='/recipes/search/:filter' exact><RecipePage /></Route>
             <Route path='/recipes/view/:id' exact component={RecipeDetailsPage} />
             <Route path='/login' exact component={LoginPage} />
             <Route path='/recipes/add' exact component={RecipeAddPage} />
@@ -114,7 +113,6 @@ function App() {
             <Route path='/shop/:id' exact component={ShopPage} />
             <Route path='/shop/product/:id' exact component={ProductDetailsPage}/>
             <Route path='/admin' exact component={AdminPage} />
-            <Route path='/testpage' exact component={RecipeAddPage2} />
 
             <Redirect to="/" exact />
           </Switch>
