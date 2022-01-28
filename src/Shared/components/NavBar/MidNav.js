@@ -59,7 +59,7 @@ const MidNav = props =>{
                 <Button variant='outline-light' className='NavBar-Button' onClick={()=>handleCartShow()}>Cart ({quantityInCart})<i className="fas fa-shopping-cart"/></Button>
             </Col>
         </Row>
-        )
+    )
 }
 
 export default MidNav;

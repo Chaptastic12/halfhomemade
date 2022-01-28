@@ -35,7 +35,12 @@ const BottomNav = props =>{
                         <Dropdown.Item as={NavLink} to='/recipes/search/japanese' onClick={ () => { setSearchParam('tag'); setSearchItem('japanese') } }>Japanese Dishes</Dropdown.Item>
                         <Dropdown.Item as={NavLink} to='/recipes/search/american' onClick={ () => { setSearchParam('tag'); setSearchItem('american') } }>American Dishes</Dropdown.Item>
                     </DropdownButton>
-
+    let SearchNav = <DropdownButton title={`Shop`} variant='outline-none' className='NavBar-Button'>
+                        <Dropdown.Item as={NavLink} to='/shop/search/all' onClick={ () => { setSearchParam(null); setSearchItem(null) } }>All</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to='/shop/search/householditems' onClick={ () => { setSearchParam('collection'); setSearchItem({id: 'Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzM4ODA3NjQzNzc1Mw==', title: 'Household Items' }) } }>View House items</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to='/shop/search/clothes' onClick={ () => { setSearchParam('collection'); setSearchItem({id: 'Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzM4ODA3NzIyNDE4NQ==', title: 'Clothes' }) } }>View All Clothes</Dropdown.Item>
+                        <Dropdown.Item as={NavLink} to='/shop/search/shirts' onClick={ () => { setSearchParam('text'); setSearchItem('shirt') } }>View Shirts</Dropdown.Item>
+                    </DropdownButton>
     const logoutAndRedirect = () =>{
         logoutUser()
         setTimeout(()=> { history.push('/') }, 500);
@@ -51,7 +56,8 @@ const BottomNav = props =>{
                             {RecipeNav} 
                         </Col>
                         <Col xs='auto'>
-                            <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/shop/all">Shop</Button>
+                            {/* <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/shop/search/all">Shop</Button> */}
+                            { SearchNav }
                         </Col>
                         <Col xs='auto'>
                             <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/about">About</Button>

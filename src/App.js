@@ -110,7 +110,7 @@ function App() {
             <Route path='/recipes/add' exact component={RecipeAddPage} />
             <Route path='/recipes/edit/:id' exact> <RecipeAddPage edit/> </Route>
             <Route path='/book/add' exact component={BookAddPage} />
-            <Route path='/shop/:id' exact component={ShopPage} />
+            <Route path='/shop/search/:id' exact component={ShopPage} />
             <Route path='/shop/product/:id' exact component={ProductDetailsPage}/>
             <Route path='/admin' exact component={AdminPage} />
 

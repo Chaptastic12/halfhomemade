@@ -44,10 +44,10 @@ const ProductSearch = props =>{
 
             <Form.Group className="mb-3 d-flex align-items-end" as={Col} >
                 <Form.Check size='sm' type="checkbox" label="Instock" onChange={ e => setInStock(e.target.checked) }/>
-                <Button  size='sm' variant="primary" type="button" as={Link} to ='/shop/search' onClick={() => props.submitSearch(selectedCollection, searchText, inStock)} style={{marginLeft: '15px'}}>
+                <Button  size='sm' variant="primary" type="button" as={Link} to ='/shop/search/filter' onClick={() => props.submitSearch(selectedCollection, searchText, inStock)} style={{marginLeft: '15px'}}>
                     Search
                 </Button>
-                <Button  size='sm' variant="primary" type="button" as={Link} to ='/shop/search' onClick={() => props.submitSearch({title: 'all', id: 'all'} , '', false)} style={{marginLeft: '5px'}}>
+                <Button  size='sm' variant="primary" type="button" as={Link} to ='/shop/search/filter' onClick={() => props.submitSearch({title: 'all', id: 'all'} , '', false)} style={{marginLeft: '5px'}}>
                     Cancel
                 </Button>
             </Form.Group>

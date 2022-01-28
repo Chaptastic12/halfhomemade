@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import { ShopContext } from '../../Shared/context/shop-context';
+import { SearchContext } from '../../Shared/context/search-context';
 import PaginationComponent from '../../Shared/components/UI Elements/Pagination/Pagination';
 
 import { Spinner, Row, Container } from 'react-bootstrap';
@@ -15,8 +16,9 @@ const ITEMS_PER_PAGE = 8;
 const ShopPage = props => {
 
     const { fetchAllProducts, products, fetchAllCollections, collections, collection } = useContext(ShopContext);
+    const { searchItem, searchParam } = useContext(SearchContext)
 
-    useEffect( () =>{
+    useEffect(() =>{
         fetchAllProducts();
         fetchAllCollections();
     // eslint-disable-next-line
@@ -28,11 +30,15 @@ const ShopPage = props => {
     const [ pageNumber, setPageNumber ] = useState(1);
 
     useEffect(() => {
-        if(!showAll){
-            setLoadedProducts(collection.products);
-        } else{
+        if(!loadedProducts){
+            if(!showAll){
+                setLoadedProducts(collection.products);
+            } else{
+                setLoadedProducts(products);
+            }
+        } else {
             setLoadedProducts(products);
-        }
+        }   
     // eslint-disable-next-line
     }, [ collection, products ])
 
@@ -73,6 +79,30 @@ const ShopPage = props => {
             setLoadedProducts(finalSearchedProducts);
         }
     }
+
+    useEffect(() => {
+        if(loadedProducts){
+            if(searchParam !== null){
+                switch(searchParam){
+                    case('text'):
+                        searchFormSubmitHandler({id: 'all' }, searchItem, null);
+                        break;
+    
+                    case('collection'):
+                        searchFormSubmitHandler(searchItem, '', null);
+                        break;
+    
+                    default:
+                        break;
+                }
+            } else{
+                searchFormSubmitHandler({id: 'all'}, '', null);
+            }
+        } else{
+            searchFormSubmitHandler({id: 'all'}, '', null);
+        }
+    //eslint-disable-next-line
+    }, [searchParam, searchItem])
     
     if(!loadedProducts){
         return <div className='spinner'><Spinner animation="border" /></div>
