@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import { useHistory, NavLink } from 'react-router-dom';
 import { Row, Col, Button, Dropdown, DropdownButton } from 'react-bootstrap';
+import { v4 as uuid } from 'uuid'
 
 import { SideDrawerContext } from '../../context/sidedrawer-context';
 import { AuthContext } from '../../context/auth-context';
@@ -14,6 +15,13 @@ const BottomNav = props =>{
     const { setSearchParam, setSearchItem } = useContext(SearchContext);
 
     const history = useHistory();
+
+    const recipeNavOptions = [
+        { to: '/recipes/search/all', clickParam: null, clickItem: null, desc: 'All'},
+        { to: '/recipes/search/stars', clickParam: 'tag', clickItem:'reviews', desc: 'Best Reviewed'},
+        { to: '/recipes/search/japanese', clickParam: 'tag', clickItem:'japanese', desc: 'Japanese Dishes'},
+        { to: '/recipes/search/american', clickParam: 'tag', clickItem:'american', desc: 'American Dishes'}
+    ]
 
     let profileOptions;
     if(userState.isAdmin){
@@ -30,17 +38,25 @@ const BottomNav = props =>{
     }
 
     let RecipeNav = <DropdownButton title={`Recipes`} variant='outline-none' className='NavBar-Button'>
-                        <Dropdown.Item as={NavLink} to='/recipes/search/all' onClick={ () => { setSearchParam(null); setSearchItem(null) } }>All</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to='/recipes/search/stars' onClick={ () => { setSearchParam('tag'); setSearchItem('reviews') } }>Best Reviewed</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to='/recipes/search/japanese' onClick={ () => { setSearchParam('tag'); setSearchItem('japanese') } }>Japanese Dishes</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to='/recipes/search/american' onClick={ () => { setSearchParam('tag'); setSearchItem('american') } }>American Dishes</Dropdown.Item>
+                        { recipeNavOptions.map(option => <Dropdown.Item as={NavLink} to={option.to} onClick={ () => { setSearchParam(option.clickParam); setSearchItem(option.clickItem) } }>{option.desc}</Dropdown.Item> ) }
                     </DropdownButton>
+
     let SearchNav = <DropdownButton title={`Shop`} variant='outline-none' className='NavBar-Button'>
                         <Dropdown.Item as={NavLink} to='/shop/search/all' onClick={ () => { setSearchParam(null); setSearchItem(null) } }>All</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to='/shop/search/householditems' onClick={ () => { setSearchParam('collection'); setSearchItem({id: 'Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzM4ODA3NjQzNzc1Mw==', title: 'Household Items' }) } }>View House items</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to='/shop/search/clothes' onClick={ () => { setSearchParam('collection'); setSearchItem({id: 'Z2lkOi8vc2hvcGlmeS9Db2xsZWN0aW9uLzM4ODA3NzIyNDE4NQ==', title: 'Clothes' }) } }>View All Clothes</Dropdown.Item>
+                        { props.collections.map(collection =>  {
+                            return <Dropdown.Item 
+                                        key={uuid()}
+                                        as={NavLink} 
+                                        to={`/shop/search/${collection.title.replace(/\s/g,'').toLowerCase()}`} 
+                                        onClick={ () => { setSearchParam('collection'); setSearchItem(collection) } }
+                                    >
+                                        View {collection.title}
+                                    </Dropdown.Item> 
+                            })
+                        }
                         <Dropdown.Item as={NavLink} to='/shop/search/shirts' onClick={ () => { setSearchParam('text'); setSearchItem('shirt') } }>View Shirts</Dropdown.Item>
                     </DropdownButton>
+
     const logoutAndRedirect = () =>{
         logoutUser()
         setTimeout(()=> { history.push('/') }, 500);

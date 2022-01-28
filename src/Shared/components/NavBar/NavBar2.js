@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { NavLink, useHistory } from 'react-router-dom';
 import { Row, Col, Button } from 'react-bootstrap'
@@ -21,7 +21,12 @@ const NavBar2 = props => {
 
     const { handleCartShow } = useContext(SideDrawerContext);
     const { userState, logoutUser } = useContext(AuthContext);
-    const { quantityInCart } = useContext(ShopContext)
+    const { quantityInCart, fetchAllCollections, collections } = useContext(ShopContext)
+
+    useEffect(() => {
+        fetchAllCollections();
+    // eslint-disable-next-line
+    }, [])
 
     const logoutAndRedirect = () =>{
         logoutUser()
@@ -69,7 +74,7 @@ const NavBar2 = props => {
                 </Col>
             </Row>
             <Row>
-                <BottomNav new />
+                <BottomNav new collections={collections}/>
             </Row>
             <NavCanvas showNav={showNav} closeNav={()=>setShowNav(false)}>
             </NavCanvas>
