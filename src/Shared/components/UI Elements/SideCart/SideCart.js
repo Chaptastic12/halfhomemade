@@ -31,26 +31,28 @@ const SideCart = props =>{
         clearCart(cartIds);
     }
 
-    return (
-        <Offcanvas show={showCart} placement='end' className='me-2'>
-            <Offcanvas.Header closeButton onClick={handleCartClose}>
-                <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-                {( checkout.lineItems && checkout.lineItems.length > 0 ) ? 
-                <>
-                    { cartItems } 
-                    <span className='Cart-Totals'>
-                        <h1>Total: ${checkout.totalPrice}</h1>
-                        <p>Tax Calculated at checkout</p>
-                        <Button size='lg' target="_blank" rel="noreferrer" href={checkout.webUrl} disabled>Checkout</Button>
-                        <Button size='lg' onClick={(e) => removeAllFromCart(e)} style={{marginLeft: '15px'}}>Clear Cart</Button>
-                    </span>
-                </>
-                : 'No items currently in cart' }
-            </Offcanvas.Body>
-        </Offcanvas>
-    );
+    return (<>
+        {showCart && <div style={{width: '100%', height: '100%'}} onClick={handleCartClose}>
+            <Offcanvas show={showCart} placement='end' className='me-2'>
+                <Offcanvas.Header closeButton onClick={handleCartClose}>
+                    <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    {( checkout.lineItems && checkout.lineItems.length > 0 ) ? 
+                    <>
+                        { cartItems } 
+                        <span className='Cart-Totals'>
+                            <h1>Total: ${checkout.totalPrice}</h1>
+                            <p>Tax Calculated at checkout</p>
+                            <Button size='lg' target="_blank" rel="noreferrer" href={checkout.webUrl} disabled>Checkout</Button>
+                            <Button size='lg' onClick={(e) => removeAllFromCart(e)} style={{marginLeft: '15px'}}>Clear Cart</Button>
+                        </span>
+                    </>
+                    : 'No items currently in cart' }
+                </Offcanvas.Body>
+            </Offcanvas>
+        </div>}
+    </>);
 }
 
 export default SideCart;

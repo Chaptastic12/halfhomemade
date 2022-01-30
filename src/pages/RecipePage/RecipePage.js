@@ -132,6 +132,7 @@ const RecipePage = props =>{
                 }
             }
         }else{
+            setFilterText('')
             setLoadedRecipes(allRecipes);
         }
 
