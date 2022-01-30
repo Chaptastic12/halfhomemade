@@ -36,8 +36,7 @@ const ShopPage = props => {
     // eslint-disable-next-line
     }, [ collection, products ])
 
-    const searchFormSubmitHandler = (collection, filterText, instock, filterRating) => {
-        console.log(filterRating)
+    const searchFormSubmitHandler = (collection, filterText, instock) => {
         let finalSearchedProducts;
         //If we are set to look at all products
         if(collection.id === 'all'){
@@ -65,10 +64,6 @@ const ShopPage = props => {
                 setHeaderText('Showing all products in ' + collection.title + ` containing '` + filterText + `'`)
             }
             setShowAll(false);
-        }
-
-        if(filterRating !== 0){
-            finalSearchedProducts = finalSearchedProducts.filter( x => x.rating >= filterRating );
         }
 
         if(instock){
