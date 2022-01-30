@@ -42,6 +42,7 @@ const ProductSearch = props =>{
                 </Form.Select>
             </Form.Group>
 
+
             <Form.Group className="mb-3 d-flex align-items-end" as={Col} >
                 <Form.Check size='sm' type="checkbox" label="Instock" onChange={ e => setInStock(e.target.checked) }/>
                 <Button  size='sm' variant="primary" type="button" as={Link} to ='/shop/search/filter' onClick={() => props.submitSearch(selectedCollection, searchText, inStock)} style={{marginLeft: '15px'}}>

@@ -42,9 +42,9 @@ const ProductCard = props => {
                     <Card.Img variant="top" src={props.product.images[0].src} />
                 </div>
                 <Card.Body>
-                    <Card.Title>{props.product.title} { sale && <div className='sale'>Sale</div> }</Card.Title>
+                    <Card.Title>{props.product.title} </Card.Title>
                     { productRating } <br />
-                    <div className='ProductCard-Price'> { showPrice } </div>
+                    <div className='ProductCard-Price'> { showPrice } { sale && <div className='sale'>Sale</div> }</div>
                     <Card.Footer>
                         <p style={{fontSize: '12px', margin: '0px'}}>Options: { optionsToShow }</p>
                     </Card.Footer>

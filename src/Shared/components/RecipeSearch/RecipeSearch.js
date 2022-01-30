@@ -5,11 +5,13 @@ import { v4 as uuid } from 'uuid';
 
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
-const RecipeSearch = props => {
+const RecipeSearch = React.memo(props => {
 
     const [ searchTitle, setSearchTitle ] = useState(null);
     const [ searchTag, setSearchTag ] = useState(null);
     const [ searchBook, setSearchBook ] = useState('');
+    const [ rating, setRating ] = useState(0)
+
     const history = useHistory();
 
 
@@ -35,17 +37,28 @@ const RecipeSearch = props => {
                         {bookOptions}
                     </Form.Select>
                 </Form.Group>
+                <Form.Group className="mb-3" as={Col}>
+                    <Form.Label><small>Choose Rating</small></Form.Label>
+                    <Form.Select size='sm' value={rating} onChange={e => setRating(e.target.value)}>
+                        <option key={uuid()} value={0}>All ratings</option>
+                        <option key={uuid()} value={5}>5 stars</option>
+                        <option key={uuid()} value={4}>4 Stars</option>
+                        <option key={uuid()} value={3}>3 Stars</option>
+                        <option key={uuid()} value={2}>2 Stars</option>
+                        <option key={uuid()} value={1}>1 Star</option>
+                    </Form.Select>
+                </Form.Group>
                 <Form.Group className="mb-3 d-flex align-items-end" as={Col}>
-                    <Button type='button' size='sm' onClick={() => props.submitRecipeSearch(searchTitle, searchTag, searchBook) } style={{marginRight: '5px'}}>
+                    <Button type='button' size='sm' onClick={() => props.submitRecipeSearch(searchTitle, searchTag, searchBook, rating) } style={{marginRight: '5px'}}>
                         Search
                     </Button>
-                    <Button type='button' size='sm' onClick={() => { props.submitRecipeSearch('', '', ''); history.push('/recipes/search/all');} }>
+                    <Button type='button' size='sm' onClick={() => { props.submitRecipeSearch('', '', '', 0); history.push('/recipes/search/all');} }>
                         Cancel
                     </Button>
                 </Form.Group>
             </Row>
         </div>
     )
-}
+})
 
 export default RecipeSearch;

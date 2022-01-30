@@ -15,14 +15,8 @@ const ITEMS_PER_PAGE = 8;
 
 const ShopPage = props => {
 
-    const { fetchAllProducts, products, fetchAllCollections, collections, collection } = useContext(ShopContext);
+    const { products, collections, collection } = useContext(ShopContext);
     const { searchItem, searchParam } = useContext(SearchContext)
-
-    useEffect(() =>{
-        fetchAllProducts();
-        fetchAllCollections();
-    // eslint-disable-next-line
-    }, []);
 
     const [ loadedProducts, setLoadedProducts ] = useState(products);
     const [ headerText, setHeaderText ] = useState('Showing all products');
@@ -42,7 +36,8 @@ const ShopPage = props => {
     // eslint-disable-next-line
     }, [ collection, products ])
 
-    const searchFormSubmitHandler = (collection, filterText, instock) => {
+    const searchFormSubmitHandler = (collection, filterText, instock, filterRating) => {
+        console.log(filterRating)
         let finalSearchedProducts;
         //If we are set to look at all products
         if(collection.id === 'all'){
@@ -72,12 +67,17 @@ const ShopPage = props => {
             setShowAll(false);
         }
 
+        if(filterRating !== 0){
+            finalSearchedProducts = finalSearchedProducts.filter( x => x.rating >= filterRating );
+        }
+
         if(instock){
             finalSearchedProducts = finalSearchedProducts.filter(x => x.availableForSale === true );
             setLoadedProducts(finalSearchedProducts);
         }else{
             setLoadedProducts(finalSearchedProducts);
         }
+
     }
 
     useEffect(() => {
@@ -120,7 +120,7 @@ const ShopPage = props => {
                 <Container>
                     <h1 className='ShopPage-Title'>{headerText}</h1>
                     <Row>
-                        <ProductSearch collections={collections} submitSearch={(id, text, instock) => searchFormSubmitHandler(id, text, instock)}/>
+                        <ProductSearch collections={collections} submitSearch={(id, text, instock, filterRating) => searchFormSubmitHandler(id, text, instock, filterRating)}/>
                     </Row>
                     <Row className='ShopPage-Products'>
                         { shopProducts }

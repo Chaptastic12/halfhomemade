@@ -21,10 +21,11 @@ const NavBar3 = props => {
 
     const { handleCartShow } = useContext(SideDrawerContext);
     const { userState, logoutUser } = useContext(AuthContext);
-    const { quantityInCart, fetchAllCollections, collections } = useContext(ShopContext)
+    const { quantityInCart, fetchAllCollections, fetchAllProducts, collections } = useContext(ShopContext)
 
     useEffect(() => {
         fetchAllCollections();
+        fetchAllProducts();
     // eslint-disable-next-line
     }, [])
 
