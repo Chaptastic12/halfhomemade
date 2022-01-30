@@ -18,7 +18,8 @@ const ITEMS_PER_PAGE = 8;
 const RecipePage = props =>{
 
     const { userState } = useContext(AuthContext);
-    const { searchParam, searchItem } = useContext(SearchContext)
+    const { searchParam, searchItem } = useContext(SearchContext);
+
     const { sendRequest } = useHttp();
 
     const [ loadedRecipes, setLoadedRecipes ] = useState([]);
@@ -27,9 +28,10 @@ const RecipePage = props =>{
     const [ localError, setLocalError ] = useState('');
     const [ pageNumber, setPageNumber ] = useState(1);
     const [ books, setBooks ] = useState([]);
-    const [ loading, setLoading ] = useState(false);
+    const [ loading, setLoading ] = useState(true);
 
     const recipeSearchHandler = ( title, tag, book, rating ) => {
+        setLoading(true);       
         let searchedRecipe = [ ...allRecipes];
         setLocalError('');     
 
@@ -81,44 +83,46 @@ const RecipePage = props =>{
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/showAllRecipes');
                 //Update state for the recipes we show; Keep a back up of all our recipes for searching.
-                setLoadedRecipes(responseData);
                 setAllRecipes(responseData);
+                if(searchParam === null){
+                    setLoadedRecipes(responseData);
+                    setLoading(false)
+                }
             } catch(err){ /* Errors handled in hook */ }
         }
         callToServer();
         setDeletedRecipe(false);
 
-    },[deletedRecipe, sendRequest, setLoadedRecipes]);
+    },[deletedRecipe, searchParam, sendRequest, setLoadedRecipes]);
 
     //Check if we are filtering down via the URL
     useEffect(() => {
-        setTimeout(() => {
-            if(searchParam !== null){
-                if(allRecipes){
-                    switch(searchParam){
-                        case 'tag':
-                            setLoading(true);
-                            recipeSearchHandler(null, searchItem, null, null);
-                            break;
-                        case 'book':
-                            setLoading(true);
-                            recipeSearchHandler(null, null, searchItem, null);
-                            break;
-                        default:
-                            break;
-                    }
+        if(searchParam !== null){
+            if(allRecipes.length > 0){
+                switch(searchParam){
+                    case 'tag':
+                        recipeSearchHandler(null, searchItem, null, null);
+                        break;
+                    case 'book':
+                        recipeSearchHandler(null, null, searchItem, null);
+                        break;
+                    case 'stars':
+                        recipeSearchHandler(null, null, null, searchItem);
+                        break;
+                    default:
+                        break;
                 }
-            }else{
-                setLoadedRecipes(allRecipes);
             }
-        }, 175);
+        }else{
+            setLoadedRecipes(allRecipes);
+        }
 
     //eslint-disable-next-line
-    }, [allRecipes, searchParam, searchItem])
+    }, [allRecipes, searchParam, searchItem ]);  
 
     let recipeCardFormat;
-    //Project the site if the server goes down
-    if(loadedRecipes){
+    //Protect the site if the server goes down
+    if(loadedRecipes && !loading){
         const indexStart = (~ITEMS_PER_PAGE + 1) + (ITEMS_PER_PAGE * pageNumber);
         const indexEnd = indexStart + ITEMS_PER_PAGE;
 
@@ -163,7 +167,6 @@ const RecipePage = props =>{
             </div>
         )
     }
-
     
 }
 

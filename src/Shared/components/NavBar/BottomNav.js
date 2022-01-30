@@ -17,7 +17,7 @@ const BottomNav = props =>{
 
     const recipeNavOptions = [
         { to: '/recipes/search/all', clickParam: null, clickItem: null, desc: 'All'},
-        { to: '/recipes/search/stars', clickParam: 'tag', clickItem:'reviews', desc: 'Best Reviewed'},
+        { to: '/recipes/search/stars', clickParam: 'stars', clickItem: 5, desc: 'Best Reviewed'},
         { to: '/recipes/search/japanese', clickParam: 'tag', clickItem:'japanese', desc: 'Japanese Dishes'},
         { to: '/recipes/search/american', clickParam: 'tag', clickItem:'american', desc: 'American Dishes'}
     ];
