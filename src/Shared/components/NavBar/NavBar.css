@@ -96,7 +96,8 @@
 
 .Nav .Title{
     font-family: 'Tahu!';
-    font-size: calc(42px + 3vw);
+    /* font-size: calc(42px + 3vw); */
+    font-size: 95px;
 }
 
 .Nav .Title a{
@@ -133,4 +134,16 @@
 
 .NavBar-Button button:hover{
     text-decoration: underline;
+}
+
+.Title-Half{
+    margin-bottom: -75px;
+    margin-left: 70px;
+    font-size: 60px;
+}
+
+.centerDiv{
+    padding-top:1vh;
+    margin: 0 6vw;
+    min-width: 365px;
 }

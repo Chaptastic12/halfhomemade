@@ -59,15 +59,19 @@ const NavBar2 = props => {
             </Row>
             <Row className='Header d-flex align-items-center justify-content-center'>
                 <Col className='d-none d-sm-block'>
-                    { loginDiv }
                 </Col>
                 <Col>
-                    <div className='Title text-center'>
+                    {/* <div className='Title text-center'>
                         <NavLink to='/'>halfHomemade</NavLink>
+                    </div> */}
+                    <div className='Title centerDiv'>
+                        <div className='Title-Half'>half</div>
+                        <div>Homemade</div>
                     </div>
                 </Col>
                 <Col>
                     <div className='Cart d-flex justify-content-end'>
+                        { loginDiv }
                         <Button variant='outline-light' className='NavBar-Button' onClick={()=>handleCartShow()}>Cart ({quantityInCart})<i className="fas fa-shopping-cart"/></Button>
                     </div>
                     <div className='d-sm-none'>{ loginDiv }</div>

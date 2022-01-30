@@ -33,7 +33,7 @@ const EducationDiv = props =>{
     })
 
     return(
-        <div className='d-flex justify-content-center align-items-center'>
+        <div className='EducationDiv-Back d-flex justify-content-center align-items-center'>
             <div className='EducationDiv'>
                 <div className='text-center' >
                     <h1 className='EducationDiv-Title'>Learn with us</h1>
