@@ -6,18 +6,16 @@ import { v4 as uuid } from 'uuid';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
 const RecipeSearch = React.memo(props => {
-
     const [ searchTitle, setSearchTitle ] = useState(null);
     const [ searchTag, setSearchTag ] = useState(null);
-    const [ searchBook, setSearchBook ] = useState('');
+    const [ searchBook, setSearchBook ] = useState(props.books[0]);
     const [ rating, setRating ] = useState(0)
 
     const history = useHistory();
 
-
     //Create our list of book options
     let bookOptions = props.books.map( book => {
-        return <option key={uuid()} value={book._id}>{book.bookTitle}</option>
+        return <option key={uuid()} value={book}>{book.bookTitle}</option>
     })
    
     return (

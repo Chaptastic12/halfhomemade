@@ -29,31 +29,49 @@ const RecipePage = props =>{
     const [ pageNumber, setPageNumber ] = useState(1);
     const [ books, setBooks ] = useState([]);
     const [ loading, setLoading ] = useState(true);
+    const [ filterText, setFilterText ] = useState('')
 
     const recipeSearchHandler = ( title, tag, book, rating ) => {
         setLoading(true);       
-        let searchedRecipe = [ ...allRecipes];
         setLocalError('');     
 
-        if(title !== null || ''){
-            searchedRecipe = searchedRecipe.filter(x => x.recipeTitle.toLowerCase().includes(title.toLowerCase()));
+        let text = [];
+        let searchedRecipe = [ ...allRecipes ];
+
+        if(title !== null){
+            if(title.length > 0 ){
+                searchedRecipe = searchedRecipe.filter(x => x.recipeTitle.toLowerCase().includes(title.toLowerCase()));
+                text.push('containing ' + title);
+            }
         }
 
-        if(book !== null || ''){
-            searchedRecipe = searchedRecipe.filter(x => x.recipeBook.id.includes(book))
-        }
-        
-        if(tag !== null || ''){
-            searchedRecipe = searchedRecipe.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
+        if(book !== null){
+            if(title.length > 0){
+                if(book !== undefined ){
+                    searchedRecipe = searchedRecipe.filter(x => x.recipeBook.id.includes(book._id));
+                    text.push('found in ' + book.bookTitle);
+                }
+            }
         }
 
-        if(rating !== null ||   0){
-            searchedRecipe = searchedRecipe.filter(x => x.recipeRating >= rating)
+        if(tag !== null){
+            if(tag.length > 0 ){
+                searchedRecipe = searchedRecipe.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
+                text.push('with tag ' + tag);
+            }
+        }
+
+        if(rating !== null){
+            if(rating !== 0){
+                searchedRecipe = searchedRecipe.filter(x => x.recipeRating >= rating);
+                text.push('and a rating of ' + rating);
+            }
         }
 
         if(searchedRecipe.length > 0){
             setLoadedRecipes(searchedRecipe);
-            setLoading(false);
+            setFilterText(text.join(', '));
+            setLoading(false); 
         } else {
             setLocalError('No recipes found that match your search criteria.')
             setLoadedRecipes(allRecipes);
@@ -152,7 +170,9 @@ const RecipePage = props =>{
                 <Container>
                     { localError && <div>{ localError } </div> }
                     {/* <PageHeader backgroundImage={loadedFoodPlatter}/>  */}
-                    <div className='RecipePage-Title'>Recipes from around the world</div>
+                    <div className='RecipePage-Title'>Recipes from around the world </div>
+                    <h3 className='d-flex justify-content-end'>{ filterText }</h3>
+                    <br />
                     <Row>
                         <Col xs={3}><span className='RecipePage-SubTitle'>Ready for you, right here</span></Col>
                         <Col>
