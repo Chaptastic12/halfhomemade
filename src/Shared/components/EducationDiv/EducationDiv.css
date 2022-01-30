@@ -1,3 +1,7 @@
+.EducationDiv-Back{
+    background-color: rgb(249, 251, 255);
+}
+
 .EducationDiv{
     /* background-color: rgb(35, 37, 37);  */
     height:100%;
@@ -10,7 +14,7 @@
       rgb(248, 248, 248) 50%,
       white
     );
-    margin-top: -150px;
+    margin-top: -5vh;
     width: 90vw;
 }
 
