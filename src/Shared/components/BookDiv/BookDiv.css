@@ -55,7 +55,7 @@
 .BookDiv-BookText3{
     width: 100vw;
     background-color: rgba(255,255,255, 0.9);
-    padding:35px;
+    padding:25px;
     color:black;
     margin-bottom: 25px;
     /* box-shadow: 15px 15px rgba(0,0,0, 0.4); */
@@ -95,8 +95,7 @@
 .header2{
     /* background-size: cover;Fill the whole div */
     background-repeat: no-repeat;/*Don't repeat*/
-    background-position: center;
-
+    background-position: top;
     height: 75vh;
     width: 100vw;
     object-fit: contain;
@@ -125,3 +124,14 @@
     }
 }
 
+@media screen and (max-height: 675px){
+    .BookDiv-Subtext{
+        display: none;
+        
+    }
+
+    .BookDiv-BookText3{
+        padding: 15px;
+        margin-bottom: 0px;
+    }
+}

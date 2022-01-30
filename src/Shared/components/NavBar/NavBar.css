@@ -4,6 +4,13 @@
     font-style: italic;
 }
 
+.TopNav-inv{
+    background-color: rgb(33, 32, 54);
+    color:white;
+    height:25px;
+    font-style: italic;
+}
+
 /* CSS For MidNav components */
 .MidNav{
     /*Original color 
@@ -146,4 +153,68 @@
     padding-top:1vh;
     margin: 0 6vw;
     min-width: 365px;
+}
+
+/*  Code for the Third nav version */
+.Site-Nav{
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048)
+}
+.Site-Nav .Title{
+    font-family: 'Tahu!';
+    color: black;
+    text-decoration: none;
+    font-size: 95px;
+    padding-top:1vh;
+    margin-left: 50px;
+}
+
+.Site-Nav .Title-Half{
+    margin-bottom: -75px;
+    margin-left: 70px;
+    font-size: 60px;  
+}
+
+.Site-Nav .Login {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 100%;
+    margin-right: 50px;
+}
+
+.Site-Nav .Bottom-Nav {
+    margin-top: -35px;
+    background-color: white;
+}
+
+.Site-Nav .Subtitle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.Site-Nav .Hamburger{
+    font-size: 36px;
+}
+
+.Site-Nav .Header{
+    background-color: rgba(244, 244, 255, 0.7);
+}
+
+@media screen and (max-width: 515px){
+    .Site-Nav .Title{
+        font-size: 70px;
+        margin-left: 15px;
+    }
+    .Site-Nav .Title-Half{
+        font-size: 45px;
+        margin-bottom:-55px;
+        margin-left:55px;
+    }
 }

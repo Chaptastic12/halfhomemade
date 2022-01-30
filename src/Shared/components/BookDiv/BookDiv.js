@@ -25,7 +25,7 @@ const BookDiv = props =>{
                     <div className="header2 d-flex justify-content-center align-items-end" style={{backgroundImage: 'URL(' + loadedBookCover || null + ')'}}>
                         <div className='BookDiv-BookText3  text-center'>
                             <h1>Check out our new book!</h1>
-                            <p>Bringing the best recipes from around the world to one book, right in your kitchen.<span className='d-none d-md-block'>
+                            <p className='BookDiv-Subtext'>Bringing the best recipes from around the world to one book, right in your kitchen.<span className='d-none d-md-block'>
                             With recipes from Japan to America, you're sure to find something to enjoy for even the pickiest of eaters.</span></p>
                             <span className='BookDiv-Buttons'>
                                 <Button className='BookDiv-Button' variant='outline-dark' as={NavLink} to='/shop/'>Buy the book </Button>
