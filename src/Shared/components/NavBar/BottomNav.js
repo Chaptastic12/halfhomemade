@@ -38,7 +38,7 @@ const BottomNav = props =>{
     }
 
     let RecipeNav = <DropdownButton title={`Recipes`} variant='outline-none' className='NavBar-Button'>
-                        { recipeNavOptions.map(option => <Dropdown.Item as={NavLink} to={option.to} onClick={ () => { setSearchParam(option.clickParam); setSearchItem(option.clickItem) } }>{option.desc}</Dropdown.Item> ) }
+                        { recipeNavOptions.map(option => <Dropdown.Item key={uuid()} as={NavLink} to={option.to} onClick={ () => { setSearchParam(option.clickParam); setSearchItem(option.clickItem) } }>{option.desc}</Dropdown.Item> ) }
                     </DropdownButton>
 
     let SearchNav = <DropdownButton title={`Shop`} variant='outline-none' className='NavBar-Button'>

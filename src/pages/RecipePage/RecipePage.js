@@ -138,7 +138,6 @@ const RecipePage = props =>{
 
     //Make a call to our API to get our recipes
     useEffect(() => {
-        console.log('set initial recipes')
             //Reach out to our server
             const callToServer = async() => {
             try{
