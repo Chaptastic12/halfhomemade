@@ -1,19 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { useHistory, NavLink } from 'react-router-dom';
-import { Row, Col, Button, Dropdown, DropdownButton } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import { Row, Col, Button, DropdownButton } from 'react-bootstrap';
 
 import DropDownItemHelper from './DropDownItemHelper';
 
-import { SideDrawerContext } from '../../context/sidedrawer-context';
-import { AuthContext } from '../../context/auth-context';
-
 const BottomNav = props =>{
-
-    const { handleCartShow } = useContext(SideDrawerContext);
-    const { userState, logoutUser } = useContext(AuthContext);
-
-    const history = useHistory();
 
     const recipeNavOptions = [
         { to: '/recipes/search/all', clickParam: null, clickItem: null, desc: 'All'},
@@ -27,31 +19,6 @@ const BottomNav = props =>{
         { to: '/shop/search/shirts', clickParam: 'text', clickItem: 'shirt', desc: 'View Shirts'}
     ]
     
-    const profileText = 'Profile' + <i className='fas fa-user' />
-    const adminOptions = [
-        { to: '/userPage', desc: profileText},
-        { to: '/recipes/add', desc: ''},
-        { to: '/book/add', desc: ''},
-        { to: 'admin', desc: ''}
-    ]
-    
-    let profileOptions;
-    if(userState.isAdmin){
-        profileOptions = <DropdownButton id="dropdown-basic-button" title="Admin" variant='outline-dark' className='NavBar-Button'>
-                            <DropDownItemHelper data={adminOptions} normalLink={true} />
-                        </DropdownButton>
-    } else {
-        profileOptions = <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/userPage">
-                            { profileText }
-                        </Button>
-    }
-
-    const logoutAndRedirect = () =>{
-        logoutUser()
-        setTimeout(()=> { history.push('/') }, 500);
-    }
-
-
     return (
             <Row className='text-center justify-content-center'>
                 <div className='NavBottom d-flex justify-content-center align-items-center'>

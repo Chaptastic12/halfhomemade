@@ -24,7 +24,8 @@ const DropDownItemHelper = props =>{
 
 
     if(props.normalLink){
-        dropDownItems = props.data.map( option => <Dropdown.Item key={uuid()} as={NavLink} to={option.to}>{ option.desc }</Dropdown.Item> );
+        console.log(props.data)
+        dropDownItems = props.data.map(option => <Dropdown.Item key={uuid()} as={NavLink} to={option.to}>{ option.desc }</Dropdown.Item> );
     }
 
     if(props.searchLink){

@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 
 import { NavLink, useHistory } from 'react-router-dom';
-import { Row, Col, Button } from 'react-bootstrap'
+import { Row, Col, Button, DropdownButton } from 'react-bootstrap'
 
 import TopNav from './TopNav';
 import BottomNav from './BottomNav';
 import NavCanvas from '../../components/UI Elements/NavCanvas';
+import DropDownItemHelper from './DropDownItemHelper';
 
 import { SideDrawerContext } from '../../context/sidedrawer-context';
 import { AuthContext } from '../../context/auth-context';
@@ -34,16 +35,34 @@ const NavBar3 = props => {
         setTimeout(()=> { history.push('/') }, 500);
     }
 
-    let loginOrProfile;
-    let logoutButton;
+    const adminOptions = [
+        { to: '/userPage', desc: 'Profiile'},
+        { to: '/recipes/add', desc: 'Add Recipe'},
+        { to: '/book/add', desc: 'Add Book'},
+        { to: 'admin', desc: 'Admin Dashboard'}
+    ]
+    
+    let profileOptions;
+    if(userState.isAdmin){
+        profileOptions = <DropdownButton title="Admin" variant='outline-dark' className='NavBar-Button'>
+                            <DropDownItemHelper data={adminOptions} normalLink={true} />
+                        </DropdownButton>
+    } else {
+        profileOptions = <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/userPage">
+                            Profile <i className='fas fa-user' />
+                        </Button>
+    }
+
+    let loginOrProfile, logoutButton;
     if(!userState.token){
         loginOrProfile = <Button className='NavBar-Button' variant='outline-dark' as={NavLink} to="/login">
                             Login <i className="fas fa-sign-in-alt"/>
                          </Button>
     } else {
-        loginOrProfile = <Button className='NavBar-Button' variant='outline-dark' as={NavLink} to="/userProfile">
-                            Profile <i className='fas fa-user' />
-                        </Button> 
+        loginOrProfile = profileOptions;
+        // loginOrProfile = <Button className='NavBar-Button' variant='outline-dark' as={NavLink} to="/userProfile">
+        //                     Profile <i className='fas fa-user' />
+        //                 </Button> 
          logoutButton = <Button variant='outline-dark' className='NavBar-Button' onClick={() => logoutAndRedirect()}>
                             Logout <i className="fas fa-sign-out-alt" />
                         </Button>

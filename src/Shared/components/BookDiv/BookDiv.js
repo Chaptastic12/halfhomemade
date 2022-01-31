@@ -13,7 +13,7 @@ import './BookDiv.css';
 
 const BookDiv = props =>{
 
-    const test = true;
+    //const test = true;
 
     const loadedBookCover = useProgressiveImage(BookCover);
     const loadedDivBackground = useProgressiveImage(DivBackground)
@@ -38,7 +38,7 @@ const BookDiv = props =>{
             </Row>
         </div>
     )
-
+/*
     if(test){
         return (
             <div className='BookDiv2' style={{backgroundImage: 'URL(' + loadedDivBackground || null + ')'}}>
@@ -59,7 +59,7 @@ const BookDiv = props =>{
                         </div>
                     </Col>
                 </Row>
-                {/* <div className='Section-Divider' /> */}
+                {/* <div className='Section-Divider' /> *}
             </div>)
     } else {
         return(
@@ -87,6 +87,7 @@ const BookDiv = props =>{
             </>
         );    
     }
+    */
 }
 
 export default BookDiv;

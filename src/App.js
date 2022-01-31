@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import NavBar from './Shared/components/NavBar/NavBar';
-import NavBar2 from './Shared/components/NavBar/NavBar2';
+//import NavBar2 from './Shared/components/NavBar/NavBar2';
 import NavBar3 from './Shared/components/NavBar/NavBar3';
 import SideCart from './Shared/components/UI Elements/SideCart/SideCart';
 import HomePage from './pages/HomePage/HomePage';
