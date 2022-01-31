@@ -32,7 +32,7 @@ const SideCart = props =>{
     }
 
     return (<>
-        {showCart && <div style={{width: '100%', height: '100%'}} onClick={handleCartClose}>
+        { showCart && <div style={{width: 'calc((100vw - 400px))', height: '100vh', top: 0, left: 0, position: 'fixed', zIndex: 1050}} onClick={handleCartClose} /> }
             <Offcanvas show={showCart} placement='end' className='me-2'>
                 <Offcanvas.Header closeButton onClick={handleCartClose}>
                     <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
@@ -51,7 +51,6 @@ const SideCart = props =>{
                     : 'No items currently in cart' }
                 </Offcanvas.Body>
             </Offcanvas>
-        </div>}
     </>);
 }
 
