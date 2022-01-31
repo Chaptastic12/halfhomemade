@@ -44,18 +44,18 @@ const NavBar3 = props => {
     
     let profileOptions;
     if(userState.isAdmin){
-        profileOptions = <DropdownButton title="Admin" variant='outline-dark' className='NavBar-Button'>
+        profileOptions = <DropdownButton title="Admin" variant='outline-none' className='NavBar-Button'>
                             <DropDownItemHelper data={adminOptions} normalLink={true} />
                         </DropdownButton>
     } else {
-        profileOptions = <Button className='NavBar-Button' variant='outline-light' as={NavLink} to="/userPage">
+        profileOptions = <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/userPage">
                             Profile <i className='fas fa-user' />
                         </Button>
     }
 
     let loginOrProfile, logoutButton;
     if(!userState.token){
-        loginOrProfile = <Button className='NavBar-Button' variant='outline-dark' as={NavLink} to="/login">
+        loginOrProfile = <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/login">
                             Login <i className="fas fa-sign-in-alt"/>
                          </Button>
     } else {
@@ -63,7 +63,7 @@ const NavBar3 = props => {
         // loginOrProfile = <Button className='NavBar-Button' variant='outline-dark' as={NavLink} to="/userProfile">
         //                     Profile <i className='fas fa-user' />
         //                 </Button> 
-         logoutButton = <Button variant='outline-dark' className='NavBar-Button' onClick={() => logoutAndRedirect()}>
+         logoutButton = <Button variant='outline-none' className='NavBar-Button' onClick={() => logoutAndRedirect()}>
                             Logout <i className="fas fa-sign-out-alt" />
                         </Button>
     }
@@ -84,7 +84,7 @@ const NavBar3 = props => {
                 <Col className='d-none d-md-block'>
                     <div className='Login'>
                         { loginOrProfile } { logoutButton } 
-                        <Button variant='outline-dark' className='NavBar-Button' onClick={()=>handleCartShow()}>Cart ({quantityInCart})<i className="fas fa-shopping-cart"/></Button>
+                        <Button variant='outline-none' className='NavBar-Button' onClick={()=>handleCartShow()}>Cart ({quantityInCart})<i className="fas fa-shopping-cart"/></Button>
                     </div>
                 </Col>
                 <Col className='d-block d-md-none'>
