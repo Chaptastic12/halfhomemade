@@ -80,7 +80,10 @@ const RecipeDetailsPage = props =>{
                 method = 'DELETE';
                 break;
             case 'edit':
-                url = process.env.REACT_APP_API_ENDPOINT + 'recipes/editARecipe/' + reviewID
+                formData = new FormData();
+                formData.append('rating', rating);
+                formData.append('text', text);
+                url = process.env.REACT_APP_API_ENDPOINT + 'recipes/editARecipe/' + id + '/' + reviewID
                 break;
             default:
                 break;
@@ -90,7 +93,7 @@ const RecipeDetailsPage = props =>{
             try{
                 const responseData = await sendRequest(url, method, 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
                 if(responseData){ setRefresh(prevState => !prevState) }
-                if(type === 'submit'){ setAllowEnterReview(false) }
+                if(type === 'submit' || type === 'edit'){ setAllowEnterReview(false) }
                 if(type === 'delete'){ setAllowEnterReview(true); setCanSubmitReview(true) }
             }
             catch (err) { /* Errors handled in the hook */ }
@@ -148,16 +151,17 @@ const RecipeDetailsPage = props =>{
                             </p> 
                             { userState.token && allowEnterReview && <>
                                 { error }
-                                <ReviewRecipe submitReview={(type, rating, text, ratingSet) => submitReviewToServer(type, rating, text, ratingSet)} />
+                                <ReviewRecipe type='submit' placeholder='Type your review here' submitReview={(type, rating, text, ratingSet) => submitReviewToServer(type, rating, text, ratingSet)} />
                             </> }
                             <div id='reviews'>
-                                <ViewExistingReviews 
-                                    data={loadedRecipe.reviews} 
-                                    amount={amountOfReviews} 
-                                    userID={userState.id ? decryptData(userState.id, process.env.REACT_APP_CRYPSALT) : null} 
-                                    isAdmin={userState.isAdmin} 
-                                    edit={null} 
-                                    delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/> 
+                                {loadedRecipe.reviews.map(review =>
+                                    <ViewExistingReviews 
+                                        data={review} 
+                                        userID={userState.id ? decryptData(userState.id, process.env.REACT_APP_CRYPSALT) : null} 
+                                        isAdmin={userState.isAdmin} 
+                                        edit={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, rating, text, null, reviewID)} 
+                                        delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/>
+                                    )} 
                             </div>
                         </div>
                     </Row> 

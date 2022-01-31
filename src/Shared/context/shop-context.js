@@ -56,8 +56,6 @@ const ShopProvider = props => {
     const fetchProductById = async (id) => {
         const product = await client.product.fetch(id);
 
-        console.log(product)
-
         setProduct(product);
     }
 
