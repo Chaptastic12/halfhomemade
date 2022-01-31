@@ -16,6 +16,24 @@ const ProductSearch = props =>{
         setSelectedCollection({title: 'all', id: 'all'})
     }, [])
 
+    useEffect(() => {
+        //Check if we are passing in parameters we want to show immediately
+        if(props.existingData){
+            //If we have a tag we're filtering by, display it in the input field; Otherwise, set it to null
+            if(props.existingData.searchParam === 'text'){
+                setSearchText(props.existingData.searchItem);
+            }else{
+                setSearchText('');
+            }
+            //If we are filtering by stars, dispaly it in the drop down; otherwise, set it to be for all options
+            if(props.existingData.searchParam === 'collection'){
+                setSelectedCollection({title: props.existingData.searchItem.title, id: props.existingData.searchItem.id});
+            }else{
+                setSelectedCollection({title: 'all', id: 'all'})
+            }
+        }
+    }, [props.existingData])
+
     const updatedCollection = collectionId =>{
         if(collectionId === 'all'){
             setSelectedCollection({title: 'all', id: 'all'})
@@ -30,7 +48,7 @@ const ProductSearch = props =>{
             <Col xs={12} lg={5} />
             <Form.Group className="mb-3" as={Col}>
                 <Form.Label><small>Search Text</small></Form.Label>
-                <Form.Control size='sm' type="text" placeholder="Search Text" onChange={e => setSearchText(e.target.value)}/>
+                <Form.Control size='sm' type="text" placeholder="Search Text" value={searchText} onChange={e => setSearchText(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" as={Col}>
                 <Form.Label><small>Choose Collection</small></Form.Label>

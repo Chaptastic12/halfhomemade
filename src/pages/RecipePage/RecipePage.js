@@ -29,48 +29,51 @@ const RecipePage = props =>{
     const [ pageNumber, setPageNumber ] = useState(1);
     const [ books, setBooks ] = useState([]);
     const [ loading, setLoading ] = useState(true);
-    const [ filterText, setFilterText ] = useState('')
+    //const [ filterText, setFilterText ] = useState('')
 
     const recipeSearchHandler = ( title, tag, book, rating ) => {
         setLoading(true);       
         setLocalError('');     
 
-        let text = [];
+        //let text = [];
         let searchedRecipe = [ ...allRecipes ];
 
+        //Check if we need to filter all the recipes down if we have a valid title parameter
         if(title !== null){
             if(title.length > 0 ){
                 searchedRecipe = searchedRecipe.filter(x => x.recipeTitle.toLowerCase().includes(title.toLowerCase()));
-                text.push('containing ' + title);
+                //text.push('containing ' + title);
             }
         }
-
+        //Of the recipes that we filtered (or didn't filter) from the above, filter down again if we are searching by a valid book parameter
         if(book !== null){
             if(title.length > 0){
                 if(book !== undefined ){
                     searchedRecipe = searchedRecipe.filter(x => x.recipeBook.id.includes(book._id));
-                    text.push('found in ' + book.bookTitle);
+                    //text.push('found in ' + book.bookTitle);
                 }
             }
         }
-
+        //Of the recipes that we filtered (or didn't filter) from the above, filter down again if we are searching by a valid tag parameter
         if(tag !== null){
             if(tag.length > 0 ){
                 searchedRecipe = searchedRecipe.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
-                text.push('with tag ' + tag);
+                //text.push('with tag ' + tag);
             }
         }
-
+        //Of the recipes that we filtered (or didn't filter) from the above, filter down again if we are searching by a valid rating parameter
         if(rating !== null){
             if(rating !== 0){
                 searchedRecipe = searchedRecipe.filter(x => x.recipeRating >= rating);
-                text.push('and a rating of ' + rating);
+                //text.push('and a rating of ' + rating);
             }
         }
 
+        //If, after all the above, we still have recipes remaining, set the created array as our new loadedRecipes
+        //Otherwise, no recipes were found and we will just display all of them
         if(searchedRecipe.length > 0){
             setLoadedRecipes(searchedRecipe);
-            setFilterText(text.join(', '));
+            //setFilterText(text.join(', '));
             setLoading(false); 
         } else {
             setLocalError('No recipes found that match your search criteria.')
@@ -132,7 +135,7 @@ const RecipePage = props =>{
                 }
             }
         }else{
-            setFilterText('')
+            //setFilterText('')
             setLoadedRecipes(allRecipes);
         }
 
@@ -172,12 +175,12 @@ const RecipePage = props =>{
                     { localError && <div>{ localError } </div> }
                     {/* <PageHeader backgroundImage={loadedFoodPlatter}/>  */}
                     <div className='RecipePage-Title'>Recipes from around the world </div>
-                    <h3 className='d-flex justify-content-end'>{ filterText }</h3>
-                    <br />
+                    {/* <h3 className='d-flex justify-content-end'>{ filterText }</h3>
+                    <br /> */}
                     <Row>
                         <Col xs={3}><span className='RecipePage-SubTitle'>Ready for you, right here</span></Col>
                         <Col>
-                            <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} />
+                            <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
                         </Col>
                     </Row>
                     {/* <RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} /> */}

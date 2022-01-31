@@ -115,7 +115,7 @@ const ShopPage = props => {
                 <Container>
                     <h1 className='ShopPage-Title'>{headerText}</h1>
                     <Row>
-                        <ProductSearch collections={collections} submitSearch={(id, text, instock, filterRating) => searchFormSubmitHandler(id, text, instock, filterRating)}/>
+                        <ProductSearch collections={collections} submitSearch={(id, text, instock, filterRating) => searchFormSubmitHandler(id, text, instock, filterRating)} existingData={{searchParam, searchItem}} />
                     </Row>
                     <Row className='ShopPage-Products'>
                         { shopProducts }
