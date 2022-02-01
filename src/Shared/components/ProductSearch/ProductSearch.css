@@ -1,0 +1,8 @@
+.ProductSearch{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ProductSearch .form-check{
+    margin: 2px;
+}

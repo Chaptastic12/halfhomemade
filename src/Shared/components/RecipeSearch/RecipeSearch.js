@@ -38,7 +38,7 @@ const RecipeSearch = React.memo(props => {
     })
    
     return (
-        <div className='d-flex justify-content-center align-items-center' style={{paddingTop: '10px'}}>
+        <div className='d-flex justify-content-end align-items-center' style={{paddingTop: '10px'}}>
             <Row>
                 <Form.Group className="mb-3" as={Col} xs={6} md='auto'>
                     <Form.Label><small>Title</small></Form.Label>

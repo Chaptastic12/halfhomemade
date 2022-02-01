@@ -36,7 +36,7 @@ const ShopPage = props => {
     // eslint-disable-next-line
     }, [ collection, products ])
 
-    const searchFormSubmitHandler = (collection, filterText, instock) => {
+    const searchFormSubmitHandler = (collection, filterText, instock, sale) => {
         let finalSearchedProducts;
         //If we are set to look at all products
         if(collection.id === 'all'){
@@ -64,6 +64,10 @@ const ShopPage = props => {
                 setHeaderText('Showing all products in ' + collection.title + ` containing '` + filterText + `'`)
             }
             setShowAll(false);
+        }
+
+        if(sale){
+            finalSearchedProducts = finalSearchedProducts.filter(x => x.variants[0].compareAtPrice !== null);
         }
 
         if(instock){
@@ -114,7 +118,7 @@ const ShopPage = props => {
             <div className='ShopPage'>
                 <Container>
                     <h1 className='ShopPage-Title'>{headerText}</h1>
-                    <ProductSearch collections={collections} submitSearch={(id, text, instock, filterRating) => searchFormSubmitHandler(id, text, instock, filterRating)} existingData={{searchParam, searchItem}} />
+                    <ProductSearch collections={collections} submitSearch={(id, text, instock, sale) => searchFormSubmitHandler(id, text, instock, sale)} existingData={{searchParam, searchItem}} />
                     <Row className='ShopPage-Products d-flex justify-content-center align-items-center'>
                         { shopProducts }
                     </Row>

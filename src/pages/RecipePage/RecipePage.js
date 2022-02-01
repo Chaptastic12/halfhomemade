@@ -5,7 +5,7 @@ import RecipeSearch from '../../Shared/components/RecipeSearch/RecipeSearch';
 import PaginationComponent from '../../Shared/components/UI Elements/Pagination/Pagination';
 
 import { NavLink } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Button } from 'react-bootstrap'
 
 import { AuthContext } from '../../Shared/context/auth-context';
 import { SearchContext } from '../../Shared/context/search-context';
@@ -173,17 +173,8 @@ const RecipePage = props =>{
             <div className='RecipePage'>
                 <Container>
                     { localError && <div>{ localError } </div> }
-                    {/* <PageHeader backgroundImage={loadedFoodPlatter}/>  */}
                     <div className='RecipePage-Title'>Recipes from around the world </div>
-                    {/* <h3 className='d-flex justify-content-end'>{ filterText }</h3>
-                    <br /> */}
-                    <Row>
-                        {/* <Col xs={3} className='d-none d-lg-block'><span className='RecipePage-SubTitle'>Ready for you, right here</span></Col> */}
-                        <Col>
-                            <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
-                        </Col>
-                    </Row>
-                    {/* <RecipeSearch submitRecipeSearch={(title, tag)=> recipeSearchHandler(title, tag)} /> */}
+                    <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
                     { ( loadedRecipes && !loading ) && recipeCardFormat }
                     { loadedRecipes && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
                     { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }
