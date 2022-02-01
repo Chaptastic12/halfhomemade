@@ -40,21 +40,21 @@ const RecipeSearch = React.memo(props => {
     return (
         <div className='d-flex justify-content-center align-items-center' style={{paddingTop: '10px'}}>
             <Row>
-                <Form.Group className="mb-3" as={Col}>
+                <Form.Group className="mb-3" as={Col} xs={6} md='auto'>
                     <Form.Label><small>Title</small></Form.Label>
                     <Form.Control size='sm' type="text" placeholder={searchTitle ? searchTitle : 'Search by Title'}  onChange={e => setSearchTitle(e.target.value)} />
                 </Form.Group>
-                <Form.Group className="mb-3" as={Col}>
+                <Form.Group className="mb-3" as={Col} xs={6} md='auto'>
                     <Form.Label><small>Tag</small></Form.Label>
                     <Form.Control size='sm' type="text" placeholder={searchTag ? searchTag : 'Search by Tag'} value={searchTag ? searchTag : ''} onChange={e => setSearchTag(e.target.value)} />
                 </Form.Group>
-                <Form.Group className="mb-3" as={Col}>
+                <Form.Group className="mb-3" as={Col} xs={6} md='auto'>
                     <Form.Label><small>Book Selection</small></Form.Label>
                     <Form.Select size='sm' aria-label="Select Recipe Book" value={searchBook} onChange={ e => setSearchBook(e.target.value) }>
                         {bookOptions}
                     </Form.Select>
                 </Form.Group>
-                <Form.Group className="mb-3" as={Col}>
+                <Form.Group className="mb-3" as={Col} xs={6} md='auto'>
                     <Form.Label><small>Choose Rating</small></Form.Label>
                     <Form.Select size='sm' value={rating} onChange={e => setRating(e.target.value)}>
                         <option key={uuid()} value={0} selected={rating === 0 ? true : false}>All ratings</option>
@@ -65,7 +65,7 @@ const RecipeSearch = React.memo(props => {
                         <option key={uuid()} value={1} selected={rating === 1 ? true : false}>1 Star</option>
                     </Form.Select>
                 </Form.Group>
-                <Form.Group className="mb-3 d-flex align-items-end" as={Col}>
+                <Form.Group className="mb-3 d-flex align-items-end" as={Col} xs={2} md='auto'>
                     <Button type='button' size='sm' onClick={() => props.submitRecipeSearch(searchTitle, searchTag, searchBook, rating) } style={{marginRight: '5px'}}>
                         Search
                     </Button>

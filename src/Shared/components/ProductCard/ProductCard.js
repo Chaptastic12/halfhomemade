@@ -36,7 +36,7 @@ const ProductCard = props => {
     }
 
     return (
-        <Col xs='auto' md={4} lg={3}className='ProductCard' key={props.product.id} onClick={() => onCardClickHandler()}>
+        <Col xs='auto' md={4} lg={3} className='ProductCard' key={props.product.id} onClick={() => onCardClickHandler()}>
             <Card className='ProductCard-MobileCard cust-shadow-sm' onMouseEnter={() => setOpacity(prevState => !prevState)} onMouseLeave={() => setOpacity(prevState => !prevState)}>
                 <div className={`RecipeCard-ImgDiv ${opacity && 'opacity'}`}>
                     <Card.Img variant="top" src={props.product.images[0].src} />

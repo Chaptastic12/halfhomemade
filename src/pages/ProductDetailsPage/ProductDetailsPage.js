@@ -10,7 +10,9 @@ import  './ProductDetailsPage.css';
 const ProductDetailsPage = props => {
 
     const { id } = useParams();
+    
     const { fetchProductById, product, addItemsToCheckout } = useContext(ShopContext);
+
     const [ quantity, setQuantity ] = useState('1');
     const [ selections, setSelections ] = useState([]);
     const [ chosenVariant, setChosenVariant ] = useState();
@@ -18,11 +20,14 @@ const ProductDetailsPage = props => {
     const [ price, setPrice ] = useState(null);
     const [ comparePrice, setComparePrice ] = useState(null);
 
+    //Get the product for our page; must be done first
     useEffect(() => {
         fetchProductById(id);
     //eslint-disable-next-line
     }, [id]);
 
+    //Determine what our default variant is; This will end up being the first variant available, which is
+    // made up of the first choice for every option. We will need to build the variant ourselves.
     useEffect(() =>{
         let defaultVariant;
         if(product.title){
@@ -38,6 +43,7 @@ const ProductDetailsPage = props => {
         }
     },[product])
 
+    //Based off of the selections in our state, find the variantID; once found, check to ensure that item is in stock
     const findVariantID = (type) =>{
         if(product.id){
             //If we have made a change from the default, we will need to use that instead
@@ -68,6 +74,7 @@ const ProductDetailsPage = props => {
         }
     }
     
+    //Ensure that variant is in stock; If it is, add it to cart. Otherwise, alert the user.
     const verifyVariantIsInStock = ( type, variantID, quantity ) => {
         for(let i=0; i < product.variants.length; i++){
             if(product.variants[i].id === variantID){
@@ -85,31 +92,38 @@ const ProductDetailsPage = props => {
         }
     }
 
+    //Get the variant ID ready when we load in.
     useEffect(() => {
-        findVariantID()
+        findVariantID();
     })
 
+    //Check if we have loaded in our product or not; Show a spinner until we have.
     if(!product.title){
         return <div className='spinner'><Spinner animation="border" /></div>
     } else {
+        //Create an array of our options
         let productOptions = []; 
         for( let i=0; i < product.options.length; i++ ){
+            //Iterate over each option to get the values needded for that option
             let options = product.options[i].values.map(value => {
                 return <option key={uuid()} value={value.value}>{value.value}</option>
             })
 
+            //Using the options we found above, create our select dropdown utilizing them. Then, push the finished option dropdown into productOptions
             productOptions.push(<React.Fragment key={uuid()}>
                             <label>{product.options[i].name}</label>
                             <select value={selections[i]} onChange={e => { updateSelection(i, e.target.value); findVariantID('price') } }>{options}</select>
                         </React.Fragment>)
         }
 
+        //Update our selection when a user selects something new
         const updateSelection = (i, value) => {
             let copyState = [...selections];
             copyState[i] = value;
             setSelections(copyState);
         }
 
+        //Show our price; determine if there is a compare at price or not and decide what to show based off that.
         let showPrice, sale;
         if(price === comparePrice || comparePrice === null){
             showPrice = <> ${ price } </>

@@ -1,0 +1,89 @@
+/* .BookDiv{
+    /* Original color
+    background-color: rgb(35, 37, 37); *
+    background-color: rgba(146, 129, 122, 1);
+    padding:0px;
+    margin: 0px;
+    height: 50vh;
+    max-height: 600px;
+}
+
+.BookDiv2{
+    /* background: url('../../Img/Food/webp/christopher-jolly-1Ib8243cU8Q-unsplash.webp'); *
+    background-size: cover;/*Fill the whole div*
+    background-repeat: no-repeat;/*Don't repeat*
+    background-position: center;
+    height: 700px;
+}
+
+.BookDiv-BookText{
+    background-color: rgba(255,255,255, 0.1);
+    padding:35px;
+    color:white;
+    box-shadow: 15px 15px rgba(0,0,0, 0.2);
+}
+
+.BookDiv-BookText2{
+    background-color: rgba(255,255,255, 0.9);
+    padding:35px;
+    color:black;
+    margin-bottom:5px;
+    border-radius:15px;
+    /* box-shadow: 15px 15px rgba(0,0,0, 0.4); *
+} 
+
+.BookDiv a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.BookDiv2 h1{
+    font-family: 'Tahu!';
+    font-size:calc(12px + 3vw);
+}
+
+.BookDiv-BookImg{
+    background: url('../../Img/Food/webp/Cover.webp') center center/contain no-repeat;
+    height: 100%;
+    min-height: 300px;
+    min-width: 300px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.header {
+    /* background-image: url(../../Img/Food/webp/Cover.webp); *
+    background-size: cover;/*Fill the whole div*
+    background-repeat: no-repeat;/*Don't repeat*
+    background-position: center;
+    height: 50vh;
+    width: 33vw;
+    color:white;
+    margin: 2vw;
+    margin-left: 4vw;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 767px) {
+    .BookDiv {
+        padding-top:15px;
+    }
+    .BookDiv-BookText{
+        padding:15px;
+        box-shadow: 10px 10px rgba(0,0,0, 0.2);
+
+    }
+    .header{
+        width: 100%;
+        -webkit-clip-path: none;
+        clip-path:none;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .BookDiv {
+        height:80vh;
+    }
+}
+
+*/

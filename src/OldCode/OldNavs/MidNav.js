@@ -3,9 +3,9 @@ import React, { useContext } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Col, Row, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 
-import { SideDrawerContext } from '../../context/sidedrawer-context';
-import { AuthContext } from '../../context/auth-context';
-import { ShopContext } from '../../context/shop-context';
+import { SideDrawerContext } from '../../../context/sidedrawer-context';
+import { AuthContext } from '../../../context/auth-context';
+import { ShopContext } from '../../../context/shop-context';
 
 import './NavBar.css';
 

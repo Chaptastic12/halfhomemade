@@ -21,7 +21,7 @@ const BottomNav = props =>{
     
     return (
             <Row className='text-center justify-content-center'>
-                <div className='NavBottom d-flex justify-content-center align-items-center'>
+                <div className='NavBottom'>
                     <Col xs='auto'>
                         <DropdownButton title={`Recipes`} variant='outline-none' className='NavBar-Button'>
                             <DropDownItemHelper data={recipeNavOptions} searchLink={true} />

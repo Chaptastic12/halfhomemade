@@ -114,13 +114,11 @@ const ShopPage = props => {
             <div className='ShopPage'>
                 <Container>
                     <h1 className='ShopPage-Title'>{headerText}</h1>
-                    <Row>
-                        <ProductSearch collections={collections} submitSearch={(id, text, instock, filterRating) => searchFormSubmitHandler(id, text, instock, filterRating)} existingData={{searchParam, searchItem}} />
-                    </Row>
-                    <Row className='ShopPage-Products'>
+                    <ProductSearch collections={collections} submitSearch={(id, text, instock, filterRating) => searchFormSubmitHandler(id, text, instock, filterRating)} existingData={{searchParam, searchItem}} />
+                    <Row className='ShopPage-Products d-flex justify-content-center align-items-center'>
                         { shopProducts }
-                        { loadedProducts && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
                     </Row>
+                    { loadedProducts && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
                 </Container>
             </div>
         )

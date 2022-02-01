@@ -1,136 +1,55 @@
 .BookDiv{
-    /* Original color
-    background-color: rgb(35, 37, 37); */
-    background-color: rgba(146, 129, 122, 1);
-    padding:0px;
-    margin: 0px;
-    height: 50vh;
-    max-height: 600px;
-}
-
-.BookDiv2{
-    /* background: url('../../Img/Food/webp/christopher-jolly-1Ib8243cU8Q-unsplash.webp'); */
-    background-size: cover;/*Fill the whole div*/
-    background-repeat: no-repeat;/*Don't repeat*/
-    background-position: center;
-    height: 700px;
-}
-.BookDiv3{
-    /* background: url('../../Img/Food/webp/christopher-jolly-1Ib8243cU8Q-unsplash.webp'); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-size: cover;/*Fill the whole div*/
     background-repeat: no-repeat;/*Don't repeat*/
     background-position: center;
     height: 90vh
 }
-.BookDiv a{
-    text-decoration: none;
-    color: inherit;
-}
 
-.BookDiv-BookImg{
-    background: url('../../Img/Food/webp/Cover.webp') center center/contain no-repeat;
-    height: 100%;
-    min-height: 300px;
-    min-width: 300px;
-    width: 100%;
-    object-fit: contain;
-}
-
-.BookDiv-BookText{
-    background-color: rgba(255,255,255, 0.1);
-    padding:35px;
-    color:white;
-    box-shadow: 15px 15px rgba(0,0,0, 0.2);
-}
-
-.BookDiv-BookText2{
-    background-color: rgba(255,255,255, 0.9);
-    padding:35px;
-    color:black;
-    margin-bottom:5px;
-    border-radius:15px;
-    /* box-shadow: 15px 15px rgba(0,0,0, 0.4); */
-}
-
-.BookDiv-BookText3{
-    width: 100vw;
-    background-color: rgba(255,255,255, 0.9);
-    padding:25px;
-    color:black;
-    margin-bottom: 25px;
-    /* box-shadow: 15px 15px rgba(0,0,0, 0.4); */
-}
-
-.BookDiv h1{
-    font-family: 'Tahu!';
-    font-size:calc(12px + 4.5vw);
-}
-.BookDiv2 h1{
-    font-family: 'Tahu!';
-    font-size:calc(12px + 3vw);
-}
-
-.BookDiv-LearnMore{
-    font-style: italic;
-    text-decoration: underline;
-}
-
-.BookDiv-Button{
-    margin:2.5px;
-}
-
-.header {
-    /* background-image: url(../../Img/Food/webp/Cover.webp); */
-    background-size: cover;/*Fill the whole div*/
-    background-repeat: no-repeat;/*Don't repeat*/
-    background-position: center;
-    height: 50vh;
-    width: 33vw;
-    color:white;
-    margin: 2vw;
-    margin-left: 4vw;
-    border-radius: 10px;
-}
-
-.header2{
+.BookDiv .Main{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
     /* background-size: cover;Fill the whole div */
     background-repeat: no-repeat;/*Don't repeat*/
     background-position: top;
     height: 75vh;
     width: 100vw;
     object-fit: contain;
-
 }
 
-@media screen and (max-width: 767px) {
-    .BookDiv {
-        padding-top:15px;
-    }
-    .BookDiv-BookText{
-        padding:15px;
-        box-shadow: 10px 10px rgba(0,0,0, 0.2);
-
-    }
-    .header{
-        width: 100%;
-        -webkit-clip-path: none;
-        clip-path:none;
-    }
+.BookDiv .Details{
+    width: 100vw;
+    background-color: rgba(255,255,255, 0.9);
+    padding:25px;
+    color:black;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
-@media screen and (max-width: 576px) {
-    .BookDiv {
-        height:80vh;
-    }
+.BookDiv h1{
+    font-family: 'Tahu!';
+    font-size:calc(12px + 4.5vw);
+}
+
+.BookDiv .LearnMore{
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.BookDiv .btn{
+    margin:2.5px;
 }
 
 @media screen and (max-height: 675px){
-    .BookDiv-Subtext{
+    .BookDiv .Subtext{
         display: none;
         
     }
 
-    .BookDiv-BookText3{
+    .BookDiv .Details{
         padding: 15px;
         margin-bottom: 0px;
     }

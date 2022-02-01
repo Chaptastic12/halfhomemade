@@ -178,7 +178,7 @@ const RecipePage = props =>{
                     {/* <h3 className='d-flex justify-content-end'>{ filterText }</h3>
                     <br /> */}
                     <Row>
-                        <Col xs={3}><span className='RecipePage-SubTitle'>Ready for you, right here</span></Col>
+                        {/* <Col xs={3} className='d-none d-lg-block'><span className='RecipePage-SubTitle'>Ready for you, right here</span></Col> */}
                         <Col>
                             <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
                         </Col>

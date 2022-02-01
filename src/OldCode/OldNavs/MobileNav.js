@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
 
-import BottomNav from './BottomNav';
+import BottomNav from '../BottomNav';
 
 import './NavBar.css';
 

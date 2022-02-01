@@ -3,13 +3,13 @@ import React, { useState, useContext, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Row, Col, Button } from 'react-bootstrap'
 
-import NavCanvas from '../UI Elements/NavCanvas';
+import NavCanvas from '../../Shared/components/UI Elements/NavCanvas';
 
-import TopNav from './TopNav';
-import BottomNav from './BottomNav';
-import { SideDrawerContext } from '../../context/sidedrawer-context';
-import { AuthContext } from '../../context/auth-context';
-import { ShopContext } from '../../context/shop-context';
+import TopNav from '../TopNav';
+import BottomNav from '../../Shared/components/NavBar/BottomNav';
+import { SideDrawerContext } from '../../Shared/context/sidedrawer-context';
+import { AuthContext } from '../../Shared/context/auth-context';
+import { ShopContext } from '../../Shared/context/shop-context';
 
 import './NavBar.css';
 
