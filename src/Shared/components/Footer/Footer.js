@@ -1,11 +1,23 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import DropDownItemHelper from '../NavBar/DropDownItemHelper';
 import { Col, Row } from 'react-bootstrap';
 
 import './Footer.css';
 
 const Footer = props =>{
+
+    const recipeNavOptions = [
+        { to: '/recipes/search/all', clickParam: null, clickItem: null, desc: 'All'},
+        { to: '/recipes/search/stars', clickParam: 'stars', clickItem: 5, desc: 'Best Reviewed'},
+        { to: '/recipes/search/japanese', clickParam: 'tag', clickItem:'japanese', desc: 'Japanese Dishes'},
+        { to: '/recipes/search/american', clickParam: 'tag', clickItem:'american', desc: 'American Dishes'}
+    ];
+
+    const ShopNavOptions = [
+        { to: '/shop/search/all', clickParam: null, clickItem: null, desc: 'View All'},
+        { to: '/shop/search/shirts', clickParam: 'text', clickItem: 'shirt', desc: 'View Shirts'}
+    ]
 
     return(
         <>
@@ -16,10 +28,8 @@ const Footer = props =>{
                     <Col>
                         <h1 className='Header'>RECIPES & SHOP</h1>
                         <ul>
-                            <li>Buy the Book</li>
-                            <li><Link to='/recipes/all'>View all Recipes</Link></li>
-                            <li>View American Recipes</li>
-                            <li>View Asian Recipes</li>
+                            <DropDownItemHelper footer={true} data={recipeNavOptions} searchLink={true} />
+                            <DropDownItemHelper footer={true} data={ShopNavOptions} searchLink={true} />
                         </ul>
                     </Col>
                     <Col>

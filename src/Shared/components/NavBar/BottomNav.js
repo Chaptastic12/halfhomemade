@@ -14,7 +14,7 @@ const BottomNav = props =>{
         { to: '/recipes/search/american', clickParam: 'tag', clickItem:'american', desc: 'American Dishes'}
     ];
 
-    const SearchNavOptions = [
+    const ShopNavOptions = [
         { to: '/shop/search/all', clickParam: null, clickItem: null, desc: 'View All'},
         { to: '/shop/search/shirts', clickParam: 'text', clickItem: 'shirt', desc: 'View Shirts'}
     ]
@@ -29,7 +29,7 @@ const BottomNav = props =>{
                     </Col>
                     <Col xs='auto'>
                         <DropdownButton title={`Shop`} variant='outline-none' className='NavBar-Button'>
-                            <DropDownItemHelper data={SearchNavOptions} searchLink={true} />
+                            <DropDownItemHelper data={ShopNavOptions} searchLink={true} />
                             <DropDownItemHelper data={props.collections} collections={true} />
                         </DropdownButton> 
                     </Col>

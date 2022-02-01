@@ -5,14 +5,17 @@
     border-radius: 5px;
     width: 90%;
 }
-.Review-Icon {
+.Review .Icon {
     font-size: calc(12px + 6vw);
 }
 
-.Review-Buttons {
+.Review .Buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 125px;
 }
 
-.Review-Buttons button {
+.Review .Buttons button {
     margin: 2px;
 }

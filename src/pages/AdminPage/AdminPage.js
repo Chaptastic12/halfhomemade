@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 
 import AdminPageNav from './AdminPageNav/AdminPageNav';
-import RecipeAddPage from '../RecipeAddPage/RecipeAddPage_OLD';
+import RecipeAddPage from '../RecipeAddPage/RecipeAddPage';
 import BookAddPage from '../BookAddPage/BookAddPage';
 import RecipePage from '../RecipePage/RecipePage';
 
