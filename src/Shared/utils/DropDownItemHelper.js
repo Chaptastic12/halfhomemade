@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { Dropdown } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
-import { SearchContext } from "../../context/search-context";
+import { SearchContext } from "../context/search-context";
 
 const DropDownItemHelper = props =>{
 

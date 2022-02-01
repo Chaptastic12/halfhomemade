@@ -3,7 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Row, Col, Button, DropdownButton } from 'react-bootstrap';
 
-import DropDownItemHelper from './DropDownItemHelper';
+import DropDownItemHelper from '../../utils/DropDownItemHelper';
 
 const BottomNav = props =>{
 

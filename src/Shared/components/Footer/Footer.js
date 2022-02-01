@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DropDownItemHelper from '../NavBar/DropDownItemHelper';
+import DropDownItemHelper from '../../utils/DropDownItemHelper';
 import { Col, Row } from 'react-bootstrap';
 
 import './Footer.css';

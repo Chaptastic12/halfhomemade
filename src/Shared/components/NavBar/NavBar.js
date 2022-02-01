@@ -6,7 +6,7 @@ import { Row, Col, Button, DropdownButton } from 'react-bootstrap'
 import NavAlert from './NavAlert';
 import BottomNav from './BottomNav';
 import NavCanvas from '../UI Elements/NavCanvas';
-import DropDownItemHelper from './DropDownItemHelper';
+import DropDownItemHelper from '../../utils/DropDownItemHelper';
 
 import { SideDrawerContext } from '../../context/sidedrawer-context';
 import { AuthContext } from '../../context/auth-context';
