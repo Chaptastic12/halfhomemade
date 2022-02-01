@@ -4,18 +4,15 @@ import { useHttp } from '../../hooks/http-hook';
 import { Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
-import { MobileContext } from '../../context/mobile-context';
 import { AuthContext } from '../../context/auth-context';
 import { SearchContext } from '../../context/search-context';
 
 import AdminView from './RecipeCardView/AdminView';
-//import UserView from './RecipeCardView/UserView';
 import MobileView from './RecipeCardView/MobileView';
 
 import './RecipeCard.css';
 
 const RecipeCard = props =>{
-    const { isMobile } = useContext(MobileContext);
     const { userState } = useContext(AuthContext);
     const { setSearchParam, setSearchItem } = useContext(SearchContext);
 
@@ -41,24 +38,14 @@ const RecipeCard = props =>{
         setTimeout(() => { props.delete(true) }, 500 );
     }
 
-    //Leaving this check in here for now; May decide to make it a user option to use UserView if its not a mobile viewport size.
-    if(!isMobile){
-        if(props.adminPage){
-            return <div className='RecipeCard-Admin' key={props.data.id}>
-                        <AdminView data={props.data} foodRating={props.foodRating} userRating={props.userRating} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal} />
-                    </div>
-        } else {
-            // return(
-            //      <div className='' key={props.data.id}>
-            //          <UserView data={props.data} foodRating={props.foodRating} userRating={props.userRating} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/> 
-            //      </div>
-            // )
-            return <MobileView data={props.data} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/>
-
-        }
+    if(props.adminPage){
+        return <div className='RecipeCard-Admin' key={props.data.id}>
+                    <AdminView data={props.data} foodRating={props.foodRating} userRating={props.userRating} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal} />
+                </div>
     } else {
         return <MobileView data={props.data} tags={tags} deleteRecipe={deleteRecipe} userState={userState} showModal={showModal} setShowModal={setShowModal}/>
     }
-}
+
+}   
 
 export default RecipeCard;

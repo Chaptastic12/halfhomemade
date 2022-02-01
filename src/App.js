@@ -25,30 +25,6 @@ function App() {
   window.onunload = () => {
     sessionStorage.removeItem('sessionStart');
   }
-  ////////////////////////////////////////////////////
-  //
-  // The following controls if we are mobile or not
-  //
-  ////////////////////////////////////////////////////
-  const [ width, setWidth ] = useState(window.innerWidth);
-
-  //Handles determining our Window size
-  const handleWindowSizeChange = () =>{
-    setWidth(window.innerWidth);
-  }
-
-  //Run the above code dependent on if the window is adjusted or not.
-  //This will work dynamically if you are on the computer and shrink your browser
-  useEffect(() => {
-      window.addEventListener('resize', handleWindowSizeChange);
-      return () => {
-          window.removeEventListener('resize', handleWindowSizeChange);
-      }
-  }, []);
-
-  //Finally, determine if the window width is less than our minimum value
-  //If it is, we are on mobile. If not, we are on PC
-  let isMobile = (width <= 768);
 
 //////////////////
 //
@@ -93,30 +69,27 @@ function App() {
 
   return (
     <Providers>
-      <MobileContext.Provider value={{isMobile: isMobile, changeMobile: handleWindowSizeChange}}>
-        <Router>
-          <SessionTimer />
-          <NavBar />
-          <SideCart />
+      <Router>
+        <SessionTimer />
+        <NavBar />
+        <SideCart />
 
-          <Switch>
-            <Route path="/" exact component={HomePage} />
-            {/* <Route path='/recipes/all' exact component={RecipePage} /> */}
-            <Route path='/recipes/search/:filter' exact><RecipePage /></Route>
-            <Route path='/recipes/view/:id' exact component={RecipeDetailsPage} />
-            <Route path='/login' exact component={LoginPage} />
-            <Route path='/recipes/add' exact component={RecipeAddPage} />
-            <Route path='/recipes/edit/:id' exact> <RecipeAddPage edit/> </Route>
-            <Route path='/book/add' exact component={BookAddPage} />
-            <Route path='/shop/search/:id' exact component={ShopPage} />
-            <Route path='/shop/product/:id' exact component={ProductDetailsPage}/>
-            <Route path='/admin' exact component={AdminPage} />
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path='/recipes/search/:filter' exact><RecipePage /></Route>
+          <Route path='/recipes/view/:id' exact component={RecipeDetailsPage} />
+          <Route path='/login' exact component={LoginPage} />
+          <Route path='/recipes/add' exact component={RecipeAddPage} />
+          <Route path='/recipes/edit/:id' exact> <RecipeAddPage edit/> </Route>
+          <Route path='/book/add' exact component={BookAddPage} />
+          <Route path='/shop/search/:id' exact component={ShopPage} />
+          <Route path='/shop/product/:id' exact component={ProductDetailsPage}/>
+          <Route path='/admin' exact component={AdminPage} />
 
-            <Redirect to="/" exact />
-          </Switch>
-          <Footer />
-        </Router>
-      </MobileContext.Provider>
+          <Redirect to="/" exact />
+        </Switch>
+        <Footer />
+      </Router>
     </Providers>
   );
 }

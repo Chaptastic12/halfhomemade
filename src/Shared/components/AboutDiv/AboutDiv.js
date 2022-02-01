@@ -6,15 +6,11 @@ import { Col, Row } from 'react-bootstrap';
 import HoneyHam from '../../Img/Food/webp/Honey_roasted_ham.webp';
 import MafuTofu from '../../Img/Food/webp/Mafu_tofu.webp'
 
-import { MobileContext } from '../../context/mobile-context';
-
 import useProgressiveImage from '../../hooks/lazyLoad-hook';
 
 import './AboutDiv.css';
 
 const AboutDiv = props =>{
-
-    const { isMobile } = useContext(MobileContext);
 
     const loadedHoney = useProgressiveImage(HoneyHam);
     const loadedMafu = useProgressiveImage(MafuTofu)
@@ -23,10 +19,10 @@ const AboutDiv = props =>{
         <>
             <div className='AboutDiv'>
                 <Row>
-                    {!isMobile && <Col>
+                    <Col className='d-md-none'>
                         <DiagonalCard backgroundImage={loadedHoney} cardTitle='HoneyHam' left={true} />
-                    </Col> }
-                    <Col className='Details'>
+                    </Col>
+                    <Col className='Details d-none d-md-block'>
                         <div className='BookText'>
                             <h1>Learn more about us</h1>
                             <br />
