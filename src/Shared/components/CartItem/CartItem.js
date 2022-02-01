@@ -11,7 +11,7 @@ const CartItem = props => {
     return <div className='CartItem'>
         <Row key={item.id}>
             <Col>
-                <div className='CartItem-Image' style={{ backgroundImage: 'URL('+ item.variant.image.src + ')'}} />
+                <div className='Image' style={{ backgroundImage: 'URL('+ item.variant.image.src + ')'}} />
             </Col>
             <Col>
                 <Row><span className='bold text-center'>{item.variant.title}</span></Row>

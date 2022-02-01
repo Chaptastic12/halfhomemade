@@ -13,8 +13,6 @@
     color:white;
 }
 
-/*End CSS for NavAlert */
-
 /* Button styling */
 .NavBar-Button:hover, .NavBar-Button:active, .NavBar-Button button:hover{
     text-decoration: underline;

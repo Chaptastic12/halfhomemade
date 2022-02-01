@@ -1,8 +1,12 @@
 .LoginPage{
+    text-align: center;
+}
+
+.LoginPage .Form{
     width: 50vw;
 }
 
-.LoginPage-Header{
+.LoginPage .Header{
     font-family: 'Tahu!';
     font-size: 48px; 
 }

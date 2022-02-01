@@ -11,10 +11,10 @@ const Footer = props =>{
         <>
             <div className='Section-Divider' />
 
-            <div className='Footer d-flex justify-content-center'>
+            <div className='Footer'>
                 <Row sm='auto'>
                     <Col>
-                        <h1 className='Footer-Header'>RECIPES & SHOP</h1>
+                        <h1 className='Header'>RECIPES & SHOP</h1>
                         <ul>
                             <li>Buy the Book</li>
                             <li><Link to='/recipes/all'>View all Recipes</Link></li>
@@ -23,7 +23,7 @@ const Footer = props =>{
                         </ul>
                     </Col>
                     <Col>
-                        <h1 className='Footer-Header'>ABOUT</h1>
+                        <h1 className='Header'>ABOUT</h1>
                         <ul>
                             <li>About Us</li>
                             <li>Our Methodology</li>
@@ -31,7 +31,7 @@ const Footer = props =>{
                         </ul>
                     </Col>
                     <Col>
-                        <h1 className='Footer-Header'>CONTACT</h1>
+                        <h1 className='Header'>CONTACT</h1>
                         <ul>
                             <li>US: 1-555-5555</li>
                             <li>Int'l: 1-555-5556</li>

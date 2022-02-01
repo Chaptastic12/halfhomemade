@@ -14,13 +14,13 @@ const LoginPage = props =>{
     }
 
     return(<>
-            <div className='text-center'>
-                <div className='LoginPage-Header'>{toggleLogin ? 'Login' : 'Register'}</div>
+            <div className='LoginPage'>
+                <div className='Header'>{toggleLogin ? 'Login' : 'Register'}</div>
                 <Button size='sm' onClick={()=>switchToSignUp()}>
                     {toggleLogin ? 'Click to Register' : 'Click to Login'}
                 </Button>
             </div>
-            <Container className='LoginPage d-none d-md-block'>
+            <Container className='Form d-none d-md-block'>
                 <LoginForm isLogin={toggleLogin} />
             </Container>
             <div className='d-md-none'>

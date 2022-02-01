@@ -6,7 +6,7 @@ const FormattedSteps = props =>{
 
     return(
         <div className='FormattedSteps'>
-            <div className='FormattedSteps-Instructions'>{props.instructions}</div>
+            <div className='Instructions'>{props.instructions}</div>
         </div>
     )
 }

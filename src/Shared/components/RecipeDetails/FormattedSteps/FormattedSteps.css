@@ -2,13 +2,7 @@
     display: flex;
 }
 
-.FormattedSteps-StepNumber{
-    margin-left: 15px;
-    font-family: 'Tahu!';
-    font-size:calc(12px + 2vw);   
-}
-
-.FormattedSteps-Instructions{
+.FormattedSteps .Instructions{
     padding-left: 25px;
     padding-right: 15px;
     margin-top: 12px;

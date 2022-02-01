@@ -26,15 +26,15 @@ const AboutDiv = props =>{
                     {!isMobile && <Col>
                         <DiagonalCard backgroundImage={loadedHoney} cardTitle='HoneyHam' left={true} />
                     </Col> }
-                    <Col className='d-flex justify-content-center align-items-center'>
-                        <div className='AboutDiv-BookText text-center'>
+                    <Col className='Details'>
+                        <div className='BookText'>
                             <h1>Learn more about us</h1>
                             <br />
                             <p>Starting from some great ideas, and putting our own twist on them, enjoy our take on some classic recipes. The food you see here is just the beginning.
                                 We'll take you on an taste adventure around the world, strap in!
                             </p>
                             <br />
-                            <p className='AboutDiv-LearnMore'>Learn more about us <i className="far fa-arrow-alt-circle-right" /></p>
+                            <p className='LearnMore'>Learn more about us <i className="far fa-arrow-alt-circle-right" /></p>
                         </div>
                     </Col>
                     <Col>

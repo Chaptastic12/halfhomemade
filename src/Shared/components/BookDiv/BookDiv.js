@@ -29,7 +29,7 @@ const BookDiv = props =>{
                                 <Button variant='outline-dark' as={NavLink} to='/shop/'>Buy the book </Button>
                                 <Button variant='outline-dark' as={NavLink} to ='/recipes/search/all'>View Recipes</Button>
                             </span>
-                            <p className='LearnMore'>Learn more <i className="far fa-arrow-alt-circle-right" /></p>
+                            {/* <p className='LearnMore'>Learn more <i className="far fa-arrow-alt-circle-right" /></p> */}
                         </div>
                     </div>
                 </Col>
