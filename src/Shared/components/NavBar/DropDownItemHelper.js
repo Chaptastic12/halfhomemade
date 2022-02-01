@@ -14,7 +14,7 @@ const DropDownItemHelper = props =>{
     if(props.collections){
         if(props.footer){
             link = props.data.map(collection =>{
-                return <li><NavLink key={uuid()} as={NavLink} 
+                return <li key={uuid()}><NavLink as={NavLink} 
                             to={`/shop/search/${collection.title.replace(/\s/g,'').toLowerCase()}`} 
                             onClick={ () => { setSearchParam('collection'); setSearchItem(collection) } }
                         >
@@ -35,7 +35,7 @@ const DropDownItemHelper = props =>{
 
     if(props.normalLink){
         if(props.footer){
-            link = props.data.map(option => <li><NavLink key={uuid()} as={NavLink} to={option.to}>{ option.desc }</NavLink></li> );
+            link = props.data.map(option => <li key={uuid()}><NavLink  as={NavLink} to={option.to}>{ option.desc }</NavLink></li> );
 
         }else {
             link = props.data.map(option => <Dropdown.Item key={uuid()} as={NavLink} to={option.to}>{ option.desc }</Dropdown.Item> );
@@ -44,7 +44,7 @@ const DropDownItemHelper = props =>{
 
     if(props.searchLink){
         if(props.footer){
-            link = props.data.map(option => <li><NavLink key={uuid()} as={NavLink} to={option.to} onClick={ () => { setSearchParam(option.clickParam); setSearchItem(option.clickItem) } }>{option.desc}</NavLink></li> );
+            link = props.data.map(option => <li key={uuid()}><NavLink  as={NavLink} to={option.to} onClick={ () => { setSearchParam(option.clickParam); setSearchItem(option.clickItem) } }>{option.desc}</NavLink></li> );
         }else {
             link = props.data.map(option => <Dropdown.Item key={uuid()} as={NavLink} to={option.to} onClick={ () => { setSearchParam(option.clickParam); setSearchItem(option.clickItem) } }>{option.desc}</Dropdown.Item> );
         }
