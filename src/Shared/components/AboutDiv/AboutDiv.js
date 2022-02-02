@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import DiagonalCard from '../UI Elements/DiagonalCard/DiagonalCard';
 import { Col, Row } from 'react-bootstrap';
@@ -16,32 +16,28 @@ const AboutDiv = props =>{
     const loadedMafu = useProgressiveImage(MafuTofu)
 
     return(
-        <>
-            <div className='AboutDiv'>
-                <Row>
-                    <Col className='d-md-none'>
-                        <DiagonalCard backgroundImage={loadedHoney} cardTitle='HoneyHam' left={true} />
-                    </Col>
-                    <Col className='Details d-none d-md-block'>
-                        <div className='BookText'>
-                            <h1>Learn more about us</h1>
-                            <br />
-                            <p>Starting from some great ideas, and putting our own twist on them, enjoy our take on some classic recipes. The food you see here is just the beginning.
-                                We'll take you on an taste adventure around the world, strap in!
-                            </p>
-                            <br />
-                            <p className='LearnMore'>Learn more about us <i className="far fa-arrow-alt-circle-right" /></p>
-                        </div>
-                    </Col>
-                    <Col>
-                        <DiagonalCard backgroundImage={loadedMafu} cardTitle='MafoTofu' left={false} />
-                    </Col>
-                </Row>
-            </div>
-            <div className='Section-Divider' />
-        </>
-
-    )
+        <div className='AboutDiv'>
+            <Row>
+                <Col className='d-md-none'>
+                    <DiagonalCard backgroundImage={loadedHoney} cardTitle='HoneyHam' left={true} />
+                </Col>
+                <Col className='Details d-none d-md-block'>
+                    <div className='BookText'>
+                        <h1>Learn more about us</h1>
+                        <br />
+                        <p>Starting from some great ideas, and putting our own twist on them, enjoy our take on some classic recipes. The food you see here is just the beginning.
+                            We'll take you on an taste adventure around the world, strap in!
+                        </p>
+                        <br />
+                        <p className='LearnMore'>Learn more about us <i className="far fa-arrow-alt-circle-right" /></p>
+                    </div>
+                </Col>
+                <Col>
+                    <DiagonalCard backgroundImage={loadedMafu} cardTitle='MafoTofu' left={false} />
+                </Col>
+            </Row>
+        </div>
+)
 }
 
 export default AboutDiv;

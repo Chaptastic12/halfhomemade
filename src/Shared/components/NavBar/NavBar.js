@@ -72,14 +72,16 @@ const NavBar = props => {
 
             <Row className='Header'>
 
+                <Col className='Subtitle d-none d-lg-flex'>
+                    Bringing the finest cuisine to your dinner table
+                </Col>
+
                 <Col className='Title' as={NavLink} to='/'>
                     <div className='Title-Half'>half</div>
                     <div>Homemade</div>
                 </Col>
 
-                <Col className='Subtitle d-none d-lg-flex'>
-                    Bringing the finest cuisine to your dinner table
-                </Col>
+               
                 
                 <Col className='d-none d-md-block'>
                     <div className='Login'>

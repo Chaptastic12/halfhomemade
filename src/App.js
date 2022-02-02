@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -15,7 +15,6 @@ import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import Footer from './Shared/components/Footer/Footer';
 
-import { MobileContext } from './Shared/context/mobile-context';
 import Providers from './Shared/context/Providers';
 
 import SessionTimer from './Shared/components/SessionTimer';

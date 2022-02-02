@@ -38,16 +38,18 @@ const RecipePage = props =>{
         //let text = [];
         let searchedRecipe = [ ...allRecipes ];
 
+        console.log(title, tag, book, rating, )
+
         //Check if we need to filter all the recipes down if we have a valid title parameter
-        if(title !== null){
+        if(title != null){
             if(title.length > 0 ){
                 searchedRecipe = searchedRecipe.filter(x => x.recipeTitle.toLowerCase().includes(title.toLowerCase()));
                 //text.push('containing ' + title);
             }
         }
         //Of the recipes that we filtered (or didn't filter) from the above, filter down again if we are searching by a valid book parameter
-        if(book !== null){
-            if(title.length > 0){
+        if(book != null){
+            if(book.length > 0){
                 if(book !== undefined ){
                     searchedRecipe = searchedRecipe.filter(x => x.recipeBook.id.includes(book._id));
                     //text.push('found in ' + book.bookTitle);
@@ -55,17 +57,19 @@ const RecipePage = props =>{
             }
         }
         //Of the recipes that we filtered (or didn't filter) from the above, filter down again if we are searching by a valid tag parameter
-        if(tag !== null){
+        if(tag != null){
             if(tag.length > 0 ){
                 searchedRecipe = searchedRecipe.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
                 //text.push('with tag ' + tag);
             }
         }
         //Of the recipes that we filtered (or didn't filter) from the above, filter down again if we are searching by a valid rating parameter
-        if(rating !== null){
-            if(rating !== 0){
-                searchedRecipe = searchedRecipe.filter(x => x.recipeRating >= rating);
-                //text.push('and a rating of ' + rating);
+        if(rating != null){
+            if(rating !== 0){ 
+                if(rating !== '0'){
+                    searchedRecipe = searchedRecipe.filter(x =>  x.recipeRating >= parseInt(rating) && x.recipeRating <= parseInt(rating) );
+                    //text.push('and a rating of ' + rating);
+                }
             }
         }
 
@@ -171,10 +175,14 @@ const RecipePage = props =>{
     } else {
         return(
             <div className='RecipePage'>
+                <div className='Title'>
+                    <span className='Words'>Recipes from around the world </span>
+                </div>
+                <div className='Search'>
+                    <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
+                </div>
                 <Container>
                     { localError && <div>{ localError } </div> }
-                    <div className='RecipePage-Title'>Recipes from around the world </div>
-                    <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
                     { ( loadedRecipes && !loading ) && recipeCardFormat }
                     { loadedRecipes && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
                     { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }

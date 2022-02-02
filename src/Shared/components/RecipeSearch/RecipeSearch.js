@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { v4 as uuid } from 'uuid';
 
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
+import { SearchContext } from '../../context/search-context';
+
 const RecipeSearch = React.memo(props => {
+
+    const { setSearchItem, setSearchParam } = useContext(SearchContext);
 
     const [ searchTitle, setSearchTitle ] = useState(null);
     const [ searchTag, setSearchTag ] = useState(null);
@@ -19,13 +23,13 @@ const RecipeSearch = React.memo(props => {
             if(props.existingData.searchParam === 'tag'){
                 setSearchTag(props.existingData.searchItem);
             }else{
-                setSearchTag(null);
+                //setSearchTag(null);
             }
             //If we are filtering by stars, dispaly it in the drop down; otherwise, set it to be for all options
             if(props.existingData.searchParam === 'stars'){
                 setRating(props.existingData.searchItem);
             }else{
-                setRating(0)
+                //setRating(0)
             }
         }
     }, [props.existingData])
@@ -38,7 +42,7 @@ const RecipeSearch = React.memo(props => {
     })
    
     return (
-        <div className='d-flex justify-content-end align-items-center' style={{paddingTop: '10px'}}>
+        <div className='d-flex justify-content-end align-items-center' style={{paddingTop: '10px', marginRight: '10vw'}}>
             <Row>
                 <Form.Group className="mb-3" as={Col} xs={6} md='auto'>
                     <Form.Label><small>Title</small></Form.Label>
@@ -66,7 +70,7 @@ const RecipeSearch = React.memo(props => {
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex align-items-end" as={Col} xs={2} md='auto'>
-                    <Button type='button' size='sm' onClick={() => props.submitRecipeSearch(searchTitle, searchTag, searchBook, rating) } style={{marginRight: '5px'}}>
+                    <Button type='button' size='sm' onClick={() => { props.submitRecipeSearch(searchTitle, searchTag, searchBook, rating); setSearchItem(null); setSearchParam(null) } } style={{marginRight: '5px'}}>
                         Search
                     </Button>
                     <Button type='button' size='sm' onClick={() => { props.submitRecipeSearch('', '', '', 0); history.push('/recipes/search/all');} }>

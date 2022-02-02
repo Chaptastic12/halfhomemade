@@ -2,17 +2,27 @@
     /* background-color: rgba(146, 129, 122, 1); */
     height: 100%;
     width: 100vw;
-    padding: 25px;
+    padding-top: 25px;
 }
 
-.RecipePage-Title{
+.RecipePage .Title{
+    display:flex;
+    align-items: center;
+    background-color: rgb(33, 32, 54);
+    width: 100vw;
+    height: 120px;
+    color: white;
     font-family: 'Arial';
-    font-size:calc(12px + 2.5vw);  
+    font-size:calc(12px + 2.5vw); 
     /* color: white; */
 }
 
-.RecipePage-SubTitle{
-    font-family: 'Arial';
-    font-size:calc(12px + 0.5vw);  
-    /* color: white; */
+.RecipePage .Words{
+    margin-left: 5vw;
+}
+
+.RecipePage .Search{
+    background-color: rgb(33, 32, 54);
+    width: 100vw;
+    color: white;
 }

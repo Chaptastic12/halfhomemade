@@ -8,8 +8,11 @@ const HomePage = props =>{
 
     return(<>
             <BookDiv/>
+            <div className='Section-Divider' />
             <EducationDiv />
+            <div className='Section-Divider' />
             <AboutDiv/>
+            <div className='Section-Divider' />
         </>);
 }
 
