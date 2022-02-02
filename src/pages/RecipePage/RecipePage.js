@@ -38,8 +38,6 @@ const RecipePage = props =>{
         //let text = [];
         let searchedRecipe = [ ...allRecipes ];
 
-        console.log(title, tag, book, rating, )
-
         //Check if we need to filter all the recipes down if we have a valid title parameter
         if(title != null){
             if(title.length > 0 ){

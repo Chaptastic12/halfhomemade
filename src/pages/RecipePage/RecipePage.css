@@ -1,8 +1,7 @@
 .RecipePage{
-    /* background-color: rgba(146, 129, 122, 1); */
     height: 100%;
     width: 100vw;
-    padding-top: 25px;
+    padding-top: 5px;
 }
 
 .RecipePage .Title{
@@ -14,7 +13,6 @@
     color: white;
     font-family: 'Arial';
     font-size:calc(12px + 2.5vw); 
-    /* color: white; */
 }
 
 .RecipePage .Words{
