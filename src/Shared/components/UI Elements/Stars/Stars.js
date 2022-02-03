@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { v4 as uuid } from 'uuid';
+
 import './Stars.css';
 
 const Stars = props =>{
@@ -26,13 +28,24 @@ const Stars = props =>{
         )
     }
 
+    //Allows us to show half stars if the rating is above 0.5 or not
+    let stars = [];
+    let fullStars = Math.floor(props.item);
+    let halfOrNo = props.item - Math.floor(props.item);
+    for(let i=0; i < 5; i++){
+        console.log(i, fullStars, halfOrNo)
+        if(i < fullStars){
+            stars.push( <span key={uuid()} className='fa fa-star checked' /> )
+        } else if( ( i === fullStars ) && (halfOrNo >= 0.5 ) ){
+            stars.push( <span key={uuid()} className='fas fa-star-half-alt checked' /> );
+        } else {
+            stars.push( <span key={uuid()} className='fa fa-star' /> )
+        }
+    }
+
     return(
         <span className='stars'>
-            <span className="fa fa-star checked"></span>
-            <span className={`fa fa-star ${props.item > 1.5 && 'checked'}`}></span>
-            <span className={`fa fa-star ${props.item > 2.5 && 'checked'}`}></span>
-            <span className={`fa fa-star ${props.item > 3.5 && 'checked'}`}></span>
-            <span className={`fa fa-star ${props.item > 4.5 && 'checked'}`}></span>
+            { stars }
         </span>
     )
 }

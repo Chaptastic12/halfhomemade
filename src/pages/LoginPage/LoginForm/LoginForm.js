@@ -16,7 +16,7 @@ const LoginForm = props =>{
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ verifyPassword, setVerifyPassword ] = useState('');
-    const [ userName, setUserName ] = useState('');
+    const [ username, setUsername ] = useState('');
 
     const { submitting, error, sendRequest } = useHttp();
 
@@ -35,7 +35,7 @@ const LoginForm = props =>{
         //If we are logging in...
         if(props.isLogin){
             registerOrLogin = 'auth/login';
-            JSONbody = { userName, password }
+            JSONbody = { username, password }
 
         } else {
             //Ensure passwords match. If they do not, kick them out
@@ -44,7 +44,7 @@ const LoginForm = props =>{
                 return;
             }
             registerOrLogin = 'auth/register';
-            JSONbody = { userName, email, password }      
+            JSONbody = { username, email, password }      
         }
 
         //Reach out to our server
@@ -71,20 +71,21 @@ const LoginForm = props =>{
     return(<>
             {error && <h1>{ error }</h1>} {localError && <h1>{ localError }</h1>}
             <Form className='LoginForm' onSubmit={submitFormHandler}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" onChange={ e => setEmail(e.target.value) } />
-                    <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text>
-                </Form.Group>
-
-                {!props.isLogin && <>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Userame</Form.Label>
-                        <Form.Control type="text" placeholder="Enter your username" onChange={ e => setUserName(e.target.value) }/>
+                {!props.isLogin && <>   
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="text" placeholder="Enter email" onChange={ e => setEmail(e.target.value) } />
+                        <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                        </Form.Text>
                     </Form.Group>
                 </>}
+                
+                    <Form.Group className="mb-3">
+                        <Form.Label>Userame</Form.Label>
+                        <Form.Control type="text" placeholder="Enter your username" onChange={ e => setUsername(e.target.value) }/>
+                    </Form.Group>
+                
 
                 <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>

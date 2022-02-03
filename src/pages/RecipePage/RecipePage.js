@@ -70,7 +70,7 @@ const RecipePage = props =>{
         if(rating != null){
             if(rating !== 0){ 
                 if(rating !== '0'){
-                    searchedRecipe = searchedRecipe.filter(x =>  x.recipeRating >= parseInt(rating) && x.recipeRating <= parseInt(rating) );
+                    searchedRecipe = searchedRecipe.filter(x =>  x.recipeRating >= parseInt(rating) && x.recipeRating < ( parseInt(rating) + 1 ) );
                     //text.push('and a rating of ' + rating);
                 }
             }
