@@ -73,7 +73,7 @@ const NavBar = props => {
             <Row className='Header'>
 
                 <Col className='Subtitle d-none d-lg-flex'>
-                    Bringing the finest cuisine to your dinner table
+                    Bringing the finest cuisine <br />to your dinner table
                 </Col>
 
                 <Col className='Title' as={NavLink} to='/'>

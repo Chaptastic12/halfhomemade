@@ -11,18 +11,15 @@ import './ProductCard.css';
 const ProductCard = props => {
 
     const history = useHistory();
+    const [ opacity, setOpacity ] = useState('');
 
     const onCardClickHandler = () => {
         history.push(`/shop/product/${props.product.id}`);
     }
 
-    let productRating = <Stars item={5} />
-
     let optionsToShow = props.product.options.map(option => {
         return <span key={uuid()}>{ option.name + ' '} </span>
     })
-
-    const [ opacity, setOpacity ] = useState('');
 
     const price = props.product.variants[0].price;
     const comparePrice = props.product.variants[0].compareAtPrice;
@@ -37,14 +34,14 @@ const ProductCard = props => {
 
     return (
         <Col xs='auto' md={4} lg={3} className='ProductCard' key={props.product.id} onClick={() => onCardClickHandler()}>
-            <Card className='ProductCard-MobileCard cust-shadow-sm' onMouseEnter={() => setOpacity(prevState => !prevState)} onMouseLeave={() => setOpacity(prevState => !prevState)}>
-                <div className={`RecipeCard-ImgDiv ${opacity && 'opacity'}`}>
+            <Card className='Card cust-shadow-sm' onMouseEnter={() => setOpacity(prevState => !prevState)} onMouseLeave={() => setOpacity(prevState => !prevState)}>
+                <div className={`ImgDiv ${opacity && 'opacity'}`}>
                     <Card.Img variant="top" src={props.product.images[0].src} />
                 </div>
                 <Card.Body>
                     <Card.Title>{props.product.title} </Card.Title>
-                    { productRating } <br />
-                    <div className='ProductCard-Price'> { showPrice } { sale && <div className='sale'>Sale</div> }</div>
+                    <Stars item={5} /> <br />
+                    <div className='Price'> { showPrice } { sale && <div className='sale'>Sale</div> }</div>
                     <Card.Footer>
                         <p style={{fontSize: '12px', margin: '0px'}}>Options: { optionsToShow }</p>
                     </Card.Footer>

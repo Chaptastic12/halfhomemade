@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height:25px;
+    height:35px;
     font-style: italic;
     text-align: center;
 }
@@ -67,9 +67,9 @@
 .Site-Nav .Login {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     height: 100%;
-    margin-right: 50px;
+    /* margin-right: 50px; */
 }
 
 .Site-Nav .Bottom-Nav {

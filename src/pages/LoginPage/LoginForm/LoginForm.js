@@ -3,10 +3,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import moment from 'moment';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-import { encryptData } from '../../utils/util';
+import { encryptData } from '../../../Shared/utils/util';
 
-import { AuthContext } from '../../context/auth-context'
-import { useHttp } from '../../hooks/http-hook';
+import { AuthContext } from '../../../Shared/context/auth-context'
+import { useHttp } from '../../../Shared/hooks/http-hook';
 
 import './LoginForm.css';
 
@@ -16,8 +16,7 @@ const LoginForm = props =>{
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ verifyPassword, setVerifyPassword ] = useState('');
-    const [ firstName, setFirstName ] = useState('');
-    const [ lastName, setLastName ] = useState('');
+    const [ userName, setUserName ] = useState('');
 
     const { submitting, error, sendRequest } = useHttp();
 
@@ -36,7 +35,7 @@ const LoginForm = props =>{
         //If we are logging in...
         if(props.isLogin){
             registerOrLogin = 'auth/login';
-            JSONbody = { username: email, password }
+            JSONbody = { userName, password }
 
         } else {
             //Ensure passwords match. If they do not, kick them out
@@ -45,7 +44,7 @@ const LoginForm = props =>{
                 return;
             }
             registerOrLogin = 'auth/register';
-            JSONbody = { username: email, email, password, firstName, lastName }      
+            JSONbody = { userName, email, password }      
         }
 
         //Reach out to our server
@@ -82,23 +81,18 @@ const LoginForm = props =>{
 
                 {!props.isLogin && <>
                     <Form.Group className="mb-3">
-                        <Form.Label>First Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter your first name" onChange={ e => setFirstName(e.target.value) }/>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter your last name" onChange={ e => setLastName(e.target.value) } />
+                        <Form.Label>Userame</Form.Label>
+                        <Form.Control type="text" placeholder="Enter your username" onChange={ e => setUserName(e.target.value) }/>
                     </Form.Group>
                 </>}
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" onChange={ e => setPassword(e.target.value) } />
                 </Form.Group>
 
                 {!props.isLogin && 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Group className="mb-3">
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control type="password" placeholder="Confirm Password" onChange={ e => setVerifyPassword(e.target.value) } />
                     </Form.Group>

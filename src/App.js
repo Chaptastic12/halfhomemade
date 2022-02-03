@@ -12,7 +12,7 @@ import RecipeAddPage from './pages/RecipeAddPage/RecipeAddPage';
 import BookAddPage from './pages/BookAddPage/BookAddPage';
 import ShopPage from './pages/ShopPage/ShopPage';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
-import AdminPage from './pages/AdminPage/AdminPage';
+// import AdminPage from './pages/AdminPage/AdminPage';
 import Footer from './Shared/components/Footer/Footer';
 
 import Providers from './Shared/context/Providers';
@@ -83,7 +83,7 @@ function App() {
           <Route path='/book/add' exact component={BookAddPage} />
           <Route path='/shop/search/:id' exact component={ShopPage} />
           <Route path='/shop/product/:id' exact component={ProductDetailsPage}/>
-          <Route path='/admin' exact component={AdminPage} />
+          {/* <Route path='/admin' exact component={AdminPage} /> */}
 
           <Redirect to="/" exact />
         </Switch>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Col, Row, Button } from 'react-bootstrap';
-import ReviewRecipe from '../ReviewRecipe/ReviewRecipe';
+import ReviewForm from '../ReviewForm/ReviewForm';
 
 import Stars from '../UI Elements/Stars/Stars';
 
@@ -16,13 +16,14 @@ const ViewExistingReviews = props => {
     //Determine if we are editing or not; If we are, allow them to edit the fields. If not, just show the data as it is
     let reviewHTML;
     if(!editReview){
-        reviewHTML = <>
-                        <Row> <Stars item={review.rating} /> { review.author.username } </Row>
-                        <Row> { review.text } </Row>
-                        <Row> {review.updatedAt} </Row>
-                    </>
+        reviewHTML = <Row> 
+                        <Stars item={review.rating} /> 
+                        { review.author.username } reviewed on {review.updatedAt} 
+                        <br/><br/>
+                        { review.text }
+                    </Row>
     } else{
-        reviewHTML = <ReviewRecipe type='edit' rating={review.rating} placeholder={review.text} submitReview={ (type, rating, text, ratingSet) => { props.edit(type, rating, text, ratingSet, review._id); setEditReveiw(false) } } />
+        reviewHTML = <ReviewForm type='edit' rating={review.rating} placeholder={review.text} submitReview={ (type, rating, text, ratingSet) => { props.edit(type, rating, text, ratingSet, review._id); setEditReveiw(false) } } />
     }
 
     //Adjust the updatedAt time to look nicer

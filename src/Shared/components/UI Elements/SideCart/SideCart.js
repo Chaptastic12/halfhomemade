@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
-import CartItem from '../../CartItem/CartItem';
+import CartItem from './CartItem/CartItem';
 
 import { SideDrawerContext } from '../../../context/sidedrawer-context';
 import { ShopContext } from '../../../context/shop-context';
@@ -32,8 +32,8 @@ const SideCart = props =>{
     }
 
     return (<>
-        { showCart && <div style={{width: 'calc((100vw - 400px))', height: '100vh', top: 0, left: 0, position: 'fixed', zIndex: 1050}} onClick={handleCartClose} /> }
-            <Offcanvas show={showCart} placement='end' className='me-2'>
+        { showCart && <div style={{width: 'calc((100vw - 409px))', height: '100vh', top: 0, left: 0, position: 'fixed', zIndex: 1050}} onClick={handleCartClose} /> }
+            <Offcanvas show={showCart} placement='end'>
                 <Offcanvas.Header closeButton onClick={handleCartClose}>
                     <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
                 </Offcanvas.Header>

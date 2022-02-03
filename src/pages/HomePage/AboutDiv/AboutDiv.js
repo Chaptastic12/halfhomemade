@@ -1,12 +1,12 @@
 import React from 'react';
 
-import DiagonalCard from '../UI Elements/DiagonalCard/DiagonalCard';
+import DiagonalCard from '../../../Shared/components/UI Elements/DiagonalCard/DiagonalCard';
 import { Col, Row } from 'react-bootstrap';
 
-import HoneyHam from '../../Img/Food/webp/Honey_roasted_ham.webp';
-import MafuTofu from '../../Img/Food/webp/Mafu_tofu.webp'
+import HoneyHam from '../../../Shared/Img/Food/webp/Honey_roasted_ham.webp';
+import MafuTofu from '../../../Shared/Img/Food/webp/Mafu_tofu.webp'
 
-import useProgressiveImage from '../../hooks/lazyLoad-hook';
+import useProgressiveImage from '../../../Shared/hooks/lazyLoad-hook';
 
 import './AboutDiv.css';
 

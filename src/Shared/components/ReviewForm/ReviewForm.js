@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 
 import Stars from '../UI Elements/Stars/Stars';
 
-const ReviewRecipe = props => {
+const ReviewForm = props => {
 
     let loadedRating, loadedText;
     if(props.type === 'submit'){
@@ -33,4 +33,4 @@ const ReviewRecipe = props => {
     )
 }
 
-export default ReviewRecipe;
+export default ReviewForm;

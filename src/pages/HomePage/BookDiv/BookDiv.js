@@ -4,10 +4,10 @@ import { NavLink } from 'react-router-dom';
 
 import { Col, Row, Button } from 'react-bootstrap';
 
-import useProgressiveImage from '../../hooks/lazyLoad-hook';
+import useProgressiveImage from '../../../Shared/hooks/lazyLoad-hook';
 
-import BookCover from '../../Img/Food/webp/Cover.webp'
-import DivBackground from '../../Img/Food/webp/christopher-jolly-1Ib8243cU8Q-unsplash.webp'
+import BookCover from '../../../Shared/Img/Food/webp/Cover.webp'
+import DivBackground from '../../../Shared/Img/Food/webp/Back_Plate_ChrJo.webp'
 
 import './BookDiv.css';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Container, Button } from 'react-bootstrap';
-import LoginForm from '../../Shared/components/LoginForm/LoginForm';
+import LoginForm from './LoginForm/LoginForm';
 
 import './LoginPage.css';
 

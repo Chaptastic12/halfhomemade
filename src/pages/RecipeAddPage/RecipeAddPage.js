@@ -4,8 +4,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
-import IngredientList from '../../Shared/components/IngredientList/IngredientList';
-import RecipeDetails from '../../Shared/components/RecipeDetails/RecipeDetails';
+import RecipeIngredientList from '../../Shared/components/RecipeIngredientList/RecipeIngredientList';
+import RecipeSteps from '../../Shared/components/RecipeSteps/RecipeSteps';
 import { AuthContext } from '../../Shared/context/auth-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
 
@@ -41,7 +41,9 @@ const RecipeDetailsPage = props =>{
             const callToServer = async() => {
                 try{
                     const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/getOneRecipe/' + id);
+                    //Set our response to be our loaded recipe, adjust the tags and the book selection
                     setLoadedRecipe({...responseData, recipeTags: responseData.recipeTags.join(','), bookSelection: responseData.recipeBook.id});
+                    //Adjust the recipeImage we get so that it is a useable url; save this to our image preview
                     responseData.recipeImage = process.env.REACT_APP_IMAGE_ENDPOINT + responseData.recipeImage.replace(/\\/g, '/');
                     setImagePreview(responseData.recipeImage);
 
@@ -162,15 +164,16 @@ const RecipeDetailsPage = props =>{
         return <option key={uuid()} value={book._id}>{book.bookTitle}</option>
     })
 
+    //Check if we have any text to display; if we do show it, if not show nothing (an empty string)
     let recipeTitleText, recipeStepText, recipeIngText, recipeDescText;
     if(loadedRecipe.recipeTitle.length       > 0){ recipeTitleText = loadedRecipe.recipeTitle; }       else { recipeTitleText = ''  }
-    if(loadedRecipe.recipeIngredients.length > 0){ recipeIngText   = loadedRecipe.recipeIngredients; } else { recipeIngText = ''  }
-    if(loadedRecipe.recipeSteps.length       > 0){ recipeStepText  = loadedRecipe.recipeSteps; }       else { recipeStepText = ''  }
-    if(loadedRecipe.recipeDesc.length        > 0){ recipeDescText  = loadedRecipe.recipeDesc; }        else { recipeDescText = ''  }
+    if(loadedRecipe.recipeIngredients.length > 0){ recipeIngText   = loadedRecipe.recipeIngredients; } else { recipeIngText   = ''  }
+    if(loadedRecipe.recipeSteps.length       > 0){ recipeStepText  = loadedRecipe.recipeSteps; }       else { recipeStepText  = ''  }
+    if(loadedRecipe.recipeDesc.length        > 0){ recipeDescText  = loadedRecipe.recipeDesc; }        else { recipeDescText  = ''  }
 
     return(
         <div className='RecipePageDetails'>
-            {/* This section will make it easy for the admin to know that they are editing the poage. It also alerts them to how to submit and use thise page */}
+            {/* This section will make it easy for the admin to know that they are editing the page. It also alerts them to how to submit and use thise page */}
             <Row>
                 <div className='text-center'>
                     <h1>Add or edit an existing Recipe</h1>
@@ -182,7 +185,7 @@ const RecipeDetailsPage = props =>{
                         }
                 </div>
             </Row>
-            {/* This section will contain the actul information to edit */}
+            {/* This section will contain the actual information to edit */}
             <Row>
                 {/* This Col will show our image, as well as the Book and Tag fields */}
                 <Col xs={12} lg={5}>
@@ -235,7 +238,7 @@ const RecipeDetailsPage = props =>{
                         </div>
                         { !editIngredients ?
                              <div onClick={()=> setEditIngredients(true)}>
-                                 { loadedRecipe.recipeIngredients === '' ? <p className='text-center'>Click to enter ingredients</p> : <IngredientList ingredients={loadedRecipe.recipeIngredients} /> }
+                                 { loadedRecipe.recipeIngredients === '' ? <p className='text-center'>Click to enter ingredients</p> : <RecipeIngredientList ingredients={loadedRecipe.recipeIngredients} /> }
                              </div>
                              :
                              <>
@@ -249,7 +252,7 @@ const RecipeDetailsPage = props =>{
                         }
                         { !editSteps ?
                             <div onClick={() => setEditSteps(true)}>
-                                <RecipeDetails details={loadedRecipe.recipeSteps} />
+                                <RecipeSteps details={loadedRecipe.recipeSteps} />
                             </div> 
                             :
                             <>

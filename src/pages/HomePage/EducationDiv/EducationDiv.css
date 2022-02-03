@@ -1,9 +1,11 @@
-.EducationDiv-Back{
-    /* background-color: rgba(182, 175, 156, 0.473); */
+.EducationDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(33, 32, 54);
 }
 
-.EducationDiv{
+.EducationDiv .Content{
     /* background-color: rgb(35, 37, 37);  */
     height:100%;
     /* color: white; */
@@ -17,15 +19,16 @@
     );
     margin-top: -5vh;
     width: 90vw;
+    text-align: center;
 }
 
-.EducationDiv-Title{
+.EducationDiv .Title{
     font-family: 'Tahu!';
     font-size:calc(24px + 5vw);
     padding-top:15px;
 }
 
-.EducationDiv-Box{
+.EducationDiv .Box{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +49,7 @@
     0 22.3px 17.9px rgba(0, 0, 0, 0.072)
 }
 
-.EducationDiv-SubTitle{
+.EducationDiv .SubTitle{
     font-family: 'Tahu!';
     font-size:calc(32px + 1vw);
     padding-top:15px;

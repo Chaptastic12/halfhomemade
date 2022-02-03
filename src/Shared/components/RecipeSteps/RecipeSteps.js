@@ -4,9 +4,9 @@ import { v4 as uuid } from 'uuid';
 
 import FormattedSteps from './FormattedSteps/FormattedSteps';
 
-import './RecipeDetails.css';
+import './RecipeSteps.css';
 
-const RecipeDetails = props =>{
+const RecipeSteps = props =>{
 
     let stepsArray = props.details.split(/\r|\n/);
 
@@ -24,4 +24,4 @@ const RecipeDetails = props =>{
     )
 }
 
-export default RecipeDetails;
+export default RecipeSteps;

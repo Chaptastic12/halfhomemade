@@ -17,14 +17,14 @@ const EducationDiv = props =>{
     let itemsToDisplay = educationItems.map(item => {
         return  <Row key={uuid()}>
                     <Col className='d-none d-sm-block' xs={item.iconLeft ? {order: 'first'} : {order: 'last'}}>
-                        <div className='box-shadow-small EducationDiv-Box'>
+                        <div className='Box box-shadow-small'>
                             {item.icon}
                         </div>
                     </Col>
                     <Col xs={item.iconLeft ? {order: 'last'} : {order: 'first'}}>
-                        <div className='EducationDiv-Box'>
+                        <div className='Box'>
                             <div>
-                                <p className='EducationDiv-SubTitle'>{item.subTitle}</p>
+                                <p className='SubTitle'>{item.subTitle}</p>
                                 <p>{item.desc}</p>
                             </div>
                         </div>
@@ -33,15 +33,13 @@ const EducationDiv = props =>{
     })
 
     return(
-        <div className='EducationDiv-Back d-flex justify-content-center align-items-center'>
-            <div className='EducationDiv'>
-                <div className='text-center' >
-                    <h1 className='EducationDiv-Title'>Learn with us</h1>
-                    <Container >
-                        {itemsToDisplay}
-                    </Container>
-                    <br />
-                </div>
+        <div className='EducationDiv'>
+            <div className='Content'>
+                <h1 className='Title'>Learn with us</h1>
+                <Container >
+                    {itemsToDisplay}
+                </Container>
+                <br />
             </div>
         </div>
     )
