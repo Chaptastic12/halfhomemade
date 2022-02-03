@@ -61,12 +61,12 @@ const RecipeSearch = React.memo(props => {
                 <Form.Group className="mb-3" as={Col} xs={6} md='auto'>
                     <Form.Label><small>Choose Rating</small></Form.Label>
                     <Form.Select size='sm' value={rating} onChange={e => setRating(e.target.value)}>
-                        <option key={uuid()} value={0} selected={rating === 0 ? true : false}>All ratings</option>
-                        <option key={uuid()} value={5} selected={rating === 5 ? true : false}>5 stars</option>
-                        <option key={uuid()} value={4} selected={rating === 4 ? true : false}>4 Stars</option>
-                        <option key={uuid()} value={3} selected={rating === 3 ? true : false}>3 Stars</option>
-                        <option key={uuid()} value={2} selected={rating === 2 ? true : false}>2 Stars</option>
-                        <option key={uuid()} value={1} selected={rating === 1 ? true : false}>1 Star</option>
+                        <option key={uuid()} value={0} >All ratings</option>
+                        <option key={uuid()} value={5} >5 stars</option>
+                        <option key={uuid()} value={4} >4 Stars</option>
+                        <option key={uuid()} value={3} >3 Stars</option>
+                        <option key={uuid()} value={2} >2 Stars</option>
+                        <option key={uuid()} value={1} >1 Star</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex align-items-end" as={Col} xs={2} md='auto'>

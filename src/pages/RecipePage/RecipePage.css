@@ -9,10 +9,10 @@
     align-items: center;
     background-color: rgb(33, 32, 54);
     width: 100vw;
-    height: 120px;
+    height: 100px;
     color: white;
     font-family: 'Arial';
-    font-size:calc(12px + 2.5vw); 
+    font-size:calc(24px + 1.5vw); 
 }
 
 .RecipePage .Words{
@@ -23,4 +23,5 @@
     background-color: rgb(33, 32, 54);
     width: 100vw;
     color: white;
+    margin-bottom: 10px;
 }

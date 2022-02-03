@@ -18,7 +18,9 @@ const IngredientList = props =>{
     })
     
     return <div className='IngredientList text-center'>
-        {props.show && <h1><hr className='hr' style={{float: 'left' }}/>Ingredients<hr className='hr' style={{float: 'right' }}/></h1> }
+        <div className='RecipePageDetails-Header'>
+            {props.show && <h1><hr className='hr' style={{float: 'left' }}/>Ingredients<hr className='hr' style={{float: 'right' }}/></h1> }
+        </div>
         <Row className='d-flex justify-content-center align-items-center'>{ingList}</Row>
     </div>
     

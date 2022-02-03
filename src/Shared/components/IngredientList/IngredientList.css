@@ -11,6 +11,7 @@
 .IngredientList h1{
     font-family: 'Tahu!';
     font-size:calc(12px + 2vw);
+    color: black;
 }
 
 .IngredientList-Ingredients{
@@ -18,7 +19,7 @@
 }
 
 .hr {
-    margin-top: 30px;
+    margin-top: 22px;
     border: 1px solid black;
     width: 15vw;
 }

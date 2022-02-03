@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
 import RecipeSearch from '../../Shared/components/RecipeSearch/RecipeSearch';
 import PaginationComponent from '../../Shared/components/UI Elements/Pagination/Pagination';
+import AlertDisplay from '../../Shared/components/UI Elements/Alert/Alert';
 
 import { NavLink } from 'react-router-dom';
 import { Container, Row, Button } from 'react-bootstrap'
@@ -30,6 +31,10 @@ const RecipePage = props =>{
     const [ books, setBooks ] = useState([]);
     const [ loading, setLoading ] = useState(true);
     //const [ filterText, setFilterText ] = useState('')
+
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    });
 
     const recipeSearchHandler = ( title, tag, book, rating ) => {
         setLoading(true);       
@@ -78,7 +83,7 @@ const RecipePage = props =>{
             //setFilterText(text.join(', '));
             setLoading(false); 
         } else {
-            setLocalError('No recipes found that match your search criteria.')
+            setLocalError('No recipes found that match your search criteria; Showing all recipes')
             setLoadedRecipes(allRecipes);
             setLoading(false);
         }
@@ -180,9 +185,9 @@ const RecipePage = props =>{
                     <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
                 </div>
                 <Container>
-                    { localError && <div>{ localError } </div> }
+                    { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
                     { ( loadedRecipes && !loading ) && recipeCardFormat }
-                    { loadedRecipes && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
+                    { loadedRecipes && <div className='d-flex justify-content-end'> <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> </div> }
                     { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }
                 </Container>
             </div>

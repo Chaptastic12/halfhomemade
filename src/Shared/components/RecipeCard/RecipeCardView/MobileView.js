@@ -34,7 +34,7 @@ const MobileView = props =>{
                                 {/* <Button className='RecipeCard-Link' size='sm' variant='outline-primary' as={Link} to={`/recipes/view/${props.data.id}`}>View</Button> */}
                             </Card.Text>
                             {/* <Card.Text>{props.data.recipeDesc}</Card.Text> */}
-                            <Card.Text className='text-center'><small>Found in the <strong>{props.data.recipeBook.bookTitle}</strong> recipe book</small></Card.Text>
+                            {/* <Card.Text className='text-center'><small>Found in the <strong>{props.data.recipeBook.bookTitle}</strong> recipe book</small></Card.Text> */}
                             <Card.Footer>
                                 <p className='RecipeCard-Date'>Date Posted: {props.data.createdAt}</p>
                             </Card.Footer>

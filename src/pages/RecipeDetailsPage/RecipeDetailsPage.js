@@ -12,6 +12,7 @@ import Stars from '../../Shared/components/UI Elements/Stars/Stars';
 import { useHttp } from '../../Shared/hooks/http-hook';
 import { decryptData } from '../../Shared/utils/util';
 
+import AlertDisplay from '../../Shared/components/UI Elements/Alert/Alert';
 import { AuthContext } from '../../Shared/context/auth-context';
 
 import './RecipeDetailsPage.css'
@@ -21,11 +22,9 @@ const RecipeDetailsPage = props =>{
     const { id } = useParams();
     const { userState } = useContext(AuthContext)
  
-    useEffect(() => {
-        //Since the user could have scrolled down a bit on the Recipes page,
-        //The below will scroll them back to the top once the details page loads
-        document.body.scrollTop = 0;
-      }, [])
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    });
 
       const { sendRequest } = useHttp();
       const [ loadedRecipe, setLoadedRecipe ] = useState(null);
@@ -119,10 +118,10 @@ const RecipeDetailsPage = props =>{
                         <Col>
                             <div className='RecipePageDetails-RecipeInfo'>
                                 <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
-                                <br />
                                 <div className='RecipePageDetails-Rating'>{ foodRating } <a href='#reviews'>Write a review</a></div>
+                                <br />
                                 <div> 
-                                    <div className='IngredientList text-center'>
+                                    <div className='IngredientList RecipePageDetails-Header text-center'>
                                         <h1><hr className='hr' style={{float: 'left' }}/>Description<hr className='hr' style={{float: 'right' }}/></h1>
                                     </div>
                                     <div className='text-center'>{ loadedRecipe.recipeDesc } </div>
@@ -133,8 +132,8 @@ const RecipeDetailsPage = props =>{
                                 
                                 <div className='text-center'>
                                     <div> This recipe is featured in: {loadedRecipe.recipeBook.bookTitle}</div>
-                                    <br />
-                                    <div> <label>Tags:</label> <br />{loadedRecipe.recipeTags}</div>
+                                    {/* <br />
+                                    <div> <label>Tags:</label> <br />{loadedRecipe.recipeTags}</div> */}
                                 </div>
                             </div>
                         </Col>
@@ -150,7 +149,7 @@ const RecipeDetailsPage = props =>{
                                 }
                             </p> 
                             { userState.token && allowEnterReview && <>
-                                { error }
+                                { error && <AlertDisplay alertText={error} /> }
                                 <ReviewRecipe type='submit' placeholder='Type your review here' submitReview={(type, rating, text, ratingSet) => submitReviewToServer(type, rating, text, ratingSet)} />
                             </> }
                             <div id='reviews'>

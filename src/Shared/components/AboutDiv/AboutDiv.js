@@ -18,7 +18,7 @@ const AboutDiv = props =>{
     return(
         <div className='AboutDiv'>
             <Row>
-                <Col className='d-md-none'>
+                <Col className='d-none d-md-block'>
                     <DiagonalCard backgroundImage={loadedHoney} cardTitle='HoneyHam' left={true} />
                 </Col>
                 <Col className='Details d-none d-md-block'>

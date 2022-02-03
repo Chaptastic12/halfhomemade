@@ -77,8 +77,10 @@ const NavBar = props => {
                 </Col>
 
                 <Col className='Title' as={NavLink} to='/'>
-                    <div className='Title-Half'>half</div>
-                    <div>Homemade</div>
+                    <div>
+                        <div className='Title-Half'>half</div>
+                        <div>Homemade</div>
+                    </div>
                 </Col>
 
                

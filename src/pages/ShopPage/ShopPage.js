@@ -23,6 +23,10 @@ const ShopPage = props => {
     const [ showAll, setShowAll ] = useState(true);
     const [ pageNumber, setPageNumber ] = useState(1);
 
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    });
+
     useEffect(() => {
         if(!loadedProducts){
             if(!showAll){
@@ -116,10 +120,14 @@ const ShopPage = props => {
         })
         return (
             <div className='ShopPage'>
+                    <div className='Title'>
+                        <span className='Words'>{headerText}</span>
+                    </div>
+                    <div className='Search'>
+                        <ProductSearch collections={collections} submitSearch={(id, text, instock, sale) => searchFormSubmitHandler(id, text, instock, sale)} existingData={{searchParam, searchItem}} />
+                    </div>
                 <Container>
-                    <h1 className='ShopPage-Title'>{headerText}</h1>
-                    <ProductSearch collections={collections} submitSearch={(id, text, instock, sale) => searchFormSubmitHandler(id, text, instock, sale)} existingData={{searchParam, searchItem}} />
-                    <Row className='ShopPage-Products d-flex justify-content-center align-items-center'>
+                    <Row className='Products'>
                         { shopProducts }
                     </Row>
                     { loadedProducts && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
