@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import cookingTogether from '../../Shared/Img/Food/cookingTogether.jpg'
 import friendsCooking from '../../Shared/Img/Food/friendsCooking.jpg'
@@ -21,6 +21,11 @@ const AboutPage = props => {
         { icon: <img className='Image' src={loadedOutside} alt='Cooking outside' />, subTitle: 'And the rest, is history', desc: `From the joy of teaching others and enabling them to be more confident cooks comes Half-Homemade. We are excited to see you on our journey!`, iconLeft: true }
     ]
 
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    });
+
+
     return (
         <div className='AboutPage'>
             <div className='Header'>
@@ -32,14 +37,16 @@ const AboutPage = props => {
                     <span>-Jon Favreau</span>
                 </div>
             </div>
-            <div className='Content'>
-                <div className='Blurb'>
-                    Nothing is better than a home cooked meal. Whether it's weekly curry or a delicious holiday ham, it's always wonderful to share food with friends and family. 
-                    In this book, you'll find recipes to help you do just that. Some are simple, others are harder, and sometimes we take shortcuts; but all of them are great tasting! 
-                    Share love and cook tasty food. <br/><span className='Itadaki'>Itadakimasu!</span>
+            <div className='Main'>
+                <div className='Content'>
+                    <div className='Blurb'>
+                        Nothing is better than a home cooked meal. Whether it's weekly curry or a delicious holiday ham, it's always wonderful to share food with friends and family. 
+                        In this book, you'll find recipes to help you do just that. Some are simple, others are harder, and sometimes we take shortcuts; but all of them are great tasting! 
+                        Share love and cook tasty food. <br/><span className='Itadaki'>Itadakimasu!</span>
+                    </div>
                 </div>
+                <FlippingTextIcon items={aboutItems} />
             </div>
-            <FlippingTextIcon items={aboutItems} />
         </div>
     )
 }

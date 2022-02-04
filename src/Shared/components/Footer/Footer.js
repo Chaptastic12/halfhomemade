@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { NavLink } from 'react-router-dom';
+
 import DropDownItemHelper from '../../utils/DropDownItemHelper';
 import { Col, Row } from 'react-bootstrap';
 
@@ -32,7 +34,7 @@ const Footer = props =>{
                 <Col>
                     <h1 className='Header'>ABOUT</h1>
                     <ul>
-                        <li>About Us</li>
+                        <li><NavLink to='/about'>About Us</NavLink></li>
                         <li>Our Methodology</li>
                         <li>Our Promise</li>
                     </ul>

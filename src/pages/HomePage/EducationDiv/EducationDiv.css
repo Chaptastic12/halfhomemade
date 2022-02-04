@@ -27,3 +27,10 @@
     font-size:calc(24px + 5vw);
     padding-top:15px;
 }
+
+.EducationDiv .Image{
+    height: 250px;
+    object-fit: contain;
+    border-radius: 50%;
+    padding: 10px;
+}

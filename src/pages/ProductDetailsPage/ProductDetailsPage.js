@@ -3,7 +3,11 @@ import { useParams } from 'react-router-dom';
 import { Spinner, Container, Row, Col, Button } from 'react-bootstrap'
 import { v4 as uuid } from 'uuid';
 
+import RecipeReviews from '../RecipeDetailsPage/RecipeReviews/RecipeReviews';
+
 import { ShopContext } from '../../Shared/context/shop-context';
+import { AuthContext } from '../../Shared/context/auth-context';
+import { useHttp } from '../../Shared/hooks/http-hook';
 
 import  './ProductDetailsPage.css';
 
@@ -12,6 +16,7 @@ const ProductDetailsPage = props => {
     const { id } = useParams();
     
     const { fetchProductById, product, addItemsToCheckout } = useContext(ShopContext);
+    const { userState } = useContext(AuthContext);
 
     const [ quantity, setQuantity ] = useState('1');
     const [ selections, setSelections ] = useState([]);
@@ -19,12 +24,37 @@ const ProductDetailsPage = props => {
     const [ localError, setLocalError ] = useState(null);
     const [ price, setPrice ] = useState(null);
     const [ comparePrice, setComparePrice ] = useState(null);
+    const [ productReviews, setProductReviews ] = useState(null);
+    const [ canSubmitReview, setCanSubmitReview ] = useState(true);
+    const [ refreshPage, setRefreshpage ] = useState(false);
+
+    console.log(refreshPage)
+    const { sendRequest } = useHttp();
 
     //Get the product for our page; must be done first
     useEffect(() => {
         fetchProductById(id);
     //eslint-disable-next-line
-    }, [id]);
+    }, [id, refreshPage]);
+
+    useEffect(()=>{
+        //Get our reviews 
+        const getFromServer = async() => {
+            try{
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'shop/getReviewsForProduct/' + id);
+                setProductReviews(responseData);
+                //If we return undefined, then this product does not exist in our DB; so if the user is also an admin, create one
+                if(responseData === undefined && userState.isAdmin){
+                    await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'shop/submitANewProduct/', 'POST', 'include', { Authorization: `Bearer ${userState.token}`, 'Content-Type': 'application/json', 'Accept': 'application/json'}, JSON.stringify({shopifyId: id, rating: 0}));
+                    setRefreshpage(prevState => !prevState);
+                }
+            } catch(err){
+                //Errors handled in hook
+            }
+        }
+        getFromServer();
+    //eslint-disable-next-line
+    }, [id, refreshPage])
 
     //Determine what our default variant is; This will end up being the first variant available, which is
     // made up of the first choice for every option. We will need to build the variant ourselves.
@@ -133,26 +163,29 @@ const ProductDetailsPage = props => {
         }
 
         return (
-            <div>
-                <Container>
-                    { localError && <h1>{ localError } </h1> }
-                    <Row>
-                        <Col s={12} className='d-flex justify-content-center align-items-center'>
-                            <div className='ProductDetails-Picture' style={{backgroundImage: `URL(${product.images[0].src})`}}>
-                            { sale && <div className='sale' style={{marginTop: '10px', marginRight: '10px'}}>Sale</div> }
-                            </div>
-                        </Col>
-                        <Col s={12} className='ProductDetails-Details'>
-                            <Row> <h2>{product.title} - { showPrice }</h2></Row>
-                            <Row>{product.description}</Row>
-                            <Row>{productOptions}</Row>
-                            <Row><label>Quantity</label><input type='number' value={quantity} onChange={e => setQuantity(e.target.value)}/></Row>
-                            <Row><br /></Row>
-                            <Row><Button onClick={() => findVariantID('add')}>Add to Cart</Button></Row>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
+            <Container>
+                { localError && <h1>{ localError } </h1> }
+                <Row>
+                    <Col s={12} className='d-flex justify-content-center align-items-center'>
+                        <div className='ProductDetails-Picture' style={{backgroundImage: `URL(${product.images[0].src})`}}>
+                        { sale && <div className='sale' style={{marginTop: '10px', marginRight: '10px'}}>Sale</div> }
+                        </div>
+                    </Col>
+                    <Col s={12} className='ProductDetails-Details'>
+                        <Row> <h2>{product.title} - { showPrice }</h2></Row>
+                        <Row>{product.description}</Row>
+                        <Row>{productOptions}</Row>
+                        <Row><label>Quantity</label><input type='number' value={quantity} onChange={e => setQuantity(e.target.value)}/></Row>
+                        <Row><br /></Row>
+                        <Row><Button onClick={() => findVariantID('add')}>Add to Cart</Button></Row>
+                    </Col>
+                </Row>
+                <Row>
+                    {productReviews && <RecipeReviews isProduct={true} id={id} canSubmitReview={canSubmitReview} setCanSubmitReview={setCanSubmitReview} 
+                        loadedRecipe={productReviews} userState={userState} setRefreshpage={setRefreshpage} 
+                    /> }
+                </Row>
+            </Container>
         )
     }
 }

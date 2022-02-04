@@ -41,9 +41,13 @@
     padding: 10px;
 }
 
+.AboutPage .Main{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 .AboutPage .Blurb{
     text-align: center;
-    width: 70%;
     border-bottom: 2px solid rgb(33, 32, 54);
     border-top: 2px solid rgb(33, 32, 54);
     padding: 15px;

@@ -9,8 +9,6 @@ import Stars from '../../Shared/components/UI Elements/Stars/Stars';
 import RecipeReviews from './RecipeReviews/RecipeReviews';
 
 import { useHttp } from '../../Shared/hooks/http-hook';
-import { decryptData } from '../../Shared/utils/util';
-
 import { AuthContext } from '../../Shared/context/auth-context';
 
 import './RecipeDetailsPage.css'
@@ -22,12 +20,11 @@ const RecipeDetailsPage = props =>{
  
     useEffect(() =>{
         window.scrollTo(0,0);
-    },[id]);
+    },[]);
 
       const { sendRequest } = useHttp();
       const [ loadedRecipe, setLoadedRecipe ] = useState(null);
       const [ canSubmitReview, setCanSubmitReview ] = useState(true);
-      const [ allowEnterReview, setAllowEnterReview ] = useState(false);
       const [ refreshPage, setRefreshpage ] = useState(false);
   
       //Make a call to our API to get our recipes
@@ -42,19 +39,6 @@ const RecipeDetailsPage = props =>{
           }
           callToServer();
       },[id, sendRequest, setLoadedRecipe, refreshPage]);
-
-      //If we have a user logged in, decrypt their ID to find if theyve submitted any reviews yet
-      useEffect(() => {
-            if(userState.id && loadedRecipe){
-                let decryptID = decryptData(userState.id, process.env.REACT_APP_CRYPSALT);
-                for(let i=0; i < loadedRecipe.reviews.length; i++){
-                    //If they have submitted one, they won't be able to add a new one
-                    if(loadedRecipe.reviews[i].author.id === decryptID){
-                        setCanSubmitReview(false);
-                    }
-                }
-            }
-      }, [loadedRecipe, userState.id]);
 
     let foodRating = loadedRecipe ? 
                         loadedRecipe.recipeRating === 0 ? 
@@ -99,8 +83,7 @@ const RecipeDetailsPage = props =>{
                     </Row>
                     {/* This row shows the reviews post for the above recipe */}
                     <Row>
-                        <RecipeReviews id={id} canSubmitReview={canSubmitReview} setCanSubmitReview={setCanSubmitReview} 
-                            setAllowEnterReview={setAllowEnterReview} allowEnterReview={allowEnterReview} 
+                        <RecipeReviews isProduct={false} id={id} canSubmitReview={canSubmitReview} setCanSubmitReview={setCanSubmitReview} 
                             loadedRecipe={loadedRecipe} userState={userState} setRefreshpage={setRefreshpage} 
                         />
                     </Row> 
