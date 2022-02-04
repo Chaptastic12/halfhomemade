@@ -1,0 +1,55 @@
+.AboutPage{
+    height: 100%;
+    width: 100vw;
+    padding-top: 5px;
+}
+
+.AboutPage .Header{
+    font-family: 'Arial';
+    font-size:calc(24px + 1.5vw);  
+    background-color: rgb(33, 32, 54);
+    color: white;
+    width: 100vw;
+}
+.AboutPage .Title{
+    display: flex;
+    align-items: center;
+    margin-left: 5vw;
+    height: 100px;
+}
+
+.AboutPage .Quote{
+    font-family: 'Tahu!';
+    background-color: rgb(33, 32, 54);
+    color: white;
+    font-size:calc(24px + 1.5vw);  
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.AboutPage .Content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2.5vh 0;
+}
+
+.AboutPage .Image{
+    height: 250px;
+    object-fit: contain;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.AboutPage .Blurb{
+    text-align: center;
+    width: 70%;
+    border-bottom: 2px solid rgb(33, 32, 54);
+    border-top: 2px solid rgb(33, 32, 54);
+    padding: 15px;
+    border-radius: 25px;
+}
+
+.Itadaki{
+    font-weight: bold;
+}

@@ -12,6 +12,7 @@ import RecipeAddPage from './pages/RecipeAddPage/RecipeAddPage';
 import BookAddPage from './pages/BookAddPage/BookAddPage';
 import ShopPage from './pages/ShopPage/ShopPage';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
+import AboutPage from './pages/AboutPage/AboutPage';
 // import AdminPage from './pages/AdminPage/AdminPage';
 import Footer from './Shared/components/Footer/Footer';
 
@@ -75,9 +76,10 @@ function App() {
 
         <Switch>
           <Route path="/" exact component={HomePage} />
+          <Route path='/login' exact component={LoginPage} />
+          <Route path='/about' exact component={AboutPage} />
           <Route path='/recipes/search/:filter' exact><RecipePage /></Route>
           <Route path='/recipes/view/:id' exact component={RecipeDetailsPage} />
-          <Route path='/login' exact component={LoginPage} />
           <Route path='/recipes/add' exact component={RecipeAddPage} />
           <Route path='/recipes/edit/:id' exact> <RecipeAddPage edit/> </Route>
           <Route path='/book/add' exact component={BookAddPage} />
