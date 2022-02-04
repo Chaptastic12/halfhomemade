@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import RecipeCard from '../../Shared/components/RecipeCard/RecipeCard';
 import RecipeSearch from '../../Shared/components/RecipeSearch/RecipeSearch';
 import PaginationComponent from '../../Shared/components/UI Elements/Pagination/Pagination';
-import AlertDisplay from '../../Shared/components/UI Elements/Alert/Alert';
+import AlertDisplay from '../../Shared/components/UI Elements/Alert/AlertDisplay';
 
 import { NavLink } from 'react-router-dom';
 import { Container, Row, Button } from 'react-bootstrap'

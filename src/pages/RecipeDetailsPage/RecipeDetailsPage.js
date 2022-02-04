@@ -22,7 +22,7 @@ const RecipeDetailsPage = props =>{
  
     useEffect(() =>{
         window.scrollTo(0,0);
-    });
+    },[id]);
 
       const { sendRequest } = useHttp();
       const [ loadedRecipe, setLoadedRecipe ] = useState(null);

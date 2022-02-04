@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
-import AlertDisplay from '../../../Shared/components/UI Elements/Alert/Alert';
+import AlertDisplay from '../../../Shared/components/UI Elements/Alert/AlertDisplay';
 import ViewExistingReviews from '../../../Shared/components/ViewExistingReviews/ViewExistingReviews';
 import ReviewForm from '../../../Shared/components/ReviewForm/ReviewForm';
 
@@ -53,12 +53,11 @@ const RecipeReviews = props =>{
             try{
                 const responseData = await sendRequest(url, method, 'include', { Authorization: `Bearer ${userState.token}`}, formData, true);
                 if(responseData.error){
-                    console.log(responseData.error)
                     setError('Error submitting updated review to server')
                 }
                 setRefreshpage(prevState => !prevState);
                 if(type === 'submit' || type === 'edit'){ setAllowEnterReview(false) }
-                if(type === 'delete'){ setAllowEnterReview(true); setCanSubmitReview(true) }
+                if(type === 'delete'){ setCanSubmitReview(true) }
             }
             catch (err) { /* Errors handled in the hook */ }
         }

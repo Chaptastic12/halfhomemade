@@ -13,9 +13,9 @@ const AlertDisplay = props => {
         )
     }
 
-    <Alert variant='danger'>
+    return ( <Alert variant='danger'>
         {props.alertText}
-    </Alert>
+    </Alert> )
 }
 
 export default AlertDisplay;

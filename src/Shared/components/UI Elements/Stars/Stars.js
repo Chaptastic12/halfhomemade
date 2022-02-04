@@ -33,7 +33,6 @@ const Stars = props =>{
     let fullStars = Math.floor(props.item);
     let halfOrNo = props.item - Math.floor(props.item);
     for(let i=0; i < 5; i++){
-        console.log(i, fullStars, halfOrNo)
         if(i < fullStars){
             stars.push( <span key={uuid()} className='fa fa-star checked' /> )
         } else if( ( i === fullStars ) && (halfOrNo >= 0.5 ) ){
