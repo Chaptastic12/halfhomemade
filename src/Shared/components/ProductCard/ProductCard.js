@@ -32,6 +32,7 @@ const ProductCard = props => {
         showPrice = <><strike style={{color: 'grey', marginRight: '10px'}}> ${ price } </strike> ${ comparePrice } </>
     }
 
+    console.log(props.rating)
     return (
         <Col xs='auto' md={4} lg={3} className='ProductCard' key={props.product.id} onClick={() => onCardClickHandler()}>
             <Card className='Card cust-shadow-sm' onMouseEnter={() => setOpacity(prevState => !prevState)} onMouseLeave={() => setOpacity(prevState => !prevState)}>
@@ -40,7 +41,7 @@ const ProductCard = props => {
                 </div>
                 <Card.Body>
                     <Card.Title>{props.product.title} </Card.Title>
-                    <Stars item={5} /> <br />
+                    {props.rating !== 0 ? <Stars item={props.rating} /> : <span>Not yet reviewed</span> } <br />
                     <div className='Price'> { showPrice } { sale && <div className='sale'>Sale</div> }</div>
                     <Card.Footer>
                         <p style={{fontSize: '12px', margin: '0px'}}>Options: { optionsToShow }</p>

@@ -9,12 +9,15 @@ import { Spinner, Row, Container } from 'react-bootstrap';
 import ProductCard from '../../Shared/components/ProductCard/ProductCard';
 import ProductSearch from'../../Shared/components/ProductSearch/ProductSearch';
 
+import { useHttp } from '../../Shared/hooks/http-hook';
+
 import './ShopPage.css';
 
 const ITEMS_PER_PAGE = 8;
 
 const ShopPage = props => {
 
+    const { sendRequest } = useHttp();
     const { products, collections, collection } = useContext(ShopContext);
     const { searchItem, searchParam } = useContext(SearchContext)
 
@@ -22,6 +25,7 @@ const ShopPage = props => {
     const [ headerText, setHeaderText ] = useState('Showing all products');
     const [ showAll, setShowAll ] = useState(true);
     const [ pageNumber, setPageNumber ] = useState(1);
+    const [ loadedReviews, setLoadedReviews ] = useState([]);
 
     useEffect(() =>{
         window.scrollTo(0,0);
@@ -38,7 +42,19 @@ const ShopPage = props => {
             setLoadedProducts(products);
         }   
     // eslint-disable-next-line
-    }, [ collection, products ])
+    }, [ collection, products ]);
+
+    useEffect(() =>{
+        //Reach out to our server
+        const callToServer = async() => {
+            try{
+                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'shop/getAllReviewsForProducts/');
+                console.log(responseData)
+                setLoadedReviews(responseData);
+            } catch(err){ /*Errors handled in hook */ }
+        }
+        callToServer();
+    },[]);
 
     const searchFormSubmitHandler = (collection, filterText, instock, sale) => {
         let finalSearchedProducts;
@@ -116,7 +132,8 @@ const ShopPage = props => {
         const numberOfPages = Math.ceil((loadedProducts.length)/ITEMS_PER_PAGE)
 
         const shopProducts = loadedProducts.slice(indexStart, indexEnd).map(product => { 
-            return <ProductCard key={product.id} product={product} id={product.id} title={product.title} description={product.description} image={product.images[0].src} /> 
+            let productReview = loadedReviews.filter(x => x.shopifyId === product.id );
+            return <ProductCard key={product.id} rating={productReview[0].rating} product={product} id={product.id} title={product.title} description={product.description} image={product.images[0].src} /> 
         })
         return (
             <div className='ShopPage'>
