@@ -54,6 +54,7 @@ const ShopPage = props => {
             } catch(err){ /*Errors handled in hook */ }
         }
         callToServer();
+    // eslint-disable-next-line
     },[]);
 
     const searchFormSubmitHandler = (collection, filterText, instock, sale) => {
