@@ -131,40 +131,44 @@ const ShopPage = props => {
             setLocalError(error)
         }
     }, [error])
-    
-    //Ensure that everything we need has loaded in
-    if(loadedReviews === undefined || (!loadedProducts || loadedReviews)){
-        return <>
-                { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
-                <div className='spinner'><Spinner animation="border" /></div>
-            </>
-    } else {
+
+    let numberOfPages, shopProducts
+    if(loadedReviews !== undefined && (loadedProducts && !loadedReviews)){
         //Next three lines are needed for pagination
         const indexStart = (~ITEMS_PER_PAGE + 1) + (ITEMS_PER_PAGE * pageNumber);
         const indexEnd = indexStart + ITEMS_PER_PAGE;
-        const numberOfPages = Math.ceil((loadedProducts.length)/ITEMS_PER_PAGE)
+        numberOfPages = Math.ceil((loadedProducts.length)/ITEMS_PER_PAGE)
 
-        const shopProducts = loadedProducts.slice(indexStart, indexEnd).map(product => { 
+        shopProducts = loadedProducts.slice(indexStart, indexEnd).map(product => { 
             let productReview = loadedReviews.filter(x => x.shopifyId === product.id );
             return <ProductCard key={product.id} rating={productReview[0].rating} product={product} id={product.id} title={product.title} description={product.description} image={product.images[0].src} /> 
         })
-        return (
-            <div className='ShopPage'>
-                    <div className='Title'>
-                        <span className='Words'>{headerText}</span>
-                    </div>
-                    <div className='Search'>
-                        <ProductSearch collections={collections} submitSearch={(id, text, instock, sale) => searchFormSubmitHandler(id, text, instock, sale)} existingData={{searchParam, searchItem}} />
-                    </div>
+    }
+
+    return(
+        <div className='ShopPage'>
+            <div className='Title'>
+                <span className='Words'>{headerText}</span>
+            </div>
+            { ( loadedReviews === undefined || (!loadedProducts || loadedReviews) ) ? <>
+                { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
+                <div className='Spinner'>
+                    <Spinner animation="border" />
+                    <div>Loading...</div>
+                </div>
+            </> :<>
+                <div className='Search'>
+                    <ProductSearch collections={collections} submitSearch={(id, text, instock, sale) => searchFormSubmitHandler(id, text, instock, sale)} existingData={{searchParam, searchItem}} />
+                </div>
                 <Container>
                     <Row className='Products'>
                         { shopProducts }
                     </Row>
                     { loadedProducts && <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> }
                 </Container>
-            </div>
-        )
-    }
+            </> }
+        </div>
+    )
 }
 
 export default ShopPage;

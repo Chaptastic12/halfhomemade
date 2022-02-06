@@ -32,3 +32,10 @@
     padding-right: 10vw;
     margin-bottom: 10px;
 }
+
+.ShopPage .Spinner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+}

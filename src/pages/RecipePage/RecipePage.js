@@ -182,20 +182,20 @@ const RecipePage = props =>{
                 <span className='Words'>Recipes from around the world </span>
             </div>
             { loadedRecipes && !loading ? <>
-            <div className='Search'>
-                <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
-            </div>
-            <Container>
+                <div className='Search'>
+                    <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
+                </div>
+                <Container>
+                    { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
+                    { ( loadedRecipes && !loading ) && recipeCardFormat }
+                    { loadedRecipes && <div className='d-flex justify-content-end'> <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> </div> }
+                    { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }
+                </Container> </> : <>
                 { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
-                { ( loadedRecipes && !loading ) && recipeCardFormat }
-                { loadedRecipes && <div className='d-flex justify-content-end'> <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> </div> }
-                { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }
-            </Container> </> : <>
-            { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
-            <div className='Spinner'>
-                <Spinner animation="border" role="status" />
-                <div>Loading...</div>
-            </div>
+                <div className='Spinner'>
+                    <Spinner animation="border" role="status" />
+                    <div>Loading...</div>
+                </div>
             </>}
         </div>
     )
