@@ -51,7 +51,6 @@ const ShopPage = props => {
         const callToServer = async() => {
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'shop/getAllReviewsForProducts/');
-                console.log(responseData)
                 setLoadedReviews(responseData);
             } catch(err){ /*Errors handled in hook */ }
         }
@@ -133,7 +132,7 @@ const ShopPage = props => {
     }, [error])
 
     let numberOfPages, shopProducts
-    if(loadedReviews !== undefined && (loadedProducts && !loadedReviews)){
+    if(loadedReviews !== undefined && (loadedProducts || !loadedReviews)){
         //Next three lines are needed for pagination
         const indexStart = (~ITEMS_PER_PAGE + 1) + (ITEMS_PER_PAGE * pageNumber);
         const indexEnd = indexStart + ITEMS_PER_PAGE;
@@ -141,6 +140,8 @@ const ShopPage = props => {
 
         shopProducts = loadedProducts.slice(indexStart, indexEnd).map(product => { 
             let productReview = loadedReviews.filter(x => x.shopifyId === product.id );
+            //If there happens to be no reviews, set it to 0
+            if(productReview.length === 0){ productReview.push({rating: 0}); }
             return <ProductCard key={product.id} rating={productReview[0].rating} product={product} id={product.id} title={product.title} description={product.description} image={product.images[0].src} /> 
         })
     }
@@ -150,7 +151,7 @@ const ShopPage = props => {
             <div className='Title'>
                 <span className='Words'>{headerText}</span>
             </div>
-            { ( loadedReviews === undefined || (!loadedProducts || loadedReviews) ) ? <>
+            { ( loadedReviews === undefined && (!loadedProducts || loadedReviews) ) ? <>
                 { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
                 <div className='Spinner'>
                     <Spinner animation="border" />

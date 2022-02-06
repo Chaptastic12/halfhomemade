@@ -72,6 +72,14 @@
     /* margin-right: 50px; */
 }
 
+.Site-Nav .Login .btn{
+    font-size: 18px;
+}
+
+.Site-Nav .Login input{
+    size: 50px;
+}
+
 .Site-Nav .Bottom-Nav {
     background-color: white;
 }
@@ -93,6 +101,15 @@
     min-height: 130px;
     background-color: rgba(33, 32, 54, 0.85);
     color: white;
+}
+
+.Site-Nav .Login .SearchBar{
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+    width: 80%;
 }
 
 @media screen and (max-width: 515px){

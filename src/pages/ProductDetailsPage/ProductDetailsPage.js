@@ -28,7 +28,6 @@ const ProductDetailsPage = props => {
     const [ canSubmitReview, setCanSubmitReview ] = useState(true);
     const [ refreshPage, setRefreshpage ] = useState(false);
 
-    console.log(refreshPage)
     const { sendRequest } = useHttp();
 
     //Get the product for our page; must be done first

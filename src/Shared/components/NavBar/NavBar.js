@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Row, Col, Button, DropdownButton } from 'react-bootstrap'
 
+import NavBarSearch from './NavBarSearch';
 import NavAlert from './NavAlert';
 import BottomNav from './BottomNav';
 import NavCanvas from '../UI Elements/NavCanvas';
@@ -19,6 +20,7 @@ const NavBar = props => {
     const history = useHistory();
 
     const [ showMobileNav, setShowMobileNav ] = useState(false);
+    const [ showSearch, setShowSearch ] = useState(false);
 
     const { handleCartShow } = useContext(SideDrawerContext);
     const { userState, logoutUser } = useContext(AuthContext);
@@ -33,6 +35,10 @@ const NavBar = props => {
     const logoutAndRedirect = () =>{
         logoutUser();
         setTimeout(()=> { history.push('/') }, 500);
+    }
+
+    const handleSearch = (page, text) =>{
+        console.log(page, text);
     }
 
     const adminOptions = [
@@ -82,13 +88,17 @@ const NavBar = props => {
                         <div>Homemade</div>
                     </div>
                 </Col>
-
-               
                 
                 <Col className='d-none d-md-block'>
                     <div className='Login'>
-                        { loginOrProfile } { logoutButton } 
-                        <Button variant='outline-none' className='NavBar-Button' onClick={()=>handleCartShow()}>Cart ({quantityInCart})<i className="fas fa-shopping-cart"/></Button>
+                        { !showSearch ? 
+                            <>
+                                <Button variant='outline-none' className='NavBar-Button' onClick={() =>setShowSearch(true)}>Search <i className='fas fa-search' /></Button>    
+                                { loginOrProfile } { logoutButton } 
+                                <Button variant='outline-none' className='NavBar-Button' onClick={()=>handleCartShow()}>Cart <i className="fas fa-shopping-cart"/>({quantityInCart})</Button>
+                            </> : 
+                                <NavBarSearch handleSearch={(page, text) => handleSearch(page, text)} setShowSearch={(val) => setShowSearch(val)} />
+                        }
                     </div>
                 </Col>
 

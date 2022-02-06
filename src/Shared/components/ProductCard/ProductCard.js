@@ -32,7 +32,6 @@ const ProductCard = props => {
         showPrice = <><strike style={{color: 'grey', marginRight: '10px'}}> ${ price } </strike> ${ comparePrice } </>
     }
 
-    console.log(props.rating)
     return (
         <Col xs='auto' md={4} lg={3} className='ProductCard' key={props.product.id} onClick={() => onCardClickHandler()}>
             <Card className='Card cust-shadow-sm' onMouseEnter={() => setOpacity(prevState => !prevState)} onMouseLeave={() => setOpacity(prevState => !prevState)}>

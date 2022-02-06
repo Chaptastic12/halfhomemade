@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
 import AlertDisplay from '../../../Shared/components/UI Elements/Alert/AlertDisplay';
@@ -76,7 +76,7 @@ const RecipeReviews = props =>{
         submitToServer();
     }
 
-    return (
+    return (<Container>
         <div className='RecipePageDetails-Review'>
             <p className='RecipePageDetails-ReviewText'>
                 {/* Showing latest {amountOfReviews} reviews of {loadedRecipe.reviews.length} <Button size='sm' variant='outline-dark' onClick={() => setAmountOfReviews(loadedRecipe.reviews.length)}>View all</Button>  */}
@@ -100,10 +100,11 @@ const RecipeReviews = props =>{
                         isAdmin={userState.isAdmin} 
                         edit={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, rating, text, null, reviewID)} 
                         delete={(type, rating, text, ratingSet, reviewID) => submitReviewToServer(type, null, null, null, reviewID)}/>
-                    )} 
+                )}
+                {loadedRecipe.reviews.length === 0 && <div>No reviews</div>} 
             </div>
         </div>
-    )
+    </Container>)
 }
 
 export default RecipeReviews;
