@@ -4,6 +4,7 @@ import moment from 'moment';
 import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { encryptData } from '../../../Shared/utils/util';
+import AlertDisplay from '../../../Shared/components/UI Elements/Alert/AlertDisplay';
 
 import { AuthContext } from '../../../Shared/context/auth-context'
 import { useHttp } from '../../../Shared/hooks/http-hook';
@@ -68,8 +69,14 @@ const LoginForm = props =>{
         sendToServer();
     }
 
+    useEffect(() =>{
+        if(error){
+            setLocalError(error);
+        }
+    }, [error])
+
     return(<>
-            {error && <h1>{ error }</h1>} {localError && <h1>{ localError }</h1>}
+            { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
             <Form className='LoginForm' onSubmit={submitFormHandler}>
                 {!props.isLogin && <>   
                     <Form.Group className="mb-3" controlId="formBasicEmail">

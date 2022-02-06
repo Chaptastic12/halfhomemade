@@ -6,6 +6,7 @@ import PaginationComponent from '../../Shared/components/UI Elements/Pagination/
 
 import { Spinner, Row, Container } from 'react-bootstrap';
 
+import AlertDisplay from '../../Shared/components/UI Elements/Alert/AlertDisplay';
 import ProductCard from '../../Shared/components/ProductCard/ProductCard';
 import ProductSearch from'../../Shared/components/ProductSearch/ProductSearch';
 
@@ -17,7 +18,7 @@ const ITEMS_PER_PAGE = 8;
 
 const ShopPage = props => {
 
-    const { sendRequest } = useHttp();
+    const { sendRequest, error } = useHttp();
     const { products, collections, collection } = useContext(ShopContext);
     const { searchItem, searchParam } = useContext(SearchContext)
 
@@ -26,6 +27,7 @@ const ShopPage = props => {
     const [ showAll, setShowAll ] = useState(true);
     const [ pageNumber, setPageNumber ] = useState(1);
     const [ loadedReviews, setLoadedReviews ] = useState([]);
+    const [ localError, setLocalError ] = useState('');
 
     useEffect(() =>{
         window.scrollTo(0,0);
@@ -122,10 +124,20 @@ const ShopPage = props => {
             searchFormSubmitHandler({id: 'all'}, '', null);
         }
     //eslint-disable-next-line
-    }, [searchParam, searchItem])
+    }, [searchParam, searchItem]);
+
+    useEffect(()=>{
+        if(error){
+            setLocalError(error)
+        }
+    }, [error])
     
-    if(!loadedProducts){
-        return <div className='spinner'><Spinner animation="border" /></div>
+    //Ensure that everything we need has loaded in
+    if(loadedReviews === undefined || (!loadedProducts || loadedReviews)){
+        return <>
+                { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
+                <div className='spinner'><Spinner animation="border" /></div>
+            </>
     } else {
         //Next three lines are needed for pagination
         const indexStart = (~ITEMS_PER_PAGE + 1) + (ITEMS_PER_PAGE * pageNumber);

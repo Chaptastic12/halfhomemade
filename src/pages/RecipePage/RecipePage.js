@@ -6,7 +6,7 @@ import PaginationComponent from '../../Shared/components/UI Elements/Pagination/
 import AlertDisplay from '../../Shared/components/UI Elements/Alert/AlertDisplay';
 
 import { NavLink } from 'react-router-dom';
-import { Container, Row, Button } from 'react-bootstrap'
+import { Container, Row, Button, Spinner } from 'react-bootstrap'
 
 import { AuthContext } from '../../Shared/context/auth-context';
 import { SearchContext } from '../../Shared/context/search-context';
@@ -21,7 +21,7 @@ const RecipePage = props =>{
     const { userState } = useContext(AuthContext);
     const { searchParam, searchItem } = useContext(SearchContext);
 
-    const { sendRequest } = useHttp();
+    const { sendRequest, error } = useHttp();
 
     const [ loadedRecipes, setLoadedRecipes ] = useState([]);
     const [ allRecipes, setAllRecipes ] = useState([]);
@@ -145,15 +145,22 @@ const RecipePage = props =>{
             //setFilterText('')
             setLoadedRecipes(allRecipes);
         }
-
     //eslint-disable-next-line
     }, [allRecipes, searchParam, searchItem ]);  
 
-    let recipeCardFormat;
+    //After making our API calls, check if we got an error.
+    useEffect(()=>{
+        if(error){
+            setLocalError(error);
+        }
+    }, [error])
+
+    let recipeCardFormat, numberOfPages;
     //Protect the site if the server goes down
     if(loadedRecipes && !loading){
         const indexStart = (~ITEMS_PER_PAGE + 1) + (ITEMS_PER_PAGE * pageNumber);
         const indexEnd = indexStart + ITEMS_PER_PAGE;
+        numberOfPages = Math.ceil((loadedRecipes.length)/ITEMS_PER_PAGE)
 
         const serverRecipes = loadedRecipes.slice(indexStart, indexEnd).map(recipe => {
             //Update the URl for our images and how the createdAt is formatted.
@@ -167,33 +174,31 @@ const RecipePage = props =>{
                 adminPage={props.admin}/>
         })
         recipeCardFormat = <Row>{serverRecipes}</Row>
-    } else {
-        recipeCardFormat = <Row>EROR: UNABLE TO REACH SITE...</Row>
-    }
+    } 
 
-    const numberOfPages = Math.ceil((loadedRecipes.length)/ITEMS_PER_PAGE)
-
-    if(props.admin){
-        return <div className='RecipePage'> { recipeCardFormat } </div>
-    } else {
-        return(
-            <div className='RecipePage'>
-                <div className='Title'>
-                    <span className='Words'>Recipes from around the world </span>
-                </div>
-                <div className='Search'>
-                    <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
-                </div>
-                <Container>
-                    { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
-                    { ( loadedRecipes && !loading ) && recipeCardFormat }
-                    { loadedRecipes && <div className='d-flex justify-content-end'> <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> </div> }
-                    { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }
-                </Container>
+    return(
+        <div className='RecipePage'>
+            <div className='Title'>
+                <span className='Words'>Recipes from around the world </span>
             </div>
-        )
-    }
-    
+            { loadedRecipes && !loading ? <>
+            <div className='Search'>
+                <RecipeSearch books={books} submitRecipeSearch={(title, tag, book, rating)=> recipeSearchHandler(title, tag, book, rating)} existingData={{searchParam, searchItem}} />
+            </div>
+            <Container>
+                { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
+                { ( loadedRecipes && !loading ) && recipeCardFormat }
+                { loadedRecipes && <div className='d-flex justify-content-end'> <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> </div> }
+                { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }
+            </Container> </> : <>
+            { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
+            <div className='Spinner'>
+                <Spinner animation="border" role="status" />
+                <div>Loading...</div>
+            </div>
+            </>}
+        </div>
+    )
 }
 
 export default RecipePage;

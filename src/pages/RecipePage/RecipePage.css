@@ -25,3 +25,10 @@
     color: white;
     margin-bottom: 10px;
 }
+
+.RecipePage .Spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:500px;
+}
