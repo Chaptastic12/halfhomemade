@@ -58,6 +58,7 @@ const ShopPage = props => {
     // eslint-disable-next-line
     },[]);
 
+    //Logic for getting to the end result of products
     const searchFormSubmitHandler = (collection, filterText, instock, sale) => {
         let finalSearchedProducts;
         //If we are set to look at all products
@@ -94,13 +95,17 @@ const ShopPage = props => {
 
         if(instock){
             finalSearchedProducts = finalSearchedProducts.filter(x => x.availableForSale === true );
-            setLoadedProducts(finalSearchedProducts);
-        }else{
+        }
+        if(finalSearchedProducts.length === 0){
+            setLocalError('Nothing found matching your search critera; Showing all products');
+            setLoadedProducts(products)
+        }else {
+            setLocalError('')
             setLoadedProducts(finalSearchedProducts);
         }
-
     }
 
+    //Once we've verified that we have poducts, check if we passed in any search params
     useEffect(() => {
         if(loadedProducts){
             if(searchParam !== null){
@@ -124,11 +129,12 @@ const ShopPage = props => {
     //eslint-disable-next-line
     }, [searchParam, searchItem]);
 
+    //See if we have an error; if so, set it
     useEffect(()=>{
         if(error){
             setLocalError(error)
         }
-    }, [error])
+    }, [error]);
 
     let numberOfPages, shopProducts
     if(loadedReviews !== undefined && (loadedProducts || !loadedReviews)){
@@ -160,6 +166,7 @@ const ShopPage = props => {
                 <div className='Search'>
                     <ProductSearch collections={collections} submitSearch={(id, text, instock, sale) => searchFormSubmitHandler(id, text, instock, sale)} existingData={{searchParam, searchItem}} />
                 </div>
+                { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
                 <Container>
                     <Row className='Products'>
                         { shopProducts }

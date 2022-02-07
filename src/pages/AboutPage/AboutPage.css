@@ -37,7 +37,7 @@
 .AboutPage .Image{
     height: 250px;
     object-fit: contain;
-    border-radius: 50%;
+    border-radius: 25%;
     padding: 10px;
 }
 

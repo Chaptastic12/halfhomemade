@@ -11,14 +11,24 @@ const NavBarSearch = props =>{
 
     const [ searchPage, setSearchPage ] = useState('');
     const [ searchText, setSearchText ] = useState('');
+    const [ localError, setLocalError ] = useState('');
 
     const history = useHistory();
 
     const { setSearchItem, setSearchParam } = useContext(SearchContext);
 
     const handleSearch = () =>{
+        if(searchPage === '' || searchText === ''){
+            setLocalError('Please fill out all fields');
+            return;
+        }
+
+        //Clear any error messages and set our search up
+        setLocalError('');
         setSearchParam('text');
         setSearchItem(searchText);
+
+        //determine where to push
         switch (searchPage){
             case 'products':
                 history.push('/shop/search/filter');
@@ -34,6 +44,7 @@ const NavBarSearch = props =>{
 
     return(
         <div className='SearchBar'>
+            <p>{localError && localError}</p>
             <InputGroup size='sm'>
                 <FormControl
                 placeholder="Search"
