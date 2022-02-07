@@ -77,9 +77,7 @@ const RecipePage = props =>{
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'books/getAllBooks');
                 setBooks(responseData);
-            } catch(err){
-                //Errors handled in hook
-            }
+            } catch(err){ /*Errors handled in hook*/ }
         }
         getFromServer();
         // eslint-disable-next-line 
@@ -87,8 +85,8 @@ const RecipePage = props =>{
 
     //Make a call to our API to get our recipes
     useEffect(() => {
-            //Reach out to our server
-            const callToServer = async() => {
+        //Reach out to our server
+        const callToServer = async() => {
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/showAllRecipes');
                 //Update state for the recipes we show; Keep a back up of all our recipes for searching.
@@ -101,29 +99,26 @@ const RecipePage = props =>{
         }
         callToServer();
         setDeletedRecipe(false);
-
     },[deletedRecipe, searchParam, sendRequest, setLoadedRecipes]);
 
     //Check if we are filtering down via the URL
     useEffect(() => {
-        if(searchParam !== null){
-            if(allRecipes.length > 0){
-                switch(searchParam){
-                    case 'text':
-                        recipeSearchHandler(searchItem, null, null, null);
-                        break;
-                    case 'tag':
-                        recipeSearchHandler(null, searchItem, null, null);
-                        break;
-                    case 'book':
-                        recipeSearchHandler(null, null, searchItem, null);
-                        break;
-                    case 'stars':
-                        recipeSearchHandler(null, null, null, searchItem);
-                        break;
-                    default:
-                        break;
-                }
+        if((searchParam !== null) && (allRecipes.length >0)){
+            switch(searchParam){
+                case 'text':
+                    recipeSearchHandler(searchItem, null, null, null);
+                    break;
+                case 'tag':
+                    recipeSearchHandler(null, searchItem, null, null);
+                    break;
+                case 'book':
+                    recipeSearchHandler(null, null, searchItem, null);
+                    break;
+                case 'stars':
+                    recipeSearchHandler(null, null, null, searchItem);
+                    break;
+                default:
+                    break;
             }
         }else{
             //setFilterText('')
@@ -139,14 +134,14 @@ const RecipePage = props =>{
         }
     }, [error])
 
-    let recipeCardFormat, numberOfPages;
+    let serverRecipes, numberOfPages;
     //Protect the site if the server goes down
     if(loadedRecipes && !loading){
         const indexStart = (~ITEMS_PER_PAGE + 1) + (ITEMS_PER_PAGE * pageNumber);
         const indexEnd = indexStart + ITEMS_PER_PAGE;
         numberOfPages = Math.ceil((loadedRecipes.length)/ITEMS_PER_PAGE)
 
-        const serverRecipes = loadedRecipes.slice(indexStart, indexEnd).map(recipe => {
+        serverRecipes = loadedRecipes.slice(indexStart, indexEnd).map(recipe => {
             //Update the URl for our images and how the createdAt is formatted.
             recipe.recipeBook.bookImage = recipe.recipeBook.bookImage.replace(/\\/g, '/');
             recipe.recipeImage = recipe.recipeImage.replace(/\\/g, '/');
@@ -157,7 +152,6 @@ const RecipePage = props =>{
                 delete={() => setDeletedRecipe(true)} 
                 adminPage={props.admin}/>
         })
-        recipeCardFormat = <Row>{serverRecipes}</Row>
     } 
 
     return(
@@ -171,16 +165,17 @@ const RecipePage = props =>{
                 </div>
                 <Container>
                     { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
-                    { ( loadedRecipes && !loading ) && recipeCardFormat }
+                    { ( loadedRecipes && !loading ) && <Row>{serverRecipes}</Row> }
                     { loadedRecipes && <div className='d-flex justify-content-end'> <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> </div> }
                     { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }
-                </Container> </> : <>
+                </Container> 
+            </> : <>
                 { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
                 <div className='Spinner'>
                     <Spinner animation="border" role="status" />
                     <div>Loading...</div>
                 </div>
-            </>}
+            </> }
         </div>
     )
 }

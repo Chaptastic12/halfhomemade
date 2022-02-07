@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
+
 import { useHistory } from 'react-router-dom';
-
 import { v4 as uuid } from 'uuid';
-
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
 import { SearchContext } from '../../context/search-context';
 
-const RecipeSearch = React.memo(props => {
+const RecipeSearch = props => {
 
     const { setSearchItem, setSearchParam } = useContext(SearchContext);
 
@@ -16,31 +15,29 @@ const RecipeSearch = React.memo(props => {
     const [ searchBook, setSearchBook ] = useState(props.books[0]);
     const [ rating, setRating ] = useState(0);
 
+    const history = useHistory();
+
     useEffect(() => {
         //Check if we are passing in parameters we want to show immediately
         if(props.existingData){
             //If we have a tag we're filtering by, display it in the input field; Otherwise, set it to null
             if(props.existingData.searchParam === 'tag'){
                 setSearchTag(props.existingData.searchItem);
-            }else{
-                //setSearchTag(null);
             }
+            //Set the title field if we are passing in a value
             if(props.existingData.searchParam === 'text'){
                 setSearchTitle(props.existingData.searchItem);
             }
+            //Set our book if we are searching by a specific one
             if(props.existingData.searchParam === 'book'){
                 setSearchBook(props.existingData.searchItem);
             }
             //If we are filtering by stars, dispaly it in the drop down; otherwise, set it to be for all options
             if(props.existingData.searchParam === 'stars'){
                 setRating(props.existingData.searchItem);
-            }else{
-                //setRating(0)
             }
         }
     }, [props.existingData])
-
-    const history = useHistory();
 
     //Create our list of book options
     let bookOptions = props.books.map( book => {
@@ -52,7 +49,7 @@ const RecipeSearch = React.memo(props => {
             <Row>
                 <Form.Group className="mb-3" as={Col} xs={6} md='auto'>
                     <Form.Label><small>Title</small></Form.Label>
-                    <Form.Control size='sm' type="text" placeholder={searchTitle ? searchTitle : 'Search by Title'}  onChange={e => setSearchTitle(e.target.value)} />
+                    <Form.Control size='sm' type="text" placeholder={searchTitle ? searchTitle : 'Search by Title'}  value={searchTitle ? searchTitle : ''} onChange={e => setSearchTitle(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3" as={Col} xs={6} md='auto'>
                     <Form.Label><small>Tag</small></Form.Label>
@@ -77,16 +74,21 @@ const RecipeSearch = React.memo(props => {
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3 d-flex align-items-end" as={Col} xs={2} md='auto'>
-                    <Button type='button' size='sm' onClick={() => { props.submitRecipeSearch(searchTitle, searchTag, searchBook, rating); setSearchItem(null); setSearchParam(null) } } style={{marginRight: '5px'}}>
+                    <Button type='button' size='sm' 
+                        onClick={() => { props.submitRecipeSearch(searchTitle, searchTag, searchBook, rating); setSearchItem(null); setSearchParam(null)} } 
+                        style={{marginRight: '5px'}}
+                    >
                         Search
                     </Button>
-                    <Button type='button' size='sm' onClick={() => { props.submitRecipeSearch('', '', '', 0); history.push('/recipes/search/all');} }>
+                    <Button type='button' size='sm' 
+                        onClick={() => { props.submitRecipeSearch('', '', '', 0); history.push('/recipes/search/all'); setSearchItem(null); setSearchParam(null)} }
+                    >
                         Cancel
                     </Button>
                 </Form.Group>
             </Row>
         </div>
     )
-})
+}
 
 export default RecipeSearch;
