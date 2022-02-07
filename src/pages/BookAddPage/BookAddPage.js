@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 
 import { Form, Row, Col, Button, Container } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 import { AuthContext } from '../../Shared/context/auth-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
@@ -11,6 +12,7 @@ const BookAddPage = props =>{
 
     const { userState } = useContext(AuthContext);
     const { submitting, error, sendRequest } = useHttp();
+    const history = useHistory();
 
     const [ bookTitle, setBookTitle ] = useState('');
     const [ bookImg, setBookImg ] = useState('');
@@ -56,7 +58,9 @@ const BookAddPage = props =>{
         const sendToServer = async () => {
             try{
                 const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'books/add', 'POST', 'include', {Authorization: `Bearer ${userState.token}`}, formData, true);
-                console.log(responseData);
+                if(responseData){
+                    history.push('/');
+                }
             } catch(err){
                 //Errors handled in hook
             }

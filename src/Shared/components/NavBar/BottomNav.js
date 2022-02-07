@@ -18,6 +18,10 @@ const BottomNav = props =>{
         { to: '/shop/search/all', clickParam: null, clickItem: null, desc: 'View All Products'},
         { to: '/shop/search/shirts', clickParam: 'text', clickItem: 'shirt', desc: 'View Shirts'}
     ]
+
+    const bookNavOptions = [
+        { to: '/books/search/all', clickParam: null, clickItem: null, desc: 'View All Books'}
+    ]
     
     return (
             <Row className='text-center justify-content-center'>
@@ -28,6 +32,12 @@ const BottomNav = props =>{
                         </DropdownButton>
                     </Col>
                     <Col xs='auto'>
+                        <DropdownButton title={`Books`} variant='outline-none' className='NavBar-Button'>
+                            <DropDownItemHelper data={bookNavOptions} searchLink={true} />
+                            {props.books && <DropDownItemHelper data={props.books} books={true} /> }
+                        </DropdownButton> 
+                    </Col>
+                    <Col xs='auto'>
                         <DropdownButton title={`Shop`} variant='outline-none' className='NavBar-Button'>
                             <DropDownItemHelper data={ShopNavOptions} searchLink={true} />
                             <DropDownItemHelper data={props.collections} collections={true} />
@@ -35,9 +45,6 @@ const BottomNav = props =>{
                     </Col>
                     <Col xs='auto'>
                         <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/about">About</Button>
-                    </Col>
-                    <Col xs='auto'>
-                        <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/blog/all">Blog</Button>
                     </Col>
                 </div>
             </Row>

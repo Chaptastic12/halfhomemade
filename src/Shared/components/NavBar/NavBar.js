@@ -12,6 +12,7 @@ import DropDownItemHelper from '../../utils/DropDownItemHelper';
 import { SideDrawerContext } from '../../context/sidedrawer-context';
 import { AuthContext } from '../../context/auth-context';
 import { ShopContext } from '../../context/shop-context';
+import { ServerContext } from '../../context/server-context';
 
 import './NavBar.css';
 
@@ -25,10 +26,16 @@ const NavBar = props => {
     const { handleCartShow } = useContext(SideDrawerContext);
     const { userState, logoutUser } = useContext(AuthContext);
     const { quantityInCart, fetchAllCollections, fetchAllProducts, collections } = useContext(ShopContext);
+    const { books, getBooksFromServer, getRecipesFromServer, getProductReviewsFromServer } = useContext(ServerContext)
 
+
+    //Get everything we need for the site loaded
     useEffect(() => {
         fetchAllCollections();
         fetchAllProducts();
+        getBooksFromServer();
+        getRecipesFromServer();
+        getProductReviewsFromServer();
     // eslint-disable-next-line
     }, [])
 
@@ -107,7 +114,7 @@ const NavBar = props => {
              </Row>
 
              <div className='Bottom-Nav'>
-                <BottomNav collections={collections}/>
+                <BottomNav collections={collections} books={books}/>
              </div>
              
              <NavCanvas showNav={showMobileNav} closeNav={() => setShowMobileNav(false)} />

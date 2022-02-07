@@ -10,6 +10,7 @@ import { Container, Row, Button, Spinner } from 'react-bootstrap'
 
 import { AuthContext } from '../../Shared/context/auth-context';
 import { SearchContext } from '../../Shared/context/search-context';
+import { ServerContext } from '../../Shared/context/server-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
 
 import './RecipePage.css';
@@ -20,15 +21,15 @@ const RecipePage = props =>{
 
     const { userState } = useContext(AuthContext);
     const { searchParam, searchItem } = useContext(SearchContext);
+    const { books, allRecipes, getRecipesFromServer } = useContext(ServerContext)
 
-    const { sendRequest, error } = useHttp();
+    const { error } = useHttp();
 
     const [ loadedRecipes, setLoadedRecipes ] = useState([]);
-    const [ allRecipes, setAllRecipes ] = useState([]);
+    // eslint-disable-next-line
     const [ deletedRecipe, setDeletedRecipe ] = useState(false);
     const [ localError, setLocalError ] = useState('');
     const [ pageNumber, setPageNumber ] = useState(1);
-    const [ books, setBooks ] = useState([]);
     const [ loading, setLoading ] = useState(true);
 
     useEffect(() =>{
@@ -70,40 +71,9 @@ const RecipePage = props =>{
         }
     }
 
-    //useEffect to get our list of book options
-    useEffect( () => {
-        //Get our books that can be chosen as a source for the recipe
-        const getFromServer = async() => {
-            try{
-                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'books/getAllBooks');
-                setBooks(responseData);
-            } catch(err){ /*Errors handled in hook*/ }
-        }
-        getFromServer();
-        // eslint-disable-next-line 
-    },[setBooks])
-
-    //Make a call to our API to get our recipes
-    useEffect(() => {
-        //Reach out to our server
-        const callToServer = async() => {
-            try{
-                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/showAllRecipes');
-                //Update state for the recipes we show; Keep a back up of all our recipes for searching.
-                setAllRecipes(responseData);
-                if(searchParam === null){
-                    setLoadedRecipes(responseData);
-                    setLoading(false)
-                }
-            } catch(err){ /* Errors handled in hook */ }
-        }
-        callToServer();
-        setDeletedRecipe(false);
-    },[deletedRecipe, searchParam, sendRequest, setLoadedRecipes]);
-
     //Check if we are filtering down via the URL
     useEffect(() => {
-        if((searchParam !== null) && (allRecipes.length >0)){
+        if((searchParam !== null) && (allRecipes.length > 0)){
             switch(searchParam){
                 case 'text':
                     recipeSearchHandler(searchItem, null, null, null);
@@ -121,11 +91,17 @@ const RecipePage = props =>{
                     break;
             }
         }else{
-            //setFilterText('')
+            setLoadedRecipes(allRecipes);
+            setLoading(false);
+        }
+        //Check if we have deleted any recipes or not
+        if(deletedRecipe){
+            getRecipesFromServer();
             setLoadedRecipes(allRecipes);
         }
+        setDeletedRecipe(false);
     //eslint-disable-next-line
-    }, [allRecipes, searchParam, searchItem ]);  
+    }, [deletedRecipe, allRecipes, searchParam, searchItem]); 
 
     //After making our API calls, check if we got an error.
     useEffect(()=>{
@@ -165,8 +141,8 @@ const RecipePage = props =>{
                 </div>
                 <Container>
                     { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
-                    { ( loadedRecipes && !loading ) && <Row>{serverRecipes}</Row> }
-                    { loadedRecipes && <div className='d-flex justify-content-end'> <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> </div> }
+                     <Row>{serverRecipes}</Row> 
+                    <div className='d-flex justify-content-end'> <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> </div>
                     { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }
                 </Container> 
             </> : <>

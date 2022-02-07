@@ -14,7 +14,7 @@ const DropDownItemHelper = props =>{
     if(props.collections){
         if(props.footer){
             link = props.data.map(collection =>{
-                return <li key={uuid()}><NavLink as={NavLink} 
+                return <li key={uuid()}><NavLink
                             to={`/shop/search/${collection.title.replace(/\s/g,'').toLowerCase()}`} 
                             onClick={ () => { setSearchParam('collection'); setSearchItem(collection) } }
                         >
@@ -29,6 +29,28 @@ const DropDownItemHelper = props =>{
                         >
                             View {collection.title}
                         </Dropdown.Item> 
+            })
+        }
+    }
+
+    if(props.books){
+        if(props.footer){
+            link = props.data.map(book =>{
+                return <li key={uuid()}><NavLink
+                            to={`books/search/${book.bookTitle.replace(/\s/g,'').toLowerCase()}`}
+                            onClick={ () => { setSearchParam('book'); setSearchItem(book) } }
+                        >
+                            View {book.bookTitle}    
+                        </NavLink></li>
+            })
+        }else{
+            link = props.data.map(book =>{
+                return <Dropdown.Item key={uuid()} as={NavLink}
+                            to={`books/search/${book.bookTitle.replace(/\s/g,'').toLowerCase()}`}
+                            onClick={ () => { setSearchParam('book'); setSearchItem(book) } }
+                        >
+                            View {book.bookTitle}    
+                        </Dropdown.Item>
             })
         }
     }

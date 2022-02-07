@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { ShopContext } from '../../Shared/context/shop-context';
 import { SearchContext } from '../../Shared/context/search-context';
+import { ServerContext } from '../../Shared/context/server-context';
 import PaginationComponent from '../../Shared/components/UI Elements/Pagination/Pagination';
 
 import { Spinner, Row, Container } from 'react-bootstrap';
@@ -18,15 +19,15 @@ const ITEMS_PER_PAGE = 8;
 
 const ShopPage = props => {
 
-    const { sendRequest, error } = useHttp();
+    const { error } = useHttp();
     const { products, collections, collection } = useContext(ShopContext);
     const { searchItem, searchParam } = useContext(SearchContext)
+    const { loadedReviews } = useContext(ServerContext);
 
     const [ loadedProducts, setLoadedProducts ] = useState(products);
     const [ headerText, setHeaderText ] = useState('Showing all products');
     const [ showAll, setShowAll ] = useState(true);
     const [ pageNumber, setPageNumber ] = useState(1);
-    const [ loadedReviews, setLoadedReviews ] = useState([]);
     const [ localError, setLocalError ] = useState('');
 
     useEffect(() =>{
@@ -45,18 +46,6 @@ const ShopPage = props => {
         }   
     // eslint-disable-next-line
     }, [ collection, products ]);
-
-    useEffect(() =>{
-        //Reach out to our server
-        const callToServer = async() => {
-            try{
-                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'shop/getAllReviewsForProducts/');
-                setLoadedReviews(responseData);
-            } catch(err){ /*Errors handled in hook */ }
-        }
-        callToServer();
-    // eslint-disable-next-line
-    },[]);
 
     //Logic for getting to the end result of products
     const searchFormSubmitHandler = (collection, filterText, instock, sale) => {
