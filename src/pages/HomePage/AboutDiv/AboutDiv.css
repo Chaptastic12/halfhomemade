@@ -26,6 +26,10 @@
     text-decoration: underline;
 }
 
+.AboutDiv .LearnMore a{
+    color: black;
+}
+
 .AboutDiv-Button{
     margin:2.5px;
 }

@@ -28,6 +28,9 @@ const RecipeSearch = React.memo(props => {
             if(props.existingData.searchParam === 'text'){
                 setSearchTitle(props.existingData.searchItem);
             }
+            if(props.existingData.searchParam === 'book'){
+                setSearchBook(props.existingData.searchItem);
+            }
             //If we are filtering by stars, dispaly it in the drop down; otherwise, set it to be for all options
             if(props.existingData.searchParam === 'stars'){
                 setRating(props.existingData.searchItem);
@@ -41,7 +44,7 @@ const RecipeSearch = React.memo(props => {
 
     //Create our list of book options
     let bookOptions = props.books.map( book => {
-        return <option key={uuid()} value={book}>{book.bookTitle}</option>
+        return <option key={uuid()} value={book._id}>{book.bookTitle}</option>
     })
    
     return (

@@ -75,7 +75,7 @@ const LoginForm = props =>{
         }
     }, [error])
 
-    return(<>
+    return(<div className='Login'>
             { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
             <Form className='LoginForm' onSubmit={submitFormHandler}>
                 {!props.isLogin && <>   
@@ -114,7 +114,7 @@ const LoginForm = props =>{
                     {props.isLogin ? (submitting ? 'Logging in' : 'Login') : (submitting ? 'Registering' : 'Register') }
                 </Button>
             </Form>
-        </>)
+        </div>)
 }
 
 export default LoginForm;

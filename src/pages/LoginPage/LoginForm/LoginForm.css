@@ -3,4 +3,12 @@
     border-radius: 0.25rem;
     padding:25px;
     margin:15px;
+    width: 50%;
+    min-width: 600px;
+}
+
+.Login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

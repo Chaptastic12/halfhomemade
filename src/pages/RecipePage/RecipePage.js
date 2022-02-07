@@ -54,7 +54,7 @@ const RecipePage = props =>{
         if(book != null){
             if(book.length > 0){
                 if(book !== undefined ){
-                    searchedRecipe = searchedRecipe.filter(x => x.recipeBook.id.includes(book._id));
+                    searchedRecipe = searchedRecipe.filter(x => x.recipeBook.id.includes(book));
                     //text.push('found in ' + book.bookTitle);
                 }
             }
