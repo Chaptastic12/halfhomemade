@@ -1,3 +1,17 @@
+.ProductDetails{
+    margin-top: 7vh;
+    width: 70%;
+}
+
+.ProductDetails .Options,
+.ProductDetails .Quantity{
+    margin-bottom: 10px;
+}
+
+.ProductDetails .Options .OptionGrouping{
+    margin-bottom: 10px;
+}
+
 .ProductDetails-Picture {
     height: 400px;
     width: 25vw;
@@ -8,8 +22,11 @@
 }
 
 .ProductDetails-Details{
-    margin-left:75px;
+    margin-left:15px;
     width: 40vw;
+}
+.RecipePageDetails-Options{
+    margin-top:25px;
 }
 
 @media screen and (max-width: 767px) {

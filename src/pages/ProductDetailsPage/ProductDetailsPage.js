@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Spinner, Container, Row, Col, Button } from 'react-bootstrap'
+import { Spinner, Container, Row, Col, Button, Form, InputGroup, FormControl } from 'react-bootstrap'
 import { v4 as uuid } from 'uuid';
 
 import RecipeReviews from '../RecipeDetailsPage/RecipeReviews/RecipeReviews';
@@ -139,10 +139,10 @@ const ProductDetailsPage = props => {
             })
 
             //Using the options we found above, create our select dropdown utilizing them. Then, push the finished option dropdown into productOptions
-            productOptions.push(<React.Fragment key={uuid()}>
-                            <label>{product.options[i].name}</label>
-                            <select value={selections[i]} onChange={e => { updateSelection(i, e.target.value); findVariantID('price') } }>{options}</select>
-                        </React.Fragment>)
+            productOptions.push(<InputGroup key={uuid()} className='OptionGrouping'>
+                            <InputGroup.Text>{product.options[i].name}</InputGroup.Text>
+                            <Form.Select value={selections[i]} onChange={e => { updateSelection(i, e.target.value); findVariantID('price') } }>{options}</Form.Select>
+                        </InputGroup>)
         }
 
         //Update our selection when a user selects something new
@@ -162,7 +162,7 @@ const ProductDetailsPage = props => {
         }
 
         return (
-            <Container>
+            <Container className='ProductDetails'>
                 { localError && <h1>{ localError } </h1> }
                 <Row>
                     <Col s={12} className='d-flex justify-content-center align-items-center'>
@@ -171,12 +171,20 @@ const ProductDetailsPage = props => {
                         </div>
                     </Col>
                     <Col s={12} className='ProductDetails-Details'>
-                        <Row> <h2>{product.title} - { showPrice }</h2></Row>
-                        <Row>{product.description}</Row>
-                        <Row>{productOptions}</Row>
-                        <Row><label>Quantity</label><input type='number' value={quantity} onChange={e => setQuantity(e.target.value)}/></Row>
-                        <Row><br /></Row>
-                        <Row><Button onClick={() => findVariantID('add')}>Add to Cart</Button></Row>
+                        <h2>{product.title} - { showPrice }</h2>
+                        {product.description}
+                        <div className='Options'>
+                            <h5>Options</h5>
+                            {productOptions}
+                        </div>
+                        <div className='Quantity'>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Text>Quantity</InputGroup.Text>
+                                <FormControl placeholder="Quantity" aria-label="Quantity" type='number'
+                                    value={quantity} onChange={e => setQuantity(e.target.value)} />
+                            </InputGroup>
+                        </div>
+                        <Button onClick={() => findVariantID('add')}>Add to Cart</Button>
                     </Col>
                 </Row>
                 <Row>

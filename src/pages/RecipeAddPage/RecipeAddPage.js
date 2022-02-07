@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 
 import { useHistory, useParams } from 'react-router-dom';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
 import RecipeIngredientList from '../../Shared/components/RecipeIngredientList/RecipeIngredientList';
@@ -171,7 +171,7 @@ const RecipeDetailsPage = props =>{
     if(loadedRecipe.recipeSteps.length       > 0){ recipeStepText  = loadedRecipe.recipeSteps; }       else { recipeStepText  = ''  }
     if(loadedRecipe.recipeDesc.length        > 0){ recipeDescText  = loadedRecipe.recipeDesc; }        else { recipeDescText  = ''  }
 
-    return(
+    return(<div className='d-flex justify-content-center align-items-center'>
         <div className='RecipePageDetails'>
             {/* This section will make it easy for the admin to know that they are editing the page. It also alerts them to how to submit and use thise page */}
             <Row>
@@ -193,14 +193,18 @@ const RecipeDetailsPage = props =>{
                         <input id='file' type="file" ref={inputFile} name='recipeImage' accept='.jpg,.png,.jpeg,.webp' onChange={  e => submitRecipeImage(e.target.files) } style={{display: 'none'}} />
                     </div>
                     
-                    <div>
-                        <Form.Label>Book Selection</Form.Label>
-                        <Form.Select aria-label="Select Recipe Book" value={loadedRecipe.bookSelection} onChange={ e => setLoadedRecipe({ ...loadedRecipe, bookSelection: e.target.value}) }>
-                            <option>Select a Recipe Book</option>
-                            {bookOptions}
-                        </Form.Select>
-                        <Form.Label>Recipe Tags</Form.Label>
-                        <Form.Control type="text" value={loadedRecipe.recipeTags} placeholder="Recipe Tags" onChange={ e => setLoadedRecipe({...loadedRecipe, recipeTags: e.target.value}) }/>
+                    <div className='RecipePageDetails-Options'>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text>Book Choices</InputGroup.Text>
+                            <Form.Select aria-label="Select Recipe Book" value={loadedRecipe.bookSelection} onChange={ e => setLoadedRecipe({ ...loadedRecipe, bookSelection: e.target.value}) }>
+                                <option>Select a Recipe Book</option>
+                                {bookOptions}
+                            </Form.Select>
+                        </InputGroup>
+                        <InputGroup className="mb-3">
+                            <InputGroup.Text>Tags</InputGroup.Text>
+                            <Form.Control type="text" value={loadedRecipe.recipeTags} placeholder="Recipe Tags" onChange={ e => setLoadedRecipe({...loadedRecipe, recipeTags: e.target.value}) }/>
+                        </InputGroup>
                     </div>
                 </Col>
                 {/* This Col will hold the Title, Description, Ingredients and Instructions. It will check to see what to show based on if that field has been clicked on; If it has, allow editing. If not, show text
@@ -273,7 +277,7 @@ const RecipeDetailsPage = props =>{
                 </Col>
             </Row>
         </div>
-    )
+    </div>)
 }
 
 export default RecipeDetailsPage;

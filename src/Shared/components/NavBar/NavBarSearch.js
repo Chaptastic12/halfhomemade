@@ -40,6 +40,8 @@ const NavBarSearch = props =>{
                 //mistake if we get here
                 break;
         }
+        //Close the search input
+        props.setShowSearch(false);
     }
 
     return(

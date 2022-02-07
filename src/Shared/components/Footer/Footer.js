@@ -10,14 +10,14 @@ import './Footer.css';
 const Footer = props =>{
 
     const recipeNavOptions = [
-        { to: '/recipes/search/all', clickParam: null, clickItem: null, desc: 'All'},
-        { to: '/recipes/search/stars', clickParam: 'stars', clickItem: 5, desc: 'Best Reviewed'},
-        { to: '/recipes/search/japanese', clickParam: 'tag', clickItem:'japanese', desc: 'Japanese Dishes'},
-        { to: '/recipes/search/american', clickParam: 'tag', clickItem:'american', desc: 'American Dishes'}
+        { to: '/recipes/search/all', clickParam: null, clickItem: null, desc: 'All Recipes'},
+        { to: '/recipes/search/stars', clickParam: 'stars', clickItem: 5, desc: 'Best Reviewed Recipes'},
+        { to: '/recipes/search/japanese', clickParam: 'tag', clickItem:'japanese', desc: 'Japanese Recipes'},
+        { to: '/recipes/search/american', clickParam: 'tag', clickItem:'american', desc: 'American Recipes'}
     ];
 
     const ShopNavOptions = [
-        { to: '/shop/search/all', clickParam: null, clickItem: null, desc: 'View All'},
+        { to: '/shop/search/all', clickParam: null, clickItem: null, desc: 'View All Products'},
         { to: '/shop/search/shirts', clickParam: 'text', clickItem: 'shirt', desc: 'View Shirts'}
     ]
 

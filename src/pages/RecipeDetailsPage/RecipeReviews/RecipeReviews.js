@@ -80,9 +80,9 @@ const RecipeReviews = props =>{
         <div className='RecipePageDetails-Review'>
             <p className='RecipePageDetails-ReviewText'>
                 {/* Showing latest {amountOfReviews} reviews of {loadedRecipe.reviews.length} <Button size='sm' variant='outline-dark' onClick={() => setAmountOfReviews(loadedRecipe.reviews.length)}>View all</Button>  */}
-                Reviews
+                Reviews 
                 { userState.token && 
-                    <span>
+                    <span style={{marginLeft: '5px'}}>
                         <Button size='sm' variant='outline-dark' disabled={!canSubmitReview} onClick={() => setAllowEnterReview(prevState => !prevState)}>{canSubmitReview ? 'Write a Review' : 'Already Reviewed'}</Button>
                     </span>
                 }

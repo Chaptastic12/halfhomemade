@@ -47,7 +47,7 @@ const RecipeDetailsPage = props =>{
                     : 'Loading...'
 
     return(
-        <div className='d-flex justify-content-center'>
+        <div className='d-flex justify-content-center align-items-center'>
             <div className='RecipePageDetails'>
                 { loadedRecipe !== null && <div>
                     {/* This row shows the actual recipe */}
