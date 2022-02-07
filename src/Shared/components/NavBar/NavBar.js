@@ -99,7 +99,7 @@ const NavBar = props => {
                 </Col>
 
                 <Col className='d-block d-md-none'>
-                    <div className='Login' onClick={() => setShowMobileNav(true)}>
+                    <div className='Login justify-content-end' style={{marginRight: '25px'}} onClick={() => setShowMobileNav(true)}>
                         <i className="Hamburger fas fa-bars" />
                     </div>
                 </Col>
