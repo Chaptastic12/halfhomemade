@@ -30,7 +30,6 @@ const RecipePage = props =>{
     const [ pageNumber, setPageNumber ] = useState(1);
     const [ books, setBooks ] = useState([]);
     const [ loading, setLoading ] = useState(true);
-    //const [ filterText, setFilterText ] = useState('')
 
     useEffect(() =>{
         window.scrollTo(0,0);
@@ -40,47 +39,29 @@ const RecipePage = props =>{
         setLoading(true);       
         setLocalError('');     
 
-        //let text = [];
         let searchedRecipe = [ ...allRecipes ];
 
         //Check if we need to filter all the recipes down if we have a valid title parameter
-        if(title != null){
-            if(title.length > 0 ){
-                searchedRecipe = searchedRecipe.filter(x => x.recipeTitle.toLowerCase().includes(title.toLowerCase()));
-                //text.push('containing ' + title);
-            }
+        if((title != null) && (title.length > 0)){
+            searchedRecipe = searchedRecipe.filter(x => x.recipeTitle.toLowerCase().includes(title.toLowerCase()));
         }
         //Of the recipes that we filtered (or didn't filter) from the above, filter down again if we are searching by a valid book parameter
-        if(book != null){
-            if(book.length > 0){
-                if(book !== undefined ){
-                    searchedRecipe = searchedRecipe.filter(x => x.recipeBook.id.includes(book));
-                    //text.push('found in ' + book.bookTitle);
-                }
-            }
+        if((book != null) && (book.length > 0) && (book !== undefined) && (book !=='all')){
+            searchedRecipe = searchedRecipe.filter(x => x.recipeBook.id.includes(book));
         }
         //Of the recipes that we filtered (or didn't filter) from the above, filter down again if we are searching by a valid tag parameter
-        if(tag != null){
-            if(tag.length > 0 ){
-                searchedRecipe = searchedRecipe.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
-                //text.push('with tag ' + tag);
-            }
+        if((tag != null) && (tag.length >0)){
+            searchedRecipe = searchedRecipe.filter(x => x.recipeTags[0].toLowerCase().includes(tag.toLowerCase()));
         }
         //Of the recipes that we filtered (or didn't filter) from the above, filter down again if we are searching by a valid rating parameter
-        if(rating != null){
-            if(rating !== 0){ 
-                if(rating !== '0'){
-                    searchedRecipe = searchedRecipe.filter(x =>  x.recipeRating >= parseInt(rating) && x.recipeRating < ( parseInt(rating) + 1 ) );
-                    //text.push('and a rating of ' + rating);
-                }
-            }
+        if((rating != null) && (rating !== 0) && (rating !== '0')){
+            searchedRecipe = searchedRecipe.filter(x =>  x.recipeRating >= parseInt(rating) && x.recipeRating < ( parseInt(rating) + 1 ) );
         }
 
         //If, after all the above, we still have recipes remaining, set the created array as our new loadedRecipes
         //Otherwise, no recipes were found and we will just display all of them
         if(searchedRecipe.length > 0){
             setLoadedRecipes(searchedRecipe);
-            //setFilterText(text.join(', '));
             setLoading(false); 
         } else {
             setLocalError('No recipes found that match your search criteria; Showing all recipes')

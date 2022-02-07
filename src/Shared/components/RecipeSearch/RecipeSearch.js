@@ -61,6 +61,7 @@ const RecipeSearch = React.memo(props => {
                 <Form.Group className="mb-3" as={Col} xs={6} md='auto'>
                     <Form.Label><small>Book Selection</small></Form.Label>
                     <Form.Select size='sm' aria-label="Select Recipe Book" value={searchBook} onChange={ e => setSearchBook(e.target.value) }>
+                        <option key={uuid()} value='all'>All</option>
                         {bookOptions}
                     </Form.Select>
                 </Form.Group>
