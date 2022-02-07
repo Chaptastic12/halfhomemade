@@ -25,6 +25,9 @@ const RecipeSearch = React.memo(props => {
             }else{
                 //setSearchTag(null);
             }
+            if(props.existingData.searchParam === 'text'){
+                setSearchTitle(props.existingData.searchItem);
+            }
             //If we are filtering by stars, dispaly it in the drop down; otherwise, set it to be for all options
             if(props.existingData.searchParam === 'stars'){
                 setRating(props.existingData.searchItem);

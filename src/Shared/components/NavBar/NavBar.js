@@ -37,10 +37,6 @@ const NavBar = props => {
         setTimeout(()=> { history.push('/') }, 500);
     }
 
-    const handleSearch = (page, text) =>{
-        console.log(page, text);
-    }
-
     const adminOptions = [
         { to: '/userPage', desc: 'Profiile'},
         { to: '/recipes/add', desc: 'Add Recipe'},
@@ -97,7 +93,7 @@ const NavBar = props => {
                                 { loginOrProfile } { logoutButton } 
                                 <Button variant='outline-none' className='NavBar-Button' onClick={()=>handleCartShow()}>Cart <i className="fas fa-shopping-cart"/>({quantityInCart})</Button>
                             </> : 
-                                <NavBarSearch handleSearch={(page, text) => handleSearch(page, text)} setShowSearch={(val) => setShowSearch(val)} />
+                                <NavBarSearch setShowSearch={(val) => setShowSearch(val)} />
                         }
                     </div>
                 </Col>

@@ -112,7 +112,6 @@ const ShopPage = props => {
                     case('collection'):
                         searchFormSubmitHandler(searchItem, '', null);
                         break;
-    
                     default:
                         break;
                 }

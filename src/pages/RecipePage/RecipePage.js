@@ -128,6 +128,9 @@ const RecipePage = props =>{
         if(searchParam !== null){
             if(allRecipes.length > 0){
                 switch(searchParam){
+                    case 'text':
+                        recipeSearchHandler(searchItem, null, null, null);
+                        break;
                     case 'tag':
                         recipeSearchHandler(null, searchItem, null, null);
                         break;
