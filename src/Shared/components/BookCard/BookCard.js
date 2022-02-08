@@ -33,7 +33,7 @@ const BookCard = props =>{
     }
 
     return (
-        <div className='Container'>
+        <div key={uuid()} className='Container'>
             <Row className='BookCard cust-shadow-sm' key={uuid()}>
                     <Col md={6} sm={12} className='BookImage'>
                         <div className='Image' style={{backgroundImage: `URL('${loadedBookImage}')`}} />
@@ -44,7 +44,7 @@ const BookCard = props =>{
                             <p>Featuring the below recipes</p>
                         </div>
                         <Row>
-                            { book.recipes.map( recipe => <Col sm={6} md={3} as={NavLink} to={`/recipes/view/${ recipe._id }`}><SmallRecipeCard data={recipe} /></Col> )}
+                            { book.recipes.map( recipe => <Col key={uuid()} sm={6} md={3} as={NavLink} to={`/recipes/view/${ recipe._id }`}><SmallRecipeCard data={recipe} /></Col> )}
                         </Row>
                     </Col>
                     {props.isAdmin && <div>
@@ -53,7 +53,7 @@ const BookCard = props =>{
                     </div>}
                     { props.isAdmin && 
                         <PopupModal 
-                            key={book._id}
+                            key={uuid()}
                             show={showModal} 
                             body={`Are you sure you would like to delete this entry? This will move any existing recipes to the For Reveiew book.`} 
                             title='Confirm deletion' 
