@@ -11,6 +11,8 @@ import RecipeReviews from './RecipeReviews/RecipeReviews';
 import { useHttp } from '../../Shared/hooks/http-hook';
 import { AuthContext } from '../../Shared/context/auth-context';
 
+import useProgressiveImage from '../../Shared/hooks/lazyLoad-hook';
+
 import './RecipeDetailsPage.css'
 
 const RecipeDetailsPage = props =>{
@@ -46,6 +48,13 @@ const RecipeDetailsPage = props =>{
                         : <Stars item={loadedRecipe.recipeRating} /> 
                     : 'Loading...'
 
+    let image;
+    if(loadedRecipe){
+    image = loadedRecipe.recipeImage
+    }
+
+    let loadedRecipeImage = useProgressiveImage(process.env.REACT_APP_IMAGE_ENDPOINT + image);
+    
     return(
         <div className='d-flex justify-content-center align-items-center'>
             <div className='RecipePageDetails'>
@@ -53,10 +62,10 @@ const RecipeDetailsPage = props =>{
                     {/* This row shows the actual recipe */}
                     <Row>
                         <Col xs={12} lg={5}>
-                            <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + process.env.REACT_APP_IMAGE_ENDPOINT + loadedRecipe.recipeImage + ')'}} /> 
+                            <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + loadedRecipeImage + ')'}} /> 
                             <br /> 
                         </Col>
-                        <Col>
+                        <Col xs={12} lg={7}>
                             <div className='RecipePageDetails-RecipeInfo'>
                                 <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
 
@@ -73,11 +82,6 @@ const RecipeDetailsPage = props =>{
 
                                 <div><RecipeIngredientList show ingredients={loadedRecipe.recipeIngredients} /></div>
                                 <div><RecipeSteps details={loadedRecipe.recipeSteps} /></div>
-                                
-                                <div className='text-center'>
-                                    <div> This recipe is featured in: {loadedRecipe.recipeBook.bookTitle}</div>
-                                </div>
-
                             </div>
                         </Col>
                     </Row>

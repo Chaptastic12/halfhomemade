@@ -37,7 +37,7 @@ const DropDownItemHelper = props =>{
         if(props.footer){
             link = props.data.map(book =>{
                 return <li key={uuid()}><NavLink
-                            to={`books/search/${book.bookTitle.replace(/\s/g,'').toLowerCase()}`}
+                            to={`/books/search/${book.bookTitle.replace(/\s/g,'').toLowerCase()}`}
                             onClick={ () => { setSearchParam('book'); setSearchItem(book) } }
                         >
                             View {book.bookTitle}    
@@ -46,7 +46,7 @@ const DropDownItemHelper = props =>{
         }else{
             link = props.data.map(book =>{
                 return <Dropdown.Item key={uuid()} as={NavLink}
-                            to={`books/search/${book.bookTitle.replace(/\s/g,'').toLowerCase()}`}
+                            to={`/books/search/${book.bookTitle.replace(/\s/g,'').toLowerCase()}`}
                             onClick={ () => { setSearchParam('book'); setSearchItem(book) } }
                         >
                             View {book.bookTitle}    

@@ -8,10 +8,13 @@ import RecipeIngredientList from '../../Shared/components/RecipeIngredientList/R
 import RecipeSteps from '../../Shared/components/RecipeSteps/RecipeSteps';
 import { AuthContext } from '../../Shared/context/auth-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
+import { ServerContext } from '../../Shared/context/server-context';
 
 const RecipeDetailsPage = props =>{
 
     const { userState } = useContext(AuthContext);
+    const { getRecipesFromServer, getBooksFromServer } = useContext(ServerContext);
+    
     const { sendRequest } = useHttp();
 
     const inputFile = useRef(null);
@@ -144,7 +147,10 @@ const RecipeDetailsPage = props =>{
 
                 if(responseData){
                     //Add logic for redirecting upon receipt of our success from server
-                    history.push('/recipes/view/' + responseData.id);                    
+                    history.push('/recipes/view/' + responseData.id);
+                    //Re-grab our recipes and books
+                    getRecipesFromServer();        
+                    getBooksFromServer();        
                 }
             } catch(err){
                 //Errors handled in hook

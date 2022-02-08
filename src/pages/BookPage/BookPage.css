@@ -1,0 +1,17 @@
+.BookPage .Header{
+    display: flex;
+    align-items: center;
+    font-family: 'Arial';
+    font-size:calc(24px + 1.5vw);  
+    background-color: rgb(33, 32, 54);
+    color: white;
+    width: 100vw;
+    height: 100px;
+}
+
+.BookPage .SubHeader{
+    height: 80px;
+    width: 100vw;
+    color: white;
+    background-color: rgb(33, 32, 54);
+}

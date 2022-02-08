@@ -1,0 +1,38 @@
+.Container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px 0px;
+}
+
+.BookCard{
+    min-height: 400px;
+    border-radius: 25px;
+}
+
+.BookCard .BookImage{
+    display: flex;
+    align-items: center;
+}
+
+.BookCard .Image{
+    background-size: cover;
+    background-repeat: no-repeat;/*Don't repeat*/
+    background-position: top;
+    height: 50vh;
+    width: 50vh;
+    object-fit: contain;
+    border-radius: 25px;
+    margin:25px;
+    margin-top: 0px;
+}
+
+@media screen and (max-width: 767px) {
+    .BookCard .Contents{
+        margin-left: 25px;
+    }
+    
+    .BookCard .BookImage{
+        justify-content: center;
+    }
+}

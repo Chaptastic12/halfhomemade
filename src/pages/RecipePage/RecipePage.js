@@ -26,7 +26,6 @@ const RecipePage = props =>{
     const { error } = useHttp();
 
     const [ loadedRecipes, setLoadedRecipes ] = useState([]);
-    // eslint-disable-next-line
     const [ deletedRecipe, setDeletedRecipe ] = useState(false);
     const [ localError, setLocalError ] = useState('');
     const [ pageNumber, setPageNumber ] = useState(1);
@@ -63,12 +62,11 @@ const RecipePage = props =>{
         //Otherwise, no recipes were found and we will just display all of them
         if(searchedRecipe.length > 0){
             setLoadedRecipes(searchedRecipe);
-            setLoading(false); 
         } else {
             setLocalError('No recipes found that match your search criteria; Showing all recipes')
             setLoadedRecipes(allRecipes);
-            setLoading(false);
         }
+        setLoading(false);
     }
 
     //Check if we are filtering down via the URL
@@ -142,7 +140,9 @@ const RecipePage = props =>{
                 <Container>
                     { localError && <AlertDisplay lg={true} closeAlert={(x) => setLocalError('')}  alertText={localError} /> }
                      <Row>{serverRecipes}</Row> 
-                    <div className='d-flex justify-content-end'> <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} /> </div>
+                    <div className='d-flex justify-content-end'> 
+                        <PaginationComponent active={pageNumber} changePage={(num) => setPageNumber(num)} number={numberOfPages} />
+                    </div>
                     { userState.isAdmin && <Button as={NavLink} to='/recipes/add'>Add Recipe</Button> }
                 </Container> 
             </> : <>
