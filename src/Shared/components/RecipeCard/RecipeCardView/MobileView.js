@@ -50,7 +50,7 @@ const MobileView = props =>{
                         handleClose={() => props.setShowModal(false)}
                         directTo='Confirm delete' 
                         directToFunction={ () => props.deleteRecipe(props.data._id) } 
-                        directToRoute={'/recipes/all'} 
+                        directToRoute={'/recipes/search/all'} 
                     />
                     <Button size='sm' variant='danger' className='RecipeCard-Link' onClick={() => props.setShowModal(true)}>Delete</Button> 
                     <Button size='sm' variant='warning' className='RecipeCard-Link' as={Link} to={`/recipes/edit/${props.data._id}`}>Edit</Button> 

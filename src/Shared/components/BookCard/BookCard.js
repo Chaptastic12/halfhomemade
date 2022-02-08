@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Row, Col, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { v4 as uuid } from 'uuid';
 
 import SmallRecipeCard from './SmallRecipeCard/SmallRecipeCard';
 import useProgressiveImage from '../../hooks/lazyLoad-hook';
+import PopupModal from '../UI Elements/Modal/Modal';
+import { useHttp } from '../../hooks/http-hook';
 
 import './BookCard.css'
 
@@ -14,6 +16,21 @@ const BookCard = props =>{
     const book = props.data;
 
     const loadedBookImage = useProgressiveImage(process.env.REACT_APP_IMAGE_ENDPOINT + book.bookImage.replace(/\\/g, '/') );
+    const [ showModal, setShowModal ] = useState(false);
+    const { sendRequest } = useHttp();
+
+    const deleteBook = (id) =>{
+        const deleteFromServer = async() => {
+            try{
+                await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'books/deleteOneBook/'+ id, 'DELETE', 'include', {Authorization: `Bearer ${props.userToken}`}, null, true);
+            } catch(err){
+                //Errors handled in hook
+            }
+        }
+        deleteFromServer();
+        setShowModal(false);
+        setTimeout(() => { props.setDeletedBook(prevState => !prevState) }, 500 );
+    }
 
     return (
         <div className='Container'>
@@ -31,9 +48,21 @@ const BookCard = props =>{
                         </Row>
                     </Col>
                     {props.isAdmin && <div>
-                            <Button style={{marginRight: '5px'}} variant='danger'>Delete Book</Button>
-                            <Button variant='warning'>Edit Book</Button>
-                        </div>}
+                        <Button style={{marginRight: '5px'}} variant='danger' onClick={() => setShowModal(true)}>Delete Book</Button>
+                        <Button variant='warning'>Edit Book</Button>
+                    </div>}
+                    { props.isAdmin && 
+                        <PopupModal 
+                            key={book._id}
+                            show={showModal} 
+                            body={`Are you sure you would like to delete this entry? This will move any existing recipes to the For Reveiew book.`} 
+                            title='Confirm deletion' 
+                            handleClose={() => setShowModal(false)}
+                            directTo='Confirm delete' 
+                            directToFunction={() => deleteBook(book._id)} 
+                            directToRoute={'/books/search/all'} 
+                        />
+                    }
             </Row>
         </div>
    )

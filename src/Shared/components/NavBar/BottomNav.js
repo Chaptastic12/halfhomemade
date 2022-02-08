@@ -22,7 +22,7 @@ const BottomNav = props =>{
     const bookNavOptions = [
         { to: '/books/search/all', clickParam: null, clickItem: null, desc: 'View All Books'}
     ]
-    
+   
     return (
             <Row className='text-center justify-content-center'>
                 <div className='NavBottom'>
