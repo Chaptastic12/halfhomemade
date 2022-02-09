@@ -93,7 +93,7 @@ const NavBar = props => {
                 </Col>
                 
                 <Col className='d-none d-md-block'>
-                    <div className='Login'>
+                   { !showMobileNav && <div className='Login'>
                         { !showSearch ? 
                             <>
                                 <Button variant='outline-none' className='NavBar-Button' onClick={() =>setShowSearch(true)}>Search <i className='fas fa-search' /></Button>    
@@ -102,7 +102,7 @@ const NavBar = props => {
                             </> : 
                                 <NavBarSearch setShowSearch={(val) => setShowSearch(val)} />
                         }
-                    </div>
+                    </div> }
                 </Col>
 
                 <Col className='d-block d-md-none'>
@@ -121,7 +121,7 @@ const NavBar = props => {
              <div className='Section-Divider d-block d-md-none' />
 
             
-             <NavCanvas showNav={showMobileNav} closeNav={() => setShowMobileNav(false)} > 
+             <NavCanvas showNav={showMobileNav} closeNav={() => { setShowMobileNav(false); setShowSearch(false)} } > 
                 <h3>Search</h3>
                 <NavBarSearch setShowSearch={(val) => setShowSearch(val)} />
                 <BottomNav mobile={true} collections={collections} books={books} setShowMobileNav={(val) => setShowMobileNav(val)} /> 
