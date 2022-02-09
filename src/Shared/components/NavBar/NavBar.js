@@ -106,7 +106,7 @@ const NavBar = props => {
                 </Col>
 
                 <Col className='d-block d-md-none'>
-                    <div className='Login justify-content-end' style={{marginRight: '25px'}} onClick={() => setShowMobileNav(true)}>
+                    <div className='Login justify-content-end' style={{marginRight: '25px'}} onClick={() => { setShowMobileNav(true); setShowSearch(true)} }>
                         <i className="Hamburger fas fa-bars" />
                     </div>
                 </Col>
@@ -122,6 +122,8 @@ const NavBar = props => {
 
             
              <NavCanvas showNav={showMobileNav} closeNav={() => setShowMobileNav(false)} > 
+                <h3>Search</h3>
+                <NavBarSearch setShowSearch={(val) => setShowSearch(val)} />
                 <BottomNav mobile={true} collections={collections} books={books} setShowMobileNav={(val) => setShowMobileNav(val)} /> 
             </NavCanvas>
         </div>
