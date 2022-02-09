@@ -1,6 +1,5 @@
 .RecipePage{
     height: 100%;
-    width: 100vw;
     padding-top: 5px;
 }
 
@@ -8,7 +7,6 @@
     display:flex;
     align-items: center;
     background-color: rgb(33, 32, 54);
-    width: 100vw;
     height: 100px;
     color: white;
     font-family: 'Arial';
@@ -21,7 +19,6 @@
 
 .RecipePage .Search{
     background-color: rgb(33, 32, 54);
-    width: 100vw;
     color: white;
     margin-bottom: 10px;
 }

@@ -113,11 +113,17 @@ const NavBar = props => {
 
              </Row>
 
-             <div className='Bottom-Nav'>
+             <div className='Bottom-Nav d-none d-md-block'>
                 <BottomNav collections={collections} books={books}/>
              </div>
-             
-             <NavCanvas showNav={showMobileNav} closeNav={() => setShowMobileNav(false)} />
+
+             <div className='Section-Divider d-block d-md-none' />
+             <div className='Section-Divider d-block d-md-none' />
+
+            
+             <NavCanvas showNav={showMobileNav} closeNav={() => setShowMobileNav(false)} > 
+                <BottomNav mobile={true} collections={collections} books={books} setShowMobileNav={(val) => setShowMobileNav(val)} /> 
+            </NavCanvas>
         </div>
     )
 }

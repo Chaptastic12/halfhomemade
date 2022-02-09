@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Row, Col, Button, DropdownButton } from 'react-bootstrap';
 
 import DropDownItemHelper from '../../utils/DropDownItemHelper';
+import NavCanvasItem from '../../components/UI Elements/NavCanvasItem/NavCanvasItem';
 
 const BottomNav = props =>{
 
@@ -22,6 +23,31 @@ const BottomNav = props =>{
     const bookNavOptions = [
         { to: '/books/search/all', clickParam: null, clickItem: null, desc: 'View All Books'}
     ]
+
+    if(props.mobile){
+        return (
+            <div onClick={() => props.setShowMobileNav(false)}>
+                <div> 
+                    <h3>Recipes</h3>
+                    <NavCanvasItem data={recipeNavOptions} searchLink={true} /> 
+                </div>
+                <div> 
+                    <h3>Shop</h3>
+                    <NavCanvasItem data={ShopNavOptions} searchLink={true} /> 
+                    <NavCanvasItem data={props.collections} collections={true} />
+                </div>
+                <div> 
+                    <h3>Books</h3>
+                    <NavCanvasItem data={bookNavOptions} searchLink={true} /> 
+                    {props.books && <NavCanvasItem data={props.books.filter(x => x._id !== '620150200bec367cd2bdcb39')} books={true} /> }
+                </div>
+                <div> 
+                    <h3>About</h3>
+                </div>
+
+            </div>
+        )
+    }
    
     return (
             <Row className='text-center justify-content-center'>

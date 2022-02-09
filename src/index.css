@@ -67,3 +67,9 @@ code {
   align-items: center;
   justify-content: center;
 }
+
+/* Bootstrap Modal forces this padding, which messes up the app on low resolution
+Setting it to !important is the only way to fix the issue that I know of currently */
+.modal-open{
+  padding-right: 0px !important;
+}
