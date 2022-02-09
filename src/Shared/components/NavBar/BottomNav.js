@@ -43,6 +43,7 @@ const BottomNav = props =>{
                 </div>
                 <div> 
                     <h3>About</h3>
+                    <NavCanvasItem data={[{to: '/about', desc: 'About'}]} normalLink={true} /> 
                 </div>
 
             </div>
