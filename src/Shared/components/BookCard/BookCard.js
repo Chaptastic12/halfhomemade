@@ -40,7 +40,7 @@ const BookCard = props =>{
                     </Col>
                     <Col md={6} sm={12} className='Contents'>
                         <div>
-                            <h1>{book.bookTitle} <Button size='sm' disabled style={{marginBottom: '5px'}}>Purchase Book</Button></h1>
+                            <h1>{book.bookTitle} <Button size='sm' disabled style={{marginBottom: '5px'}}>Purchase Book</Button> </h1>
                             <p>Featuring the below recipes</p>
                         </div>
                         <Row>

@@ -29,7 +29,7 @@ const BookPage = props =>{
             <div className='SubHeader'>
                 <span style={{marginLeft: '5vw'}}>Click on a recipe to learn more about it!</span>
             </div>
-            {books.map( book => <BookCard key={book._id} data={book} isAdmin={userState.isAdmin} userToken={userState.token} setDeletedBook={setDeletedBook} /> )}
+            {books.filter(x => x._id !== '620150200bec367cd2bdcb39').map( book => <BookCard key={book._id} data={book} isAdmin={userState.isAdmin} userToken={userState.token} setDeletedBook={setDeletedBook} /> )}
         </div>
     )
 }

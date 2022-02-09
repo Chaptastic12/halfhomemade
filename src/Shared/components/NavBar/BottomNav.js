@@ -34,7 +34,7 @@ const BottomNav = props =>{
                     <Col xs='auto'>
                         <DropdownButton title={`Books`} variant='outline-none' className='NavBar-Button'>
                             <DropDownItemHelper data={bookNavOptions} searchLink={true} />
-                            {props.books && <DropDownItemHelper data={props.books} books={true} /> }
+                            {props.books && <DropDownItemHelper data={props.books.filter(x => x._id !== '620150200bec367cd2bdcb39')} books={true} /> }
                         </DropdownButton> 
                     </Col>
                     <Col xs='auto'>
