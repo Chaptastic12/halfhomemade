@@ -5,7 +5,8 @@
     background-size: cover;/*Fill the whole div*/
     background-repeat: no-repeat;/*Don't repeat*/
     background-position: center;
-    height: 90vh
+    height: 90vh;
+    max-height: 1500px;
 }
 
 .BookDiv .Main{
@@ -16,6 +17,7 @@
     background-repeat: no-repeat;/*Don't repeat*/
     background-position: top;
     height: 75vh;
+    max-height: 1200px;
     width: 100vw;
     object-fit: contain;
 }

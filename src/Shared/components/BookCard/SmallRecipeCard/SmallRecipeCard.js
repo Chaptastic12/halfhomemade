@@ -8,10 +8,10 @@ const SmallRecipeCard = props =>{
 
     return(
         <div className='SmallRecipeCard'>
-            <div>
                 <div className='SmallImage' style={{backgroundImage: `URL('${process.env.REACT_APP_IMAGE_ENDPOINT + props.data.recipeImage }')`}} />
-                { props.data.recipeTitle} <br /><Stars item={props.data.recipeRating} />
-            </div>
+                <div className='Text'>
+                    { props.data.recipeTitle} <br /> {props.data.recipeRating !== 0 ? <Stars item={props.data.recipeRating} /> : <span>No reviews</span> }
+                </div>
 
         </div>
     )
