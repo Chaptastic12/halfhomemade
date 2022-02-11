@@ -85,7 +85,7 @@ const RecipeDetailsPage = props =>{
                         <Col xs={12} lg={5}>
                             <div className='RecipePageDetails-RecipeImage' style={{backgroundImage: 'URL(' + loadedRecipeImage + ')'}} /> 
                             <br /> 
-                            { userState.token && <div>
+                            { userState.token && <div className='d-flex justify-content-center' style={{width: '100%'}}>
                                 <Button size='lg' style={{width: '200px'}} onClick={(e) => submitLikeToServer(e)}>
                                     { userLikesRecipe === undefined ? <span>Like <i className="fas fa-thumbs-up" /></span> :
                                      <span>Dislike <i className="fas fa-thumbs-down" /></span> }
@@ -96,7 +96,7 @@ const RecipeDetailsPage = props =>{
                             <div className='RecipePageDetails-RecipeInfo'>
                                 <h1 className='RecipePageDetails-Title text-center'>{loadedRecipe.recipeTitle}</h1>
 
-                                <div className='RecipePageDetails-Rating'>{ foodRating } <a href='#reviews'>{ canSubmitReview ? 'Write a review' : 'View Reviews' }</a> </div>
+                                <div className='RecipePageDetails-Rating'>{ foodRating } <a href='#reviews'>{ ( canSubmitReview && userState.id ) ? 'Write a review' : 'View Reviews' }</a> </div>
                                 <br />
 
                                 <div> 
