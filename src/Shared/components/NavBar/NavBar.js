@@ -73,7 +73,7 @@ const NavBar = props => {
         loginOrProfile = <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/login">
                             Login <i className="fas fa-sign-in-alt"/>
                          </Button>
-        loginOrLogout = <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/login">
+        loginOrLogout = <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/login" onClick={() => setShowMobileNav(false)}>
                             Login <i className="fas fa-sign-in-alt"/>
                         </Button>
     } else {
@@ -82,7 +82,7 @@ const NavBar = props => {
                             Logout <i className="fas fa-sign-out-alt" />
                         </Button>
 
-        logoutButton = <Button variant='outline-none' className='NavBar-Button' onClick={() => logoutAndRedirect()}>
+        logoutButton = <Button variant='outline-none' className='NavBar-Button' onClick={() => {logoutAndRedirect(); setShowMobileNav(false)} }>
                             Logout <i className="fas fa-sign-out-alt" />
                         </Button>
     }
@@ -140,13 +140,13 @@ const NavBar = props => {
                 <h3>Search</h3> 
                 <NavBarSearch setShowSearch={(val) => setShowSearch(val)} />
 
-                {userState.isAdmin ? <>
+                {userState.isAdmin ? <div onClick={() => setShowMobileNav(false)}>
                     <h3>Admin</h3>
                     <NavCanvasItem data={adminOptions} normalLink={true} /> 
-                </> : userState.token && <>
+                </div> : userState.token && <div onClick={() => setShowMobileNav(false)}>
                     <h3>Profile</h3>
                     <NavCanvasItem data={smallProfileOptions} normalLink={true} /> 
-                </>}
+                </div>}
 
                 <BottomNav mobile={true} collections={collections} books={books} setShowMobileNav={(val) => setShowMobileNav(val)} /> 
             </NavCanvas>

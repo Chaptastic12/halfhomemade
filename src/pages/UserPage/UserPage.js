@@ -16,13 +16,15 @@ const UserPage = props => {
     const { sendRequest } = useHttp();
 
     useEffect(()=>{
-        const getData = async() => {
-            try{
-                const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'auth/getUserInfoById/', 'GET', 'include', { Authorization: `Bearer ${userState.token}`}, null, true);
-                setUserInfo(responseData);
-            } catch {/* Errors handled in hook */}
+        if(userState.token){
+            const getData = async() => {
+                try{
+                    const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'auth/getUserInfoById/', 'GET', 'include', { Authorization: `Bearer ${userState.token}`}, null, true);
+                    setUserInfo(responseData);
+                } catch {/* Errors handled in hook */}
+            }
+            getData();
         }
-        getData();
     // eslint-disable-next-line
     }, []);
 
