@@ -1,13 +1,16 @@
 # Needs to be done
-## Finish blog page or remove for now, not part of MVP
-    * Dynamic page - will need server. Allow submitting of blog posts.
-    *Show most recent 5, etc.
-
 ## Add reviews section to home page
     * based off reviews of the book
 
 ## Add frequently asked questions to home page?
 
+## Finish profile page for user
+    * Settings, able to adjust username and password
+    * Able to see recipes theyve linked
+
+## Ability for user to like a recipe
+    * Adds to a like list that will then display on the user page
+    
 # Completed items
 ## Change design for the RecipeDetailsPage - COMPLETED
     * NEED FOR MVP
@@ -23,3 +26,7 @@
 
 ## Add search in navbar - COMPLETED
     *Allow users to search by a recipe title / product title
+
+## Finish blog page or remove for now, not part of MVP - REMOVED
+* Dynamic page - will need server. Allow submitting of blog posts.
+*Show most recent 5, etc.

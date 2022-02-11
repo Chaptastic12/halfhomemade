@@ -121,10 +121,10 @@ const RecipePage = props =>{
             recipe.recipeImage = recipe.recipeImage.replace(/\\/g, '/');
             recipe.createdAt = recipe.createdAt.toString().split('T')[0];
             return <RecipeCard
-                data={recipe}
-                key={recipe._id}
-                delete={() => setDeletedRecipe(true)} 
-                adminPage={props.admin}/>
+                    data={recipe}
+                    key={recipe._id}
+                    delete={() => setDeletedRecipe(true)} 
+                    adminPage={props.admin}/>
         })
     } 
 
