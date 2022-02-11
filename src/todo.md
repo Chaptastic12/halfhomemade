@@ -8,9 +8,6 @@
     * Settings, able to adjust username and password
     * Able to see recipes theyve linked
 
-## Ability for user to like a recipe
-    * Adds to a like list that will then display on the user page
-    
 # Completed items
 ## Change design for the RecipeDetailsPage - COMPLETED
     * NEED FOR MVP
@@ -30,3 +27,6 @@
 ## Finish blog page or remove for now, not part of MVP - REMOVED
 * Dynamic page - will need server. Allow submitting of blog posts.
 *Show most recent 5, etc.
+
+## Ability for user to like a recipe - COMPLETED
+    * Adds to a like list that will then display on the user page

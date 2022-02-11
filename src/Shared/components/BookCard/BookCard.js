@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import { Row, Col, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
@@ -9,6 +9,8 @@ import useProgressiveImage from '../../hooks/lazyLoad-hook';
 import PopupModal from '../UI Elements/Modal/Modal';
 import { useHttp } from '../../hooks/http-hook';
 
+import { SearchContext } from '../../context/search-context';
+
 import './BookCard.css'
 
 const BookCard = props =>{
@@ -18,6 +20,7 @@ const BookCard = props =>{
     const loadedBookImage = useProgressiveImage(process.env.REACT_APP_IMAGE_ENDPOINT + book.bookImage.replace(/\\/g, '/') );
     const [ showModal, setShowModal ] = useState(false);
     const { sendRequest } = useHttp();
+    const { setSearchItem, setSearchParam } = useContext(SearchContext)
 
     const deleteBook = (id) =>{
         const deleteFromServer = async() => {
@@ -32,6 +35,8 @@ const BookCard = props =>{
         setTimeout(() => { props.setDeletedBook(prevState => !prevState) }, 500 );
     }
 
+    let formattedBookTitle = book.bookTitle.replace(/\s/g,'').toLowerCase();
+
     return (
         <div key={uuid()} className='Container'>
             <Row className='BookCard cust-shadow-sm' key={uuid()}>
@@ -40,7 +45,7 @@ const BookCard = props =>{
                     </Col>
                     <Col md={6} sm={12} className='Contents'>
                         <div>
-                            <h1>{book.bookTitle} <Button size='sm' disabled style={{marginBottom: '5px'}}>Purchase Book</Button> </h1>
+                            <h1>{book.bookTitle} <Button size='sm' style={{marginBottom: '5px'}}  as={NavLink} to={`/shop/search/${formattedBookTitle}`} onClick={()=> { setSearchParam('text'); setSearchItem(formattedBookTitle)}} >Purchase Book</Button> </h1>
                             <p>Featuring the below recipes</p>
                         </div>
                         <Row>

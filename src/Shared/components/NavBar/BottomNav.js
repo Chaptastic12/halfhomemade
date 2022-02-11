@@ -26,10 +26,38 @@ const BottomNav = props =>{
 
     if(props.mobile){
         return (
+            // <Accordion flush>
+            //     <Accordion.Item eventKey='0'>
+            //         <Accordion.Header>Recipes</Accordion.Header>
+            //         <Accordion.Body onClick={() => props.setShowMobileNav(false)}>                    
+            //             <NavCanvasItem data={recipeNavOptions} searchLink={true} /> 
+            //         </Accordion.Body>
+            //     </Accordion.Item>
+            //     <Accordion.Item eventKey='1'>
+            //        <Accordion.Header>Shop</Accordion.Header>
+            //        <Accordion.Body onClick={() => props.setShowMobileNav(false)}>                    
+            //             <NavCanvasItem data={ShopNavOptions} searchLink={true} /> 
+            //             <NavCanvasItem data={props.collections} collections={true} /> 
+            //        </Accordion.Body>
+            //     </Accordion.Item>
+            //     <Accordion.Item eventKey='2'>
+            //        <Accordion.Header>Books</Accordion.Header>
+            //        <Accordion.Body onClick={() => props.setShowMobileNav(false)}>                    
+            //             <NavCanvasItem data={bookNavOptions} searchLink={true} /> 
+            //             {props.books && <NavCanvasItem data={props.books.filter(x => x._id !== '620150200bec367cd2bdcb39')} books={true} /> }
+            //        </Accordion.Body>
+            //     </Accordion.Item>
+            //     <Accordion.Item eventKey='3'>
+            //        <Accordion.Header>About</Accordion.Header>
+            //        <Accordion.Body onClick={() => props.setShowMobileNav(false)}>                    
+            //             <NavCanvasItem data={[{to: '/about', desc: 'About'}]} normalLink={true} /> 
+            //        </Accordion.Body>
+            //     </Accordion.Item>
+            // </Accordion>
             <div onClick={() => props.setShowMobileNav(false)}>
                 <div> 
                     <h3>Recipes</h3>
-                    <NavCanvasItem data={recipeNavOptions} searchLink={true} /> 
+                   <NavCanvasItem data={recipeNavOptions} searchLink={true} /> 
                 </div>
                 <div> 
                     <h3>Shop</h3>

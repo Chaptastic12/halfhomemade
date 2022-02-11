@@ -1,0 +1,49 @@
+.UserPage{
+    background-color: rgba(33, 32, 54, 0.35);
+    height: 75vh;
+    min-height: 600px;
+}
+
+.UserPage .Header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(33, 32, 54);
+    color: white;
+    height: 150px;
+}
+
+.UserPage .Nav{
+    margin-top: -75px;
+    margin-left: 10px;
+    background-color: white;
+    height: 500px;
+    width: 200px;
+    min-width: 150px;
+    float: left;
+}
+
+.UserPage .Details{
+    background-color: white;
+    margin-top: 25px;
+    margin-left: 38vw;
+    height: 50vh;
+    width: 50vw;
+}
+
+.UserPage .option:hover{
+    background-color: rgb(230, 230, 230);
+}
+
+@media screen and (max-width: 576px) {
+    .UserPage .Contents{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .UserPage .Details{
+        margin-left: 0px;
+        width: 75vw;
+    }
+}

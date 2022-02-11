@@ -1,26 +1,28 @@
-import React from 'react';
+import React              from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-import NavBar from './Shared/components/NavBar/NavBar';
-import SideCart from './Shared/components/UI Elements/SideCart/SideCart';
-import HomePage from './pages/HomePage/HomePage';
-import RecipePage from './pages/RecipePage/RecipePage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import RecipeDetailsPage from './pages/RecipeDetailsPage/RecipeDetailsPage';
-import RecipeAddPage from './pages/RecipeAddPage/RecipeAddPage';
-import BookAddPage from './pages/BookAddPage/BookAddPage';
-import ShopPage from './pages/ShopPage/ShopPage';
+import NavBar             from './Shared/components/NavBar/NavBar';
+import SideCart           from './Shared/components/UI Elements/SideCart/SideCart';
+import HomePage           from './pages/HomePage/HomePage';
+import RecipePage         from './pages/RecipePage/RecipePage';
+import LoginPage          from './pages/LoginPage/LoginPage';
+import RecipeDetailsPage  from './pages/RecipeDetailsPage/RecipeDetailsPage';
+import RecipeAddPage      from './pages/RecipeAddPage/RecipeAddPage';
+import BookAddPage        from './pages/BookAddPage/BookAddPage';
+import ShopPage           from './pages/ShopPage/ShopPage';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage';
-import AboutPage from './pages/AboutPage/AboutPage';
-import BookPage from './pages/BookPage/BookPage';
-// import AdminPage from './pages/AdminPage/AdminPage';
-import Footer from './Shared/components/Footer/Footer';
+import AboutPage          from './pages/AboutPage/AboutPage';
+import BookPage           from './pages/BookPage/BookPage';
+import UserPage           from './pages/UserPage/UserPage';
+// import AdminPage       from './pages/AdminPage/AdminPage';
+import Footer             from './Shared/components/Footer/Footer';
 
-import Providers from './Shared/context/Providers';
+import Providers          from './Shared/context/Providers';
 
-import SessionTimer from './Shared/components/SessionTimer';
+import SessionTimer       from './Shared/components/SessionTimer';
+
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   window.onunload = () => {
@@ -87,6 +89,7 @@ function App() {
           <Route path='/shop/search/:id' exact component={ShopPage} />
           <Route path='/shop/product/:id' exact component={ProductDetailsPage}/>
           <Route path='/books/search/:id' exact component={BookPage} />
+          <Route path='/user/profile' exact component={UserPage} />
           {/* <Route path='/admin' exact component={AdminPage} /> */}
 
           <Redirect to="/" exact />

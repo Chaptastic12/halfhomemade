@@ -8,6 +8,7 @@ import NavAlert from './NavAlert';
 import BottomNav from './BottomNav';
 import NavCanvas from '../UI Elements/NavCanvas';
 import DropDownItemHelper from '../../utils/DropDownItemHelper';
+import NavCanvasItem from '../UI Elements/NavCanvasItem/NavCanvasItem';
 
 import { SideDrawerContext } from '../../context/sidedrawer-context';
 import { AuthContext } from '../../context/auth-context';
@@ -45,30 +46,41 @@ const NavBar = props => {
     }
 
     const adminOptions = [
-        { to: '/userPage', desc: 'Profiile'},
+        { to: '/user/profile', desc: 'Profile'},
         { to: '/recipes/add', desc: 'Add Recipe'},
-        { to: '/book/add', desc: 'Add Book'},
-        { to: 'admin', desc: 'Admin Dashboard'}
+        { to: '/book/add', desc: 'Add Book'}
     ]
+
+
+    const smallProfileOptions = [
+        { to: '/user/profile', desc: 'Profile'},
+    ]
+
     
     let profileOptions;
     if(userState.isAdmin){
         profileOptions = <DropdownButton title="Admin" variant='outline-none' className='NavBar-Button'>
-                            <DropDownItemHelper data={adminOptions} normalLink={true} />
+                            <DropDownItemHelper data={adminOptions} normalLink={true}/>
                         </DropdownButton>
     } else {
-        profileOptions = <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/userPage">
+        profileOptions = <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/user/profile">
                             Profile <i className='fas fa-user' />
                         </Button>
     }
 
-    let loginOrProfile, logoutButton;
+    let loginOrProfile, logoutButton, loginOrLogout;
     if(!userState.token){
         loginOrProfile = <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/login">
                             Login <i className="fas fa-sign-in-alt"/>
                          </Button>
+        loginOrLogout = <Button className='NavBar-Button' variant='outline-none' as={NavLink} to="/login">
+                            Login <i className="fas fa-sign-in-alt"/>
+                        </Button>
     } else {
         loginOrProfile = profileOptions;
+        loginOrLogout = <Button variant='outline-none' className='NavBar-Button' onClick={() => logoutAndRedirect()}>
+                            Logout <i className="fas fa-sign-out-alt" />
+                        </Button>
 
         logoutButton = <Button variant='outline-none' className='NavBar-Button' onClick={() => logoutAndRedirect()}>
                             Logout <i className="fas fa-sign-out-alt" />
@@ -119,11 +131,23 @@ const NavBar = props => {
 
              <div className='Section-Divider d-block d-md-none' />
              <div className='Section-Divider d-block d-md-none' />
-
             
              <NavCanvas showNav={showMobileNav} closeNav={() => { setShowMobileNav(false); setShowSearch(false)} } > 
-                <h3>Search</h3>
+                <div style={{float: 'right'}}>
+                    { loginOrLogout }
+                    <Button variant='outline-none' className='NavBar-Button' onClick={()=>handleCartShow()} ><i className="fas fa-shopping-cart" />({quantityInCart})</Button>
+                </div>
+                <h3>Search</h3> 
                 <NavBarSearch setShowSearch={(val) => setShowSearch(val)} />
+
+                {userState.isAdmin ? <>
+                    <h3>Admin</h3>
+                    <NavCanvasItem data={adminOptions} normalLink={true} /> 
+                </> : userState.token && <>
+                    <h3>Profile</h3>
+                    <NavCanvasItem data={smallProfileOptions} normalLink={true} /> 
+                </>}
+
                 <BottomNav mobile={true} collections={collections} books={books} setShowMobileNav={(val) => setShowMobileNav(val)} /> 
             </NavCanvas>
         </div>

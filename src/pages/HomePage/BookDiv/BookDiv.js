@@ -28,7 +28,7 @@ const BookDiv = props =>{
                             <p className='Subtext'>Bringing the best recipes from around the world to one book, right in your kitchen.<span className='d-none d-md-block'>
                             With recipes from Japan to America, you're sure to find something to enjoy for even the pickiest of eaters.</span></p>
                             <span>
-                                <Button variant='outline-dark' as={NavLink} to='/shop/search/all' onClick={()=> { setSearchParam(null); setSearchItem(null) }}>Buy the book </Button>
+                                <Button variant='outline-dark' as={NavLink} to='/shop/search/half-homemade' onClick={()=> { setSearchParam('text'); setSearchItem('half-homemade') }}>Buy the book </Button>
                                 <Button variant='outline-dark' as={NavLink} to ='/recipes/search/all' onClick={()=> { setSearchParam('book'); setSearchItem("61cf59095e855573649abf1a") }}>View Recipes</Button>
                             </span>
                         </div>
