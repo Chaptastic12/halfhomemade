@@ -25,7 +25,7 @@ const LoginForm = props =>{
     const history = useHistory();
 
     useEffect(()=>{
-        if(userState.token){ history.goBack(); }
+        if(userState.token){ history.push('/'); }
     },[history, userState])
 
     const submitFormHandler = e =>{

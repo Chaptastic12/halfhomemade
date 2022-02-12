@@ -30,3 +30,7 @@
 
 ## Ability for user to like a recipe - COMPLETED
     * Adds to a like list that will then display on the user page
+
+## Working user profile page
+    * Allows a user to look at their liked recipes
+    * Allows a user to change their username, email and password

@@ -16,6 +16,7 @@ const UserPage = props => {
     const [ userInfo, setUserInfo ] = useState([])
     const [ details, setDetails ] = useState('likes');
     const [ localError, setLocalError ] = useState('');
+    const [ refreshPage, setRefreshPage ] = useState(false);
 
     const { userState } = useContext(AuthContext);
     const { sendRequest } = useHttp();
@@ -31,7 +32,7 @@ const UserPage = props => {
             getData();
         }
     // eslint-disable-next-line
-    }, []);
+    }, [refreshPage]);
 
     const submitUpdatedInfo = async( info ) =>{
         const { username, email, password, confirmPassword } = info;
@@ -61,8 +62,8 @@ const UserPage = props => {
          }
 
         try{
-            const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'auth/updateUserInfo/', 'POST', 'include', { Authorization: `Bearer ${userState.token}`, 'Content-Type': 'application/json', 'Accept': 'application/json'}, JSON.stringify(JSONbody), true);
-            console.log(responseData);
+            await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'auth/updateUserInfo/', 'POST', 'include', { Authorization: `Bearer ${userState.token}`, 'Content-Type': 'application/json', 'Accept': 'application/json'}, JSON.stringify(JSONbody), true);
+            setRefreshPage(prevState => !prevState)
         } catch(err) { /* Errors handled in hook */}
     }
 
@@ -75,17 +76,18 @@ const UserPage = props => {
         }
     }
 
-
-
     if(!userState.id){
         return <div>Please login</div>
     } else {
         return (
             <div className='UserPage'>
+
                 <div className='Header'>
                         <h1>Welcome, {userInfo.username}</h1>
                 </div>
+
                 { localError && <AlertDisplay lg={true} closeAllert={(change) => setLocalError('')} alertText={localError} /> }
+
                 <div className='d-block d-sm-none'>
                     <ListGroup horizontal>
                         <ListGroup.Item><strong>Navigation</strong></ListGroup.Item>
@@ -93,6 +95,7 @@ const UserPage = props => {
                         <ListGroup.Item className='option' onClick={() => setDetails('settings')}>Settings</ListGroup.Item>
                     </ListGroup>
                 </div>
+                
                 <div className='Contents'>
                     <div className='Nav d-none d-sm-block'>
                         <h2 style={{marginLeft: '5px'}}>Navigation</h2>
@@ -104,11 +107,10 @@ const UserPage = props => {
                         </ListGroup>
                     </div>
 
-
-
                     <div className='Details'>
                         {pageToShow}
                     </div>
+
                 </div>
 
             </div>
