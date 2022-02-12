@@ -21,3 +21,7 @@ https://shopify.github.io/js-buy-sdk/
 # uuid
 Used for getting keys
 https://www.npmjs.com/package/uuid
+
+# react-router-hash-link
+Lets us use hash links in the app
+https://www.npmjs.com/package/react-router-hash-link

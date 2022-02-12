@@ -27,6 +27,11 @@
     text-align: center;
 }
 
+.AboutPage .Main h1{
+    font-family: 'Tahu!';
+    font-size:calc(36px + 1.5vw);  
+}
+
 .AboutPage .Content{
     display: flex;
     align-items: center;

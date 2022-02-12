@@ -2,7 +2,7 @@ import React from 'react';
 
 import DiagonalCard from '../../../Shared/components/UI Elements/DiagonalCard/DiagonalCard';
 import { Col, Row } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavHashLink } from 'react-router-hash-link';
 
 import HoneyHam from '../../../Shared/Img/Food/webp/Honey_roasted_ham.webp';
 import MafuTofu from '../../../Shared/Img/Food/webp/Mafu_tofu.webp'
@@ -30,7 +30,7 @@ const AboutDiv = props =>{
                             We'll take you on an taste adventure around the world, strap in!
                         </p>
                         <br />
-                        <p className='LearnMore'><NavLink to='/about'>Learn more about us <i className="far fa-arrow-alt-circle-right" /></NavLink></p>
+                        <p className='LearnMore'><NavHashLink to='/about/#about'>Learn more about us <i className="far fa-arrow-alt-circle-right" /></NavHashLink></p>
                     </div>
                 </Col>
                 <Col>

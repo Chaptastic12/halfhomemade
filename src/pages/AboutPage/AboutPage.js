@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import cookingTogether from '../../Shared/Img/Food/cookingTogether.jpg'
 import friendsCooking from '../../Shared/Img/Food/friendsCooking.jpg'
@@ -21,15 +21,10 @@ const AboutPage = props => {
         { icon: <img className='Image' src={loadedOutside} alt='Cooking outside' />, subTitle: 'And the rest, is history', desc: `From the joy of teaching others and enabling them to be more confident cooks comes Half-Homemade. We are excited to see you on our journey!`, iconLeft: true }
     ]
 
-    useEffect(() =>{
-        window.scrollTo(0,0);
-    });
-
-
     return (
         <div className='AboutPage'>
-            <div className='Header'>
-                <div className='Title'>
+            <div id='about' className='Header'>
+                <div id='about' className='Title'>
                     About us
                 </div>
                 <div className='Quote'>
@@ -46,6 +41,14 @@ const AboutPage = props => {
                     </div>
                 </div>
                 <FlippingTextIcon items={aboutItems} />
+                <div id='methodology'>
+                    <h1>Our Methodology</h1>
+                    <p>Methodology Words</p>
+                </div>
+                <div id='promise'>
+                    <h1>Our Promise</h1>
+                    <p>Promise Words</p>
+                </div>
             </div>
         </div>
     )
