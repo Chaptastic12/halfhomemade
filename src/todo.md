@@ -4,10 +4,13 @@
 
 ## Add frequently asked questions to home page?
 
+## Implement password reset functionality
+    * utilize nodemailer
+        https://www.npmjs.com/package/nodemailer
 
-
-
-
+## Add logging functionality to server
+    * utilize Morgan
+        https://www.npmjs.com/package/morgan
 
 # Completed items
 ## Change design for the RecipeDetailsPage - COMPLETED
