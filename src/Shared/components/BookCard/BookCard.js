@@ -49,7 +49,7 @@ const BookCard = props =>{
                             <p>Featuring the below recipes</p>
                         </div>
                         <Row>
-                            { book.recipes.map( recipe => <Col key={uuid()} sm={6} md={3} as={NavLink} to={`/recipes/view/${ recipe._id }`} style={{textDecoration: 'none'}}><SmallRecipeCard data={recipe} /></Col> )}
+                            { book.recipes.map( recipe => <Col key={uuid()} sm={3} md={3} as={NavLink} to={`/recipes/view/${ recipe._id }`} style={{textDecoration: 'none'}}><SmallRecipeCard data={recipe} /></Col> )}
                         </Row>
                     </Col>
                     {props.isAdmin && <div>

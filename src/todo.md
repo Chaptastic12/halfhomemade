@@ -4,9 +4,10 @@
 
 ## Add frequently asked questions to home page?
 
-## Finish profile page for user
-    * Settings, able to adjust username and password
-    * Able to see recipes theyve linked
+
+
+
+
 
 # Completed items
 ## Change design for the RecipeDetailsPage - COMPLETED
@@ -31,6 +32,6 @@
 ## Ability for user to like a recipe - COMPLETED
     * Adds to a like list that will then display on the user page
 
-## Working user profile page
+## Working user profile page - COMPLETED
     * Allows a user to look at their liked recipes
     * Allows a user to change their username, email and password
