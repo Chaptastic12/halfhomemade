@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 
 import { ListGroup } from 'react-bootstrap';
 
+import UserLikesPage from './UserLikesPage/UserLikesPage';
+
 import { AuthContext } from '../../Shared/context/auth-context';
 import { useHttp } from '../../Shared/hooks/http-hook';
 
@@ -28,12 +30,16 @@ const UserPage = props => {
     // eslint-disable-next-line
     }, []);
 
+    console.log(userInfo)
     let pageToShow;
-    if(details === 'likes'){
-        pageToShow = 'likes'
-    } else if(details === 'settings'){
-        pageToShow = 'settings';
+    if(userInfo){
+        if(details === 'likes'){
+            pageToShow = <UserLikesPage likes={userInfo.likes} />
+        } else if(details === 'settings'){
+            pageToShow = 'settings';
+        }
     }
+
 
 
     if(!userState.id){

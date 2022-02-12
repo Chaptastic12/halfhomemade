@@ -32,7 +32,7 @@ const SessionTimer = props => {
             if(difference >= 9){
                 setRunningTimer(false);
                 setShowWarning(false);
-                setTimeout(() =>{ logoutUser() });
+                setTimeout(() =>{ logoutUser(); history.push('/') });
             }
         } else {
            //No session active, shouldn't do anything but continue to check
