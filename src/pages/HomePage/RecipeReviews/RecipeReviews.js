@@ -37,7 +37,6 @@ const RecipeReviews = props =>{
         }
     }
 
-    console.log(reviewsToShow)
     const reviewCards = reviewsToShow.map( review =>  <Col key={uuid()}> <ReviewCard data={review} /> </Col> )
  
     return (
