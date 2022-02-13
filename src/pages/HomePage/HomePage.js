@@ -3,6 +3,7 @@ import React from 'react';
 import BookDiv from './BookDiv/BookDiv';
 import AboutDiv from './AboutDiv/AboutDiv';
 import EducationDiv from './EducationDiv/EducationDiv';
+import RecipeReviews from './RecipeReviews/RecipeReviews';
 
 const HomePage = props =>{
 
@@ -12,6 +13,8 @@ const HomePage = props =>{
             <EducationDiv />
             <div className='Section-Divider' />
             <AboutDiv/>
+            <div className='Section-Divider' />
+            <RecipeReviews />
             <div className='Section-Divider' />
         </>);
 }

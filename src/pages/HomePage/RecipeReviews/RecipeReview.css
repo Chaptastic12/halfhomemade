@@ -1,0 +1,9 @@
+.RecipeReview{
+    text-align: center;
+}
+
+.RecipeReview h1{
+    font-family: 'Tahu!';
+    font-size:calc(18px + 5vw);
+    padding-top:15px;
+}
