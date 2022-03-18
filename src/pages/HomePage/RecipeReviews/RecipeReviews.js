@@ -8,6 +8,7 @@ import ReviewCard from './ReviewCard';
 import { ServerContext } from '../../../Shared/context/server-context';
 
 import './RecipeReview.css';
+import FadeInSection from '../../../Shared/components/UI Elements/FadeInSection/FadeInSection';
 
 const RecipeReviews = props =>{
 
@@ -45,13 +46,13 @@ const RecipeReviews = props =>{
     const reviewCards = reviewsToShow.map( review =>  <Col key={uuid()}> <ReviewCard data={review} /> </Col> )
  
     return (
-        <div className='RecipeReview'>
-            <h1>Checkout some recipe reviews</h1>
-            <Row>
-                { reviewCards }
-            </Row>
+      <FadeInSection>
+        <div className="RecipeReview">
+          <h1>Checkout some recipe reviews</h1>
+          <Row>{reviewCards}</Row>
         </div>
-    )
+      </FadeInSection>
+    );
 }
 
 export default RecipeReviews;

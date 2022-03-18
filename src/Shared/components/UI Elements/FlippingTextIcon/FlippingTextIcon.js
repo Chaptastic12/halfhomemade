@@ -9,8 +9,8 @@ const FlippingTextIcon = props =>{
 
     let output = props.items.map(item => {
         return (
-          <FadeInSection>
-            <Row key={uuid()} className="FlippingTextIcon">
+          <FadeInSection key={uuid()}>
+            <Row className="FlippingTextIcon">
               <Col
                 className="d-none d-sm-block"
                 xs={item.iconLeft ? { order: "first" } : { order: "last" }}

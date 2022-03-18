@@ -8,6 +8,7 @@ export default function FadeInSection(props) {
   const domRef = useRef();
 
   useEffect(() => {
+    const ele = domRef;
     const observer = new IntersectionObserver((entries) => {
       // In your case there's only one element to observe:
       if (entries[0].isIntersecting) {
@@ -15,13 +16,11 @@ export default function FadeInSection(props) {
         setVisible(true);
 
         // No need to keep observing:
-        observer.unobserve(domRef.current);
+        observer.unobserve(ele.current);
       }
     });
-
-    observer.observe(domRef.current);
-
-    return () => observer.unobserve(domRef.current);
+ 
+    observer.observe(ele.current);
   }, []);
 
   return (
