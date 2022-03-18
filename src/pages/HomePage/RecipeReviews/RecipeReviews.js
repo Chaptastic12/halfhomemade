@@ -29,13 +29,15 @@ const RecipeReviews = props =>{
     if(allRecipes && allRecipes.length > 0){
         for(let i=0; i < numberOfReviews; i++){
             let randomRecipeIndex = Math.floor(Math.random() * allRecipedCopy.length);
-            let randomReviewIndex = Math.floor(Math.random() *allRecipedCopy[randomRecipeIndex].reviews.length);
-            reviewsToShow.push( { 
-                review: allRecipedCopy[randomRecipeIndex].reviews[randomReviewIndex], 
-                recipe: {
-                    id: allRecipedCopy[randomRecipeIndex]._id,
-                    title:allRecipedCopy[randomRecipeIndex].recipeTitle
-                } 
+            let randomReviewIndex = Math.floor(Math.random() * allRecipedCopy[randomRecipeIndex].reviews.length);
+            let chosenReview = allRecipedCopy[randomRecipeIndex].reviews[randomReviewIndex];
+
+            reviewsToShow.push({
+              review: chosenReview,
+              recipe: {
+                id: allRecipedCopy[randomRecipeIndex]._id,
+                title: allRecipedCopy[randomRecipeIndex].recipeTitle,
+              },
             });
             allRecipedCopy.splice(randomRecipeIndex, 1);
         }
