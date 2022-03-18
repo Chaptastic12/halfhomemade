@@ -13,8 +13,11 @@ const RecipeReviews = props =>{
 
     const { allRecipes } = useContext(ServerContext);
 
+    let allRecipedCopy = [];
     //Make a copy because we will be removing recipes we already got a review from
-    let allRecipedCopy = [ ...allRecipes ];
+    if(allRecipes.length > 0){
+        allRecipedCopy = [...allRecipes];
+    } 
 
     //Only show recipes that are 4* or higher
     allRecipedCopy = allRecipedCopy.filter(recipe => recipe.recipeRating >= 4);
@@ -22,7 +25,7 @@ const RecipeReviews = props =>{
     let reviewsToShow = [];
     //Show a maximum of 5, or a minimum of the length of our found reviews
     const numberOfReviews = Math.min(allRecipedCopy.length, 5);
-    if(allRecipes.length > 0){
+    if(allRecipes && allRecipes.length > 0){
         for(let i=0; i < numberOfReviews; i++){
             let randomRecipeIndex = Math.floor(Math.random() * allRecipedCopy.length);
             let randomReviewIndex = Math.floor(Math.random() *allRecipedCopy[randomRecipeIndex].reviews.length);
@@ -35,6 +38,8 @@ const RecipeReviews = props =>{
             });
             allRecipedCopy.splice(randomRecipeIndex, 1);
         }
+    } else {
+        reviewsToShow = allRecipedCopy;
     }
 
     const reviewCards = reviewsToShow.map( review =>  <Col key={uuid()}> <ReviewCard data={review} /> </Col> )

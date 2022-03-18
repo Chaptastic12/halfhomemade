@@ -23,7 +23,9 @@ const ServerProvider = props =>{
     const getRecipesFromServer = async() => {
         try{
             const responseData = await sendRequest(process.env.REACT_APP_API_ENDPOINT + 'recipes/showAllRecipes');
-            setAllRecipes(responseData);
+            if(responseData){
+                setAllRecipes(responseData);
+            }
         } catch(err){ /* Errors handled in hook */ }
     }
 

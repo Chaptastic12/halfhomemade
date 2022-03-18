@@ -1,5 +1,5 @@
 
-import { Row, Col, Container, Fade } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 
 import FadeInSection from '../FadeInSection/FadeInSection';
